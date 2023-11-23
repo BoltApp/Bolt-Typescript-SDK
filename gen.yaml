@@ -1,12 +1,29 @@
 configVersion: 1.0.0
+management:
+  docChecksum: c533e0586c292fea4f0573a073d085fc
+  docVersion: 3.0.1
+  speakeasyVersion: 1.122.0
+  generationVersion: 2.195.2
 generation:
   comments: {}
   sdkClassName: Bolt-Typescript-SDK
+  repoURL: https://github.com/BoltApp/Bolt-Typescript-SDK.git
   maintainOpenAPIOrder: true
   usageSnippets:
     optionalPropertyRendering: withExample
+features:
+  typescript:
+    core: 3.1.4
+    flattening: 2.81.1
+    globalSecurity: 2.82.0
+    globalServerURLs: 2.82.1
+    groups: 2.81.2
+    ignores: 2.81.1
+    inputOutputModels: 2.82.0
+    methodSecurity: 2.82.0
+    nameOverrides: 2.81.1
 typescript:
-  version: 0.0.1
+  version: 0.1.0
   author: BoltPublicAPI
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true
@@ -19,6 +36,9 @@ typescript:
       shared: models/components
       webhooks: models/webhooks
   inputModelSuffix: input
+  installationURL: https://github.com/BoltApp/Bolt-Typescript-SDK
   maxMethodParams: 4
   outputModelSuffix: output
   packageName: Bolt-Typescript-SDK
+  published: true
+  repoSubDirectory: .

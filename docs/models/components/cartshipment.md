@@ -1,0 +1,10 @@
+# CartShipment
+
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          | Example                                                              |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `address`                                                            | *any*                                                                | :heavy_minus_sign:                                                   | N/A                                                                  |                                                                      |
+| `cost`                                                               | [components.Amount](../../models/components/amount.md)               | :heavy_minus_sign:                                                   | A monetary amount, i.e. a base unit amount and a supported currency. |                                                                      |
+| `carrier`                                                            | *string*                                                             | :heavy_minus_sign:                                                   | The name of the carrier selected.                                    | FedEx                                                                |

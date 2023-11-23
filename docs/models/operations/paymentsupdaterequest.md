@@ -1,0 +1,10 @@
+# PaymentsUpdateRequest
+
+
+## Fields
+
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        | Example                                                                            |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `id`                                                                               | *string*                                                                           | :heavy_check_mark:                                                                 | The ID of the payment to update                                                    | iKv7t5bgt1gg                                                                       |
+| `xPublishableKey`                                                                  | *string*                                                                           | :heavy_check_mark:                                                                 | The publicly viewable identifier used to identify a merchant division.             |                                                                                    |
+| `paymentUpdateRequest`                                                             | [components.PaymentUpdateRequest](../../models/components/paymentupdaterequest.md) | :heavy_check_mark:                                                                 | N/A                                                                                |                                                                                    |
