@@ -39,6 +39,6 @@ typescript:
   installationURL: https://github.com/BoltApp/Bolt-Typescript-SDK
   maxMethodParams: 4
   outputModelSuffix: output
-  packageName: Bolt-Typescript-SDK
+  packageName: @boltpay/bolt-typescript-sdk
   published: true
   repoSubDirectory: .

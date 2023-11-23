@@ -1,5 +1,5 @@
 {
-  "name": "Bolt-Typescript-SDK",
+  "name": "@boltpay/bolt-typescript-sdk",
   "version": "0.1.0",
   "author": "BoltPublicAPI",
   "scripts": {
@@ -31,7 +31,16 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/BoltApp/Bolt-Typescript-SDK.git",
+    "url": "git+https://github.com/BoltApp/Bolt-Typescript-SDK.git",
     "directory": "."
-  }
+  },
+  "description": "<div align=\"left\">     <a href=\"https://speakeasyapi.dev/\"><img src=\"https://custom-icon-badges.demolab.com/badge/-Built%20By%20Speakeasy-212015?style=for-the-badge&logoColor=FBE331&logo=speakeasy&labelColor=545454\" /></a>     <a href=\"https://github.com/BoltApp/Bolt-Typescript-SDK.git/actions\"><img src=\"https://img.shields.io/github/actions/workflow/status/BoltApp/Bolt-Typescript-SDK/speakeasy_sdk_generation.yml?style=for-the-badge\" /></a>",
+  "bugs": {
+    "url": "https://github.com/BoltApp/Bolt-Typescript-SDK/issues"
+  },
+  "homepage": "https://github.com/BoltApp/Bolt-Typescript-SDK#readme",
+  "directories": {
+    "doc": "docs"
+  },
+  "license": "ISC"
 }
