@@ -16,7 +16,7 @@ Bolt when it is updated or finalized for guest shoppers.
 ### Example Usage
 
 ```typescript
-import { BoltTypescriptSDK } from "Bolt-Typescript-SDK";
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import {
   Amount,
   Cart,
@@ -26,8 +26,8 @@ import {
   Currency,
   GuestPaymentInitializeRequest,
   ProfileCreationData,
-} from "Bolt-Typescript-SDK/dist/models/components";
-import { GuestPaymentsInitializeRequest, GuestPaymentsInitializeSecurity } from "Bolt-Typescript-SDK/dist/models/operations";
+} from "@boltpay/bolt-typescript-sdk/dist/models/components";
+import { GuestPaymentsInitializeRequest, GuestPaymentsInitializeSecurity } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 (async() => {
   const sdk = new BoltTypescriptSDK();
@@ -127,7 +127,7 @@ Update a pending guest payment
 ### Example Usage
 
 ```typescript
-import { BoltTypescriptSDK } from "Bolt-Typescript-SDK";
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import {
   Amount,
   Cart,
@@ -136,8 +136,8 @@ import {
   CartShipment,
   Currency,
   PaymentUpdateRequest,
-} from "Bolt-Typescript-SDK/dist/models/components";
-import { GuestPaymentsUpdateRequest, GuestPaymentsUpdateSecurity } from "Bolt-Typescript-SDK/dist/models/operations";
+} from "@boltpay/bolt-typescript-sdk/dist/models/components";
+import { GuestPaymentsUpdateRequest, GuestPaymentsUpdateSecurity } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 (async() => {
   const sdk = new BoltTypescriptSDK();
@@ -231,9 +231,9 @@ Perform an irreversible action on a pending guest payment, such as finalizing it
 ### Example Usage
 
 ```typescript
-import { BoltTypescriptSDK } from "Bolt-Typescript-SDK";
-import { DotTag, PaymentActionRequest } from "Bolt-Typescript-SDK/dist/models/components";
-import { GuestPaymentsActionRequest, GuestPaymentsActionSecurity } from "Bolt-Typescript-SDK/dist/models/operations";
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
+import { DotTag, PaymentActionRequest } from "@boltpay/bolt-typescript-sdk/dist/models/components";
+import { GuestPaymentsActionRequest, GuestPaymentsActionSecurity } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 (async() => {
   const sdk = new BoltTypescriptSDK();

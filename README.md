@@ -14,29 +14,30 @@ It has been generated successfully based on your OpenAPI spec. However, it is no
 - [ ] ♻️ Refine your SDK quickly by iterating locally with the [Speakeasy CLI](https://github.com/speakeasy-api/speakeasy)
 - [ ] 🎁 Publish your SDK to package managers by [configuring automatic publishing](https://www.speakeasyapi.dev/docs/productionize-sdks/publish-sdks)
 - [ ] ✨ When ready to productionize, delete this section from the README
-<!-- Start SDK Installation -->
+<!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
 ### NPM
 
 ```bash
-npm add Bolt-Typescript-SDK
+npm add @boltpay/bolt-typescript-sdk
 ```
 
 ### Yarn
 
 ```bash
-yarn add Bolt-Typescript-SDK
+yarn add @boltpay/bolt-typescript-sdk
 ```
-<!-- End SDK Installation -->
+<!-- End SDK Installation [installation] -->
 
+<!-- Start SDK Example Usage [usage] -->
 ## SDK Example Usage
-<!-- Start SDK Example Usage -->
+
 ### Example
 
 ```typescript
-import { BoltTypescriptSDK } from "Bolt-Typescript-SDK";
-import { AccountGetRequest } from "Bolt-Typescript-SDK/dist/models/operations";
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
+import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 (async () => {
     const sdk = new BoltTypescriptSDK({
@@ -55,11 +56,10 @@ import { AccountGetRequest } from "Bolt-Typescript-SDK/dist/models/operations";
 })();
 
 ```
-<!-- End SDK Example Usage -->
+<!-- End SDK Example Usage [usage] -->
 
-<!-- Start SDK Available Operations -->
+<!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
-
 
 ### [account](docs/sdks/account/README.md)
 
@@ -92,9 +92,9 @@ import { AccountGetRequest } from "Bolt-Typescript-SDK/dist/models/operations";
 
 * [createAccount](docs/sdks/testing/README.md#createaccount) - Create a test account
 * [getCreditCard](docs/sdks/testing/README.md#getcreditcard) - Retrieve a test credit card, including its token
-<!-- End SDK Available Operations -->
+<!-- End Available Resources and Operations [operations] -->
 
-<!-- Start Error Handling -->
+<!-- Start Error Handling [errors] -->
 ## Error Handling
 
 Handling errors in this SDK should largely match your expectations.  All operations return a response object or throw an error.  If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Error type.
@@ -107,8 +107,8 @@ Handling errors in this SDK should largely match your expectations.  All operati
 Example
 
 ```typescript
-import { BoltTypescriptSDK } from "Bolt-Typescript-SDK";
-import { AccountGetRequest } from "Bolt-Typescript-SDK/dist/models/operations";
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
+import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 (async() => {
   const sdk = new BoltTypescriptSDK({
@@ -134,9 +134,9 @@ const xPublishableKey: string = "string";
   }
 })();
 ```
-<!-- End Error Handling -->
+<!-- End Error Handling [errors] -->
 
-<!-- Start Server Selection -->
+<!-- Start Server Selection [server] -->
 ## Server Selection
 
 ### Select Server by Index
@@ -150,8 +150,8 @@ You can override the default server globally by passing a server index to the `s
 #### Example
 
 ```typescript
-import { BoltTypescriptSDK } from "Bolt-Typescript-SDK";
-import { AccountGetRequest } from "Bolt-Typescript-SDK/dist/models/operations";
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
+import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 (async () => {
     const sdk = new BoltTypescriptSDK({
@@ -181,8 +181,8 @@ Some of the server options above contain variables. If you want to set the value
 
 The default server can also be overridden globally by passing a URL to the `serverURL: str` optional parameter when initializing the SDK client instance. For example:
 ```typescript
-import { BoltTypescriptSDK } from "Bolt-Typescript-SDK";
-import { AccountGetRequest } from "Bolt-Typescript-SDK/dist/models/operations";
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
+import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 (async () => {
     const sdk = new BoltTypescriptSDK({
@@ -202,9 +202,9 @@ import { AccountGetRequest } from "Bolt-Typescript-SDK/dist/models/operations";
 })();
 
 ```
-<!-- End Server Selection -->
+<!-- End Server Selection [server] -->
 
-<!-- Start Custom HTTP Client -->
+<!-- Start Custom HTTP Client [http-client] -->
 ## Custom HTTP Client
 
 The Typescript SDK makes API calls using the (axios)[https://axios-http.com/docs/intro] HTTP library.  In order to provide a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration, you can initialize the SDK client with a custom `AxiosInstance` object.
@@ -212,7 +212,7 @@ The Typescript SDK makes API calls using the (axios)[https://axios-http.com/docs
 For example, you could specify a header for every request that your sdk makes as follows:
 
 ```typescript
-from Bolt-Typescript-SDK import BoltTypescriptSDK;
+from @boltpay/bolt-typescript-sdk import BoltTypescriptSDK;
 import axios;
 
 const httpClient = axios.create({
@@ -221,10 +221,9 @@ const httpClient = axios.create({
 
 const sdk = new BoltTypescriptSDK({defaultClient: httpClient});
 ```
-<!-- End Custom HTTP Client -->
+<!-- End Custom HTTP Client [http-client] -->
 
-<!-- Start Authentication -->
-
+<!-- Start Authentication [security] -->
 ## Authentication
 
 ### Per-Client Security Schemes
@@ -238,8 +237,8 @@ This SDK supports the following security schemes globally:
 
 You can set the security parameters through the `security` optional parameter when initializing the SDK client instance. The selected scheme will be used by default to authenticate with the API for all operations that support it. For example:
 ```typescript
-import { BoltTypescriptSDK } from "Bolt-Typescript-SDK";
-import { AccountGetRequest } from "Bolt-Typescript-SDK/dist/models/operations";
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
+import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 (async () => {
     const sdk = new BoltTypescriptSDK({
@@ -263,7 +262,7 @@ import { AccountGetRequest } from "Bolt-Typescript-SDK/dist/models/operations";
 
 Some operations in this SDK require the security scheme to be specified at the request level. For example:
 ```typescript
-import { BoltTypescriptSDK } from "Bolt-Typescript-SDK";
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import {
     Amount,
     Cart,
@@ -273,11 +272,11 @@ import {
     Currency,
     GuestPaymentInitializeRequest,
     ProfileCreationData,
-} from "Bolt-Typescript-SDK/dist/models/components";
+} from "@boltpay/bolt-typescript-sdk/dist/models/components";
 import {
     GuestPaymentsInitializeRequest,
     GuestPaymentsInitializeSecurity,
-} from "Bolt-Typescript-SDK/dist/models/operations";
+} from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 (async () => {
     const sdk = new BoltTypescriptSDK();
@@ -353,7 +352,7 @@ import {
 })();
 
 ```
-<!-- End Authentication -->
+<!-- End Authentication [security] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

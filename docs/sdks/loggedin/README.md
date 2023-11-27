@@ -16,7 +16,7 @@ Bolt when it is updated or finalized for logged in shoppers.
 ### Example Usage
 
 ```typescript
-import { BoltTypescriptSDK } from "Bolt-Typescript-SDK";
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import {
   Amount,
   Cart,
@@ -25,8 +25,8 @@ import {
   CartShipment,
   Currency,
   PaymentInitializeRequest,
-} from "Bolt-Typescript-SDK/dist/models/components";
-import { PaymentsInitializeRequest } from "Bolt-Typescript-SDK/dist/models/operations";
+} from "@boltpay/bolt-typescript-sdk/dist/models/components";
+import { PaymentsInitializeRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 (async() => {
   const sdk = new BoltTypescriptSDK({
@@ -122,7 +122,7 @@ Update a pending payment
 ### Example Usage
 
 ```typescript
-import { BoltTypescriptSDK } from "Bolt-Typescript-SDK";
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import {
   Amount,
   Cart,
@@ -131,8 +131,8 @@ import {
   CartShipment,
   Currency,
   PaymentUpdateRequest,
-} from "Bolt-Typescript-SDK/dist/models/components";
-import { PaymentsUpdateRequest } from "Bolt-Typescript-SDK/dist/models/operations";
+} from "@boltpay/bolt-typescript-sdk/dist/models/components";
+import { PaymentsUpdateRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 (async() => {
   const sdk = new BoltTypescriptSDK({
@@ -229,9 +229,9 @@ Perform an irreversible action on a pending payment, such as finalizing it.
 ### Example Usage
 
 ```typescript
-import { BoltTypescriptSDK } from "Bolt-Typescript-SDK";
-import { DotTag, PaymentActionRequest } from "Bolt-Typescript-SDK/dist/models/components";
-import { PaymentsActionRequest } from "Bolt-Typescript-SDK/dist/models/operations";
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
+import { DotTag, PaymentActionRequest } from "@boltpay/bolt-typescript-sdk/dist/models/components";
+import { PaymentsActionRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 (async() => {
   const sdk = new BoltTypescriptSDK({

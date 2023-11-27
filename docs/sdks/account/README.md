@@ -24,8 +24,8 @@ Retrieve a shopper's account details, such as addresses and payment information
 ### Example Usage
 
 ```typescript
-import { BoltTypescriptSDK } from "Bolt-Typescript-SDK";
-import { AccountGetRequest } from "Bolt-Typescript-SDK/dist/models/operations";
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
+import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 (async() => {
   const sdk = new BoltTypescriptSDK({
@@ -69,9 +69,9 @@ Add an address to the shopper's account
 ### Example Usage
 
 ```typescript
-import { BoltTypescriptSDK } from "Bolt-Typescript-SDK";
-import { AddressListingInput, CountryCode } from "Bolt-Typescript-SDK/dist/models/components";
-import { AccountAddressCreateRequest } from "Bolt-Typescript-SDK/dist/models/operations";
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
+import { AddressListingInput, CountryCode } from "@boltpay/bolt-typescript-sdk/dist/models/components";
+import { AccountAddressCreateRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 (async() => {
   const sdk = new BoltTypescriptSDK({
@@ -131,8 +131,8 @@ shipments that are associated with it.
 ### Example Usage
 
 ```typescript
-import { BoltTypescriptSDK } from "Bolt-Typescript-SDK";
-import { AccountAddressDeleteRequest } from "Bolt-Typescript-SDK/dist/models/operations";
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
+import { AccountAddressDeleteRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 (async() => {
   const sdk = new BoltTypescriptSDK({
@@ -181,9 +181,9 @@ shipments.
 ### Example Usage
 
 ```typescript
-import { BoltTypescriptSDK } from "Bolt-Typescript-SDK";
-import { AddressListingInput, CountryCode } from "Bolt-Typescript-SDK/dist/models/components";
-import { AccountAddressEditRequest } from "Bolt-Typescript-SDK/dist/models/operations";
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
+import { AddressListingInput, CountryCode } from "@boltpay/bolt-typescript-sdk/dist/models/components";
+import { AccountAddressEditRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 (async() => {
   const sdk = new BoltTypescriptSDK({
@@ -243,9 +243,9 @@ Determine whether or not an identifier is associated with an existing Bolt accou
 ### Example Usage
 
 ```typescript
-import { BoltTypescriptSDK } from "Bolt-Typescript-SDK";
-import { Identifier, IdentifierType } from "Bolt-Typescript-SDK/dist/models/components";
-import { AccountExistsRequest } from "Bolt-Typescript-SDK/dist/models/operations";
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
+import { Identifier, IdentifierType } from "@boltpay/bolt-typescript-sdk/dist/models/components";
+import { AccountExistsRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 (async() => {
   const sdk = new BoltTypescriptSDK({
@@ -298,8 +298,8 @@ which is documented in [Install the Bolt Tokenizer](https://help.bolt.com/develo
 ### Example Usage
 
 ```typescript
-import { BoltTypescriptSDK } from "Bolt-Typescript-SDK";
-import { AccountAddPaymentMethodRequest } from "Bolt-Typescript-SDK/dist/models/operations";
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
+import { AccountAddPaymentMethodRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 (async() => {
   const sdk = new BoltTypescriptSDK({
@@ -346,8 +346,8 @@ orders that are associated with it.
 ### Example Usage
 
 ```typescript
-import { BoltTypescriptSDK } from "Bolt-Typescript-SDK";
-import { AccountPaymentMethodDeleteRequest } from "Bolt-Typescript-SDK/dist/models/operations";
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
+import { AccountPaymentMethodDeleteRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 (async() => {
   const sdk = new BoltTypescriptSDK({

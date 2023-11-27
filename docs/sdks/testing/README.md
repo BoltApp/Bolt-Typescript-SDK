@@ -20,9 +20,9 @@ Create a Bolt shopper account for testing purposes.
 ### Example Usage
 
 ```typescript
-import { BoltTypescriptSDK } from "Bolt-Typescript-SDK";
-import { AccountTestCreationData, EmailState, PhoneState } from "Bolt-Typescript-SDK/dist/models/components";
-import { TestingAccountCreateRequest, TestingAccountCreateSecurity } from "Bolt-Typescript-SDK/dist/models/operations";
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
+import { AccountTestCreationData, EmailState, PhoneState } from "@boltpay/bolt-typescript-sdk/dist/models/components";
+import { TestingAccountCreateRequest, TestingAccountCreateSecurity } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 (async() => {
   const sdk = new BoltTypescriptSDK();
@@ -72,8 +72,8 @@ generated against the `4111 1111 1111 1004` test card.
 ### Example Usage
 
 ```typescript
-import { BoltTypescriptSDK } from "Bolt-Typescript-SDK";
-import { TestingCreditCardGetSecurity } from "Bolt-Typescript-SDK/dist/models/operations";
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
+import { TestingCreditCardGetSecurity } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 (async() => {
   const sdk = new BoltTypescriptSDK();

@@ -63,7 +63,6 @@ src/models/errors/error.ts
 src/models/errors/index.ts
 src/models/operations/index.ts
 src/models/components/index.ts
-USAGE.md
 docs/models/operations/accountgetrequest.md
 docs/models/operations/accountgetresponse.md
 docs/models/operations/accountaddresscreaterequest.md
@@ -140,4 +139,5 @@ docs/sdks/guest/README.md
 docs/sdks/loggedin/README.md
 docs/sdks/oauth/README.md
 docs/sdks/testing/README.md
+USAGE.md
 .gitattributes

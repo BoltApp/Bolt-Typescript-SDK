@@ -19,8 +19,8 @@ Retrieve a new or refresh an existing OAuth token.
 ### Example Usage
 
 ```typescript
-import { BoltTypescriptSDK } from "Bolt-Typescript-SDK";
-import { GrantType, Scope } from "Bolt-Typescript-SDK/dist/models/components";
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
+import { GrantType, Scope } from "@boltpay/bolt-typescript-sdk/dist/models/components";
 
 (async() => {
   const sdk = new BoltTypescriptSDK({
