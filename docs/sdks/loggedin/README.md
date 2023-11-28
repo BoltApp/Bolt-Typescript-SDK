@@ -244,7 +244,6 @@ const id: string = "iKv7t5bgt1gg";
 const xPublishableKey: string = "string";
 const paymentActionRequest: PaymentActionRequest = {
   dotTag: DotTag.Finalize,
-  redirectResult: "eyJ0cmFuc",
 };
 
   const res = await sdk.payments.loggedIn.performAction(id, xPublishableKey, paymentActionRequest);
