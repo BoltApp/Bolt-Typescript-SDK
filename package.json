@@ -1,6 +1,6 @@
 {
   "name": "@boltpay/bolt-typescript-sdk",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "author": "BoltPublicAPI",
   "scripts": {
     "prepare": "tsc --build",

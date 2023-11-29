@@ -13,4 +13,11 @@ export class PaymentActionRequest extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: ".tag" })
     dotTag: DotTag;
+
+    /**
+     * Optional redirect result token required for an APM payment (excluding PayPal).
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "redirect_result" })
+    redirectResult?: string;
 }
