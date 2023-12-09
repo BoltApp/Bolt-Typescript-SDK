@@ -22,7 +22,7 @@ Retrieve a new or refresh an existing OAuth token.
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { GrantType, Scope } from "@boltpay/bolt-typescript-sdk/dist/models/components";
 
-(async() => {
+async function run() {
   const sdk = new BoltTypescriptSDK({
     security: {
       apiKey: "",
@@ -43,7 +43,9 @@ import { GrantType, Scope } from "@boltpay/bolt-typescript-sdk/dist/models/compo
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters

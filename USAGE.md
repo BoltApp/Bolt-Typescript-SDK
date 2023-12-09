@@ -3,7 +3,7 @@
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
-(async () => {
+async function run() {
     const sdk = new BoltTypescriptSDK({
         security: {
             apiKey: "",
@@ -17,7 +17,9 @@ import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/oper
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
 <!-- End SDK Example Usage [usage] -->

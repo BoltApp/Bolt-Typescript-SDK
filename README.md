@@ -39,7 +39,7 @@ yarn add @boltpay/bolt-typescript-sdk
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
-(async () => {
+async function run() {
     const sdk = new BoltTypescriptSDK({
         security: {
             apiKey: "",
@@ -53,7 +53,9 @@ import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/oper
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
 <!-- End SDK Example Usage [usage] -->
@@ -110,29 +112,35 @@ Example
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
-(async() => {
-  const sdk = new BoltTypescriptSDK({
-    security: {
-      apiKey: "",
-      oauth: "",
-    },
-  });
-const xPublishableKey: string = "string";
+async function run() {
+    const sdk = new BoltTypescriptSDK({
+        security: {
+            apiKey: "",
+            oauth: "",
+        },
+    });
+    const xPublishableKey: string = "string";
 
-  
-  let res;
-  try {
-    res = await sdk.account.getDetails(xPublishableKey);
-  } catch (e) { 
-    if (e instanceof errors.ErrorT) {
-      console.error(e) // handle exception 
-    
-  }
+    let res;
+    try {
+        res = await sdk.account.getDetails(xPublishableKey);
+    } catch (err) {
+        if (err instanceof errors.ErrorT) {
+            console.error(err); // handle exception
+            throw err;
+        } else if (err instanceof errors.SDKError) {
+            console.error(err); // handle exception
+            throw err;
+        }
+    }
 
-  if (res.statusCode == 200) {
-    // handle response
-  }
-})();
+    if (res.statusCode == 200) {
+        // handle response
+    }
+}
+
+run();
+
 ```
 <!-- End Error Handling [errors] -->
 
@@ -153,7 +161,7 @@ You can override the default server globally by passing a server index to the `s
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
-(async () => {
+async function run() {
     const sdk = new BoltTypescriptSDK({
         serverIdx: 0,
         security: {
@@ -168,7 +176,9 @@ import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/oper
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
 
@@ -184,7 +194,7 @@ The default server can also be overridden globally by passing a URL to the `serv
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
-(async () => {
+async function run() {
     const sdk = new BoltTypescriptSDK({
         serverURL: "https://{environment}.bolt.com/v3",
         security: {
@@ -199,7 +209,9 @@ import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/oper
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
 <!-- End Server Selection [server] -->
@@ -207,13 +219,13 @@ import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/oper
 <!-- Start Custom HTTP Client [http-client] -->
 ## Custom HTTP Client
 
-The Typescript SDK makes API calls using the (axios)[https://axios-http.com/docs/intro] HTTP library.  In order to provide a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration, you can initialize the SDK client with a custom `AxiosInstance` object.
+The Typescript SDK makes API calls using the [axios](https://axios-http.com/docs/intro) HTTP library.  In order to provide a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration, you can initialize the SDK client with a custom `AxiosInstance` object.
 
 For example, you could specify a header for every request that your sdk makes as follows:
 
 ```typescript
-from @boltpay/bolt-typescript-sdk import BoltTypescriptSDK;
-import axios;
+import { @boltpay/bolt-typescript-sdk } from "BoltTypescriptSDK";
+import axios from "axios";
 
 const httpClient = axios.create({
     headers: {'x-custom-header': 'someValue'}
@@ -240,7 +252,7 @@ You can set the security parameters through the `security` optional parameter wh
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
-(async () => {
+async function run() {
     const sdk = new BoltTypescriptSDK({
         security: {
             apiKey: "",
@@ -254,7 +266,9 @@ import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/oper
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
 
@@ -278,7 +292,7 @@ import {
     GuestPaymentsInitializeSecurity,
 } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
-(async () => {
+async function run() {
     const sdk = new BoltTypescriptSDK();
     const xPublishableKey: string = "string";
     const guestPaymentInitializeRequest: GuestPaymentInitializeRequest = {
@@ -349,7 +363,9 @@ import {
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
 <!-- End Authentication [security] -->

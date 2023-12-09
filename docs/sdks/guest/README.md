@@ -29,7 +29,7 @@ import {
 } from "@boltpay/bolt-typescript-sdk/dist/models/components";
 import { GuestPaymentsInitializeRequest, GuestPaymentsInitializeSecurity } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
-(async() => {
+async function run() {
   const sdk = new BoltTypescriptSDK();
 const xPublishableKey: string = "string";
 const guestPaymentInitializeRequest: GuestPaymentInitializeRequest = {
@@ -96,7 +96,9 @@ const operationSecurity: GuestPaymentsInitializeSecurity = "";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -139,7 +141,7 @@ import {
 } from "@boltpay/bolt-typescript-sdk/dist/models/components";
 import { GuestPaymentsUpdateRequest, GuestPaymentsUpdateSecurity } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
-(async() => {
+async function run() {
   const sdk = new BoltTypescriptSDK();
 const id: string = "iKv7t5bgt1gg";
 const xPublishableKey: string = "string";
@@ -199,7 +201,9 @@ const operationSecurity: GuestPaymentsUpdateSecurity = "";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -235,7 +239,7 @@ import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { DotTag, PaymentActionRequest } from "@boltpay/bolt-typescript-sdk/dist/models/components";
 import { GuestPaymentsActionRequest, GuestPaymentsActionSecurity } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
-(async() => {
+async function run() {
   const sdk = new BoltTypescriptSDK();
 const id: string = "iKv7t5bgt1gg";
 const xPublishableKey: string = "string";
@@ -250,7 +254,9 @@ const operationSecurity: GuestPaymentsActionSecurity = "";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters

@@ -27,7 +27,7 @@ Retrieve a shopper's account details, such as addresses and payment information
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
-(async() => {
+async function run() {
   const sdk = new BoltTypescriptSDK({
     security: {
       apiKey: "",
@@ -41,7 +41,9 @@ const xPublishableKey: string = "string";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -73,7 +75,7 @@ import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { AddressListingInput, CountryCode } from "@boltpay/bolt-typescript-sdk/dist/models/components";
 import { AccountAddressCreateRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
-(async() => {
+async function run() {
   const sdk = new BoltTypescriptSDK({
     security: {
       apiKey: "",
@@ -101,7 +103,9 @@ const addressListing: AddressListingInput = {
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -134,7 +138,7 @@ shipments that are associated with it.
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { AccountAddressDeleteRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
-(async() => {
+async function run() {
   const sdk = new BoltTypescriptSDK({
     security: {
       apiKey: "",
@@ -149,7 +153,9 @@ const xPublishableKey: string = "string";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -185,7 +191,7 @@ import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { AddressListingInput, CountryCode } from "@boltpay/bolt-typescript-sdk/dist/models/components";
 import { AccountAddressEditRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
-(async() => {
+async function run() {
   const sdk = new BoltTypescriptSDK({
     security: {
       apiKey: "",
@@ -214,7 +220,9 @@ const addressListing: AddressListingInput = {
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -247,7 +255,7 @@ import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { Identifier, IdentifierType } from "@boltpay/bolt-typescript-sdk/dist/models/components";
 import { AccountExistsRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
-(async() => {
+async function run() {
   const sdk = new BoltTypescriptSDK({
     security: {
       apiKey: "",
@@ -265,7 +273,9 @@ const xPublishableKey: string = "string";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -301,7 +311,7 @@ which is documented in [Install the Bolt Tokenizer](https://help.bolt.com/develo
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { AccountAddPaymentMethodRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
-(async() => {
+async function run() {
   const sdk = new BoltTypescriptSDK({
     security: {
       apiKey: "",
@@ -316,7 +326,9 @@ const requestBody: any = "string";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -349,7 +361,7 @@ orders that are associated with it.
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { AccountPaymentMethodDeleteRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
-(async() => {
+async function run() {
   const sdk = new BoltTypescriptSDK({
     security: {
       apiKey: "",
@@ -364,7 +376,9 @@ const xPublishableKey: string = "string";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters

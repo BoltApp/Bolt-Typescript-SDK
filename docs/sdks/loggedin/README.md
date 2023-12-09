@@ -28,7 +28,7 @@ import {
 } from "@boltpay/bolt-typescript-sdk/dist/models/components";
 import { PaymentsInitializeRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
-(async() => {
+async function run() {
   const sdk = new BoltTypescriptSDK({
     security: {
       apiKey: "",
@@ -92,7 +92,9 @@ const paymentInitializeRequest: PaymentInitializeRequest = {
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -134,7 +136,7 @@ import {
 } from "@boltpay/bolt-typescript-sdk/dist/models/components";
 import { PaymentsUpdateRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
-(async() => {
+async function run() {
   const sdk = new BoltTypescriptSDK({
     security: {
       apiKey: "",
@@ -198,7 +200,9 @@ const paymentUpdateRequest: PaymentUpdateRequest = {
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -233,7 +237,7 @@ import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { DotTag, PaymentActionRequest } from "@boltpay/bolt-typescript-sdk/dist/models/components";
 import { PaymentsActionRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
-(async() => {
+async function run() {
   const sdk = new BoltTypescriptSDK({
     security: {
       apiKey: "",
@@ -252,7 +256,9 @@ const paymentActionRequest: PaymentActionRequest = {
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters

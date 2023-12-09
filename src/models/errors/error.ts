@@ -9,6 +9,7 @@ import { classToPlain, Expose } from "class-transformer";
  * The type of error returned
  */
 export enum DotTag {
+    UnprocessableRequest = "unprocessable_request",
     MissingInputParameter = "missing_input_parameter",
     InvalidInputParameter = "invalid_input_parameter",
     NotFound = "not_found",

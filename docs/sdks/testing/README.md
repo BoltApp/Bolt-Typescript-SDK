@@ -24,7 +24,7 @@ import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { AccountTestCreationData, EmailState, PhoneState } from "@boltpay/bolt-typescript-sdk/dist/models/components";
 import { TestingAccountCreateRequest, TestingAccountCreateSecurity } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
-(async() => {
+async function run() {
   const sdk = new BoltTypescriptSDK();
 const xPublishableKey: string = "string";
 const accountTestCreationData: AccountTestCreationData = {
@@ -40,7 +40,9 @@ const operationSecurity: TestingAccountCreateSecurity = "";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -75,7 +77,7 @@ generated against the `4111 1111 1111 1004` test card.
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { TestingCreditCardGetSecurity } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
-(async() => {
+async function run() {
   const sdk = new BoltTypescriptSDK();
 const operationSecurity: TestingCreditCardGetSecurity = "";
 
@@ -84,7 +86,9 @@ const operationSecurity: TestingCreditCardGetSecurity = "";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
