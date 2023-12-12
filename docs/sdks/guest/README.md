@@ -89,7 +89,7 @@ const guestPaymentInitializeRequest: GuestPaymentInitializeRequest = {
   },
   paymentMethod: "string",
 };
-const operationSecurity: GuestPaymentsInitializeSecurity = "";
+const operationSecurity: GuestPaymentsInitializeSecurity = "<YOUR_API_KEY_HERE>";
 
   const res = await sdk.payments.guest.initialize(operationSecurity, xPublishableKey, guestPaymentInitializeRequest);
 
@@ -194,7 +194,7 @@ const paymentUpdateRequest: PaymentUpdateRequest = {
     },
   },
 };
-const operationSecurity: GuestPaymentsUpdateSecurity = "";
+const operationSecurity: GuestPaymentsUpdateSecurity = "<YOUR_API_KEY_HERE>";
 
   const res = await sdk.payments.guest.update(operationSecurity, id, xPublishableKey, paymentUpdateRequest);
 
@@ -247,7 +247,7 @@ const paymentActionRequest: PaymentActionRequest = {
   dotTag: DotTag.Finalize,
   redirectResult: "eyJ0cmFuc",
 };
-const operationSecurity: GuestPaymentsActionSecurity = "";
+const operationSecurity: GuestPaymentsActionSecurity = "<YOUR_API_KEY_HERE>";
 
   const res = await sdk.payments.guest.performAction(operationSecurity, id, xPublishableKey, paymentActionRequest);
 

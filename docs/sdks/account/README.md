@@ -11,8 +11,8 @@ you can add or remove addresses and payment information.
 
 * [getDetails](#getdetails) - Retrieve account details
 * [addAddress](#addaddress) - Add an address
-* [deleteAddress](#deleteaddress) - Delete an existing address
 * [updateAddress](#updateaddress) - Edit an existing address
+* [deleteAddress](#deleteaddress) - Delete an existing address
 * [detect](#detect) - Determine the existence of a Bolt account
 * [addPaymentMethod](#addpaymentmethod) - Add a payment method to a shopper's Bolt account Wallet.
 * [deletePaymentMethod](#deletepaymentmethod) - Delete an existing payment method
@@ -30,8 +30,7 @@ import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/oper
 async function run() {
   const sdk = new BoltTypescriptSDK({
     security: {
-      apiKey: "",
-      oauth: "",
+      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
     },
   });
 const xPublishableKey: string = "string";
@@ -78,8 +77,7 @@ import { AccountAddressCreateRequest } from "@boltpay/bolt-typescript-sdk/dist/m
 async function run() {
   const sdk = new BoltTypescriptSDK({
     security: {
-      apiKey: "",
-      oauth: "",
+      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
     },
   });
 const xPublishableKey: string = "string";
@@ -126,57 +124,6 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.SDKError | 400-600         | */*             |
 
-## deleteAddress
-
-Delete an existing address. Deleting an address does not invalidate transactions or
-shipments that are associated with it.
-
-
-### Example Usage
-
-```typescript
-import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { AccountAddressDeleteRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
-
-async function run() {
-  const sdk = new BoltTypescriptSDK({
-    security: {
-      apiKey: "",
-      oauth: "",
-    },
-  });
-const id: string = "D4g3h5tBuVYK9";
-const xPublishableKey: string = "string";
-
-  const res = await sdk.account.deleteAddress(id, xPublishableKey);
-
-  if (res.statusCode == 200) {
-    // handle response
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            | Example                                                                |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `id`                                                                   | *string*                                                               | :heavy_check_mark:                                                     | The ID of the address to delete                                        | D4g3h5tBuVYK9                                                          |
-| `xPublishableKey`                                                      | *string*                                                               | :heavy_check_mark:                                                     | The publicly viewable identifier used to identify a merchant division. |                                                                        |
-| `config`                                                               | [AxiosRequestConfig](https://axios-http.com/docs/req_config)           | :heavy_minus_sign:                                                     | Available config options for making requests.                          |                                                                        |
-
-
-### Response
-
-**Promise<[operations.AccountAddressDeleteResponse](../../models/operations/accountaddressdeleteresponse.md)>**
-### Errors
-
-| Error Object     | Status Code      | Content Type     |
-| ---------------- | ---------------- | ---------------- |
-| errors.ErrorT    | 4XX              | application/json |
-| errors.SDKError  | 400-600          | */*              |
-
 ## updateAddress
 
 Edit an existing address on the shopper's account. This does not edit addresses
@@ -194,8 +141,7 @@ import { AccountAddressEditRequest } from "@boltpay/bolt-typescript-sdk/dist/mod
 async function run() {
   const sdk = new BoltTypescriptSDK({
     security: {
-      apiKey: "",
-      oauth: "",
+      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
     },
   });
 const id: string = "D4g3h5tBuVYK9";
@@ -244,6 +190,56 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.SDKError | 400-600         | */*             |
 
+## deleteAddress
+
+Delete an existing address. Deleting an address does not invalidate transactions or
+shipments that are associated with it.
+
+
+### Example Usage
+
+```typescript
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
+import { AccountAddressDeleteRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
+
+async function run() {
+  const sdk = new BoltTypescriptSDK({
+    security: {
+      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+    },
+  });
+const id: string = "D4g3h5tBuVYK9";
+const xPublishableKey: string = "string";
+
+  const res = await sdk.account.deleteAddress(id, xPublishableKey);
+
+  if (res.statusCode == 200) {
+    // handle response
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            | Example                                                                |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `id`                                                                   | *string*                                                               | :heavy_check_mark:                                                     | The ID of the address to delete                                        | D4g3h5tBuVYK9                                                          |
+| `xPublishableKey`                                                      | *string*                                                               | :heavy_check_mark:                                                     | The publicly viewable identifier used to identify a merchant division. |                                                                        |
+| `config`                                                               | [AxiosRequestConfig](https://axios-http.com/docs/req_config)           | :heavy_minus_sign:                                                     | Available config options for making requests.                          |                                                                        |
+
+
+### Response
+
+**Promise<[operations.AccountAddressDeleteResponse](../../models/operations/accountaddressdeleteresponse.md)>**
+### Errors
+
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 400-600          | */*              |
+
 ## detect
 
 Determine whether or not an identifier is associated with an existing Bolt account.
@@ -258,8 +254,7 @@ import { AccountExistsRequest } from "@boltpay/bolt-typescript-sdk/dist/models/o
 async function run() {
   const sdk = new BoltTypescriptSDK({
     security: {
-      apiKey: "",
-      oauth: "",
+      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
     },
   });
 const identifier: Identifier = {
@@ -314,8 +309,7 @@ import { AccountAddPaymentMethodRequest } from "@boltpay/bolt-typescript-sdk/dis
 async function run() {
   const sdk = new BoltTypescriptSDK({
     security: {
-      apiKey: "",
-      oauth: "",
+      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
     },
   });
 const xPublishableKey: string = "string";
@@ -364,8 +358,7 @@ import { AccountPaymentMethodDeleteRequest } from "@boltpay/bolt-typescript-sdk/
 async function run() {
   const sdk = new BoltTypescriptSDK({
     security: {
-      apiKey: "",
-      oauth: "",
+      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
     },
   });
 const id: string = "D4g3h5tBuVYK9";

@@ -136,6 +136,8 @@ export class Testing {
                     decodedRes,
                     httpRes
                 );
+            default:
+                break;
         }
 
         return res;
@@ -227,6 +229,8 @@ export class Testing {
                     decodedRes,
                     httpRes
                 );
+            default:
+                break;
         }
 
         return res;

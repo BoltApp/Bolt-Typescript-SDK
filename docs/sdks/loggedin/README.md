@@ -31,8 +31,7 @@ import { PaymentsInitializeRequest } from "@boltpay/bolt-typescript-sdk/dist/mod
 async function run() {
   const sdk = new BoltTypescriptSDK({
     security: {
-      apiKey: "",
-      oauth: "",
+      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
     },
   });
 const xPublishableKey: string = "string";
@@ -139,8 +138,7 @@ import { PaymentsUpdateRequest } from "@boltpay/bolt-typescript-sdk/dist/models/
 async function run() {
   const sdk = new BoltTypescriptSDK({
     security: {
-      apiKey: "",
-      oauth: "",
+      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
     },
   });
 const id: string = "iKv7t5bgt1gg";
@@ -240,8 +238,7 @@ import { PaymentsActionRequest } from "@boltpay/bolt-typescript-sdk/dist/models/
 async function run() {
   const sdk = new BoltTypescriptSDK({
     security: {
-      apiKey: "",
-      oauth: "",
+      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
     },
   });
 const id: string = "iKv7t5bgt1gg";

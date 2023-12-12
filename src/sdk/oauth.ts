@@ -133,6 +133,8 @@ export class OAuth {
                     decodedRes,
                     httpRes
                 );
+            default:
+                break;
         }
 
         return res;

@@ -6,8 +6,7 @@ import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/oper
 async function run() {
     const sdk = new BoltTypescriptSDK({
         security: {
-            apiKey: "",
-            oauth: "",
+            oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         },
     });
     const xPublishableKey: string = "string";

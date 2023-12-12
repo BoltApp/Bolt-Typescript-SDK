@@ -42,8 +42,7 @@ import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/oper
 async function run() {
     const sdk = new BoltTypescriptSDK({
         security: {
-            apiKey: "",
-            oauth: "",
+            oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         },
     });
     const xPublishableKey: string = "string";
@@ -67,8 +66,8 @@ run();
 
 * [getDetails](docs/sdks/account/README.md#getdetails) - Retrieve account details
 * [addAddress](docs/sdks/account/README.md#addaddress) - Add an address
-* [deleteAddress](docs/sdks/account/README.md#deleteaddress) - Delete an existing address
 * [updateAddress](docs/sdks/account/README.md#updateaddress) - Edit an existing address
+* [deleteAddress](docs/sdks/account/README.md#deleteaddress) - Delete an existing address
 * [detect](docs/sdks/account/README.md#detect) - Determine the existence of a Bolt account
 * [addPaymentMethod](docs/sdks/account/README.md#addpaymentmethod) - Add a payment method to a shopper's Bolt account Wallet.
 * [deletePaymentMethod](docs/sdks/account/README.md#deletepaymentmethod) - Delete an existing payment method
@@ -115,8 +114,7 @@ import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/oper
 async function run() {
     const sdk = new BoltTypescriptSDK({
         security: {
-            apiKey: "",
-            oauth: "",
+            oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         },
     });
     const xPublishableKey: string = "string";
@@ -165,8 +163,7 @@ async function run() {
     const sdk = new BoltTypescriptSDK({
         serverIdx: 0,
         security: {
-            apiKey: "",
-            oauth: "",
+            oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         },
     });
     const xPublishableKey: string = "string";
@@ -198,8 +195,7 @@ async function run() {
     const sdk = new BoltTypescriptSDK({
         serverURL: "https://{environment}.bolt.com/v3",
         security: {
-            apiKey: "",
-            oauth: "",
+            oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         },
     });
     const xPublishableKey: string = "string";
@@ -244,8 +240,8 @@ This SDK supports the following security schemes globally:
 
 | Name         | Type         | Scheme       |
 | ------------ | ------------ | ------------ |
-| `apiKey`     | apiKey       | API key      |
 | `oauth`      | oauth2       | OAuth2 token |
+| `apiKey`     | apiKey       | API key      |
 
 You can set the security parameters through the `security` optional parameter when initializing the SDK client instance. The selected scheme will be used by default to authenticate with the API for all operations that support it. For example:
 ```typescript
@@ -255,8 +251,7 @@ import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/oper
 async function run() {
     const sdk = new BoltTypescriptSDK({
         security: {
-            apiKey: "",
-            oauth: "",
+            oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         },
     });
     const xPublishableKey: string = "string";
@@ -352,7 +347,7 @@ async function run() {
         },
         paymentMethod: "string",
     };
-    const operationSecurity: GuestPaymentsInitializeSecurity = "";
+    const operationSecurity: GuestPaymentsInitializeSecurity = "<YOUR_API_KEY_HERE>";
 
     const res = await sdk.payments.guest.initialize(
         operationSecurity,

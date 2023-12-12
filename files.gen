@@ -26,8 +26,8 @@ src/types/rfcdate.ts
 tsconfig.json
 src/models/operations/accountget.ts
 src/models/operations/accountaddresscreate.ts
-src/models/operations/accountaddressdelete.ts
 src/models/operations/accountaddressedit.ts
+src/models/operations/accountaddressdelete.ts
 src/models/operations/accountexists.ts
 src/models/operations/accountaddpaymentmethod.ts
 src/models/operations/accountpaymentmethoddelete.ts
@@ -67,10 +67,10 @@ docs/models/operations/accountgetrequest.md
 docs/models/operations/accountgetresponse.md
 docs/models/operations/accountaddresscreaterequest.md
 docs/models/operations/accountaddresscreateresponse.md
-docs/models/operations/accountaddressdeleterequest.md
-docs/models/operations/accountaddressdeleteresponse.md
 docs/models/operations/accountaddresseditrequest.md
 docs/models/operations/accountaddresseditresponse.md
+docs/models/operations/accountaddressdeleterequest.md
+docs/models/operations/accountaddressdeleteresponse.md
 docs/models/operations/accountexistsrequest.md
 docs/models/operations/accountexistsresponse.md
 docs/models/operations/accountaddpaymentmethodrequest.md

@@ -33,7 +33,7 @@ const accountTestCreationData: AccountTestCreationData = {
   isMigrated: true,
   hasAddress: true,
 };
-const operationSecurity: TestingAccountCreateSecurity = "";
+const operationSecurity: TestingAccountCreateSecurity = "<YOUR_API_KEY_HERE>";
 
   const res = await sdk.testing.createAccount(operationSecurity, xPublishableKey, accountTestCreationData);
 
@@ -79,7 +79,7 @@ import { TestingCreditCardGetSecurity } from "@boltpay/bolt-typescript-sdk/dist/
 
 async function run() {
   const sdk = new BoltTypescriptSDK();
-const operationSecurity: TestingCreditCardGetSecurity = "";
+const operationSecurity: TestingCreditCardGetSecurity = "<YOUR_API_KEY_HERE>";
 
   const res = await sdk.testing.getCreditCard(operationSecurity);
 

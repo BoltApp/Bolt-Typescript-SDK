@@ -115,6 +115,8 @@ export class Account {
                     decodedRes,
                     httpRes
                 );
+            default:
+                break;
         }
 
         return res;
@@ -217,97 +219,8 @@ export class Account {
                     decodedRes,
                     httpRes
                 );
-        }
-
-        return res;
-    }
-
-    /**
-     * Delete an existing address
-     *
-     * @remarks
-     * Delete an existing address. Deleting an address does not invalidate transactions or
-     * shipments that are associated with it.
-     *
-     */
-    async deleteAddress(
-        id: string,
-        xPublishableKey: string,
-        config?: AxiosRequestConfig
-    ): Promise<operations.AccountAddressDeleteResponse> {
-        const req = new operations.AccountAddressDeleteRequest({
-            id: id,
-            xPublishableKey: xPublishableKey,
-        });
-        const baseURL: string = utils.templateUrl(
-            this.sdkConfiguration.serverURL,
-            this.sdkConfiguration.serverDefaults
-        );
-        const operationUrl: string = utils.generateURL(baseURL, "/account/addresses/{id}", req);
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
-        let globalSecurity = this.sdkConfiguration.security;
-        if (typeof globalSecurity === "function") {
-            globalSecurity = await globalSecurity();
-        }
-        if (!(globalSecurity instanceof utils.SpeakeasyBase)) {
-            globalSecurity = new components.Security(globalSecurity);
-        }
-        const properties = utils.parseSecurityProperties(globalSecurity);
-        const headers: RawAxiosRequestHeaders = {
-            ...utils.getHeadersFromRequest(req),
-            ...config?.headers,
-            ...properties.headers,
-        };
-        headers["Accept"] = "application/json";
-
-        headers["user-agent"] = this.sdkConfiguration.userAgent;
-
-        const httpRes: AxiosResponse = await client.request({
-            validateStatus: () => true,
-            url: operationUrl,
-            method: "delete",
-            headers: headers,
-            responseType: "arraybuffer",
-            ...config,
-        });
-
-        const responseContentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-        if (httpRes?.status == null) {
-            throw new Error(`status code not found in response: ${httpRes}`);
-        }
-
-        const res: operations.AccountAddressDeleteResponse =
-            new operations.AccountAddressDeleteResponse({
-                statusCode: httpRes.status,
-                contentType: responseContentType,
-                rawResponse: httpRes,
-            });
-        const decodedRes = new TextDecoder().decode(httpRes?.data);
-        switch (true) {
-            case httpRes?.status == 200:
+            default:
                 break;
-            case httpRes?.status >= 400 && httpRes?.status < 500:
-                if (utils.matchContentType(responseContentType, `application/json`)) {
-                    const err = utils.objectToClass(JSON.parse(decodedRes), errors.ErrorT);
-                    err.rawResponse = httpRes;
-                    throw new errors.ErrorT(err);
-                } else {
-                    throw new errors.SDKError(
-                        "unknown content-type received: " + responseContentType,
-                        httpRes.status,
-                        decodedRes,
-                        httpRes
-                    );
-                }
-                break;
-            case httpRes?.status >= 500 && httpRes?.status < 600:
-                throw new errors.SDKError(
-                    "API error occurred",
-                    httpRes.status,
-                    decodedRes,
-                    httpRes
-                );
         }
 
         return res;
@@ -415,6 +328,99 @@ export class Account {
                     decodedRes,
                     httpRes
                 );
+            default:
+                break;
+        }
+
+        return res;
+    }
+
+    /**
+     * Delete an existing address
+     *
+     * @remarks
+     * Delete an existing address. Deleting an address does not invalidate transactions or
+     * shipments that are associated with it.
+     *
+     */
+    async deleteAddress(
+        id: string,
+        xPublishableKey: string,
+        config?: AxiosRequestConfig
+    ): Promise<operations.AccountAddressDeleteResponse> {
+        const req = new operations.AccountAddressDeleteRequest({
+            id: id,
+            xPublishableKey: xPublishableKey,
+        });
+        const baseURL: string = utils.templateUrl(
+            this.sdkConfiguration.serverURL,
+            this.sdkConfiguration.serverDefaults
+        );
+        const operationUrl: string = utils.generateURL(baseURL, "/account/addresses/{id}", req);
+        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        let globalSecurity = this.sdkConfiguration.security;
+        if (typeof globalSecurity === "function") {
+            globalSecurity = await globalSecurity();
+        }
+        if (!(globalSecurity instanceof utils.SpeakeasyBase)) {
+            globalSecurity = new components.Security(globalSecurity);
+        }
+        const properties = utils.parseSecurityProperties(globalSecurity);
+        const headers: RawAxiosRequestHeaders = {
+            ...utils.getHeadersFromRequest(req),
+            ...config?.headers,
+            ...properties.headers,
+        };
+        headers["Accept"] = "application/json";
+
+        headers["user-agent"] = this.sdkConfiguration.userAgent;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: operationUrl,
+            method: "delete",
+            headers: headers,
+            responseType: "arraybuffer",
+            ...config,
+        });
+
+        const responseContentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.AccountAddressDeleteResponse =
+            new operations.AccountAddressDeleteResponse({
+                statusCode: httpRes.status,
+                contentType: responseContentType,
+                rawResponse: httpRes,
+            });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
+        switch (true) {
+            case httpRes?.status >= 400 && httpRes?.status < 500:
+                if (utils.matchContentType(responseContentType, `application/json`)) {
+                    const err = utils.objectToClass(JSON.parse(decodedRes), errors.ErrorT);
+                    err.rawResponse = httpRes;
+                    throw new errors.ErrorT(err);
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + responseContentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
+                }
+                break;
+            case httpRes?.status >= 500 && httpRes?.status < 600:
+                throw new errors.SDKError(
+                    "API error occurred",
+                    httpRes.status,
+                    decodedRes,
+                    httpRes
+                );
+            default:
+                break;
         }
 
         return res;
@@ -481,8 +487,6 @@ export class Account {
         });
         const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
-            case httpRes?.status == 200:
-                break;
             case httpRes?.status >= 400 && httpRes?.status < 500:
                 if (utils.matchContentType(responseContentType, `application/json`)) {
                     const err = utils.objectToClass(JSON.parse(decodedRes), errors.ErrorT);
@@ -504,6 +508,8 @@ export class Account {
                     decodedRes,
                     httpRes
                 );
+            default:
+                break;
         }
 
         return res;
@@ -607,6 +613,8 @@ export class Account {
                     decodedRes,
                     httpRes
                 );
+            default:
+                break;
         }
 
         return res;
@@ -679,8 +687,6 @@ export class Account {
             });
         const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
-            case httpRes?.status == 200:
-                break;
             case httpRes?.status >= 400 && httpRes?.status < 500:
                 if (utils.matchContentType(responseContentType, `application/json`)) {
                     const err = utils.objectToClass(JSON.parse(decodedRes), errors.ErrorT);
@@ -702,6 +708,8 @@ export class Account {
                     decodedRes,
                     httpRes
                 );
+            default:
+                break;
         }
 
         return res;

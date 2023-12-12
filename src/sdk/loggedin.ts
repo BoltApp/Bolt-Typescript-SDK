@@ -129,6 +129,8 @@ export class LoggedIn {
                     decodedRes,
                     httpRes
                 );
+            default:
+                break;
         }
 
         return res;
@@ -247,6 +249,8 @@ export class LoggedIn {
                     decodedRes,
                     httpRes
                 );
+            default:
+                break;
         }
 
         return res;
@@ -365,6 +369,8 @@ export class LoggedIn {
                     decodedRes,
                     httpRes
                 );
+            default:
+                break;
         }
 
         return res;

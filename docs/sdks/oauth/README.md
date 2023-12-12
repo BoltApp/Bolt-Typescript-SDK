@@ -25,8 +25,7 @@ import { GrantType, Scope } from "@boltpay/bolt-typescript-sdk/dist/models/compo
 async function run() {
   const sdk = new BoltTypescriptSDK({
     security: {
-      apiKey: "",
-      oauth: "",
+      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
     },
   });
 

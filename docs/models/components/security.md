@@ -3,7 +3,7 @@
 
 ## Fields
 
-| Field              | Type               | Required           | Description        | Example            |
-| ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| `apiKey`           | *string*           | :heavy_check_mark: | N/A                |                    |
-| `oauth`            | *string*           | :heavy_check_mark: | N/A                |                    |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `oauth`            | *string*           | :heavy_minus_sign: | N/A                |
+| `apiKey`           | *string*           | :heavy_minus_sign: | N/A                |

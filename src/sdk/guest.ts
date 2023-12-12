@@ -126,6 +126,8 @@ export class Guest {
                     decodedRes,
                     httpRes
                 );
+            default:
+                break;
         }
 
         return res;
@@ -242,6 +244,8 @@ export class Guest {
                     decodedRes,
                     httpRes
                 );
+            default:
+                break;
         }
 
         return res;
@@ -358,6 +362,8 @@ export class Guest {
                     decodedRes,
                     httpRes
                 );
+            default:
+                break;
         }
 
         return res;
