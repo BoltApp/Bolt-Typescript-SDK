@@ -37,7 +37,6 @@ yarn add @boltpay/bolt-typescript-sdk
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 async function run() {
     const sdk = new BoltTypescriptSDK({
@@ -45,13 +44,15 @@ async function run() {
             oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         },
     });
-    const xPublishableKey: string = "string";
 
+    const xPublishableKey = "string";
     const res = await sdk.account.getDetails(xPublishableKey);
 
-    if (res.statusCode == 200) {
-        // handle response
+    if (res?.statusCode !== 200) {
+        throw new Error("Unexpected status code: " + res?.statusCode || "-");
     }
+
+    // handle response
 }
 
 run();
@@ -98,7 +99,7 @@ run();
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-Handling errors in this SDK should largely match your expectations.  All operations return a response object or throw an error.  If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Error type.
+All SDK methods return a response object or throw an error. If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Error type.
 
 | Error Object     | Status Code      | Content Type     |
 | ---------------- | ---------------- | ---------------- |
@@ -109,7 +110,7 @@ Example
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
+import * as errors from "@boltpay/bolt-typescript-sdk/models/errors";
 
 async function run() {
     const sdk = new BoltTypescriptSDK({
@@ -117,24 +118,23 @@ async function run() {
             oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         },
     });
-    const xPublishableKey: string = "string";
 
-    let res;
-    try {
-        res = await sdk.account.getDetails(xPublishableKey);
-    } catch (err) {
+    const xPublishableKey = "string";
+
+    const res = await sdk.account.getDetails(xPublishableKey).catch((err) => {
         if (err instanceof errors.ErrorT) {
             console.error(err); // handle exception
-            throw err;
-        } else if (err instanceof errors.SDKError) {
-            console.error(err); // handle exception
+            return null;
+        } else {
             throw err;
         }
+    });
+
+    if (res?.statusCode !== 200) {
+        throw new Error("Unexpected status code: " + res?.statusCode || "-");
     }
 
-    if (res.statusCode == 200) {
-        // handle response
-    }
+    // handle response
 }
 
 run();
@@ -153,31 +153,7 @@ You can override the default server globally by passing a server index to the `s
 | - | ------ | --------- |
 | 0 | `https://{environment}.bolt.com/v3` | `environment` (default is `api-sandbox`) |
 
-#### Example
 
-```typescript
-import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
-
-async function run() {
-    const sdk = new BoltTypescriptSDK({
-        serverIdx: 0,
-        security: {
-            oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
-        },
-    });
-    const xPublishableKey: string = "string";
-
-    const res = await sdk.account.getDetails(xPublishableKey);
-
-    if (res.statusCode == 200) {
-        // handle response
-    }
-}
-
-run();
-
-```
 
 #### Variables
 
@@ -187,47 +163,54 @@ Some of the server options above contain variables. If you want to set the value
 ### Override Server URL Per-Client
 
 The default server can also be overridden globally by passing a URL to the `serverURL: str` optional parameter when initializing the SDK client instance. For example:
-```typescript
-import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
-
-async function run() {
-    const sdk = new BoltTypescriptSDK({
-        serverURL: "https://{environment}.bolt.com/v3",
-        security: {
-            oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
-        },
-    });
-    const xPublishableKey: string = "string";
-
-    const res = await sdk.account.getDetails(xPublishableKey);
-
-    if (res.statusCode == 200) {
-        // handle response
-    }
-}
-
-run();
-
-```
 <!-- End Server Selection [server] -->
 
 <!-- Start Custom HTTP Client [http-client] -->
 ## Custom HTTP Client
 
-The Typescript SDK makes API calls using the [axios](https://axios-http.com/docs/intro) HTTP library.  In order to provide a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration, you can initialize the SDK client with a custom `AxiosInstance` object.
+The TypeScript SDK makes API calls using an `HTTPClient` that wraps the native
+[Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). This
+client is a thin wrapper around `fetch` and provides the ability to attach hooks
+around the request lifecycle that can be used to modify the request or handle
+errors and response.
 
-For example, you could specify a header for every request that your sdk makes as follows:
+The `HTTPClient` constructor takes an optional `fetcher` argument that can be
+used to integrate a third-party HTTP client or when writing tests to mock out
+the HTTP client and feed in fixtures.
+
+The following example shows how to use the `"beforeRequest"` hook to to add a
+custom header and a timeout to requests and how to use the `"requestError"` hook
+to log errors:
 
 ```typescript
-import { @boltpay/bolt-typescript-sdk } from "BoltTypescriptSDK";
-import axios from "axios";
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
+import { HTTPClient } from "@boltpay/bolt-typescript-sdk/lib/http";
 
-const httpClient = axios.create({
-    headers: {'x-custom-header': 'someValue'}
-})
+const httpClient = new HTTPClient({
+  // fetcher takes a function that has the same signature as native `fetch`.
+  fetcher: (request) => {
+    return fetch(request);
+  }
+});
 
-const sdk = new BoltTypescriptSDK({defaultClient: httpClient});
+httpClient.addHook("beforeRequest", (request) => {
+  const nextRequest = new Request(request, {
+    signal: request.signal || AbortSignal.timeout(5000);
+  });
+
+  nextRequest.headers.set("x-custom-header", "custom value");
+
+  return nextRequest;
+});
+
+httpClient.addHook("requestError", (error, request) => {
+  console.group("Request Error");
+  console.log("Reason:", `${error}`);
+  console.log("Endpoint:", `${request.method} ${request.url}`);
+  console.groupEnd();
+});
+
+const sdk = new BoltTypescriptSDK({ httpClient });
 ```
 <!-- End Custom HTTP Client [http-client] -->
 
@@ -246,7 +229,6 @@ This SDK supports the following security schemes globally:
 You can set the security parameters through the `security` optional parameter when initializing the SDK client instance. The selected scheme will be used by default to authenticate with the API for all operations that support it. For example:
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 async function run() {
     const sdk = new BoltTypescriptSDK({
@@ -254,13 +236,15 @@ async function run() {
             oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         },
     });
-    const xPublishableKey: string = "string";
 
+    const xPublishableKey = "string";
     const res = await sdk.account.getDetails(xPublishableKey);
 
-    if (res.statusCode == 200) {
-        // handle response
+    if (res?.statusCode !== 200) {
+        throw new Error("Unexpected status code: " + res?.statusCode || "-");
     }
+
+    // handle response
 }
 
 run();
@@ -272,25 +256,14 @@ run();
 Some operations in this SDK require the security scheme to be specified at the request level. For example:
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import {
-    Amount,
-    Cart,
-    CartDiscount,
-    CartItem,
-    CartShipment,
-    Currency,
-    GuestPaymentInitializeRequest,
-    ProfileCreationData,
-} from "@boltpay/bolt-typescript-sdk/dist/models/components";
-import {
-    GuestPaymentsInitializeRequest,
-    GuestPaymentsInitializeSecurity,
-} from "@boltpay/bolt-typescript-sdk/dist/models/operations";
+import { Currency } from "@boltpay/bolt-typescript-sdk/models/components";
+import { GuestPaymentsInitializeSecurity } from "@boltpay/bolt-typescript-sdk/models/operations";
 
 async function run() {
     const sdk = new BoltTypescriptSDK();
-    const xPublishableKey: string = "string";
-    const guestPaymentInitializeRequest: GuestPaymentInitializeRequest = {
+
+    const xPublishableKey = "string";
+    const guestPaymentInitializeRequest = {
         profile: {
             createAccount: true,
             firstName: "Alice",
@@ -348,16 +321,17 @@ async function run() {
         paymentMethod: "string",
     };
     const operationSecurity: GuestPaymentsInitializeSecurity = "<YOUR_API_KEY_HERE>";
-
     const res = await sdk.payments.guest.initialize(
         operationSecurity,
         xPublishableKey,
         guestPaymentInitializeRequest
     );
 
-    if (res.statusCode == 200) {
-        // handle response
+    if (res?.statusCode !== 200) {
+        throw new Error("Unexpected status code: " + res?.statusCode || "-");
     }
+
+    // handle response
 }
 
 run();
