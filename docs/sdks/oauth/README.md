@@ -20,28 +20,32 @@ Retrieve a new or refresh an existing OAuth token.
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { GrantType, Scope } from "@boltpay/bolt-typescript-sdk/dist/models/components";
+import {  } from "@boltpay/bolt-typescript-sdk/models";
+import { GrantType } from "@boltpay/bolt-typescript-sdk/models/components";
 
 async function run() {
   const sdk = new BoltTypescriptSDK({
-    security: {
-      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
-    },
-  });
+      security: {
+        oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+      },
+    });
 
+  
   const res = await sdk.oAuth.getToken({
-    code: "string",
-    clientId: "string",
-    clientSecret: "string",
-    grantType: GrantType.AuthorizationCode,
-    scope: [
-      Scope.BoltAccountManage,
-    ],
-  });
+      code: "string",
+      clientId: "string",
+      clientSecret: "string",
+      grantType: GrantType.AuthorizationCode,
+      scope: [
+        Scope.BoltAccountManage,
+      ],
+    });
 
-  if (res.statusCode == 200) {
-    // handle response
+  if (res?.statusCode !== 200) {
+    throw new Error("Unexpected status code: " + res?.statusCode || "-");
   }
+  
+  // handle response
 }
 
 run();
@@ -49,10 +53,11 @@ run();
 
 ### Parameters
 
-| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `request`                                                                            | [components.GetAccessTokenRequest](../../models/components/getaccesstokenrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
-| `config`                                                                             | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                         | :heavy_minus_sign:                                                                   | Available config options for making requests.                                        |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [components.GetAccessTokenRequest](../../models/components/getaccesstokenrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 
 
 ### Response
