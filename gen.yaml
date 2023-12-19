@@ -1,9 +1,9 @@
 configVersion: 1.0.0
 management:
-  docChecksum: 3b8fa46f5a3dd747537376b55b54f572
+  docChecksum: 7e6ce1c6ce69ce76d7c9b8f763f5f469
   docVersion: 3.0.1
-  speakeasyVersion: 1.126.0
-  generationVersion: 2.213.3
+  speakeasyVersion: 1.127.2
+  generationVersion: 2.220.3
 generation:
   comments: {}
   sdkClassName: Bolt-Typescript-SDK
@@ -11,19 +11,21 @@ generation:
   maintainOpenAPIOrder: true
   usageSnippets:
     optionalPropertyRendering: withExample
+  fixes:
+    nameResolutionDec2023: false
 features:
   typescript:
-    core: 3.3.0
+    core: 3.3.9
     flattening: 2.81.1
-    globalSecurity: 2.82.1
+    globalSecurity: 2.82.2
     globalServerURLs: 2.82.1
     groups: 2.81.2
     ignores: 2.81.1
-    inputOutputModels: 2.82.0
+    inputOutputModels: 2.83.0
     methodSecurity: 2.82.0
     nameOverrides: 2.81.1
 typescript:
-  version: 0.3.0
+  version: 0.4.0
   author: BoltPublicAPI
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true
