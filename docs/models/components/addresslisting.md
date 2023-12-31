@@ -1,6 +1,6 @@
 # AddressListing
 
-A physical address.
+An address saved on an account, i.e. a physical address plus any additional account-specific metadata.
 
 
 ## Fields
