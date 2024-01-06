@@ -25,7 +25,6 @@ Retrieve a shopper's account details, such as addresses and payment information
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 async function run() {
   const sdk = new BoltTypescriptSDK({
@@ -33,13 +32,16 @@ async function run() {
       oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
     },
   });
-const xPublishableKey: string = "string";
 
+  const xPublishableKey = "string";
+  
   const res = await sdk.account.getDetails(xPublishableKey);
 
-  if (res.statusCode == 200) {
-    // handle response
+  if (res?.statusCode !== 200) {
+    throw new Error("Unexpected status code: " + res?.statusCode || "-");
   }
+  
+  // handle response
 }
 
 run();
@@ -47,10 +49,11 @@ run();
 
 ### Parameters
 
-| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `xPublishableKey`                                                      | *string*                                                               | :heavy_check_mark:                                                     | The publicly viewable identifier used to identify a merchant division. |
-| `config`                                                               | [AxiosRequestConfig](https://axios-http.com/docs/req_config)           | :heavy_minus_sign:                                                     | Available config options for making requests.                          |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `xPublishableKey`                                                                                                                                                              | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The publicly viewable identifier used to identify a merchant division.                                                                                                         |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 
 
 ### Response
@@ -58,10 +61,9 @@ run();
 **Promise<[operations.AccountGetResponse](../../models/operations/accountgetresponse.md)>**
 ### Errors
 
-| Error Object     | Status Code      | Content Type     |
-| ---------------- | ---------------- | ---------------- |
-| errors.ErrorT    | 4XX              | application/json |
-| errors.SDKError  | 400-600          | */*              |
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |
 
 ## addAddress
 
@@ -71,8 +73,7 @@ Add an address to the shopper's account
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { AddressListingInput, CountryCode } from "@boltpay/bolt-typescript-sdk/dist/models/components";
-import { AccountAddressCreateRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
+import { CountryCode } from "@boltpay/bolt-typescript-sdk/models/components";
 
 async function run() {
   const sdk = new BoltTypescriptSDK({
@@ -80,27 +81,30 @@ async function run() {
       oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
     },
   });
-const xPublishableKey: string = "string";
-const addressListing: AddressListingInput = {
-  firstName: "Alice",
-  lastName: "Baker",
-  company: "ACME Corporation",
-  streetAddress1: "535 Mission St, Ste 1401",
-  streetAddress2: "c/o Shipping Department",
-  locality: "San Francisco",
-  postalCode: "94105",
-  region: "CA",
-  countryCode: CountryCode.Us,
-  email: "alice@example.com",
-  phone: "+14155550199",
-  isDefault: true,
-};
 
+  const xPublishableKey = "string";
+  const addressListing = {
+    firstName: "Alice",
+    lastName: "Baker",
+    company: "ACME Corporation",
+    streetAddress1: "535 Mission St, Ste 1401",
+    streetAddress2: "c/o Shipping Department",
+    locality: "San Francisco",
+    postalCode: "94105",
+    region: "CA",
+    countryCode: CountryCode.Us,
+    email: "alice@example.com",
+    phone: "+14155550199",
+    isDefault: true,
+  };
+  
   const res = await sdk.account.addAddress(xPublishableKey, addressListing);
 
-  if (res.statusCode == 200) {
-    // handle response
+  if (res?.statusCode !== 200) {
+    throw new Error("Unexpected status code: " + res?.statusCode || "-");
   }
+  
+  // handle response
 }
 
 run();
@@ -108,11 +112,12 @@ run();
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `xPublishableKey`                                                                | *string*                                                                         | :heavy_check_mark:                                                               | The publicly viewable identifier used to identify a merchant division.           |
-| `addressListing`                                                                 | [components.AddressListingInput](../../models/components/addresslistinginput.md) | :heavy_check_mark:                                                               | N/A                                                                              |
-| `config`                                                                         | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                     | :heavy_minus_sign:                                                               | Available config options for making requests.                                    |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `xPublishableKey`                                                                                                                                                              | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The publicly viewable identifier used to identify a merchant division.                                                                                                         |
+| `addressListing`                                                                                                                                                               | [components.AddressListingInput](../../models/components/addresslistinginput.md)                                                                                               | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 
 
 ### Response
@@ -122,7 +127,7 @@ run();
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| errors.SDKError | 400-600         | */*             |
+| errors.SDKError | 4xx-5xx         | */*             |
 
 ## updateAddress
 
@@ -135,8 +140,7 @@ shipments.
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { AddressListingInput, CountryCode } from "@boltpay/bolt-typescript-sdk/dist/models/components";
-import { AccountAddressEditRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
+import { CountryCode } from "@boltpay/bolt-typescript-sdk/models/components";
 
 async function run() {
   const sdk = new BoltTypescriptSDK({
@@ -144,28 +148,31 @@ async function run() {
       oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
     },
   });
-const id: string = "D4g3h5tBuVYK9";
-const xPublishableKey: string = "string";
-const addressListing: AddressListingInput = {
-  firstName: "Alice",
-  lastName: "Baker",
-  company: "ACME Corporation",
-  streetAddress1: "535 Mission St, Ste 1401",
-  streetAddress2: "c/o Shipping Department",
-  locality: "San Francisco",
-  postalCode: "94105",
-  region: "CA",
-  countryCode: CountryCode.Us,
-  email: "alice@example.com",
-  phone: "+14155550199",
-  isDefault: true,
-};
 
+  const id = "D4g3h5tBuVYK9";
+  const xPublishableKey = "string";
+  const addressListing = {
+    firstName: "Alice",
+    lastName: "Baker",
+    company: "ACME Corporation",
+    streetAddress1: "535 Mission St, Ste 1401",
+    streetAddress2: "c/o Shipping Department",
+    locality: "San Francisco",
+    postalCode: "94105",
+    region: "CA",
+    countryCode: CountryCode.Us,
+    email: "alice@example.com",
+    phone: "+14155550199",
+    isDefault: true,
+  };
+  
   const res = await sdk.account.updateAddress(id, xPublishableKey, addressListing);
 
-  if (res.statusCode == 200) {
-    // handle response
+  if (res?.statusCode !== 200) {
+    throw new Error("Unexpected status code: " + res?.statusCode || "-");
   }
+  
+  // handle response
 }
 
 run();
@@ -173,12 +180,13 @@ run();
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `id`                                                                             | *string*                                                                         | :heavy_check_mark:                                                               | The ID of the address to edit                                                    | D4g3h5tBuVYK9                                                                    |
-| `xPublishableKey`                                                                | *string*                                                                         | :heavy_check_mark:                                                               | The publicly viewable identifier used to identify a merchant division.           |                                                                                  |
-| `addressListing`                                                                 | [components.AddressListingInput](../../models/components/addresslistinginput.md) | :heavy_check_mark:                                                               | N/A                                                                              |                                                                                  |
-| `config`                                                                         | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                     | :heavy_minus_sign:                                                               | Available config options for making requests.                                    |                                                                                  |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    | Example                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The ID of the address to edit                                                                                                                                                  | [object Object]                                                                                                                                                                |
+| `xPublishableKey`                                                                                                                                                              | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The publicly viewable identifier used to identify a merchant division.                                                                                                         |                                                                                                                                                                                |
+| `addressListing`                                                                                                                                                               | [components.AddressListingInput](../../models/components/addresslistinginput.md)                                                                                               | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |                                                                                                                                                                                |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |                                                                                                                                                                                |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |                                                                                                                                                                                |
 
 
 ### Response
@@ -188,7 +196,7 @@ run();
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| errors.SDKError | 400-600         | */*             |
+| errors.SDKError | 4xx-5xx         | */*             |
 
 ## deleteAddress
 
@@ -200,7 +208,6 @@ shipments that are associated with it.
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { AccountAddressDeleteRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 async function run() {
   const sdk = new BoltTypescriptSDK({
@@ -208,14 +215,17 @@ async function run() {
       oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
     },
   });
-const id: string = "D4g3h5tBuVYK9";
-const xPublishableKey: string = "string";
 
+  const id = "D4g3h5tBuVYK9";
+  const xPublishableKey = "string";
+  
   const res = await sdk.account.deleteAddress(id, xPublishableKey);
 
-  if (res.statusCode == 200) {
-    // handle response
+  if (res?.statusCode !== 200) {
+    throw new Error("Unexpected status code: " + res?.statusCode || "-");
   }
+  
+  // handle response
 }
 
 run();
@@ -223,11 +233,12 @@ run();
 
 ### Parameters
 
-| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            | Example                                                                |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `id`                                                                   | *string*                                                               | :heavy_check_mark:                                                     | The ID of the address to delete                                        | D4g3h5tBuVYK9                                                          |
-| `xPublishableKey`                                                      | *string*                                                               | :heavy_check_mark:                                                     | The publicly viewable identifier used to identify a merchant division. |                                                                        |
-| `config`                                                               | [AxiosRequestConfig](https://axios-http.com/docs/req_config)           | :heavy_minus_sign:                                                     | Available config options for making requests.                          |                                                                        |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    | Example                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The ID of the address to delete                                                                                                                                                | [object Object]                                                                                                                                                                |
+| `xPublishableKey`                                                                                                                                                              | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The publicly viewable identifier used to identify a merchant division.                                                                                                         |                                                                                                                                                                                |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |                                                                                                                                                                                |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |                                                                                                                                                                                |
 
 
 ### Response
@@ -235,10 +246,9 @@ run();
 **Promise<[operations.AccountAddressDeleteResponse](../../models/operations/accountaddressdeleteresponse.md)>**
 ### Errors
 
-| Error Object     | Status Code      | Content Type     |
-| ---------------- | ---------------- | ---------------- |
-| errors.ErrorT    | 4XX              | application/json |
-| errors.SDKError  | 400-600          | */*              |
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |
 
 ## detect
 
@@ -248,8 +258,7 @@ Determine whether or not an identifier is associated with an existing Bolt accou
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { Identifier, IdentifierType } from "@boltpay/bolt-typescript-sdk/dist/models/components";
-import { AccountExistsRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
+import { IdentifierType } from "@boltpay/bolt-typescript-sdk/models/components";
 
 async function run() {
   const sdk = new BoltTypescriptSDK({
@@ -257,17 +266,20 @@ async function run() {
       oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
     },
   });
-const identifier: Identifier = {
-  identifierType: IdentifierType.Email,
-  identifierValue: "alice@example.com",
-};
-const xPublishableKey: string = "string";
 
+  const identifier = {
+    identifierType: IdentifierType.Email,
+    identifierValue: "alice@example.com",
+  };
+  const xPublishableKey = "string";
+  
   const res = await sdk.account.detect(identifier, xPublishableKey);
 
-  if (res.statusCode == 200) {
-    // handle response
+  if (res?.statusCode !== 200) {
+    throw new Error("Unexpected status code: " + res?.statusCode || "-");
   }
+  
+  // handle response
 }
 
 run();
@@ -275,11 +287,12 @@ run();
 
 ### Parameters
 
-| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
-| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `identifier`                                                                                          | [components.Identifier](../../models/components/identifier.md)                                        | :heavy_check_mark:                                                                                    | A type and value combination that defines the identifier used to detect<br/>the existence of an account.<br/> |
-| `xPublishableKey`                                                                                     | *string*                                                                                              | :heavy_check_mark:                                                                                    | The publicly viewable identifier used to identify a merchant division.                                |
-| `config`                                                                                              | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                          | :heavy_minus_sign:                                                                                    | Available config options for making requests.                                                         |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `identifier`                                                                                                                                                                   | [components.Identifier](../../models/components/identifier.md)                                                                                                                 | :heavy_check_mark:                                                                                                                                                             | A type and value combination that defines the identifier used to detect<br/>the existence of an account.<br/>                                                                  |
+| `xPublishableKey`                                                                                                                                                              | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The publicly viewable identifier used to identify a merchant division.                                                                                                         |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 
 
 ### Response
@@ -287,10 +300,9 @@ run();
 **Promise<[operations.AccountExistsResponse](../../models/operations/accountexistsresponse.md)>**
 ### Errors
 
-| Error Object     | Status Code      | Content Type     |
-| ---------------- | ---------------- | ---------------- |
-| errors.ErrorT    | 4XX              | application/json |
-| errors.SDKError  | 400-600          | */*              |
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |
 
 ## addPaymentMethod
 
@@ -304,7 +316,6 @@ which is documented in [Install the Bolt Tokenizer](https://help.bolt.com/develo
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { AccountAddPaymentMethodRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 async function run() {
   const sdk = new BoltTypescriptSDK({
@@ -312,14 +323,17 @@ async function run() {
       oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
     },
   });
-const xPublishableKey: string = "string";
-const requestBody: any = "string";
 
+  const xPublishableKey = "string";
+  const requestBody = "string";
+  
   const res = await sdk.account.addPaymentMethod(xPublishableKey, requestBody);
 
-  if (res.statusCode == 200) {
-    // handle response
+  if (res?.statusCode !== 200) {
+    throw new Error("Unexpected status code: " + res?.statusCode || "-");
   }
+  
+  // handle response
 }
 
 run();
@@ -327,11 +341,12 @@ run();
 
 ### Parameters
 
-| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `xPublishableKey`                                                      | *string*                                                               | :heavy_check_mark:                                                     | The publicly viewable identifier used to identify a merchant division. |
-| `requestBody`                                                          | *any*                                                                  | :heavy_check_mark:                                                     | N/A                                                                    |
-| `config`                                                               | [AxiosRequestConfig](https://axios-http.com/docs/req_config)           | :heavy_minus_sign:                                                     | Available config options for making requests.                          |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `xPublishableKey`                                                                                                                                                              | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The publicly viewable identifier used to identify a merchant division.                                                                                                         |
+| `requestBody`                                                                                                                                                                  | *any*                                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 
 
 ### Response
@@ -341,7 +356,7 @@ run();
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| errors.SDKError | 400-600         | */*             |
+| errors.SDKError | 4xx-5xx         | */*             |
 
 ## deletePaymentMethod
 
@@ -353,7 +368,6 @@ orders that are associated with it.
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { AccountPaymentMethodDeleteRequest } from "@boltpay/bolt-typescript-sdk/dist/models/operations";
 
 async function run() {
   const sdk = new BoltTypescriptSDK({
@@ -361,14 +375,17 @@ async function run() {
       oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
     },
   });
-const id: string = "D4g3h5tBuVYK9";
-const xPublishableKey: string = "string";
 
+  const id = "D4g3h5tBuVYK9";
+  const xPublishableKey = "string";
+  
   const res = await sdk.account.deletePaymentMethod(id, xPublishableKey);
 
-  if (res.statusCode == 200) {
-    // handle response
+  if (res?.statusCode !== 200) {
+    throw new Error("Unexpected status code: " + res?.statusCode || "-");
   }
+  
+  // handle response
 }
 
 run();
@@ -376,11 +393,12 @@ run();
 
 ### Parameters
 
-| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            | Example                                                                |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `id`                                                                   | *string*                                                               | :heavy_check_mark:                                                     | The ID of the payment method to delete                                 | D4g3h5tBuVYK9                                                          |
-| `xPublishableKey`                                                      | *string*                                                               | :heavy_check_mark:                                                     | The publicly viewable identifier used to identify a merchant division. |                                                                        |
-| `config`                                                               | [AxiosRequestConfig](https://axios-http.com/docs/req_config)           | :heavy_minus_sign:                                                     | Available config options for making requests.                          |                                                                        |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    | Example                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The ID of the payment method to delete                                                                                                                                         | [object Object]                                                                                                                                                                |
+| `xPublishableKey`                                                                                                                                                              | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The publicly viewable identifier used to identify a merchant division.                                                                                                         |                                                                                                                                                                                |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |                                                                                                                                                                                |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |                                                                                                                                                                                |
 
 
 ### Response
@@ -388,7 +406,6 @@ run();
 **Promise<[operations.AccountPaymentMethodDeleteResponse](../../models/operations/accountpaymentmethoddeleteresponse.md)>**
 ### Errors
 
-| Error Object     | Status Code      | Content Type     |
-| ---------------- | ---------------- | ---------------- |
-| errors.ErrorT    | 4XX              | application/json |
-| errors.SDKError  | 400-600          | */*              |
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |
