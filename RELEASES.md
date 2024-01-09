@@ -69,3 +69,13 @@ Based on:
 - [typescript v0.3.0] .
 ### Releases
 - [NPM v0.3.0] https://www.npmjs.com/package/@boltpay/bolt-typescript-sdk/v/0.3.0 - .
+
+## 2024-01-09 00:17:33
+### Changes
+Based on:
+- OpenAPI Doc 3.0.1 
+- Speakeasy CLI 1.134.0 (2.230.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v0.4.0] .
+### Releases
+- [NPM v0.4.0] https://www.npmjs.com/package/@boltpay/bolt-typescript-sdk/v/0.4.0 - .
