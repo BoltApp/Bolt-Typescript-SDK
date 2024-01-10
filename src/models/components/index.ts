@@ -13,7 +13,6 @@ export * from "./cartshipment";
 export * from "./getaccesstokenrequest";
 export * from "./getaccesstokenresponse";
 export * from "./guestpaymentinitializerequest";
-export * from "./identifier";
 export * from "./paymentactionrequest";
 export * from "./paymentinitializerequest";
 export * from "./paymentupdaterequest";

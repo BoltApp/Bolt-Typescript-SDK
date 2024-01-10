@@ -6,7 +6,6 @@ export * from "./accountaddpaymentmethod";
 export * from "./accountaddresscreate";
 export * from "./accountaddressdelete";
 export * from "./accountaddressedit";
-export * from "./accountexists";
 export * from "./accountget";
 export * from "./accountpaymentmethoddelete";
 export * from "./guestpaymentsaction";
