@@ -4,18 +4,6 @@
 
 import { z } from "zod";
 
-export enum RefreshTokenScope {
-    BoltAccountManage = "bolt.account.manage",
-    BoltAccountView = "bolt.account.view",
-    Openid = "openid",
-}
-
-export enum GetAccessTokenResponseScope {
-    BoltAccountManage = "bolt.account.manage",
-    BoltAccountView = "bolt.account.view",
-    Openid = "openid",
-}
-
 export type GetAccessTokenResponse = {
     /**
      * A JWT token issued when the request includes the scope open_id.
@@ -26,7 +14,7 @@ export type GetAccessTokenResponse = {
      */
     accessToken?: string | undefined;
     /**
-     * Access token’s expiration in seconds.
+     * The access token's expiration, in seconds.
      */
     expiresIn?: number | undefined;
     /**
@@ -34,28 +22,22 @@ export type GetAccessTokenResponse = {
      */
     refreshToken?: string | undefined;
     /**
-     * The scope granted to the refresh token. Currently this will always be bolt.account.view.
+     * The scope granted to the refresh token. Currently, refreshed token will only grant view permissions.
      */
-    refreshTokenScope?: Array<RefreshTokenScope> | undefined;
+    refreshTokenScope?: string | undefined;
     /**
      * The scope granted to access token, depending on the scope granted to the authorization code as well as the scope parameter.
      *
      * @remarks
-     * Options include `bolt.account.manage`, `bolt.account.view`, `openid`.'
+     * Options include `bolt.account.manage`, `bolt.account.view`, `openid`. Multiple values can be returned as space-separated strings.
      *
      */
-    scope?: Array<GetAccessTokenResponseScope> | undefined;
+    scope?: string | undefined;
     /**
      * The token_type will always be bearer.
      */
     tokenType?: string | undefined;
 };
-
-/** @internal */
-export const RefreshTokenScope$ = z.nativeEnum(RefreshTokenScope);
-
-/** @internal */
-export const GetAccessTokenResponseScope$ = z.nativeEnum(GetAccessTokenResponseScope);
 
 /** @internal */
 export namespace GetAccessTokenResponse$ {
@@ -64,8 +46,8 @@ export namespace GetAccessTokenResponse$ {
         access_token?: string | undefined;
         expires_in?: number | undefined;
         refresh_token?: string | undefined;
-        refresh_token_scope?: Array<RefreshTokenScope> | undefined;
-        scope?: Array<GetAccessTokenResponseScope> | undefined;
+        refresh_token_scope?: string | undefined;
+        scope?: string | undefined;
         token_type?: string | undefined;
     };
 
@@ -75,8 +57,8 @@ export namespace GetAccessTokenResponse$ {
             access_token: z.string().optional(),
             expires_in: z.number().int().optional(),
             refresh_token: z.string().optional(),
-            refresh_token_scope: z.array(RefreshTokenScope$).optional(),
-            scope: z.array(GetAccessTokenResponseScope$).optional(),
+            refresh_token_scope: z.string().optional(),
+            scope: z.string().optional(),
             token_type: z.string().optional(),
         })
         .transform((v) => {
@@ -98,8 +80,8 @@ export namespace GetAccessTokenResponse$ {
         access_token?: string | undefined;
         expires_in?: number | undefined;
         refresh_token?: string | undefined;
-        refresh_token_scope?: Array<RefreshTokenScope> | undefined;
-        scope?: Array<GetAccessTokenResponseScope> | undefined;
+        refresh_token_scope?: string | undefined;
+        scope?: string | undefined;
         token_type?: string | undefined;
     };
 
@@ -109,8 +91,8 @@ export namespace GetAccessTokenResponse$ {
             accessToken: z.string().optional(),
             expiresIn: z.number().int().optional(),
             refreshToken: z.string().optional(),
-            refreshTokenScope: z.array(RefreshTokenScope$).optional(),
-            scope: z.array(GetAccessTokenResponseScope$).optional(),
+            refreshTokenScope: z.string().optional(),
+            scope: z.string().optional(),
             tokenType: z.string().optional(),
         })
         .transform((v) => {

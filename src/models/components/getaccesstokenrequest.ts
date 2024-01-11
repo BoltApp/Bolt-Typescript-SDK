@@ -5,12 +5,7 @@
 import { z } from "zod";
 
 /**
- * The type of OAuth 2.0 grant being utilized.
- *
- * @remarks
- *
- * The value will always be `authorization_code` when exchanging an authorization code for an access token.
- *
+ * The type of OAuth 2.0 grant being utilized. The only supported grant is `authorization_code`.
  */
 export enum GrantType {
     AuthorizationCode = "authorization_code",
@@ -28,34 +23,38 @@ export type GetAccessTokenRequest = {
      */
     code: string;
     /**
-     * Merchant publishable key which can be found in the merchant dashboard
+     * The OAuth client ID, which corresponds to the merchant publishable key, which can be retrieved
+     *
+     * @remarks
+     * in the Merchant Dashboard.
+     *
      */
     clientId: string;
     /**
-     * Your Bolt API Key.
+     * The OAuth client secret, which corresponds the merchant API key, which can be retrieved in the
+     *
+     * @remarks
+     * Merchant Dashboard.
+     *
      */
     clientSecret: string;
     /**
-     * The type of OAuth 2.0 grant being utilized.
-     *
-     * @remarks
-     *
-     * The value will always be `authorization_code` when exchanging an authorization code for an access token.
-     *
+     * The type of OAuth 2.0 grant being utilized. The only supported grant is `authorization_code`.
      */
     grantType: GrantType;
     /**
      * The scope issued to the merchant when receiving an authorization code.
      *
      * @remarks
-     * Options include `bolt.account.manage`, `bolt.account.view`, `openid`.
-     * You can find more information on these options in our
-     * [OAuth scope documentation](https://help.bolt.com/developers/references/bolt-oauth/#scopes).
      *
      */
     scope: Array<Scope>;
     /**
-     * A randomly generated string issued to the merchant when receiving an authorization code used to prevent CSRF attacks
+     * A randomly generated string sent along with an authorization code. This must be included, if provided,
+     *
+     * @remarks
+     * in order to prevent CSRF attacks. used to prevent CSRF attacks.
+     *
      */
     state?: string | undefined;
 };
