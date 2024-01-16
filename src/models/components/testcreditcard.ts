@@ -7,7 +7,7 @@ import { z } from "zod";
 /**
  * The credit card's network.
  */
-export enum Network {
+export enum TestCreditCardNetwork {
     Visa = "visa",
     Mastercard = "mastercard",
     Amex = "amex",
@@ -22,7 +22,7 @@ export type TestCreditCard = {
     /**
      * The credit card's network.
      */
-    network: Network;
+    network: TestCreditCardNetwork;
     /**
      * The Bank Identification Number (BIN). This is typically the first 4 to 6 digits of the account number.
      */
@@ -42,12 +42,12 @@ export type TestCreditCard = {
 };
 
 /** @internal */
-export const Network$ = z.nativeEnum(Network);
+export const TestCreditCardNetwork$ = z.nativeEnum(TestCreditCardNetwork);
 
 /** @internal */
 export namespace TestCreditCard$ {
     export type Inbound = {
-        network: Network;
+        network: TestCreditCardNetwork;
         bin: string;
         last4: string;
         expiration: string;
@@ -56,7 +56,7 @@ export namespace TestCreditCard$ {
 
     export const inboundSchema: z.ZodType<TestCreditCard, z.ZodTypeDef, Inbound> = z
         .object({
-            network: Network$,
+            network: TestCreditCardNetwork$,
             bin: z.string(),
             last4: z.string(),
             expiration: z
@@ -76,7 +76,7 @@ export namespace TestCreditCard$ {
         });
 
     export type Outbound = {
-        network: Network;
+        network: TestCreditCardNetwork;
         bin: string;
         last4: string;
         expiration: string;
@@ -85,7 +85,7 @@ export namespace TestCreditCard$ {
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, TestCreditCard> = z
         .object({
-            network: Network$,
+            network: TestCreditCardNetwork$,
             bin: z.string(),
             last4: z.string(),
             expiration: z.date().transform((v) => v.toISOString()),

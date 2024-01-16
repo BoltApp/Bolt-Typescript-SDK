@@ -34,13 +34,10 @@ async function run() {
 
   const xPublishableKey = "string";
   
-  const res = await sdk.account.getDetails(xPublishableKey);
+  const result = await sdk.account.getDetails(xPublishableKey);
 
-  if (res?.statusCode !== 200) {
-    throw new Error("Unexpected status code: " + res?.statusCode || "-");
-  }
-  
-  // handle response
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -60,9 +57,10 @@ run();
 **Promise<[operations.AccountGetResponse](../../models/operations/accountgetresponse.md)>**
 ### Errors
 
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4xx-5xx         | */*             |
+| Error Object                  | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.AccountGetResponseBody | 4XX                           | application/json              |
+| errors.SDKError               | 4xx-5xx                       | */*                           |
 
 ## addAddress
 
@@ -97,13 +95,10 @@ async function run() {
     isDefault: true,
   };
   
-  const res = await sdk.account.addAddress(xPublishableKey, addressListing);
+  const result = await sdk.account.addAddress(xPublishableKey, addressListing);
 
-  if (res?.statusCode !== 200) {
-    throw new Error("Unexpected status code: " + res?.statusCode || "-");
-  }
-  
-  // handle response
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -124,9 +119,10 @@ run();
 **Promise<[operations.AccountAddressCreateResponse](../../models/operations/accountaddresscreateresponse.md)>**
 ### Errors
 
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4xx-5xx         | */*             |
+| Error Object                            | Status Code                             | Content Type                            |
+| --------------------------------------- | --------------------------------------- | --------------------------------------- |
+| errors.AccountAddressCreateResponseBody | 4XX                                     | application/json                        |
+| errors.SDKError                         | 4xx-5xx                                 | */*                                     |
 
 ## updateAddress
 
@@ -165,13 +161,10 @@ async function run() {
     isDefault: true,
   };
   
-  const res = await sdk.account.updateAddress(id, xPublishableKey, addressListing);
+  const result = await sdk.account.updateAddress(id, xPublishableKey, addressListing);
 
-  if (res?.statusCode !== 200) {
-    throw new Error("Unexpected status code: " + res?.statusCode || "-");
-  }
-  
-  // handle response
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -193,9 +186,10 @@ run();
 **Promise<[operations.AccountAddressEditResponse](../../models/operations/accountaddresseditresponse.md)>**
 ### Errors
 
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4xx-5xx         | */*             |
+| Error Object                          | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.AccountAddressEditResponseBody | 4XX                                   | application/json                      |
+| errors.SDKError                       | 4xx-5xx                               | */*                                   |
 
 ## deleteAddress
 
@@ -218,13 +212,10 @@ async function run() {
   const id = "D4g3h5tBuVYK9";
   const xPublishableKey = "string";
   
-  const res = await sdk.account.deleteAddress(id, xPublishableKey);
+  const result = await sdk.account.deleteAddress(id, xPublishableKey);
 
-  if (res?.statusCode !== 200) {
-    throw new Error("Unexpected status code: " + res?.statusCode || "-");
-  }
-  
-  // handle response
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -245,9 +236,10 @@ run();
 **Promise<[operations.AccountAddressDeleteResponse](../../models/operations/accountaddressdeleteresponse.md)>**
 ### Errors
 
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4xx-5xx         | */*             |
+| Error Object                            | Status Code                             | Content Type                            |
+| --------------------------------------- | --------------------------------------- | --------------------------------------- |
+| errors.AccountAddressDeleteResponseBody | 4XX                                     | application/json                        |
+| errors.SDKError                         | 4xx-5xx                                 | */*                                     |
 
 ## addPaymentMethod
 
@@ -270,15 +262,12 @@ async function run() {
   });
 
   const xPublishableKey = "string";
-  const requestBody = "string";
+  const paymentMethod = ;
   
-  const res = await sdk.account.addPaymentMethod(xPublishableKey, requestBody);
+  const result = await sdk.account.addPaymentMethod(xPublishableKey, paymentMethod);
 
-  if (res?.statusCode !== 200) {
-    throw new Error("Unexpected status code: " + res?.statusCode || "-");
-  }
-  
-  // handle response
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -289,7 +278,7 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `xPublishableKey`                                                                                                                                                              | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The publicly viewable identifier used to identify a merchant division.                                                                                                         |
-| `requestBody`                                                                                                                                                                  | *any*                                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |
+| `paymentMethod`                                                                                                                                                                | *components.PaymentMethodInput*                                                                                                                                                | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 
@@ -299,9 +288,10 @@ run();
 **Promise<[operations.AccountAddPaymentMethodResponse](../../models/operations/accountaddpaymentmethodresponse.md)>**
 ### Errors
 
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4xx-5xx         | */*             |
+| Error Object                               | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| errors.AccountAddPaymentMethodResponseBody | 4XX                                        | application/json                           |
+| errors.SDKError                            | 4xx-5xx                                    | */*                                        |
 
 ## deletePaymentMethod
 
@@ -324,13 +314,10 @@ async function run() {
   const id = "D4g3h5tBuVYK9";
   const xPublishableKey = "string";
   
-  const res = await sdk.account.deletePaymentMethod(id, xPublishableKey);
+  const result = await sdk.account.deletePaymentMethod(id, xPublishableKey);
 
-  if (res?.statusCode !== 200) {
-    throw new Error("Unexpected status code: " + res?.statusCode || "-");
-  }
-  
-  // handle response
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -351,6 +338,7 @@ run();
 **Promise<[operations.AccountPaymentMethodDeleteResponse](../../models/operations/accountpaymentmethoddeleteresponse.md)>**
 ### Errors
 
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4xx-5xx         | */*             |
+| Error Object                                  | Status Code                                   | Content Type                                  |
+| --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
+| errors.AccountPaymentMethodDeleteResponseBody | 4XX                                           | application/json                              |
+| errors.SDKError                               | 4xx-5xx                                       | */*                                           |

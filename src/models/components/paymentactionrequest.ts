@@ -4,12 +4,12 @@
 
 import { z } from "zod";
 
-export enum DotTag {
+export enum PaymentActionRequestTag {
     Finalize = "finalize",
 }
 
 export type PaymentActionRequest = {
-    dotTag: DotTag;
+    dotTag: PaymentActionRequestTag;
     /**
      * Optional redirect result token required for an APM payment (excluding PayPal).
      */
@@ -17,18 +17,18 @@ export type PaymentActionRequest = {
 };
 
 /** @internal */
-export const DotTag$ = z.nativeEnum(DotTag);
+export const PaymentActionRequestTag$ = z.nativeEnum(PaymentActionRequestTag);
 
 /** @internal */
 export namespace PaymentActionRequest$ {
     export type Inbound = {
-        ".tag": DotTag;
+        ".tag": PaymentActionRequestTag;
         redirect_result?: string | undefined;
     };
 
     export const inboundSchema: z.ZodType<PaymentActionRequest, z.ZodTypeDef, Inbound> = z
         .object({
-            ".tag": DotTag$,
+            ".tag": PaymentActionRequestTag$,
             redirect_result: z.string().optional(),
         })
         .transform((v) => {
@@ -39,13 +39,13 @@ export namespace PaymentActionRequest$ {
         });
 
     export type Outbound = {
-        ".tag": DotTag;
+        ".tag": PaymentActionRequestTag;
         redirect_result?: string | undefined;
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentActionRequest> = z
         .object({
-            dotTag: DotTag$,
+            dotTag: PaymentActionRequestTag$,
             redirectResult: z.string().optional(),
         })
         .transform((v) => {

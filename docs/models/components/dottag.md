@@ -3,6 +3,6 @@
 
 ## Values
 
-| Name       | Value      |
-| ---------- | ---------- |
-| `Finalize` | finalize   |
+| Name         | Value        |
+| ------------ | ------------ |
+| `CreditCard` | credit_card  |

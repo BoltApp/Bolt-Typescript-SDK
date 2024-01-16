@@ -3,46 +3,168 @@
  */
 
 import { Cart, Cart$ } from "./cart";
+import {
+    PaymentMethodAffirm,
+    PaymentMethodAffirm$,
+    PaymentMethodAffirmTag,
+} from "./paymentmethodaffirmoutput";
+import {
+    PaymentMethodAfterpay,
+    PaymentMethodAfterpay$,
+    PaymentMethodAfterpayTag,
+} from "./paymentmethodafterpayoutput";
+import {
+    DotTag,
+    PaymentMethodCreditCardInput,
+    PaymentMethodCreditCardInput$,
+} from "./paymentmethodcreditcard";
+import {
+    PaymentMethodKlarnaAccount,
+    PaymentMethodKlarnaAccount$,
+    PaymentMethodKlarnaAccountTag,
+} from "./paymentmethodklarnaaccountoutput";
+import {
+    PaymentMethodKlarna,
+    PaymentMethodKlarna$,
+    PaymentMethodKlarnaTag,
+} from "./paymentmethodklarnaoutput";
+import {
+    PaymentMethodKlarnaPaynow,
+    PaymentMethodKlarnaPaynow$,
+    PaymentMethodKlarnaPaynowTag,
+} from "./paymentmethodklarnapaynowoutput";
+import {
+    PaymentMethodPaypal,
+    PaymentMethodPaypal$,
+    PaymentMethodPaypalTag,
+} from "./paymentmethodpaypaloutput";
+import {
+    PaymentMethodReference,
+    PaymentMethodReference$,
+    PaymentMethodReferenceTag,
+} from "./paymentmethodreference";
 import { z } from "zod";
 
 export type PaymentInitializeRequest = {
     cart: Cart;
-    paymentMethod?: any | undefined;
+    paymentMethod:
+        | (PaymentMethodReference & { dotTag: PaymentMethodReferenceTag.Id })
+        | (PaymentMethodAffirm & { dotTag: PaymentMethodAffirmTag.Affirm })
+        | (PaymentMethodAfterpay & { dotTag: PaymentMethodAfterpayTag.Afterpay })
+        | (PaymentMethodKlarna & { dotTag: PaymentMethodKlarnaTag.Klarna })
+        | (PaymentMethodKlarnaAccount & { dotTag: PaymentMethodKlarnaAccountTag.KlarnaAccount })
+        | (PaymentMethodKlarnaPaynow & { dotTag: PaymentMethodKlarnaPaynowTag.KlarnaPaynow })
+        | (PaymentMethodPaypal & { dotTag: PaymentMethodPaypalTag.Paypal })
+        | (PaymentMethodCreditCardInput & { dotTag: DotTag.CreditCard });
 };
 
 /** @internal */
 export namespace PaymentInitializeRequest$ {
     export type Inbound = {
         cart: Cart$.Inbound;
-        payment_method?: any | undefined;
+        payment_method:
+            | (PaymentMethodReference$.Inbound & { ".tag": PaymentMethodReferenceTag.Id })
+            | (PaymentMethodAffirm$.Inbound & { ".tag": PaymentMethodAffirmTag.Affirm })
+            | (PaymentMethodAfterpay$.Inbound & { ".tag": PaymentMethodAfterpayTag.Afterpay })
+            | (PaymentMethodKlarna$.Inbound & { ".tag": PaymentMethodKlarnaTag.Klarna })
+            | (PaymentMethodKlarnaAccount$.Inbound & {
+                  ".tag": PaymentMethodKlarnaAccountTag.KlarnaAccount;
+              })
+            | (PaymentMethodKlarnaPaynow$.Inbound & {
+                  ".tag": PaymentMethodKlarnaPaynowTag.KlarnaPaynow;
+              })
+            | (PaymentMethodPaypal$.Inbound & { ".tag": PaymentMethodPaypalTag.Paypal })
+            | (PaymentMethodCreditCardInput$.Inbound & { ".tag": DotTag.CreditCard });
     };
 
     export const inboundSchema: z.ZodType<PaymentInitializeRequest, z.ZodTypeDef, Inbound> = z
         .object({
             cart: Cart$.inboundSchema,
-            payment_method: z.any().optional(),
+            payment_method: z.union([
+                PaymentMethodReference$.inboundSchema.and(
+                    z.object({ ".tag": z.literal(PaymentMethodReferenceTag.Id) })
+                ),
+                PaymentMethodAffirm$.inboundSchema.and(
+                    z.object({ ".tag": z.literal(PaymentMethodAffirmTag.Affirm) })
+                ),
+                PaymentMethodAfterpay$.inboundSchema.and(
+                    z.object({ ".tag": z.literal(PaymentMethodAfterpayTag.Afterpay) })
+                ),
+                PaymentMethodKlarna$.inboundSchema.and(
+                    z.object({ ".tag": z.literal(PaymentMethodKlarnaTag.Klarna) })
+                ),
+                PaymentMethodKlarnaAccount$.inboundSchema.and(
+                    z.object({ ".tag": z.literal(PaymentMethodKlarnaAccountTag.KlarnaAccount) })
+                ),
+                PaymentMethodKlarnaPaynow$.inboundSchema.and(
+                    z.object({ ".tag": z.literal(PaymentMethodKlarnaPaynowTag.KlarnaPaynow) })
+                ),
+                PaymentMethodPaypal$.inboundSchema.and(
+                    z.object({ ".tag": z.literal(PaymentMethodPaypalTag.Paypal) })
+                ),
+                PaymentMethodCreditCardInput$.inboundSchema.and(
+                    z.object({ ".tag": z.literal(DotTag.CreditCard) })
+                ),
+            ]),
         })
         .transform((v) => {
             return {
                 cart: v.cart,
-                ...(v.payment_method === undefined ? null : { paymentMethod: v.payment_method }),
+                paymentMethod: v.payment_method,
             };
         });
 
     export type Outbound = {
         cart: Cart$.Outbound;
-        payment_method?: any | undefined;
+        payment_method:
+            | (PaymentMethodReference$.Outbound & { ".tag": PaymentMethodReferenceTag.Id })
+            | (PaymentMethodAffirm$.Outbound & { ".tag": PaymentMethodAffirmTag.Affirm })
+            | (PaymentMethodAfterpay$.Outbound & { ".tag": PaymentMethodAfterpayTag.Afterpay })
+            | (PaymentMethodKlarna$.Outbound & { ".tag": PaymentMethodKlarnaTag.Klarna })
+            | (PaymentMethodKlarnaAccount$.Outbound & {
+                  ".tag": PaymentMethodKlarnaAccountTag.KlarnaAccount;
+              })
+            | (PaymentMethodKlarnaPaynow$.Outbound & {
+                  ".tag": PaymentMethodKlarnaPaynowTag.KlarnaPaynow;
+              })
+            | (PaymentMethodPaypal$.Outbound & { ".tag": PaymentMethodPaypalTag.Paypal })
+            | (PaymentMethodCreditCardInput$.Outbound & { ".tag": DotTag.CreditCard });
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentInitializeRequest> = z
         .object({
             cart: Cart$.outboundSchema,
-            paymentMethod: z.any().optional(),
+            paymentMethod: z.union([
+                PaymentMethodReference$.outboundSchema.and(
+                    z.object({ dotTag: z.literal(PaymentMethodReferenceTag.Id) })
+                ),
+                PaymentMethodAffirm$.outboundSchema.and(
+                    z.object({ dotTag: z.literal(PaymentMethodAffirmTag.Affirm) })
+                ),
+                PaymentMethodAfterpay$.outboundSchema.and(
+                    z.object({ dotTag: z.literal(PaymentMethodAfterpayTag.Afterpay) })
+                ),
+                PaymentMethodKlarna$.outboundSchema.and(
+                    z.object({ dotTag: z.literal(PaymentMethodKlarnaTag.Klarna) })
+                ),
+                PaymentMethodKlarnaAccount$.outboundSchema.and(
+                    z.object({ dotTag: z.literal(PaymentMethodKlarnaAccountTag.KlarnaAccount) })
+                ),
+                PaymentMethodKlarnaPaynow$.outboundSchema.and(
+                    z.object({ dotTag: z.literal(PaymentMethodKlarnaPaynowTag.KlarnaPaynow) })
+                ),
+                PaymentMethodPaypal$.outboundSchema.and(
+                    z.object({ dotTag: z.literal(PaymentMethodPaypalTag.Paypal) })
+                ),
+                PaymentMethodCreditCardInput$.outboundSchema.and(
+                    z.object({ dotTag: z.literal(DotTag.CreditCard) })
+                ),
+            ]),
         })
         .transform((v) => {
             return {
                 cart: v.cart,
-                ...(v.paymentMethod === undefined ? null : { payment_method: v.paymentMethod }),
+                payment_method: v.paymentMethod,
             };
         });
 }

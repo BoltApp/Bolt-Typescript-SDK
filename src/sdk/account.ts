@@ -82,6 +82,13 @@ export class Account extends ClientSDK {
                 account: responseBody,
             });
             return result;
+        } else if (this.matchResponse(response, "4XX", "application/json")) {
+            const responseBody = await response.json();
+            const result = errors.AccountGetResponseBody$.inboundSchema.parse({
+                ...responseFields$,
+                ...responseBody,
+            });
+            throw result;
         } else if (this.matchStatusCode(response, "default")) {
             // fallthrough
         } else {
@@ -156,6 +163,13 @@ export class Account extends ClientSDK {
                 "address-listing": responseBody,
             });
             return result;
+        } else if (this.matchResponse(response, "4XX", "application/json")) {
+            const responseBody = await response.json();
+            const result = errors.AccountAddressCreateResponseBody$.inboundSchema.parse({
+                ...responseFields$,
+                ...responseBody,
+            });
+            throw result;
         } else if (this.matchStatusCode(response, "default")) {
             // fallthrough
         } else {
@@ -239,6 +253,13 @@ export class Account extends ClientSDK {
                 "address-listing": responseBody,
             });
             return result;
+        } else if (this.matchResponse(response, "4XX", "application/json")) {
+            const responseBody = await response.json();
+            const result = errors.AccountAddressEditResponseBody$.inboundSchema.parse({
+                ...responseFields$,
+                ...responseBody,
+            });
+            throw result;
         } else if (this.matchStatusCode(response, "default")) {
             // fallthrough
         } else {
@@ -268,7 +289,7 @@ export class Account extends ClientSDK {
         };
         const headers$ = new Headers();
         headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Accept", "*/*");
+        headers$.set("Accept", "application/json");
 
         const payload$ = operations.AccountAddressDeleteRequest$.outboundSchema.parse(input$);
         const body$ = null;
@@ -310,7 +331,14 @@ export class Account extends ClientSDK {
             RawResponse: response,
         };
 
-        if (this.matchStatusCode(response, [200, "default"])) {
+        if (this.matchResponse(response, "4XX", "application/json")) {
+            const responseBody = await response.json();
+            const result = errors.AccountAddressDeleteResponseBody$.inboundSchema.parse({
+                ...responseFields$,
+                ...responseBody,
+            });
+            throw result;
+        } else if (this.matchStatusCode(response, [200, "default"])) {
             // fallthrough
         } else {
             const responseBody = await response.text();
@@ -332,12 +360,12 @@ export class Account extends ClientSDK {
      */
     async addPaymentMethod(
         xPublishableKey: string,
-        requestBody: any,
+        paymentMethod: components.PaymentMethodInput,
         options?: RequestOptions
     ): Promise<operations.AccountAddPaymentMethodResponse> {
         const input$: operations.AccountAddPaymentMethodRequest = {
             xPublishableKey: xPublishableKey,
-            requestBody: requestBody,
+            paymentMethod: paymentMethod,
         };
         const headers$ = new Headers();
         headers$.set("user-agent", SDK_METADATA.userAgent);
@@ -346,7 +374,7 @@ export class Account extends ClientSDK {
 
         const payload$ = operations.AccountAddPaymentMethodRequest$.outboundSchema.parse(input$);
 
-        const body$ = enc$.encodeJSON("body", payload$.RequestBody, { explode: true });
+        const body$ = enc$.encodeJSON("body", payload$["payment-method"], { explode: true });
 
         const path$ = this.templateURLComponent("/account/payment-methods")();
 
@@ -388,6 +416,13 @@ export class Account extends ClientSDK {
                 "payment-method": responseBody,
             });
             return result;
+        } else if (this.matchResponse(response, "4XX", "application/json")) {
+            const responseBody = await response.json();
+            const result = errors.AccountAddPaymentMethodResponseBody$.inboundSchema.parse({
+                ...responseFields$,
+                ...responseBody,
+            });
+            throw result;
         } else if (this.matchStatusCode(response, "default")) {
             // fallthrough
         } else {
@@ -417,7 +452,7 @@ export class Account extends ClientSDK {
         };
         const headers$ = new Headers();
         headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Accept", "*/*");
+        headers$.set("Accept", "application/json");
 
         const payload$ = operations.AccountPaymentMethodDeleteRequest$.outboundSchema.parse(input$);
         const body$ = null;
@@ -459,7 +494,14 @@ export class Account extends ClientSDK {
             RawResponse: response,
         };
 
-        if (this.matchStatusCode(response, [200, "default"])) {
+        if (this.matchResponse(response, "4XX", "application/json")) {
+            const responseBody = await response.json();
+            const result = errors.AccountPaymentMethodDeleteResponseBody$.inboundSchema.parse({
+                ...responseFields$,
+                ...responseBody,
+            });
+            throw result;
+        } else if (this.matchStatusCode(response, [200, "default"])) {
             // fallthrough
         } else {
             const responseBody = await response.text();

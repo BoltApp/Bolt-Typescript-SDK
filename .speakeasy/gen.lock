@@ -4,24 +4,25 @@ management:
   docChecksum: 38a3866bf6148d95ef937819ce3322b5
   docVersion: 3.0.1
   speakeasyVersion: internal
-  generationVersion: 2.231.0
-  releaseVersion: 0.4.2
-  configChecksum: 857a0f0f5bbfd0e549297a9b766d4f84
+  generationVersion: 2.233.2
+  releaseVersion: 0.5.0
+  configChecksum: a5e8612a5b46480046dd0ebacb02fc3d
   repoURL: https://github.com/BoltApp/Bolt-Typescript-SDK.git
   repoSubDirectory: .
   installationURL: https://github.com/BoltApp/Bolt-Typescript-SDK
   published: true
 features:
   typescript:
-    core: 3.4.5
+    core: 3.4.6
     flattening: 2.81.1
     globalSecurity: 2.82.2
     globalServerURLs: 2.82.1
     groups: 2.81.2
     ignores: 2.81.1
-    inputOutputModels: 2.83.0
-    methodSecurity: 2.82.0
+    inputOutputModels: 2.82.0
+    methodSecurity: 2.82.1
     nameOverrides: 2.81.1
+    unions: 2.85.0
 generatedFiles:
   - src/sdk/account.ts
   - src/sdk/guest.ts
@@ -32,6 +33,7 @@ generatedFiles:
   - src/sdk/sdk.ts
   - .eslintrc.js
   - .npmignore
+  - RUNTIMES.md
   - package-lock.json
   - package.json
   - src/index.ts
@@ -68,7 +70,27 @@ generatedFiles:
   - src/models/operations/testingcreditcardget.ts
   - src/models/components/account.ts
   - src/models/components/profile.ts
+  - src/models/components/paymentmethod.ts
+  - src/models/components/addressreference.ts
+  - src/models/components/addressreferenceid.ts
+  - src/models/components/paymentmethodpaypaloutput.ts
+  - src/models/components/paymentmethodaffirmoutput.ts
+  - src/models/components/paymentmethodafterpayoutput.ts
+  - src/models/components/paymentmethodklarnaoutput.ts
+  - src/models/components/paymentmethodklarnaaccountoutput.ts
+  - src/models/components/paymentmethodklarnapaynowoutput.ts
   - src/models/components/addresslisting.ts
+  - src/models/components/error.ts
+  - src/models/components/fielderror.ts
+  - src/models/components/creditcarderror.ts
+  - src/models/components/paymentmethodinput.ts
+  - src/models/components/paymentmethodcreditcard.ts
+  - src/models/components/addressreferenceinput.ts
+  - src/models/components/addressreferenceexplicit.ts
+  - src/models/components/paymentresponse.ts
+  - src/models/components/paymentresponsefinalized.ts
+  - src/models/components/transaction.ts
+  - src/models/components/paymentresponsepending.ts
   - src/models/components/guestpaymentinitializerequest.ts
   - src/models/components/cart.ts
   - src/models/components/amount.ts
@@ -79,11 +101,28 @@ generatedFiles:
   - src/models/components/paymentupdaterequest.ts
   - src/models/components/paymentactionrequest.ts
   - src/models/components/paymentinitializerequest.ts
+  - src/models/components/paymentmethodextended.ts
+  - src/models/components/paymentmethodreference.ts
   - src/models/components/getaccesstokenresponse.ts
   - src/models/components/getaccesstokenrequest.ts
   - src/models/components/accounttestcreationdataoutput.ts
   - src/models/components/testcreditcard.ts
   - src/models/components/security.ts
+  - src/models/errors/accountget.ts
+  - src/models/errors/accountaddresscreate.ts
+  - src/models/errors/accountaddressedit.ts
+  - src/models/errors/accountaddressdelete.ts
+  - src/models/errors/accountaddpaymentmethod.ts
+  - src/models/errors/accountpaymentmethoddelete.ts
+  - src/models/errors/guestpaymentsinitialize.ts
+  - src/models/errors/guestpaymentsupdate.ts
+  - src/models/errors/guestpaymentsaction.ts
+  - src/models/errors/paymentsinitialize.ts
+  - src/models/errors/paymentsupdate.ts
+  - src/models/errors/paymentsaction.ts
+  - src/models/errors/oauthgettoken.ts
+  - src/models/errors/testingaccountcreate.ts
+  - src/models/errors/testingcreditcardget.ts
   - src/models/errors/index.ts
   - src/models/operations/index.ts
   - src/models/components/index.ts
@@ -122,9 +161,56 @@ generatedFiles:
   - docs/models/operations/testingcreditcardgetresponse.md
   - docs/models/components/account.md
   - docs/models/components/profile.md
+  - docs/models/components/paymentmethod.md
+  - docs/models/components/dottag.md
+  - docs/models/components/network.md
+  - docs/models/components/paymentmethodcreditcard.md
+  - docs/models/components/addressreference.md
+  - docs/models/components/addressreferenceidtag.md
+  - docs/models/components/addressreferenceid.md
+  - docs/models/components/addressreferenceexplicittag.md
+  - docs/models/components/addressreferenceexplicitcountrycode.md
+  - docs/models/components/addressreferenceexplicit.md
+  - docs/models/components/paymentmethodpaypaltag.md
+  - docs/models/components/paymentmethodpaypaloutput.md
+  - docs/models/components/paymentmethodaffirmtag.md
+  - docs/models/components/paymentmethodaffirmoutput.md
+  - docs/models/components/paymentmethodafterpaytag.md
+  - docs/models/components/paymentmethodafterpayoutput.md
+  - docs/models/components/paymentmethodklarnatag.md
+  - docs/models/components/paymentmethodklarnaoutput.md
+  - docs/models/components/paymentmethodklarnaaccounttag.md
+  - docs/models/components/paymentmethodklarnaaccountoutput.md
+  - docs/models/components/paymentmethodklarnapaynowtag.md
+  - docs/models/components/paymentmethodklarnapaynowoutput.md
   - docs/models/components/countrycode.md
   - docs/models/components/addresslisting.md
+  - docs/models/components/errortag.md
+  - docs/models/components/errort.md
+  - docs/models/components/fielderrortag.md
+  - docs/models/components/fielderror.md
   - docs/models/components/addresslistinginput.md
+  - docs/models/components/creditcarderrortag.md
+  - docs/models/components/creditcarderror.md
+  - docs/models/components/paymentmethodinput.md
+  - docs/models/components/paymentmethodcreditcardinput.md
+  - docs/models/components/addressreferenceinput.md
+  - docs/models/components/addressreferenceexplicitinput.md
+  - docs/models/components/paymentmethodpaypal.md
+  - docs/models/components/paymentmethodaffirm.md
+  - docs/models/components/paymentmethodafterpay.md
+  - docs/models/components/paymentmethodklarna.md
+  - docs/models/components/paymentmethodklarnaaccount.md
+  - docs/models/components/paymentmethodklarnapaynow.md
+  - docs/models/components/paymentresponse.md
+  - docs/models/components/paymentresponsefinalizedtag.md
+  - docs/models/components/status.md
+  - docs/models/components/paymentresponsefinalized.md
+  - docs/models/components/transaction.md
+  - docs/models/components/paymentresponsependingtag.md
+  - docs/models/components/paymentresponsependingstatus.md
+  - docs/models/components/action.md
+  - docs/models/components/paymentresponsepending.md
   - docs/models/components/guestpaymentinitializerequest.md
   - docs/models/components/cart.md
   - docs/models/components/currency.md
@@ -134,9 +220,12 @@ generatedFiles:
   - docs/models/components/cartshipment.md
   - docs/models/components/profilecreationdata.md
   - docs/models/components/paymentupdaterequest.md
-  - docs/models/components/dottag.md
+  - docs/models/components/paymentactionrequesttag.md
   - docs/models/components/paymentactionrequest.md
   - docs/models/components/paymentinitializerequest.md
+  - docs/models/components/paymentmethodextended.md
+  - docs/models/components/paymentmethodreferencetag.md
+  - docs/models/components/paymentmethodreference.md
   - docs/models/components/getaccesstokenresponse.md
   - docs/models/components/granttype.md
   - docs/models/components/scope.md
@@ -145,9 +234,24 @@ generatedFiles:
   - docs/models/components/phonestate.md
   - docs/models/components/accounttestcreationdataoutput.md
   - docs/models/components/accounttestcreationdata.md
-  - docs/models/components/network.md
+  - docs/models/components/testcreditcardnetwork.md
   - docs/models/components/testcreditcard.md
   - docs/models/components/security.md
+  - docs/models/errors/accountgetresponsebody.md
+  - docs/models/errors/accountaddresscreateresponsebody.md
+  - docs/models/errors/accountaddresseditresponsebody.md
+  - docs/models/errors/accountaddressdeleteresponsebody.md
+  - docs/models/errors/accountaddpaymentmethodresponsebody.md
+  - docs/models/errors/accountpaymentmethoddeleteresponsebody.md
+  - docs/models/errors/guestpaymentsinitializeresponsebody.md
+  - docs/models/errors/guestpaymentsupdateresponsebody.md
+  - docs/models/errors/guestpaymentsactionresponsebody.md
+  - docs/models/errors/paymentsinitializeresponsebody.md
+  - docs/models/errors/paymentsupdateresponsebody.md
+  - docs/models/errors/paymentsactionresponsebody.md
+  - docs/models/errors/oauthgettokenresponsebody.md
+  - docs/models/errors/testingaccountcreateresponsebody.md
+  - docs/models/errors/testingcreditcardgetresponsebody.md
   - docs/sdks/bolttypescriptsdk/README.md
   - docs/sdks/account/README.md
   - docs/sdks/payments/README.md

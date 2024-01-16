@@ -38,7 +38,6 @@ async function run() {
       displayId: "215614191",
       shipments: [
         {
-          address: "string",
           cost: {
             currency: Currency.Usd,
             units: 900,
@@ -79,17 +78,13 @@ async function run() {
         units: 900,
       },
     },
-    paymentMethod: "string",
   };
   const operationSecurity: GuestPaymentsInitializeSecurity = "<YOUR_API_KEY_HERE>";
   
-  const res = await sdk.payments.guest.initialize(operationSecurity, xPublishableKey, guestPaymentInitializeRequest);
+  const result = await sdk.payments.guest.initialize(operationSecurity, xPublishableKey, guestPaymentInitializeRequest);
 
-  if (res?.statusCode !== 200) {
-    throw new Error("Unexpected status code: " + res?.statusCode || "-");
-  }
-  
-  // handle response
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -111,9 +106,10 @@ run();
 **Promise<[operations.GuestPaymentsInitializeResponse](../../models/operations/guestpaymentsinitializeresponse.md)>**
 ### Errors
 
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4xx-5xx         | */*             |
+| Error Object                               | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| errors.GuestPaymentsInitializeResponseBody | 4XX                                        | application/json                           |
+| errors.SDKError                            | 4xx-5xx                                    | */*                                        |
 
 ## update
 
@@ -139,7 +135,6 @@ async function run() {
       displayId: "215614191",
       shipments: [
         {
-          address: "string",
           cost: {
             currency: Currency.Usd,
             units: 900,
@@ -183,13 +178,10 @@ async function run() {
   };
   const operationSecurity: GuestPaymentsUpdateSecurity = "<YOUR_API_KEY_HERE>";
   
-  const res = await sdk.payments.guest.update(operationSecurity, id, xPublishableKey, paymentUpdateRequest);
+  const result = await sdk.payments.guest.update(operationSecurity, id, xPublishableKey, paymentUpdateRequest);
 
-  if (res?.statusCode !== 200) {
-    throw new Error("Unexpected status code: " + res?.statusCode || "-");
-  }
-  
-  // handle response
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -212,9 +204,10 @@ run();
 **Promise<[operations.GuestPaymentsUpdateResponse](../../models/operations/guestpaymentsupdateresponse.md)>**
 ### Errors
 
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4xx-5xx         | */*             |
+| Error Object                           | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| errors.GuestPaymentsUpdateResponseBody | 4XX                                    | application/json                       |
+| errors.SDKError                        | 4xx-5xx                                | */*                                    |
 
 ## performAction
 
@@ -225,7 +218,7 @@ Perform an irreversible action on a pending guest payment, such as finalizing it
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { DotTag } from "@boltpay/bolt-typescript-sdk/models/components";
+import { PaymentActionRequestTag } from "@boltpay/bolt-typescript-sdk/models/components";
 import { GuestPaymentsActionSecurity } from "@boltpay/bolt-typescript-sdk/models/operations";
 
 async function run() {
@@ -234,18 +227,15 @@ async function run() {
   const id = "iKv7t5bgt1gg";
   const xPublishableKey = "string";
   const paymentActionRequest = {
-    dotTag: DotTag.Finalize,
+    dotTag: PaymentActionRequestTag.Finalize,
     redirectResult: "eyJ0cmFuc",
   };
   const operationSecurity: GuestPaymentsActionSecurity = "<YOUR_API_KEY_HERE>";
   
-  const res = await sdk.payments.guest.performAction(operationSecurity, id, xPublishableKey, paymentActionRequest);
+  const result = await sdk.payments.guest.performAction(operationSecurity, id, xPublishableKey, paymentActionRequest);
 
-  if (res?.statusCode !== 200) {
-    throw new Error("Unexpected status code: " + res?.statusCode || "-");
-  }
-  
-  // handle response
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -268,6 +258,7 @@ run();
 **Promise<[operations.GuestPaymentsActionResponse](../../models/operations/guestpaymentsactionresponse.md)>**
 ### Errors
 
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4xx-5xx         | */*             |
+| Error Object                           | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| errors.GuestPaymentsActionResponseBody | 4XX                                    | application/json                       |
+| errors.SDKError                        | 4xx-5xx                                | */*                                    |

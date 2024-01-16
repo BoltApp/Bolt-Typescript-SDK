@@ -47,13 +47,10 @@ async function run() {
 
     const xPublishableKey = "string";
 
-    const res = await sdk.account.getDetails(xPublishableKey);
+    const result = await sdk.account.getDetails(xPublishableKey);
 
-    if (res?.statusCode !== 200) {
-        throw new Error("Unexpected status code: " + res?.statusCode || "-");
-    }
-
-    // handle response
+    // Handle the result
+    console.log(result);
 }
 
 run();
@@ -101,9 +98,10 @@ run();
 
 All SDK methods return a response object or throw an error. If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Error type.
 
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4xx-5xx         | */*             |
+| Error Object                  | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.AccountGetResponseBody | 4XX                           | application/json              |
+| errors.SDKError               | 4xx-5xx                       | */*                           |
 
 Example
 
@@ -120,15 +118,23 @@ async function run() {
 
     const xPublishableKey = "string";
 
-    const res = await sdk.account.getDetails(xPublishableKey).catch((err) => {
-        throw err;
-    });
-
-    if (res?.statusCode !== 200) {
-        throw new Error("Unexpected status code: " + res?.statusCode || "-");
+    let result;
+    try {
+        result = await sdk.account.getDetails(xPublishableKey);
+    } catch (err) {
+        switch (true) {
+            case err instanceof errors.AccountGetResponseBody: {
+                console.error(err); // handle exception
+                return;
+            }
+            default: {
+                throw err;
+            }
+        }
     }
 
-    // handle response
+    // Handle the result
+    console.log(result);
 }
 
 run();
@@ -141,13 +147,34 @@ run();
 
 ### Select Server by Index
 
-You can override the default server globally by passing a server index to the `serverIdx: number` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
+You can override the default server globally by passing a server index to the `serverIdx` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
 
 | # | Server | Variables |
 | - | ------ | --------- |
 | 0 | `https://{environment}.bolt.com/v3` | `environment` (default is `api-sandbox`) |
 
+```typescript
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 
+async function run() {
+    const sdk = new BoltTypescriptSDK({
+        serverIdx: 0,
+        security: {
+            oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+        },
+    });
+
+    const xPublishableKey = "string";
+
+    const result = await sdk.account.getDetails(xPublishableKey);
+
+    // Handle the result
+    console.log(result);
+}
+
+run();
+
+```
 
 #### Variables
 
@@ -156,7 +183,30 @@ Some of the server options above contain variables. If you want to set the value
 
 ### Override Server URL Per-Client
 
-The default server can also be overridden globally by passing a URL to the `serverURL: str` optional parameter when initializing the SDK client instance. For example:
+The default server can also be overridden globally by passing a URL to the `serverURL` optional parameter when initializing the SDK client instance. For example:
+
+```typescript
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
+
+async function run() {
+    const sdk = new BoltTypescriptSDK({
+        serverURL: "https://{environment}.bolt.com/v3",
+        security: {
+            oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+        },
+    });
+
+    const xPublishableKey = "string";
+
+    const result = await sdk.account.getDetails(xPublishableKey);
+
+    // Handle the result
+    console.log(result);
+}
+
+run();
+
+```
 <!-- End Server Selection [server] -->
 
 <!-- Start Custom HTTP Client [http-client] -->
@@ -233,13 +283,10 @@ async function run() {
 
     const xPublishableKey = "string";
 
-    const res = await sdk.account.getDetails(xPublishableKey);
+    const result = await sdk.account.getDetails(xPublishableKey);
 
-    if (res?.statusCode !== 200) {
-        throw new Error("Unexpected status code: " + res?.statusCode || "-");
-    }
-
-    // handle response
+    // Handle the result
+    console.log(result);
 }
 
 run();
@@ -272,7 +319,6 @@ async function run() {
             displayId: "215614191",
             shipments: [
                 {
-                    address: "string",
                     cost: {
                         currency: Currency.Usd,
                         units: 900,
@@ -313,27 +359,29 @@ async function run() {
                 units: 900,
             },
         },
-        paymentMethod: "string",
     };
     const operationSecurity: GuestPaymentsInitializeSecurity = "<YOUR_API_KEY_HERE>";
 
-    const res = await sdk.payments.guest.initialize(
+    const result = await sdk.payments.guest.initialize(
         operationSecurity,
         xPublishableKey,
         guestPaymentInitializeRequest
     );
 
-    if (res?.statusCode !== 200) {
-        throw new Error("Unexpected status code: " + res?.statusCode || "-");
-    }
-
-    // handle response
+    // Handle the result
+    console.log(result);
 }
 
 run();
 
 ```
 <!-- End Authentication [security] -->
+
+<!-- Start Requirements [requirements] -->
+## Requirements
+
+For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
+<!-- End Requirements [requirements] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

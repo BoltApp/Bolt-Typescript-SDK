@@ -11,13 +11,10 @@ async function run() {
 
     const xPublishableKey = "string";
 
-    const res = await sdk.account.getDetails(xPublishableKey);
+    const result = await sdk.account.getDetails(xPublishableKey);
 
-    if (res?.statusCode !== 200) {
-        throw new Error("Unexpected status code: " + res?.statusCode || "-");
-    }
-
-    // handle response
+    // Handle the result
+    console.log(result);
 }
 
 run();

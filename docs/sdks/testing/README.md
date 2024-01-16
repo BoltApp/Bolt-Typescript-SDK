@@ -37,13 +37,10 @@ async function run() {
   };
   const operationSecurity: TestingAccountCreateSecurity = "<YOUR_API_KEY_HERE>";
   
-  const res = await sdk.testing.createAccount(operationSecurity, xPublishableKey, accountTestCreationData);
+  const result = await sdk.testing.createAccount(operationSecurity, xPublishableKey, accountTestCreationData);
 
-  if (res?.statusCode !== 200) {
-    throw new Error("Unexpected status code: " + res?.statusCode || "-");
-  }
-  
-  // handle response
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -65,9 +62,10 @@ run();
 **Promise<[operations.TestingAccountCreateResponse](../../models/operations/testingaccountcreateresponse.md)>**
 ### Errors
 
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4xx-5xx         | */*             |
+| Error Object                            | Status Code                             | Content Type                            |
+| --------------------------------------- | --------------------------------------- | --------------------------------------- |
+| errors.TestingAccountCreateResponseBody | 4XX                                     | application/json                        |
+| errors.SDKError                         | 4xx-5xx                                 | */*                                     |
 
 ## getCreditCard
 
@@ -86,13 +84,10 @@ async function run() {
 
   const operationSecurity: TestingCreditCardGetSecurity = "<YOUR_API_KEY_HERE>";
   
-  const res = await sdk.testing.getCreditCard(operationSecurity);
+  const result = await sdk.testing.getCreditCard(operationSecurity);
 
-  if (res?.statusCode !== 200) {
-    throw new Error("Unexpected status code: " + res?.statusCode || "-");
-  }
-  
-  // handle response
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -112,6 +107,7 @@ run();
 **Promise<[operations.TestingCreditCardGetResponse](../../models/operations/testingcreditcardgetresponse.md)>**
 ### Errors
 
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4xx-5xx         | */*             |
+| Error Object                            | Status Code                             | Content Type                            |
+| --------------------------------------- | --------------------------------------- | --------------------------------------- |
+| errors.TestingCreditCardGetResponseBody | 4XX                                     | application/json                        |
+| errors.SDKError                         | 4xx-5xx                                 | */*                                     |

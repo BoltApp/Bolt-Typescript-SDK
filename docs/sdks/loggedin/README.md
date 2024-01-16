@@ -34,7 +34,6 @@ async function run() {
       displayId: "215614191",
       shipments: [
         {
-          address: "string",
           cost: {
             currency: Currency.Usd,
             units: 900,
@@ -75,16 +74,12 @@ async function run() {
         units: 900,
       },
     },
-    paymentMethod: "string",
   };
   
-  const res = await sdk.payments.loggedIn.initialize(xPublishableKey, paymentInitializeRequest);
+  const result = await sdk.payments.loggedIn.initialize(xPublishableKey, paymentInitializeRequest);
 
-  if (res?.statusCode !== 200) {
-    throw new Error("Unexpected status code: " + res?.statusCode || "-");
-  }
-  
-  // handle response
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -105,9 +100,10 @@ run();
 **Promise<[operations.PaymentsInitializeResponse](../../models/operations/paymentsinitializeresponse.md)>**
 ### Errors
 
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4xx-5xx         | */*             |
+| Error Object                          | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.PaymentsInitializeResponseBody | 4XX                                   | application/json                      |
+| errors.SDKError                       | 4xx-5xx                               | */*                                   |
 
 ## update
 
@@ -136,7 +132,6 @@ async function run() {
       displayId: "215614191",
       shipments: [
         {
-          address: "string",
           cost: {
             currency: Currency.Usd,
             units: 900,
@@ -179,13 +174,10 @@ async function run() {
     },
   };
   
-  const res = await sdk.payments.loggedIn.update(id, xPublishableKey, paymentUpdateRequest);
+  const result = await sdk.payments.loggedIn.update(id, xPublishableKey, paymentUpdateRequest);
 
-  if (res?.statusCode !== 200) {
-    throw new Error("Unexpected status code: " + res?.statusCode || "-");
-  }
-  
-  // handle response
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -207,9 +199,10 @@ run();
 **Promise<[operations.PaymentsUpdateResponse](../../models/operations/paymentsupdateresponse.md)>**
 ### Errors
 
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4xx-5xx         | */*             |
+| Error Object                      | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| errors.PaymentsUpdateResponseBody | 4XX                               | application/json                  |
+| errors.SDKError                   | 4xx-5xx                           | */*                               |
 
 ## performAction
 
@@ -220,7 +213,7 @@ Perform an irreversible action on a pending payment, such as finalizing it.
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { DotTag } from "@boltpay/bolt-typescript-sdk/models/components";
+import { PaymentActionRequestTag } from "@boltpay/bolt-typescript-sdk/models/components";
 
 async function run() {
   const sdk = new BoltTypescriptSDK({
@@ -232,17 +225,14 @@ async function run() {
   const id = "iKv7t5bgt1gg";
   const xPublishableKey = "string";
   const paymentActionRequest = {
-    dotTag: DotTag.Finalize,
+    dotTag: PaymentActionRequestTag.Finalize,
     redirectResult: "eyJ0cmFuc",
   };
   
-  const res = await sdk.payments.loggedIn.performAction(id, xPublishableKey, paymentActionRequest);
+  const result = await sdk.payments.loggedIn.performAction(id, xPublishableKey, paymentActionRequest);
 
-  if (res?.statusCode !== 200) {
-    throw new Error("Unexpected status code: " + res?.statusCode || "-");
-  }
-  
-  // handle response
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -264,6 +254,7 @@ run();
 **Promise<[operations.PaymentsActionResponse](../../models/operations/paymentsactionresponse.md)>**
 ### Errors
 
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4xx-5xx         | */*             |
+| Error Object                      | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| errors.PaymentsActionResponseBody | 4XX                               | application/json                  |
+| errors.SDKError                   | 4xx-5xx                           | */*                               |

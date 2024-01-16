@@ -76,6 +76,13 @@ export class OAuth extends ClientSDK {
                 "get-access-token-response": responseBody,
             });
             return result;
+        } else if (this.matchResponse(response, "4XX", "application/json")) {
+            const responseBody = await response.json();
+            const result = errors.OauthGetTokenResponseBody$.inboundSchema.parse({
+                ...responseFields$,
+                ...responseBody,
+            });
+            throw result;
         } else if (this.matchStatusCode(response, "default")) {
             // fallthrough
         } else {

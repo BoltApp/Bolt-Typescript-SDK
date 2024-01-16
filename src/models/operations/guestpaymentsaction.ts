@@ -37,7 +37,7 @@ export type GuestPaymentsActionResponse = {
     /**
      * The action was successfully applied to the pending guest payment
      */
-    paymentResponse?: any | undefined;
+    paymentResponse?: components.PaymentResponse | undefined;
 };
 
 /** @internal */
@@ -89,7 +89,7 @@ export namespace GuestPaymentsActionResponse$ {
         ContentType: string;
         StatusCode: number;
         RawResponse: Response;
-        "payment-response"?: any | undefined;
+        "payment-response"?: components.PaymentResponse$.Inbound | undefined;
     };
 
     export const inboundSchema: z.ZodType<GuestPaymentsActionResponse, z.ZodTypeDef, Inbound> = z
@@ -97,7 +97,7 @@ export namespace GuestPaymentsActionResponse$ {
             ContentType: z.string(),
             StatusCode: z.number().int(),
             RawResponse: z.instanceof(Response),
-            "payment-response": z.any().optional(),
+            "payment-response": components.PaymentResponse$.inboundSchema.optional(),
         })
         .transform((v) => {
             return {
@@ -114,7 +114,7 @@ export namespace GuestPaymentsActionResponse$ {
         ContentType: string;
         StatusCode: number;
         RawResponse: never;
-        "payment-response"?: any | undefined;
+        "payment-response"?: components.PaymentResponse$.Outbound | undefined;
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, GuestPaymentsActionResponse> = z
@@ -124,7 +124,7 @@ export namespace GuestPaymentsActionResponse$ {
             rawResponse: z.instanceof(Response).transform(() => {
                 throw new Error("Response cannot be serialized");
             }),
-            paymentResponse: z.any().optional(),
+            paymentResponse: components.PaymentResponse$.outboundSchema.optional(),
         })
         .transform((v) => {
             return {

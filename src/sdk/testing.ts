@@ -88,6 +88,13 @@ export class Testing extends ClientSDK {
                 "account-test-creation-data": responseBody,
             });
             return result;
+        } else if (this.matchResponse(response, "4XX", "application/json")) {
+            const responseBody = await response.json();
+            const result = errors.TestingAccountCreateResponseBody$.inboundSchema.parse({
+                ...responseFields$,
+                ...responseBody,
+            });
+            throw result;
         } else if (this.matchStatusCode(response, "default")) {
             // fallthrough
         } else {
@@ -138,6 +145,13 @@ export class Testing extends ClientSDK {
                 "test-credit-card": responseBody,
             });
             return result;
+        } else if (this.matchResponse(response, "4XX", "application/json")) {
+            const responseBody = await response.json();
+            const result = errors.TestingCreditCardGetResponseBody$.inboundSchema.parse({
+                ...responseFields$,
+                ...responseBody,
+            });
+            throw result;
         } else if (this.matchStatusCode(response, "default")) {
             // fallthrough
         } else {

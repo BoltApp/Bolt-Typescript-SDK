@@ -89,6 +89,13 @@ export class Guest extends ClientSDK {
                 "payment-response": responseBody,
             });
             return result;
+        } else if (this.matchResponse(response, "4XX", "application/json")) {
+            const responseBody = await response.json();
+            const result = errors.GuestPaymentsInitializeResponseBody$.inboundSchema.parse({
+                ...responseFields$,
+                ...responseBody,
+            });
+            throw result;
         } else if (this.matchStatusCode(response, "default")) {
             // fallthrough
         } else {
@@ -171,6 +178,13 @@ export class Guest extends ClientSDK {
                 "payment-response": responseBody,
             });
             return result;
+        } else if (this.matchResponse(response, "4XX", "application/json")) {
+            const responseBody = await response.json();
+            const result = errors.GuestPaymentsUpdateResponseBody$.inboundSchema.parse({
+                ...responseFields$,
+                ...responseBody,
+            });
+            throw result;
         } else if (this.matchStatusCode(response, "default")) {
             // fallthrough
         } else {
@@ -253,6 +267,13 @@ export class Guest extends ClientSDK {
                 "payment-response": responseBody,
             });
             return result;
+        } else if (this.matchResponse(response, "4XX", "application/json")) {
+            const responseBody = await response.json();
+            const result = errors.GuestPaymentsActionResponseBody$.inboundSchema.parse({
+                ...responseFields$,
+                ...responseBody,
+            });
+            throw result;
         } else if (this.matchStatusCode(response, "default")) {
             // fallthrough
         } else {

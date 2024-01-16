@@ -90,6 +90,13 @@ export class LoggedIn extends ClientSDK {
                 "payment-response": responseBody,
             });
             return result;
+        } else if (this.matchResponse(response, "4XX", "application/json")) {
+            const responseBody = await response.json();
+            const result = errors.PaymentsInitializeResponseBody$.inboundSchema.parse({
+                ...responseFields$,
+                ...responseBody,
+            });
+            throw result;
         } else if (this.matchStatusCode(response, "default")) {
             // fallthrough
         } else {
@@ -173,6 +180,13 @@ export class LoggedIn extends ClientSDK {
                 "payment-response": responseBody,
             });
             return result;
+        } else if (this.matchResponse(response, "4XX", "application/json")) {
+            const responseBody = await response.json();
+            const result = errors.PaymentsUpdateResponseBody$.inboundSchema.parse({
+                ...responseFields$,
+                ...responseBody,
+            });
+            throw result;
         } else if (this.matchStatusCode(response, "default")) {
             // fallthrough
         } else {
@@ -256,6 +270,13 @@ export class LoggedIn extends ClientSDK {
                 "payment-response": responseBody,
             });
             return result;
+        } else if (this.matchResponse(response, "4XX", "application/json")) {
+            const responseBody = await response.json();
+            const result = errors.PaymentsActionResponseBody$.inboundSchema.parse({
+                ...responseFields$,
+                ...responseBody,
+            });
+            throw result;
         } else if (this.matchStatusCode(response, "default")) {
             // fallthrough
         } else {
