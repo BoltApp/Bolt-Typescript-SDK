@@ -87,6 +87,10 @@ run();
 
 * [getToken](docs/sdks/oauth/README.md#gettoken) - Get OAuth token
 
+### [orders](docs/sdks/orders/README.md)
+
+* [ordersCreate](docs/sdks/orders/README.md#orderscreate) - Create an order that was placed outside the Bolt ecosystem.
+
 ### [testing](docs/sdks/testing/README.md)
 
 * [createAccount](docs/sdks/testing/README.md#createaccount) - Create a test account

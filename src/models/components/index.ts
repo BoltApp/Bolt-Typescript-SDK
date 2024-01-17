@@ -20,6 +20,8 @@ export * from "./fielderror";
 export * from "./getaccesstokenrequest";
 export * from "./getaccesstokenresponse";
 export * from "./guestpaymentinitializerequest";
+export * from "./order";
+export * from "./orderresponse";
 export * from "./paymentactionrequest";
 export * from "./paymentinitializerequest";
 export * from "./paymentmethod";

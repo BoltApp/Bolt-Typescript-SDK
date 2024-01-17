@@ -7,6 +7,7 @@ import { HTTPClient } from "../lib/http";
 import { ClientSDK } from "../lib/sdks";
 import { Account } from "./account";
 import { OAuth } from "./oauth";
+import { Orders } from "./orders";
 import { Payments } from "./payments";
 import { Testing } from "./testing";
 
@@ -36,6 +37,11 @@ export class BoltTypescriptSDK extends ClientSDK {
     private _oAuth?: OAuth;
     get oAuth() {
         return (this._oAuth ??= new OAuth(this.options$));
+    }
+
+    private _orders?: Orders;
+    get orders() {
+        return (this._orders ??= new Orders(this.options$));
     }
 
     private _testing?: Testing;
