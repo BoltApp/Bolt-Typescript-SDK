@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 79fa0df9-852a-493c-b998-1d82654b5f18
 management:
-  docChecksum: 2e806d5a02504d8811475c2d9c68f203
+  docChecksum: df05cfb469f989f050e1bbd577d75453
   docVersion: 3.0.1
   speakeasyVersion: internal
-  generationVersion: 2.235.3
-  releaseVersion: 0.5.1
-  configChecksum: 30f0bf64ff2c746032905696390f2138
+  generationVersion: 2.237.2
+  releaseVersion: 0.5.2
+  configChecksum: 82c5455925dc5752051b02e522df5b8c
   repoURL: https://github.com/BoltApp/Bolt-Typescript-SDK.git
   repoSubDirectory: .
   installationURL: https://github.com/BoltApp/Bolt-Typescript-SDK
   published: true
 features:
   typescript:
-    core: 3.4.6
+    core: 3.4.7
     flattening: 2.81.1
     globalSecurity: 2.82.2
     globalServerURLs: 2.82.1
@@ -167,6 +167,8 @@ generatedFiles:
   - docs/models/operations/testingaccountcreaterequest.md
   - docs/models/operations/testingaccountcreateresponse.md
   - docs/models/operations/testingcreditcardgetsecurity.md
+  - docs/models/operations/typet.md
+  - docs/models/operations/testingcreditcardgetrequestbody.md
   - docs/models/operations/testingcreditcardgetresponse.md
   - docs/models/components/account.md
   - docs/models/components/profile.md

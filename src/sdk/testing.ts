@@ -109,17 +109,21 @@ export class Testing extends ClientSDK {
      * Retrieve a test credit card, including its token
      *
      * @remarks
-     * Retrieve test credit card information. This includes its token, which is
-     * generated against the `4111 1111 1111 1004` test card.
+     * Retrieve test credit card information. This includes its token, which can be used to process payments.
      *
      */
     async getCreditCard(
+        input: operations.TestingCreditCardGetRequestBody,
         security: operations.TestingCreditCardGetSecurity,
         options?: RequestOptions
     ): Promise<operations.TestingCreditCardGetResponse> {
         const headers$ = new Headers();
         headers$.set("user-agent", SDK_METADATA.userAgent);
+        headers$.set("Content-Type", "application/json");
         headers$.set("Accept", "application/json");
+
+        const payload$ = operations.TestingCreditCardGetRequestBody$.outboundSchema.parse(input);
+        const body$ = enc$.encodeJSON("body", payload$, { explode: true });
 
         const path$ = this.templateURLComponent("/testing/credit-cards")();
 
@@ -128,7 +132,13 @@ export class Testing extends ClientSDK {
         ]);
 
         const response = await this.fetch$(
-            { security: securitySettings$, method: "GET", path: path$, headers: headers$ },
+            {
+                security: securitySettings$,
+                method: "POST",
+                path: path$,
+                headers: headers$,
+                body: body$,
+            },
             options
         );
 

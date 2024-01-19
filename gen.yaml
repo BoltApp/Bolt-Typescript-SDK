@@ -7,7 +7,7 @@ generation:
   fixes:
     nameResolutionDec2023: false
 typescript:
-  version: 0.5.1
+  version: 0.5.2
   author: BoltPublicAPI
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true

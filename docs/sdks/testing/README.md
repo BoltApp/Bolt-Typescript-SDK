@@ -69,22 +69,23 @@ run();
 
 ## getCreditCard
 
-Retrieve test credit card information. This includes its token, which is
-generated against the `4111 1111 1111 1004` test card.
+Retrieve test credit card information. This includes its token, which can be used to process payments.
 
 
 ### Example Usage
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { TestingCreditCardGetSecurity } from "@boltpay/bolt-typescript-sdk/models/operations";
+import { TestingCreditCardGetSecurity, TypeT } from "@boltpay/bolt-typescript-sdk/models/operations";
 
 async function run() {
   const sdk = new BoltTypescriptSDK();
 
   const operationSecurity: TestingCreditCardGetSecurity = "<YOUR_API_KEY_HERE>";
   
-  const result = await sdk.testing.getCreditCard(operationSecurity);
+  const result = await sdk.testing.getCreditCard({
+    type: TypeT.Approve,
+  }, operationSecurity);
 
   // Handle the result
   console.log(result)
@@ -97,6 +98,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.TestingCreditCardGetRequestBody](../../models/operations/testingcreditcardgetrequestbody.md)                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `security`                                                                                                                                                                     | [operations.TestingCreditCardGetSecurity](../../models/operations/testingcreditcardgetsecurity.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
