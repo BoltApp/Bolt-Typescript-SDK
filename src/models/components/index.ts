@@ -15,6 +15,7 @@ export * from "./cartdiscount";
 export * from "./cartitem";
 export * from "./cartshipment";
 export * from "./creditcarderror";
+export * from "./creditcardnetwork";
 export * from "./error";
 export * from "./fielderror";
 export * from "./getaccesstokenrequest";

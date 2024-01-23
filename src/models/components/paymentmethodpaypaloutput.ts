@@ -17,11 +17,11 @@ export type PaymentMethodPaypal = {
     /**
      * Redirect URL for successful PayPal transaction.
      */
-    successUrl?: string | undefined;
+    successUrl: string;
     /**
      * Redirect URL for canceled PayPal transaction.
      */
-    cancelUrl?: string | undefined;
+    cancelUrl: string;
 };
 
 /** @internal */
@@ -62,41 +62,41 @@ export namespace PaymentMethodPaypalOutput$ {
 export namespace PaymentMethodPaypal$ {
     export type Inbound = {
         ".tag": PaymentMethodPaypalTag;
-        success_url?: string | undefined;
-        cancel_url?: string | undefined;
+        success_url: string;
+        cancel_url: string;
     };
 
     export const inboundSchema: z.ZodType<PaymentMethodPaypal, z.ZodTypeDef, Inbound> = z
         .object({
             ".tag": PaymentMethodPaypalTag$,
-            success_url: z.string().optional(),
-            cancel_url: z.string().optional(),
+            success_url: z.string(),
+            cancel_url: z.string(),
         })
         .transform((v) => {
             return {
                 dotTag: v[".tag"],
-                ...(v.success_url === undefined ? null : { successUrl: v.success_url }),
-                ...(v.cancel_url === undefined ? null : { cancelUrl: v.cancel_url }),
+                successUrl: v.success_url,
+                cancelUrl: v.cancel_url,
             };
         });
 
     export type Outbound = {
         ".tag": PaymentMethodPaypalTag;
-        success_url?: string | undefined;
-        cancel_url?: string | undefined;
+        success_url: string;
+        cancel_url: string;
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentMethodPaypal> = z
         .object({
             dotTag: PaymentMethodPaypalTag$,
-            successUrl: z.string().optional(),
-            cancelUrl: z.string().optional(),
+            successUrl: z.string(),
+            cancelUrl: z.string(),
         })
         .transform((v) => {
             return {
                 ".tag": v.dotTag,
-                ...(v.successUrl === undefined ? null : { success_url: v.successUrl }),
-                ...(v.cancelUrl === undefined ? null : { cancel_url: v.cancelUrl }),
+                success_url: v.successUrl,
+                cancel_url: v.cancelUrl,
             };
         });
 }

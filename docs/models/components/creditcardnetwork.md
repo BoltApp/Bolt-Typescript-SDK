@@ -1,4 +1,4 @@
-# Network
+# CreditCardNetwork
 
 The credit card's network.
 

@@ -14,24 +14,11 @@ import {
     AddressReferenceId$,
     AddressReferenceIdTag,
 } from "./addressreferenceid";
+import { CreditCardNetwork, CreditCardNetwork$ } from "./creditcardnetwork";
 import { z } from "zod";
 
 export enum DotTag {
     CreditCard = "credit_card",
-}
-
-/**
- * The credit card's network.
- */
-export enum Network {
-    Visa = "visa",
-    Mastercard = "mastercard",
-    Amex = "amex",
-    Discover = "discover",
-    Jcb = "jcb",
-    Unionpay = "unionpay",
-    Alliancedata = "alliancedata",
-    Citiplcc = "citiplcc",
 }
 
 export type PaymentMethodCreditCard = {
@@ -43,7 +30,7 @@ export type PaymentMethodCreditCard = {
     /**
      * The credit card's network.
      */
-    network: Network;
+    network: CreditCardNetwork;
     /**
      * The account number's last four digits.
      */
@@ -62,7 +49,7 @@ export type PaymentMethodCreditCardInput = {
     /**
      * The credit card's network.
      */
-    network: Network;
+    network: CreditCardNetwork;
     /**
      * The Bank Identification Number (BIN). This is typically the first 4 to 6 digits of the account number.
      */
@@ -85,9 +72,6 @@ export type PaymentMethodCreditCardInput = {
 export const DotTag$ = z.nativeEnum(DotTag);
 
 /** @internal */
-export const Network$ = z.nativeEnum(Network);
-
-/** @internal */
 export namespace PaymentMethodCreditCard$ {
     export type Inbound = {
         ".tag": DotTag;
@@ -97,7 +81,7 @@ export namespace PaymentMethodCreditCard$ {
             | (AddressReferenceExplicit$.Inbound & {
                   ".tag": AddressReferenceExplicitTag.Explicit;
               });
-        network: Network;
+        network: CreditCardNetwork;
         last4: string;
         expiration: string;
     };
@@ -114,7 +98,7 @@ export namespace PaymentMethodCreditCard$ {
                     z.object({ ".tag": z.literal(AddressReferenceExplicitTag.Explicit) })
                 ),
             ]),
-            network: Network$,
+            network: CreditCardNetwork$,
             last4: z.string(),
             expiration: z.string(),
         })
@@ -137,7 +121,7 @@ export namespace PaymentMethodCreditCard$ {
             | (AddressReferenceExplicit$.Outbound & {
                   ".tag": AddressReferenceExplicitTag.Explicit;
               });
-        network: Network;
+        network: CreditCardNetwork;
         last4: string;
         expiration: string;
     };
@@ -154,7 +138,7 @@ export namespace PaymentMethodCreditCard$ {
                     z.object({ dotTag: z.literal(AddressReferenceExplicitTag.Explicit) })
                 ),
             ]),
-            network: Network$,
+            network: CreditCardNetwork$,
             last4: z.string(),
             expiration: z.string(),
         })
@@ -179,7 +163,7 @@ export namespace PaymentMethodCreditCardInput$ {
             | (AddressReferenceExplicitInput$.Inbound & {
                   ".tag": AddressReferenceExplicitTag.Explicit;
               });
-        network: Network;
+        network: CreditCardNetwork;
         bin: string;
         last4: string;
         expiration: string;
@@ -197,7 +181,7 @@ export namespace PaymentMethodCreditCardInput$ {
                     z.object({ ".tag": z.literal(AddressReferenceExplicitTag.Explicit) })
                 ),
             ]),
-            network: Network$,
+            network: CreditCardNetwork$,
             bin: z.string(),
             last4: z.string(),
             expiration: z.string(),
@@ -222,7 +206,7 @@ export namespace PaymentMethodCreditCardInput$ {
             | (AddressReferenceExplicitInput$.Outbound & {
                   ".tag": AddressReferenceExplicitTag.Explicit;
               });
-        network: Network;
+        network: CreditCardNetwork;
         bin: string;
         last4: string;
         expiration: string;
@@ -240,7 +224,7 @@ export namespace PaymentMethodCreditCardInput$ {
                     z.object({ dotTag: z.literal(AddressReferenceExplicitTag.Explicit) })
                 ),
             ]),
-            network: Network$,
+            network: CreditCardNetwork$,
             bin: z.string(),
             last4: z.string(),
             expiration: z.string(),

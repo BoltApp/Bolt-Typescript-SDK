@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 79fa0df9-852a-493c-b998-1d82654b5f18
 management:
-  docChecksum: df05cfb469f989f050e1bbd577d75453
+  docChecksum: 90d8fb7e96c274a28fb9d286a2727296
   docVersion: 3.0.1
   speakeasyVersion: internal
-  generationVersion: 2.237.2
-  releaseVersion: 0.5.2
-  configChecksum: 82c5455925dc5752051b02e522df5b8c
+  generationVersion: 2.237.3
+  releaseVersion: 0.5.3
+  configChecksum: e18592a104bc3b8e33e126c077253686
   repoURL: https://github.com/BoltApp/Bolt-Typescript-SDK.git
   repoSubDirectory: .
   installationURL: https://github.com/BoltApp/Bolt-Typescript-SDK
@@ -74,6 +74,8 @@ generatedFiles:
   - src/models/components/account.ts
   - src/models/components/profile.ts
   - src/models/components/paymentmethod.ts
+  - src/models/components/paymentmethodcreditcard.ts
+  - src/models/components/creditcardnetwork.ts
   - src/models/components/addressreference.ts
   - src/models/components/addressreferenceid.ts
   - src/models/components/paymentmethodpaypaloutput.ts
@@ -87,7 +89,6 @@ generatedFiles:
   - src/models/components/fielderror.ts
   - src/models/components/creditcarderror.ts
   - src/models/components/paymentmethodinput.ts
-  - src/models/components/paymentmethodcreditcard.ts
   - src/models/components/addressreferenceinput.ts
   - src/models/components/addressreferenceexplicit.ts
   - src/models/components/paymentresponse.ts
@@ -174,8 +175,8 @@ generatedFiles:
   - docs/models/components/profile.md
   - docs/models/components/paymentmethod.md
   - docs/models/components/dottag.md
-  - docs/models/components/network.md
   - docs/models/components/paymentmethodcreditcard.md
+  - docs/models/components/creditcardnetwork.md
   - docs/models/components/addressreference.md
   - docs/models/components/addressreferenceidtag.md
   - docs/models/components/addressreferenceid.md
@@ -247,7 +248,6 @@ generatedFiles:
   - docs/models/components/phonestate.md
   - docs/models/components/accounttestcreationdataoutput.md
   - docs/models/components/accounttestcreationdata.md
-  - docs/models/components/testcreditcardnetwork.md
   - docs/models/components/testcreditcard.md
   - docs/models/components/security.md
   - docs/models/errors/accountgetresponsebody.md

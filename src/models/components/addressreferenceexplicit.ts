@@ -277,7 +277,7 @@ export type AddressReferenceExplicit = {
     /**
      * The address's unique identifier.
      */
-    id: string;
+    id?: string | undefined;
     /**
      * The first name of the person associated with this address.
      */
@@ -390,7 +390,7 @@ export const AddressReferenceExplicitCountryCode$ = z.nativeEnum(
 export namespace AddressReferenceExplicit$ {
     export type Inbound = {
         ".tag": AddressReferenceExplicitTag;
-        id: string;
+        id?: string | undefined;
         first_name: string;
         last_name: string;
         company?: string | undefined;
@@ -407,7 +407,7 @@ export namespace AddressReferenceExplicit$ {
     export const inboundSchema: z.ZodType<AddressReferenceExplicit, z.ZodTypeDef, Inbound> = z
         .object({
             ".tag": AddressReferenceExplicitTag$,
-            id: z.string(),
+            id: z.string().optional(),
             first_name: z.string(),
             last_name: z.string(),
             company: z.string().optional(),
@@ -423,7 +423,7 @@ export namespace AddressReferenceExplicit$ {
         .transform((v) => {
             return {
                 dotTag: v[".tag"],
-                id: v.id,
+                ...(v.id === undefined ? null : { id: v.id }),
                 firstName: v.first_name,
                 lastName: v.last_name,
                 ...(v.company === undefined ? null : { company: v.company }),
@@ -440,7 +440,7 @@ export namespace AddressReferenceExplicit$ {
 
     export type Outbound = {
         ".tag": AddressReferenceExplicitTag;
-        id: string;
+        id?: string | undefined;
         first_name: string;
         last_name: string;
         company?: string | undefined;
@@ -457,7 +457,7 @@ export namespace AddressReferenceExplicit$ {
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, AddressReferenceExplicit> = z
         .object({
             dotTag: AddressReferenceExplicitTag$,
-            id: z.string(),
+            id: z.string().optional(),
             firstName: z.string(),
             lastName: z.string(),
             company: z.string().optional(),
@@ -473,7 +473,7 @@ export namespace AddressReferenceExplicit$ {
         .transform((v) => {
             return {
                 ".tag": v.dotTag,
-                id: v.id,
+                ...(v.id === undefined ? null : { id: v.id }),
                 first_name: v.firstName,
                 last_name: v.lastName,
                 ...(v.company === undefined ? null : { company: v.company }),

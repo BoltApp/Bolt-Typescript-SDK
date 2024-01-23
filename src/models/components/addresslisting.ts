@@ -266,7 +266,7 @@ export type AddressListing = {
     /**
      * The address's unique identifier.
      */
-    id: string;
+    id?: string | undefined;
     /**
      * The first name of the person associated with this address.
      */
@@ -377,7 +377,7 @@ export const CountryCode$ = z.nativeEnum(CountryCode);
 /** @internal */
 export namespace AddressListing$ {
     export type Inbound = {
-        id: string;
+        id?: string | undefined;
         first_name: string;
         last_name: string;
         company?: string | undefined;
@@ -394,7 +394,7 @@ export namespace AddressListing$ {
 
     export const inboundSchema: z.ZodType<AddressListing, z.ZodTypeDef, Inbound> = z
         .object({
-            id: z.string(),
+            id: z.string().optional(),
             first_name: z.string(),
             last_name: z.string(),
             company: z.string().optional(),
@@ -410,7 +410,7 @@ export namespace AddressListing$ {
         })
         .transform((v) => {
             return {
-                id: v.id,
+                ...(v.id === undefined ? null : { id: v.id }),
                 firstName: v.first_name,
                 lastName: v.last_name,
                 ...(v.company === undefined ? null : { company: v.company }),
@@ -427,7 +427,7 @@ export namespace AddressListing$ {
         });
 
     export type Outbound = {
-        id: string;
+        id?: string | undefined;
         first_name: string;
         last_name: string;
         company?: string | undefined;
@@ -444,7 +444,7 @@ export namespace AddressListing$ {
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, AddressListing> = z
         .object({
-            id: z.string(),
+            id: z.string().optional(),
             firstName: z.string(),
             lastName: z.string(),
             company: z.string().optional(),
@@ -460,7 +460,7 @@ export namespace AddressListing$ {
         })
         .transform((v) => {
             return {
-                id: v.id,
+                ...(v.id === undefined ? null : { id: v.id }),
                 first_name: v.firstName,
                 last_name: v.lastName,
                 ...(v.company === undefined ? null : { company: v.company }),
