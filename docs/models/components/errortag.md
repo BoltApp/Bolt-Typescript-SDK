@@ -7,5 +7,6 @@ The type of error returned
 
 | Name                   | Value                  |
 | ---------------------- | ---------------------- |
+| `Unauthorized`         | unauthorized           |
 | `UnprocessableRequest` | unprocessable_request  |
 | `NotFound`             | not_found              |

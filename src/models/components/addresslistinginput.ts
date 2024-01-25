@@ -8,11 +8,7 @@ import { z } from "zod";
 /**
  * An address saved on an account, i.e. a physical address plus any additional account-specific metadata.
  */
-export type AddressListing = {
-    /**
-     * The address's unique identifier.
-     */
-    id?: string | undefined;
+export type AddressListingInput = {
     /**
      * The first name of the person associated with this address.
      */
@@ -64,9 +60,8 @@ export type AddressListing = {
 };
 
 /** @internal */
-export namespace AddressListing$ {
+export namespace AddressListingInput$ {
     export type Inbound = {
-        id?: string | undefined;
         first_name: string;
         last_name: string;
         company?: string | undefined;
@@ -81,9 +76,8 @@ export namespace AddressListing$ {
         is_default?: boolean | undefined;
     };
 
-    export const inboundSchema: z.ZodType<AddressListing, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<AddressListingInput, z.ZodTypeDef, Inbound> = z
         .object({
-            id: z.string().optional(),
             first_name: z.string(),
             last_name: z.string(),
             company: z.string().optional(),
@@ -99,7 +93,6 @@ export namespace AddressListing$ {
         })
         .transform((v) => {
             return {
-                ...(v.id === undefined ? null : { id: v.id }),
                 firstName: v.first_name,
                 lastName: v.last_name,
                 ...(v.company === undefined ? null : { company: v.company }),
@@ -116,7 +109,6 @@ export namespace AddressListing$ {
         });
 
     export type Outbound = {
-        id?: string | undefined;
         first_name: string;
         last_name: string;
         company?: string | undefined;
@@ -131,9 +123,8 @@ export namespace AddressListing$ {
         is_default?: boolean | undefined;
     };
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, AddressListing> = z
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, AddressListingInput> = z
         .object({
-            id: z.string().optional(),
             firstName: z.string(),
             lastName: z.string(),
             company: z.string().optional(),
@@ -149,7 +140,6 @@ export namespace AddressListing$ {
         })
         .transform((v) => {
             return {
-                ...(v.id === undefined ? null : { id: v.id }),
                 first_name: v.firstName,
                 last_name: v.lastName,
                 ...(v.company === undefined ? null : { company: v.company }),

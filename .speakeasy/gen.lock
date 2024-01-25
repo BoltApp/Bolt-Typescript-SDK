@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 79fa0df9-852a-493c-b998-1d82654b5f18
 management:
-  docChecksum: 90d8fb7e96c274a28fb9d286a2727296
+  docChecksum: 1d04f8a746ca7df0efd64a6a125fc076
   docVersion: 3.0.1
   speakeasyVersion: internal
-  generationVersion: 2.237.3
-  releaseVersion: 0.5.3
-  configChecksum: e18592a104bc3b8e33e126c077253686
+  generationVersion: 2.239.4
+  releaseVersion: 0.5.4
+  configChecksum: fe25b17652890f09cf86574183fd59e8
   repoURL: https://github.com/BoltApp/Bolt-Typescript-SDK.git
   repoSubDirectory: .
   installationURL: https://github.com/BoltApp/Bolt-Typescript-SDK
@@ -78,6 +78,8 @@ generatedFiles:
   - src/models/components/creditcardnetwork.ts
   - src/models/components/addressreference.ts
   - src/models/components/addressreferenceid.ts
+  - src/models/components/addressreferenceexplicit.ts
+  - src/models/components/countrycode.ts
   - src/models/components/paymentmethodpaypaloutput.ts
   - src/models/components/paymentmethodaffirmoutput.ts
   - src/models/components/paymentmethodafterpayoutput.ts
@@ -87,10 +89,10 @@ generatedFiles:
   - src/models/components/addresslisting.ts
   - src/models/components/error.ts
   - src/models/components/fielderror.ts
+  - src/models/components/addresslistinginput.ts
   - src/models/components/creditcarderror.ts
   - src/models/components/paymentmethodinput.ts
   - src/models/components/addressreferenceinput.ts
-  - src/models/components/addressreferenceexplicit.ts
   - src/models/components/paymentresponse.ts
   - src/models/components/paymentresponsefinalized.ts
   - src/models/components/transaction.ts
@@ -181,8 +183,8 @@ generatedFiles:
   - docs/models/components/addressreferenceidtag.md
   - docs/models/components/addressreferenceid.md
   - docs/models/components/addressreferenceexplicittag.md
-  - docs/models/components/addressreferenceexplicitcountrycode.md
   - docs/models/components/addressreferenceexplicit.md
+  - docs/models/components/countrycode.md
   - docs/models/components/paymentmethodpaypaltag.md
   - docs/models/components/paymentmethodpaypaloutput.md
   - docs/models/components/paymentmethodaffirmtag.md
@@ -195,7 +197,6 @@ generatedFiles:
   - docs/models/components/paymentmethodklarnaaccountoutput.md
   - docs/models/components/paymentmethodklarnapaynowtag.md
   - docs/models/components/paymentmethodklarnapaynowoutput.md
-  - docs/models/components/countrycode.md
   - docs/models/components/addresslisting.md
   - docs/models/components/errortag.md
   - docs/models/components/errort.md

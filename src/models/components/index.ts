@@ -5,6 +5,7 @@
 export * from "./account";
 export * from "./accounttestcreationdataoutput";
 export * from "./addresslisting";
+export * from "./addresslistinginput";
 export * from "./addressreference";
 export * from "./addressreferenceexplicit";
 export * from "./addressreferenceid";
@@ -14,6 +15,7 @@ export * from "./cart";
 export * from "./cartdiscount";
 export * from "./cartitem";
 export * from "./cartshipment";
+export * from "./countrycode";
 export * from "./creditcarderror";
 export * from "./creditcardnetwork";
 export * from "./error";

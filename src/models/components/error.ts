@@ -8,6 +8,7 @@ import { z } from "zod";
  * The type of error returned
  */
 export enum ErrorTag {
+    Unauthorized = "unauthorized",
     UnprocessableRequest = "unprocessable_request",
     NotFound = "not_found",
 }
