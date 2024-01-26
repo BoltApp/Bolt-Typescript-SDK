@@ -53,10 +53,6 @@ export type AddressListingInput = {
      * The phone number associated with this address.
      */
     phone?: string | undefined;
-    /**
-     * Whether or not this is the default address saved.
-     */
-    isDefault?: boolean | undefined;
 };
 
 /** @internal */
@@ -73,7 +69,6 @@ export namespace AddressListingInput$ {
         country_code: CountryCode;
         email?: string | undefined;
         phone?: string | undefined;
-        is_default?: boolean | undefined;
     };
 
     export const inboundSchema: z.ZodType<AddressListingInput, z.ZodTypeDef, Inbound> = z
@@ -89,7 +84,6 @@ export namespace AddressListingInput$ {
             country_code: CountryCode$,
             email: z.string().optional(),
             phone: z.string().optional(),
-            is_default: z.boolean().optional(),
         })
         .transform((v) => {
             return {
@@ -104,7 +98,6 @@ export namespace AddressListingInput$ {
                 countryCode: v.country_code,
                 ...(v.email === undefined ? null : { email: v.email }),
                 ...(v.phone === undefined ? null : { phone: v.phone }),
-                ...(v.is_default === undefined ? null : { isDefault: v.is_default }),
             };
         });
 
@@ -120,7 +113,6 @@ export namespace AddressListingInput$ {
         country_code: CountryCode;
         email?: string | undefined;
         phone?: string | undefined;
-        is_default?: boolean | undefined;
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, AddressListingInput> = z
@@ -136,7 +128,6 @@ export namespace AddressListingInput$ {
             countryCode: CountryCode$,
             email: z.string().optional(),
             phone: z.string().optional(),
-            isDefault: z.boolean().optional(),
         })
         .transform((v) => {
             return {
@@ -151,7 +142,6 @@ export namespace AddressListingInput$ {
                 country_code: v.countryCode,
                 ...(v.email === undefined ? null : { email: v.email }),
                 ...(v.phone === undefined ? null : { phone: v.phone }),
-                ...(v.isDefault === undefined ? null : { is_default: v.isDefault }),
             };
         });
 }

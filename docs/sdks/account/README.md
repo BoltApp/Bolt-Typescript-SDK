@@ -92,7 +92,6 @@ async function run() {
     countryCode: CountryCode.Us,
     email: "alice@example.com",
     phone: "+14155550199",
-    isDefault: true,
   };
   
   const result = await sdk.account.addAddress(xPublishableKey, addressListing);
@@ -158,7 +157,6 @@ async function run() {
     countryCode: CountryCode.Us,
     email: "alice@example.com",
     phone: "+14155550199",
-    isDefault: true,
   };
   
   const result = await sdk.account.updateAddress(id, xPublishableKey, addressListing);
