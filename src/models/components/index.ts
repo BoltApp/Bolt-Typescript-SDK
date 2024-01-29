@@ -13,6 +13,7 @@ export * from "./addressreferenceinput";
 export * from "./amount";
 export * from "./cart";
 export * from "./cartdiscount";
+export * from "./carterror";
 export * from "./cartitem";
 export * from "./cartshipment";
 export * from "./countrycode";

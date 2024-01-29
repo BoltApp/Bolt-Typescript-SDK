@@ -1,6 +1,6 @@
 # GuestPaymentsInitializeResponseBody
 
-An error has occurred, and further details are contained in the response
+The payment operation cannot complete
 
 
 ## Fields

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 79fa0df9-852a-493c-b998-1d82654b5f18
 management:
-  docChecksum: 5aaeaec9ce41f3d66f5d3ee365161120
+  docChecksum: 845558ad15c03e83f41ff092b0e40bfa
   docVersion: 3.0.1
   speakeasyVersion: internal
   generationVersion: 2.239.4
-  releaseVersion: 0.5.5
-  configChecksum: 41872b465957245d56742f2cb3fb86a0
+  releaseVersion: 0.5.6
+  configChecksum: 87c19dfc009ee91fe968c99529ba113b
   repoURL: https://github.com/BoltApp/Bolt-Typescript-SDK.git
   repoSubDirectory: .
   installationURL: https://github.com/BoltApp/Bolt-Typescript-SDK
@@ -97,6 +97,7 @@ generatedFiles:
   - src/models/components/paymentresponsefinalized.ts
   - src/models/components/transaction.ts
   - src/models/components/paymentresponsepending.ts
+  - src/models/components/carterror.ts
   - src/models/components/guestpaymentinitializerequest.ts
   - src/models/components/cart.ts
   - src/models/components/amount.ts
@@ -224,6 +225,8 @@ generatedFiles:
   - docs/models/components/paymentresponsependingstatus.md
   - docs/models/components/action.md
   - docs/models/components/paymentresponsepending.md
+  - docs/models/components/carterrortag.md
+  - docs/models/components/carterror.md
   - docs/models/components/guestpaymentinitializerequest.md
   - docs/models/components/cart.md
   - docs/models/components/currency.md

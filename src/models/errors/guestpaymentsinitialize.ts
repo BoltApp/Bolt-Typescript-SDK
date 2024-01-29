@@ -5,7 +5,7 @@
 import { z } from "zod";
 
 /**
- * An error has occurred, and further details are contained in the response
+ * The payment operation cannot complete
  */
 export type GuestPaymentsInitializeResponseBodyData = {
     /**
@@ -15,7 +15,7 @@ export type GuestPaymentsInitializeResponseBodyData = {
 };
 
 /**
- * An error has occurred, and further details are contained in the response
+ * The payment operation cannot complete
  */
 export class GuestPaymentsInitializeResponseBody extends Error {
     /**
