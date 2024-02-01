@@ -76,7 +76,7 @@ Retrieve test credit card information. This includes its token, which can be use
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { TestingCreditCardGetSecurity, TypeT } from "@boltpay/bolt-typescript-sdk/models/operations";
+import { TestingCreditCardGetSecurity, Type } from "@boltpay/bolt-typescript-sdk/models/operations";
 
 async function run() {
   const sdk = new BoltTypescriptSDK();
@@ -84,7 +84,7 @@ async function run() {
   const operationSecurity: TestingCreditCardGetSecurity = "<YOUR_API_KEY_HERE>";
   
   const result = await sdk.testing.getCreditCard({
-    type: TypeT.Approve,
+    type: Type.Approve,
   }, operationSecurity);
 
   // Handle the result

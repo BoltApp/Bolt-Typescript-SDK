@@ -3,41 +3,7 @@
  */
 
 import { AddressListing, AddressListing$ } from "./addresslisting";
-import {
-    PaymentMethodAffirmOutput,
-    PaymentMethodAffirmOutput$,
-    PaymentMethodAffirmTag,
-} from "./paymentmethodaffirmoutput";
-import {
-    PaymentMethodAfterpayOutput,
-    PaymentMethodAfterpayOutput$,
-    PaymentMethodAfterpayTag,
-} from "./paymentmethodafterpayoutput";
-import {
-    DotTag,
-    PaymentMethodCreditCard,
-    PaymentMethodCreditCard$,
-} from "./paymentmethodcreditcard";
-import {
-    PaymentMethodKlarnaAccountOutput,
-    PaymentMethodKlarnaAccountOutput$,
-    PaymentMethodKlarnaAccountTag,
-} from "./paymentmethodklarnaaccountoutput";
-import {
-    PaymentMethodKlarnaOutput,
-    PaymentMethodKlarnaOutput$,
-    PaymentMethodKlarnaTag,
-} from "./paymentmethodklarnaoutput";
-import {
-    PaymentMethodKlarnaPaynowOutput,
-    PaymentMethodKlarnaPaynowOutput$,
-    PaymentMethodKlarnaPaynowTag,
-} from "./paymentmethodklarnapaynowoutput";
-import {
-    PaymentMethodPaypalOutput,
-    PaymentMethodPaypalOutput$,
-    PaymentMethodPaypalTag,
-} from "./paymentmethodpaypaloutput";
+import { PaymentMethod, PaymentMethod$ } from "./paymentmethod";
 import { Profile, Profile$ } from "./profile";
 import { z } from "zod";
 
@@ -49,17 +15,7 @@ export type Account = {
     /**
      * A list of payment methods associated with this account.
      */
-    paymentMethods: Array<
-        | (PaymentMethodPaypalOutput & { dotTag: PaymentMethodPaypalTag.Paypal })
-        | (PaymentMethodAffirmOutput & { dotTag: PaymentMethodAffirmTag.Affirm })
-        | (PaymentMethodAfterpayOutput & { dotTag: PaymentMethodAfterpayTag.Afterpay })
-        | (PaymentMethodKlarnaOutput & { dotTag: PaymentMethodKlarnaTag.Klarna })
-        | (PaymentMethodKlarnaAccountOutput & {
-              dotTag: PaymentMethodKlarnaAccountTag.KlarnaAccount;
-          })
-        | (PaymentMethodKlarnaPaynowOutput & { dotTag: PaymentMethodKlarnaPaynowTag.KlarnaPaynow })
-        | (PaymentMethodCreditCard & { dotTag: DotTag.CreditCard })
-    >;
+    paymentMethods: Array<PaymentMethod>;
     profile?: Profile | undefined;
 };
 
@@ -67,50 +23,14 @@ export type Account = {
 export namespace Account$ {
     export type Inbound = {
         addresses: Array<AddressListing$.Inbound>;
-        payment_methods: Array<
-            | (PaymentMethodPaypalOutput$.Inbound & { ".tag": PaymentMethodPaypalTag.Paypal })
-            | (PaymentMethodAffirmOutput$.Inbound & { ".tag": PaymentMethodAffirmTag.Affirm })
-            | (PaymentMethodAfterpayOutput$.Inbound & { ".tag": PaymentMethodAfterpayTag.Afterpay })
-            | (PaymentMethodKlarnaOutput$.Inbound & { ".tag": PaymentMethodKlarnaTag.Klarna })
-            | (PaymentMethodKlarnaAccountOutput$.Inbound & {
-                  ".tag": PaymentMethodKlarnaAccountTag.KlarnaAccount;
-              })
-            | (PaymentMethodKlarnaPaynowOutput$.Inbound & {
-                  ".tag": PaymentMethodKlarnaPaynowTag.KlarnaPaynow;
-              })
-            | (PaymentMethodCreditCard$.Inbound & { ".tag": DotTag.CreditCard })
-        >;
+        payment_methods: Array<PaymentMethod$.Inbound>;
         profile?: Profile$.Inbound | undefined;
     };
 
     export const inboundSchema: z.ZodType<Account, z.ZodTypeDef, Inbound> = z
         .object({
             addresses: z.array(AddressListing$.inboundSchema),
-            payment_methods: z.array(
-                z.union([
-                    PaymentMethodPaypalOutput$.inboundSchema.and(
-                        z.object({ ".tag": z.literal(PaymentMethodPaypalTag.Paypal) })
-                    ),
-                    PaymentMethodAffirmOutput$.inboundSchema.and(
-                        z.object({ ".tag": z.literal(PaymentMethodAffirmTag.Affirm) })
-                    ),
-                    PaymentMethodAfterpayOutput$.inboundSchema.and(
-                        z.object({ ".tag": z.literal(PaymentMethodAfterpayTag.Afterpay) })
-                    ),
-                    PaymentMethodKlarnaOutput$.inboundSchema.and(
-                        z.object({ ".tag": z.literal(PaymentMethodKlarnaTag.Klarna) })
-                    ),
-                    PaymentMethodKlarnaAccountOutput$.inboundSchema.and(
-                        z.object({ ".tag": z.literal(PaymentMethodKlarnaAccountTag.KlarnaAccount) })
-                    ),
-                    PaymentMethodKlarnaPaynowOutput$.inboundSchema.and(
-                        z.object({ ".tag": z.literal(PaymentMethodKlarnaPaynowTag.KlarnaPaynow) })
-                    ),
-                    PaymentMethodCreditCard$.inboundSchema.and(
-                        z.object({ ".tag": z.literal(DotTag.CreditCard) })
-                    ),
-                ])
-            ),
+            payment_methods: z.array(PaymentMethod$.inboundSchema),
             profile: Profile$.inboundSchema.optional(),
         })
         .transform((v) => {
@@ -123,52 +43,14 @@ export namespace Account$ {
 
     export type Outbound = {
         addresses: Array<AddressListing$.Outbound>;
-        payment_methods: Array<
-            | (PaymentMethodPaypalOutput$.Outbound & { ".tag": PaymentMethodPaypalTag.Paypal })
-            | (PaymentMethodAffirmOutput$.Outbound & { ".tag": PaymentMethodAffirmTag.Affirm })
-            | (PaymentMethodAfterpayOutput$.Outbound & {
-                  ".tag": PaymentMethodAfterpayTag.Afterpay;
-              })
-            | (PaymentMethodKlarnaOutput$.Outbound & { ".tag": PaymentMethodKlarnaTag.Klarna })
-            | (PaymentMethodKlarnaAccountOutput$.Outbound & {
-                  ".tag": PaymentMethodKlarnaAccountTag.KlarnaAccount;
-              })
-            | (PaymentMethodKlarnaPaynowOutput$.Outbound & {
-                  ".tag": PaymentMethodKlarnaPaynowTag.KlarnaPaynow;
-              })
-            | (PaymentMethodCreditCard$.Outbound & { ".tag": DotTag.CreditCard })
-        >;
+        payment_methods: Array<PaymentMethod$.Outbound>;
         profile?: Profile$.Outbound | undefined;
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, Account> = z
         .object({
             addresses: z.array(AddressListing$.outboundSchema),
-            paymentMethods: z.array(
-                z.union([
-                    PaymentMethodPaypalOutput$.outboundSchema.and(
-                        z.object({ dotTag: z.literal(PaymentMethodPaypalTag.Paypal) })
-                    ),
-                    PaymentMethodAffirmOutput$.outboundSchema.and(
-                        z.object({ dotTag: z.literal(PaymentMethodAffirmTag.Affirm) })
-                    ),
-                    PaymentMethodAfterpayOutput$.outboundSchema.and(
-                        z.object({ dotTag: z.literal(PaymentMethodAfterpayTag.Afterpay) })
-                    ),
-                    PaymentMethodKlarnaOutput$.outboundSchema.and(
-                        z.object({ dotTag: z.literal(PaymentMethodKlarnaTag.Klarna) })
-                    ),
-                    PaymentMethodKlarnaAccountOutput$.outboundSchema.and(
-                        z.object({ dotTag: z.literal(PaymentMethodKlarnaAccountTag.KlarnaAccount) })
-                    ),
-                    PaymentMethodKlarnaPaynowOutput$.outboundSchema.and(
-                        z.object({ dotTag: z.literal(PaymentMethodKlarnaPaynowTag.KlarnaPaynow) })
-                    ),
-                    PaymentMethodCreditCard$.outboundSchema.and(
-                        z.object({ dotTag: z.literal(DotTag.CreditCard) })
-                    ),
-                ])
-            ),
+            paymentMethods: z.array(PaymentMethod$.outboundSchema),
             profile: Profile$.outboundSchema.optional(),
         })
         .transform((v) => {

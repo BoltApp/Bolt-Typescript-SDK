@@ -12,7 +12,7 @@ export type TestingCreditCardGetSecurity = {
 /**
  * The expected authorization result when using the generated token for a payment.
  */
-export enum TypeT {
+export enum Type {
     Approve = "approve",
     Decline = "decline",
 }
@@ -21,7 +21,7 @@ export type TestingCreditCardGetRequestBody = {
     /**
      * The expected authorization result when using the generated token for a payment.
      */
-    type: TypeT;
+    type: Type;
 };
 
 export type TestingCreditCardGetResponse = {
@@ -44,18 +44,18 @@ export type TestingCreditCardGetResponse = {
 };
 
 /** @internal */
-export const TypeT$ = z.nativeEnum(TypeT);
+export const Type$ = z.nativeEnum(Type);
 
 /** @internal */
 export namespace TestingCreditCardGetRequestBody$ {
     export type Inbound = {
-        type: TypeT;
+        type: Type;
     };
 
     export const inboundSchema: z.ZodType<TestingCreditCardGetRequestBody, z.ZodTypeDef, Inbound> =
         z
             .object({
-                type: TypeT$,
+                type: Type$,
             })
             .transform((v) => {
                 return {
@@ -64,7 +64,7 @@ export namespace TestingCreditCardGetRequestBody$ {
             });
 
     export type Outbound = {
-        type: TypeT;
+        type: Type;
     };
 
     export const outboundSchema: z.ZodType<
@@ -73,7 +73,7 @@ export namespace TestingCreditCardGetRequestBody$ {
         TestingCreditCardGetRequestBody
     > = z
         .object({
-            type: TypeT$,
+            type: Type$,
         })
         .transform((v) => {
             return {
