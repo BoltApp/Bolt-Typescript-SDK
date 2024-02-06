@@ -9,6 +9,7 @@ import { z } from "zod";
  */
 export enum ErrorTag {
     Unauthorized = "unauthorized",
+    Forbidden = "forbidden",
     UnprocessableRequest = "unprocessable_request",
     NotFound = "not_found",
 }
