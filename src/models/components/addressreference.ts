@@ -30,19 +30,27 @@ export namespace AddressReference$ {
 
     export const inboundSchema: z.ZodType<AddressReference, z.ZodTypeDef, Inbound> = z.union([
         AddressReferenceId$.inboundSchema.and(
-            z.object({ ".tag": z.literal(AddressReferenceIdTag.Id) })
+            z
+                .object({ ".tag": z.literal(AddressReferenceIdTag.Id) })
+                .transform((v) => ({ dotTag: v[".tag"] }))
         ),
         AddressReferenceExplicit$.inboundSchema.and(
-            z.object({ ".tag": z.literal(AddressReferenceExplicitTag.Explicit) })
+            z
+                .object({ ".tag": z.literal(AddressReferenceExplicitTag.Explicit) })
+                .transform((v) => ({ dotTag: v[".tag"] }))
         ),
     ]);
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, AddressReference> = z.union([
         AddressReferenceId$.outboundSchema.and(
-            z.object({ dotTag: z.literal(AddressReferenceIdTag.Id) })
+            z
+                .object({ dotTag: z.literal(AddressReferenceIdTag.Id) })
+                .transform((v) => ({ ".tag": v.dotTag }))
         ),
         AddressReferenceExplicit$.outboundSchema.and(
-            z.object({ dotTag: z.literal(AddressReferenceExplicitTag.Explicit) })
+            z
+                .object({ dotTag: z.literal(AddressReferenceExplicitTag.Explicit) })
+                .transform((v) => ({ ".tag": v.dotTag }))
         ),
     ]);
 }

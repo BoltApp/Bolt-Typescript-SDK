@@ -8,8 +8,9 @@ generation:
   fixes:
     nameResolutionDec2023: false
     parameterOrderingFeb2024: false
+    requestResponseComponentNamesFeb2024: false
 typescript:
-  version: 0.7.0
+  version: 0.8.0
   author: BoltPublicAPI
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true

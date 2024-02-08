@@ -30,19 +30,27 @@ export namespace PaymentResponse$ {
 
     export const inboundSchema: z.ZodType<PaymentResponse, z.ZodTypeDef, Inbound> = z.union([
         PaymentResponseFinalized$.inboundSchema.and(
-            z.object({ ".tag": z.literal(PaymentResponseFinalizedTag.Finalized) })
+            z
+                .object({ ".tag": z.literal(PaymentResponseFinalizedTag.Finalized) })
+                .transform((v) => ({ dotTag: v[".tag"] }))
         ),
         PaymentResponsePending$.inboundSchema.and(
-            z.object({ ".tag": z.literal(PaymentResponsePendingTag.Pending) })
+            z
+                .object({ ".tag": z.literal(PaymentResponsePendingTag.Pending) })
+                .transform((v) => ({ dotTag: v[".tag"] }))
         ),
     ]);
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentResponse> = z.union([
         PaymentResponseFinalized$.outboundSchema.and(
-            z.object({ dotTag: z.literal(PaymentResponseFinalizedTag.Finalized) })
+            z
+                .object({ dotTag: z.literal(PaymentResponseFinalizedTag.Finalized) })
+                .transform((v) => ({ ".tag": v.dotTag }))
         ),
         PaymentResponsePending$.outboundSchema.and(
-            z.object({ dotTag: z.literal(PaymentResponsePendingTag.Pending) })
+            z
+                .object({ dotTag: z.literal(PaymentResponsePendingTag.Pending) })
+                .transform((v) => ({ ".tag": v.dotTag }))
         ),
     ]);
 }

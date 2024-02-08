@@ -78,49 +78,77 @@ export namespace PaymentMethod$ {
 
     export const inboundSchema: z.ZodType<PaymentMethod, z.ZodTypeDef, Inbound> = z.union([
         PaymentMethodPaypalOutput$.inboundSchema.and(
-            z.object({ ".tag": z.literal(PaymentMethodPaypalTag.Paypal) })
+            z
+                .object({ ".tag": z.literal(PaymentMethodPaypalTag.Paypal) })
+                .transform((v) => ({ dotTag: v[".tag"] }))
         ),
         PaymentMethodAffirmOutput$.inboundSchema.and(
-            z.object({ ".tag": z.literal(PaymentMethodAffirmTag.Affirm) })
+            z
+                .object({ ".tag": z.literal(PaymentMethodAffirmTag.Affirm) })
+                .transform((v) => ({ dotTag: v[".tag"] }))
         ),
         PaymentMethodAfterpayOutput$.inboundSchema.and(
-            z.object({ ".tag": z.literal(PaymentMethodAfterpayTag.Afterpay) })
+            z
+                .object({ ".tag": z.literal(PaymentMethodAfterpayTag.Afterpay) })
+                .transform((v) => ({ dotTag: v[".tag"] }))
         ),
         PaymentMethodKlarnaOutput$.inboundSchema.and(
-            z.object({ ".tag": z.literal(PaymentMethodKlarnaTag.Klarna) })
+            z
+                .object({ ".tag": z.literal(PaymentMethodKlarnaTag.Klarna) })
+                .transform((v) => ({ dotTag: v[".tag"] }))
         ),
         PaymentMethodKlarnaAccountOutput$.inboundSchema.and(
-            z.object({ ".tag": z.literal(PaymentMethodKlarnaAccountTag.KlarnaAccount) })
+            z
+                .object({ ".tag": z.literal(PaymentMethodKlarnaAccountTag.KlarnaAccount) })
+                .transform((v) => ({ dotTag: v[".tag"] }))
         ),
         PaymentMethodKlarnaPaynowOutput$.inboundSchema.and(
-            z.object({ ".tag": z.literal(PaymentMethodKlarnaPaynowTag.KlarnaPaynow) })
+            z
+                .object({ ".tag": z.literal(PaymentMethodKlarnaPaynowTag.KlarnaPaynow) })
+                .transform((v) => ({ dotTag: v[".tag"] }))
         ),
         PaymentMethodCreditCard$.inboundSchema.and(
-            z.object({ ".tag": z.literal(DotTag.CreditCard) })
+            z
+                .object({ ".tag": z.literal(DotTag.CreditCard) })
+                .transform((v) => ({ dotTag: v[".tag"] }))
         ),
     ]);
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentMethod> = z.union([
         PaymentMethodPaypalOutput$.outboundSchema.and(
-            z.object({ dotTag: z.literal(PaymentMethodPaypalTag.Paypal) })
+            z
+                .object({ dotTag: z.literal(PaymentMethodPaypalTag.Paypal) })
+                .transform((v) => ({ ".tag": v.dotTag }))
         ),
         PaymentMethodAffirmOutput$.outboundSchema.and(
-            z.object({ dotTag: z.literal(PaymentMethodAffirmTag.Affirm) })
+            z
+                .object({ dotTag: z.literal(PaymentMethodAffirmTag.Affirm) })
+                .transform((v) => ({ ".tag": v.dotTag }))
         ),
         PaymentMethodAfterpayOutput$.outboundSchema.and(
-            z.object({ dotTag: z.literal(PaymentMethodAfterpayTag.Afterpay) })
+            z
+                .object({ dotTag: z.literal(PaymentMethodAfterpayTag.Afterpay) })
+                .transform((v) => ({ ".tag": v.dotTag }))
         ),
         PaymentMethodKlarnaOutput$.outboundSchema.and(
-            z.object({ dotTag: z.literal(PaymentMethodKlarnaTag.Klarna) })
+            z
+                .object({ dotTag: z.literal(PaymentMethodKlarnaTag.Klarna) })
+                .transform((v) => ({ ".tag": v.dotTag }))
         ),
         PaymentMethodKlarnaAccountOutput$.outboundSchema.and(
-            z.object({ dotTag: z.literal(PaymentMethodKlarnaAccountTag.KlarnaAccount) })
+            z
+                .object({ dotTag: z.literal(PaymentMethodKlarnaAccountTag.KlarnaAccount) })
+                .transform((v) => ({ ".tag": v.dotTag }))
         ),
         PaymentMethodKlarnaPaynowOutput$.outboundSchema.and(
-            z.object({ dotTag: z.literal(PaymentMethodKlarnaPaynowTag.KlarnaPaynow) })
+            z
+                .object({ dotTag: z.literal(PaymentMethodKlarnaPaynowTag.KlarnaPaynow) })
+                .transform((v) => ({ ".tag": v.dotTag }))
         ),
         PaymentMethodCreditCard$.outboundSchema.and(
-            z.object({ dotTag: z.literal(DotTag.CreditCard) })
+            z
+                .object({ dotTag: z.literal(DotTag.CreditCard) })
+                .transform((v) => ({ ".tag": v.dotTag }))
         ),
     ]);
 }
