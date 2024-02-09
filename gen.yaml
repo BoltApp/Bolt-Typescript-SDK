@@ -10,7 +10,7 @@ generation:
     parameterOrderingFeb2024: false
     requestResponseComponentNamesFeb2024: false
 typescript:
-  version: 0.8.0
+  version: 0.8.1
   author: BoltPublicAPI
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true
