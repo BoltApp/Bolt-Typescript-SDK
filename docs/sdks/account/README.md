@@ -32,7 +32,7 @@ async function run() {
     },
   });
 
-  const xPublishableKey = "string";
+  const xPublishableKey = "<value>";
   
   const result = await sdk.account.getDetails(xPublishableKey);
 
@@ -79,7 +79,7 @@ async function run() {
     },
   });
 
-  const xPublishableKey = "string";
+  const xPublishableKey = "<value>";
   const addressListing = {
     firstName: "Alice",
     lastName: "Baker",
@@ -144,7 +144,7 @@ async function run() {
   });
 
   const id = "D4g3h5tBuVYK9";
-  const xPublishableKey = "string";
+  const xPublishableKey = "<value>";
   const addressListing = {
     firstName: "Alice",
     lastName: "Baker",
@@ -208,7 +208,7 @@ async function run() {
   });
 
   const id = "D4g3h5tBuVYK9";
-  const xPublishableKey = "string";
+  const xPublishableKey = "<value>";
   
   const result = await sdk.account.deleteAddress(id, xPublishableKey);
 
@@ -251,6 +251,7 @@ which is documented in [Install the Bolt Tokenizer](https://help.bolt.com/develo
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
+import { PaymentMethodAffirmTag } from "@boltpay/bolt-typescript-sdk/models/components";
 
 async function run() {
   const sdk = new BoltTypescriptSDK({
@@ -259,8 +260,11 @@ async function run() {
     },
   });
 
-  const xPublishableKey = "string";
-  const paymentMethod = ;
+  const xPublishableKey = "<value>";
+  const paymentMethod = {
+      dotTag: PaymentMethodAffirmTag.Affirm,
+      returnUrl: "www.example.com/handle_affirm_success",
+    };
   
   const result = await sdk.account.addPaymentMethod(xPublishableKey, paymentMethod);
 
@@ -310,7 +314,7 @@ async function run() {
   });
 
   const id = "D4g3h5tBuVYK9";
-  const xPublishableKey = "string";
+  const xPublishableKey = "<value>";
   
   const result = await sdk.account.deletePaymentMethod(id, xPublishableKey);
 

@@ -17,13 +17,12 @@ Bolt when it is updated or finalized for guest shoppers.
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { Currency } from "@boltpay/bolt-typescript-sdk/models/components";
-import { GuestPaymentsInitializeSecurity } from "@boltpay/bolt-typescript-sdk/models/operations";
+import { AddressReferenceIdTag, Currency, PaymentMethodAffirmTag } from "@boltpay/bolt-typescript-sdk/models/components";
 
 async function run() {
   const sdk = new BoltTypescriptSDK();
 
-  const xPublishableKey = "string";
+  const xPublishableKey = "<value>";
   const guestPaymentInitializeRequest = {
     profile: {
       createAccount: true,
@@ -38,6 +37,10 @@ async function run() {
       displayId: "215614191",
       shipments: [
         {
+        address:     {
+              dotTag: AddressReferenceIdTag.Id,
+              id: "D4g3h5tBuVYK9",
+            },
           cost: {
             currency: Currency.Usd,
             units: 900,
@@ -78,8 +81,12 @@ async function run() {
         units: 900,
       },
     },
+  paymentMethod:     {
+        dotTag: PaymentMethodAffirmTag.Affirm,
+        returnUrl: "www.example.com/handle_affirm_success",
+      },
   };
-  const operationSecurity: GuestPaymentsInitializeSecurity = "<YOUR_API_KEY_HERE>";
+  const operationSecurity = "<YOUR_API_KEY_HERE>";
   
   const result = await sdk.payments.guest.initialize(operationSecurity, xPublishableKey, guestPaymentInitializeRequest);
 
@@ -120,14 +127,13 @@ Update a pending guest payment
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { Currency } from "@boltpay/bolt-typescript-sdk/models/components";
-import { GuestPaymentsUpdateSecurity } from "@boltpay/bolt-typescript-sdk/models/operations";
+import { AddressReferenceExplicitTag, CountryCode, Currency } from "@boltpay/bolt-typescript-sdk/models/components";
 
 async function run() {
   const sdk = new BoltTypescriptSDK();
 
   const id = "iKv7t5bgt1gg";
-  const xPublishableKey = "string";
+  const xPublishableKey = "<value>";
   const paymentUpdateRequest = {
     cart: {
       orderReference: "order_100",
@@ -135,6 +141,20 @@ async function run() {
       displayId: "215614191",
       shipments: [
         {
+        address:     {
+              dotTag: AddressReferenceExplicitTag.Explicit,
+              firstName: "Alice",
+              lastName: "Baker",
+              company: "ACME Corporation",
+              streetAddress1: "535 Mission St, Ste 1401",
+              streetAddress2: "c/o Shipping Department",
+              locality: "San Francisco",
+              postalCode: "94105",
+              region: "CA",
+              countryCode: CountryCode.Us,
+              email: "alice@example.com",
+              phone: "+14155550199",
+            },
           cost: {
             currency: Currency.Usd,
             units: 900,
@@ -176,7 +196,7 @@ async function run() {
       },
     },
   };
-  const operationSecurity: GuestPaymentsUpdateSecurity = "<YOUR_API_KEY_HERE>";
+  const operationSecurity = "<YOUR_API_KEY_HERE>";
   
   const result = await sdk.payments.guest.update(operationSecurity, id, xPublishableKey, paymentUpdateRequest);
 
@@ -219,18 +239,17 @@ Perform an irreversible action on a pending guest payment, such as finalizing it
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { PaymentActionRequestTag } from "@boltpay/bolt-typescript-sdk/models/components";
-import { GuestPaymentsActionSecurity } from "@boltpay/bolt-typescript-sdk/models/operations";
 
 async function run() {
   const sdk = new BoltTypescriptSDK();
 
   const id = "iKv7t5bgt1gg";
-  const xPublishableKey = "string";
+  const xPublishableKey = "<value>";
   const paymentActionRequest = {
     dotTag: PaymentActionRequestTag.Finalize,
     redirectResult: "eyJ0cmFuc",
   };
-  const operationSecurity: GuestPaymentsActionSecurity = "<YOUR_API_KEY_HERE>";
+  const operationSecurity = "<YOUR_API_KEY_HERE>";
   
   const result = await sdk.payments.guest.performAction(operationSecurity, id, xPublishableKey, paymentActionRequest);
 

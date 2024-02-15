@@ -9,7 +9,7 @@ async function run() {
         },
     });
 
-    const xPublishableKey = "string";
+    const xPublishableKey = "<value>";
 
     const result = await sdk.account.getDetails(xPublishableKey);
 

@@ -22,6 +22,7 @@ export class Orders extends ClientSDK {
         this.options$ = options;
         void this.options$;
     }
+
     /**
      * Create an order that was placed outside the Bolt ecosystem.
      *

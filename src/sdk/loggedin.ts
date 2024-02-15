@@ -22,6 +22,7 @@ export class LoggedIn extends ClientSDK {
         this.options$ = options;
         void this.options$;
     }
+
     /**
      * Initialize a Bolt payment for logged in shoppers
      *

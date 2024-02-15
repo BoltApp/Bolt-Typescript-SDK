@@ -4,16 +4,16 @@ management:
   docChecksum: 6a4f47a32772ac402e83efcd9d8d007d
   docVersion: 3.0.1
   speakeasyVersion: internal
-  generationVersion: 2.253.0
-  releaseVersion: 0.8.2
-  configChecksum: 38db2a9d0483ddd90e51be59f1f44a57
+  generationVersion: 2.258.0
+  releaseVersion: 0.8.3
+  configChecksum: 2ccf322727812f597ff8db96c3b927b8
   repoURL: https://github.com/BoltApp/Bolt-Typescript-SDK.git
   repoSubDirectory: .
   installationURL: https://github.com/BoltApp/Bolt-Typescript-SDK
   published: true
 features:
   typescript:
-    core: 3.4.9
+    core: 3.4.10
     flattening: 2.81.1
     globalSecurity: 2.82.2
     globalServerURLs: 2.82.3

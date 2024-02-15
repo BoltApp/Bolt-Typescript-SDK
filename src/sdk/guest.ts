@@ -22,6 +22,7 @@ export class Guest extends ClientSDK {
         this.options$ = options;
         void this.options$;
     }
+
     /**
      * Initialize a Bolt payment for guest shoppers
      *

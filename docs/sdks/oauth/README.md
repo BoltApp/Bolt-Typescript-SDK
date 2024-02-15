@@ -20,8 +20,7 @@ Retrieve a new or refresh an existing OAuth token.
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import {  } from "@boltpay/bolt-typescript-sdk/models";
-import { GrantType } from "@boltpay/bolt-typescript-sdk/models/components";
+import { GrantType, Scope } from "@boltpay/bolt-typescript-sdk/models/components";
 
 async function run() {
   const sdk = new BoltTypescriptSDK({

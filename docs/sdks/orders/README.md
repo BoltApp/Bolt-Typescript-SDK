@@ -19,13 +19,12 @@ Create an order that was placed outside the Bolt ecosystem.
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { Currency } from "@boltpay/bolt-typescript-sdk/models/components";
-import { OrdersCreateSecurity } from "@boltpay/bolt-typescript-sdk/models/operations";
+import { AddressReferenceExplicitTag, CountryCode, Currency } from "@boltpay/bolt-typescript-sdk/models/components";
 
 async function run() {
   const sdk = new BoltTypescriptSDK();
 
-  const xPublishableKey = "string";
+  const xPublishableKey = "<value>";
   const order = {
     profile: {
       firstName: "Alice",
@@ -39,6 +38,20 @@ async function run() {
       displayId: "215614191",
       shipments: [
         {
+        address:     {
+              dotTag: AddressReferenceExplicitTag.Explicit,
+              firstName: "Alice",
+              lastName: "Baker",
+              company: "ACME Corporation",
+              streetAddress1: "535 Mission St, Ste 1401",
+              streetAddress2: "c/o Shipping Department",
+              locality: "San Francisco",
+              postalCode: "94105",
+              region: "CA",
+              countryCode: CountryCode.Us,
+              email: "alice@example.com",
+              phone: "+14155550199",
+            },
           cost: {
             currency: Currency.Usd,
             units: 900,
@@ -80,7 +93,7 @@ async function run() {
       },
     },
   };
-  const operationSecurity: OrdersCreateSecurity = "<YOUR_API_KEY_HERE>";
+  const operationSecurity = "<YOUR_API_KEY_HERE>";
   
   const result = await sdk.orders.ordersCreate(operationSecurity, xPublishableKey, order);
 

@@ -22,12 +22,11 @@ Create a Bolt shopper account for testing purposes.
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { EmailState, PhoneState } from "@boltpay/bolt-typescript-sdk/models/components";
-import { TestingAccountCreateSecurity } from "@boltpay/bolt-typescript-sdk/models/operations";
 
 async function run() {
   const sdk = new BoltTypescriptSDK();
 
-  const xPublishableKey = "string";
+  const xPublishableKey = "<value>";
   const accountTestCreationData = {
     emailState: EmailState.Unverified,
     phoneState: PhoneState.Verified,
@@ -35,7 +34,7 @@ async function run() {
     hasAddress: true,
     hasCreditCard: true,
   };
-  const operationSecurity: TestingAccountCreateSecurity = "<YOUR_API_KEY_HERE>";
+  const operationSecurity = "<YOUR_API_KEY_HERE>";
   
   const result = await sdk.testing.createAccount(operationSecurity, xPublishableKey, accountTestCreationData);
 
@@ -76,12 +75,12 @@ Retrieve test credit card information. This includes its token, which can be use
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { TestingCreditCardGetSecurity, Type } from "@boltpay/bolt-typescript-sdk/models/operations";
+import { Type } from "@boltpay/bolt-typescript-sdk/models/operations";
 
 async function run() {
   const sdk = new BoltTypescriptSDK();
 
-  const operationSecurity: TestingCreditCardGetSecurity = "<YOUR_API_KEY_HERE>";
+  const operationSecurity = "<YOUR_API_KEY_HERE>";
   
   const result = await sdk.testing.getCreditCard({
     type: Type.Approve,

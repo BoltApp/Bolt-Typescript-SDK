@@ -22,6 +22,7 @@ export class Testing extends ClientSDK {
         this.options$ = options;
         void this.options$;
     }
+
     /**
      * Create a test account
      *

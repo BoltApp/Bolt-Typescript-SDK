@@ -22,6 +22,7 @@ export class OAuth extends ClientSDK {
         this.options$ = options;
         void this.options$;
     }
+
     /**
      * Get OAuth token
      *

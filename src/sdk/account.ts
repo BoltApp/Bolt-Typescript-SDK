@@ -22,6 +22,7 @@ export class Account extends ClientSDK {
         this.options$ = options;
         void this.options$;
     }
+
     /**
      * Retrieve account details
      *
