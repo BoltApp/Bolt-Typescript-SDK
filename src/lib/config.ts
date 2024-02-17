@@ -66,6 +66,6 @@ export const SDK_METADATA = Object.freeze({
     language: "typescript",
     openapiDocVersion: "3.0.1",
     sdkVersion: "0.8.3",
-    genVersion: "2.258.0",
-    userAgent: "speakeasy-sdk/typescript 0.8.3 2.258.0 3.0.1 @boltpay/bolt-typescript-sdk",
+    genVersion: "2.262.2",
+    userAgent: "speakeasy-sdk/typescript 0.8.3 2.262.2 3.0.1 @boltpay/bolt-typescript-sdk",
 });

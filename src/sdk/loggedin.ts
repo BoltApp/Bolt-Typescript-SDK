@@ -140,7 +140,6 @@ export class LoggedIn extends ClientSDK {
         const pathParams$ = {
             id: enc$.encodeSimple("id", payload$.id, { explode: false, charEncoding: "percent" }),
         };
-
         const path$ = this.templateURLComponent("/payments/{id}")(pathParams$);
 
         headers$.set(
@@ -230,7 +229,6 @@ export class LoggedIn extends ClientSDK {
         const pathParams$ = {
             id: enc$.encodeSimple("id", payload$.id, { explode: false, charEncoding: "percent" }),
         };
-
         const path$ = this.templateURLComponent("/payments/{id}")(pathParams$);
 
         headers$.set(

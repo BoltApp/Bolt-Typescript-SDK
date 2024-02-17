@@ -213,7 +213,6 @@ export class Account extends ClientSDK {
         const pathParams$ = {
             id: enc$.encodeSimple("id", payload$.id, { explode: false, charEncoding: "percent" }),
         };
-
         const path$ = this.templateURLComponent("/account/addresses/{id}")(pathParams$);
 
         headers$.set(
@@ -298,7 +297,6 @@ export class Account extends ClientSDK {
         const pathParams$ = {
             id: enc$.encodeSimple("id", payload$.id, { explode: false, charEncoding: "percent" }),
         };
-
         const path$ = this.templateURLComponent("/account/addresses/{id}")(pathParams$);
 
         headers$.set(
@@ -461,7 +459,6 @@ export class Account extends ClientSDK {
         const pathParams$ = {
             id: enc$.encodeSimple("id", payload$.id, { explode: false, charEncoding: "percent" }),
         };
-
         const path$ = this.templateURLComponent("/account/payment-methods/{id}")(pathParams$);
 
         headers$.set(
