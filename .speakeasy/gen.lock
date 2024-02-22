@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 79fa0df9-852a-493c-b998-1d82654b5f18
 management:
-  docChecksum: 6a4f47a32772ac402e83efcd9d8d007d
-  docVersion: 3.0.1
+  docChecksum: bc06a11b6267820dda5725a5536b1a6e
+  docVersion: 3.0.2
   speakeasyVersion: internal
   generationVersion: 2.263.3
-  releaseVersion: 0.9.0
-  configChecksum: 359dd993e40eb644679b7ada0d7fb567
+  releaseVersion: 0.9.1
+  configChecksum: c9cb49926a9fc1c5f0b45952f0fac0e4
   repoURL: https://github.com/BoltApp/Bolt-Typescript-SDK.git
   repoSubDirectory: .
   installationURL: https://github.com/BoltApp/Bolt-Typescript-SDK
@@ -110,7 +110,9 @@ generatedFiles:
   - src/models/components/paymentmethodextended.ts
   - src/models/components/paymentmethodreference.ts
   - src/models/components/getaccesstokenresponse.ts
-  - src/models/components/getaccesstokenrequest.ts
+  - src/models/components/tokenrequest.ts
+  - src/models/components/authorizationcoderequest.ts
+  - src/models/components/refreshtokenrequest.ts
   - src/models/components/orderresponse.ts
   - src/models/components/order.ts
   - src/models/components/accounttestcreationdataoutput.ts
@@ -242,9 +244,13 @@ generatedFiles:
   - docs/models/components/paymentmethodreferencetag.md
   - docs/models/components/paymentmethodreference.md
   - docs/models/components/getaccesstokenresponse.md
+  - docs/models/components/tokenrequest.md
   - docs/models/components/granttype.md
   - docs/models/components/scope.md
-  - docs/models/components/getaccesstokenrequest.md
+  - docs/models/components/authorizationcoderequest.md
+  - docs/models/components/refreshtokenrequestgranttype.md
+  - docs/models/components/refreshtokenrequestscope.md
+  - docs/models/components/refreshtokenrequest.md
   - docs/models/components/orderresponse.md
   - docs/models/components/order.md
   - docs/models/components/emailstate.md

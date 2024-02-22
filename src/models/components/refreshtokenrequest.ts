@@ -5,23 +5,27 @@
 import { z } from "zod";
 
 /**
- * The type of OAuth 2.0 grant being utilized. The only supported grant is `authorization_code`.
+ * The type of OAuth 2.0 grant being utilized.
  */
-export enum GrantType {
-    AuthorizationCode = "authorization_code",
+export enum RefreshTokenRequestGrantType {
+    RefreshToken = "refresh_token",
 }
 
-export enum Scope {
+export enum RefreshTokenRequestScope {
     BoltAccountManage = "bolt.account.manage",
     BoltAccountView = "bolt.account.view",
     Openid = "openid",
 }
 
-export type GetAccessTokenRequest = {
+export type RefreshTokenRequest = {
     /**
-     * Fetched value using OTP value from the Authorization Modal.
+     * The type of OAuth 2.0 grant being utilized.
      */
-    code: string;
+    grantType: RefreshTokenRequestGrantType;
+    /**
+     * The value of the refresh token issued to you in the originating OAuth token request.
+     */
+    refreshToken: string;
     /**
      * The OAuth client ID, which corresponds to the merchant publishable key, which can be retrieved
      *
@@ -39,16 +43,12 @@ export type GetAccessTokenRequest = {
      */
     clientSecret: string;
     /**
-     * The type of OAuth 2.0 grant being utilized. The only supported grant is `authorization_code`.
-     */
-    grantType: GrantType;
-    /**
-     * The scope issued to the merchant when receiving an authorization code.
+     * The requested scopes. If the request is successful, the OAuth client will be able to perform operations requiring these scopes.
      *
      * @remarks
      *
      */
-    scope: Array<Scope>;
+    scope: Array<RefreshTokenRequestScope>;
     /**
      * A randomly generated string sent along with an authorization code. This must be included, if provided,
      *
@@ -60,66 +60,66 @@ export type GetAccessTokenRequest = {
 };
 
 /** @internal */
-export const GrantType$ = z.nativeEnum(GrantType);
+export const RefreshTokenRequestGrantType$ = z.nativeEnum(RefreshTokenRequestGrantType);
 
 /** @internal */
-export const Scope$ = z.nativeEnum(Scope);
+export const RefreshTokenRequestScope$ = z.nativeEnum(RefreshTokenRequestScope);
 
 /** @internal */
-export namespace GetAccessTokenRequest$ {
+export namespace RefreshTokenRequest$ {
     export type Inbound = {
-        code: string;
+        grant_type: RefreshTokenRequestGrantType;
+        refresh_token: string;
         client_id: string;
         client_secret: string;
-        grant_type: GrantType;
-        scope: Array<Scope>;
+        scope: Array<RefreshTokenRequestScope>;
         state?: string | undefined;
     };
 
-    export const inboundSchema: z.ZodType<GetAccessTokenRequest, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<RefreshTokenRequest, z.ZodTypeDef, Inbound> = z
         .object({
-            code: z.string(),
+            grant_type: RefreshTokenRequestGrantType$,
+            refresh_token: z.string(),
             client_id: z.string(),
             client_secret: z.string(),
-            grant_type: GrantType$,
-            scope: z.array(Scope$),
+            scope: z.array(RefreshTokenRequestScope$),
             state: z.string().optional(),
         })
         .transform((v) => {
             return {
-                code: v.code,
+                grantType: v.grant_type,
+                refreshToken: v.refresh_token,
                 clientId: v.client_id,
                 clientSecret: v.client_secret,
-                grantType: v.grant_type,
                 scope: v.scope,
                 ...(v.state === undefined ? null : { state: v.state }),
             };
         });
 
     export type Outbound = {
-        code: string;
+        grant_type: RefreshTokenRequestGrantType;
+        refresh_token: string;
         client_id: string;
         client_secret: string;
-        grant_type: GrantType;
-        scope: Array<Scope>;
+        scope: Array<RefreshTokenRequestScope>;
         state?: string | undefined;
     };
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, GetAccessTokenRequest> = z
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, RefreshTokenRequest> = z
         .object({
-            code: z.string(),
+            grantType: RefreshTokenRequestGrantType$,
+            refreshToken: z.string(),
             clientId: z.string(),
             clientSecret: z.string(),
-            grantType: GrantType$,
-            scope: z.array(Scope$),
+            scope: z.array(RefreshTokenRequestScope$),
             state: z.string().optional(),
         })
         .transform((v) => {
             return {
-                code: v.code,
+                grant_type: v.grantType,
+                refresh_token: v.refreshToken,
                 client_id: v.clientId,
                 client_secret: v.clientSecret,
-                grant_type: v.grantType,
                 scope: v.scope,
                 ...(v.state === undefined ? null : { state: v.state }),
             };

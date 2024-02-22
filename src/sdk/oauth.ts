@@ -45,7 +45,7 @@ export class OAuth extends ClientSDK {
      * Retrieve a new or refresh an existing OAuth token.
      */
     async getToken(
-        input: components.GetAccessTokenRequest,
+        input: components.TokenRequest,
         options?: RequestOptions
     ): Promise<operations.OauthGetTokenResponse> {
         const headers$ = new Headers();
@@ -53,7 +53,7 @@ export class OAuth extends ClientSDK {
         headers$.set("Content-Type", "application/x-www-form-urlencoded");
         headers$.set("Accept", "application/json");
 
-        const payload$ = components.GetAccessTokenRequest$.outboundSchema.parse(input);
+        const payload$ = components.TokenRequest$.outboundSchema.parse(input);
         const body$ = Object.entries(payload$ || {})
             .map(([k, v]) => {
                 return enc$.encodeBodyForm(k, v, { charEncoding: "percent" });
