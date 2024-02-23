@@ -144,7 +144,6 @@ export class Account extends ClientSDK {
         headers$.set("Accept", "application/json");
 
         const payload$ = operations.AccountAddressCreateRequest$.outboundSchema.parse(input$);
-
         const body$ = enc$.encodeJSON("body", payload$["address-listing"], { explode: true });
 
         const path$ = this.templateURLComponent("/account/addresses")();
@@ -238,7 +237,6 @@ export class Account extends ClientSDK {
         headers$.set("Accept", "application/json");
 
         const payload$ = operations.AccountAddressEditRequest$.outboundSchema.parse(input$);
-
         const body$ = enc$.encodeJSON("body", payload$["address-listing"], { explode: true });
 
         const pathParams$ = {
@@ -419,7 +417,6 @@ export class Account extends ClientSDK {
         headers$.set("Accept", "application/json");
 
         const payload$ = operations.AccountAddPaymentMethodRequest$.outboundSchema.parse(input$);
-
         const body$ = enc$.encodeJSON("body", payload$["payment-method"], { explode: true });
 
         const path$ = this.templateURLComponent("/account/payment-methods")();

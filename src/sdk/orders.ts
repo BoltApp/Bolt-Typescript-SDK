@@ -61,7 +61,6 @@ export class Orders extends ClientSDK {
         headers$.set("Accept", "application/json");
 
         const payload$ = operations.OrdersCreateRequest$.outboundSchema.parse(input$);
-
         const body$ = enc$.encodeJSON("body", payload$.order, { explode: true });
 
         const path$ = this.templateURLComponent("/orders")();

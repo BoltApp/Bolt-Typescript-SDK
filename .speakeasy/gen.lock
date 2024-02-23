@@ -4,9 +4,9 @@ management:
   docChecksum: bc06a11b6267820dda5725a5536b1a6e
   docVersion: 3.0.2
   speakeasyVersion: internal
-  generationVersion: 2.263.3
-  releaseVersion: 0.9.1
-  configChecksum: c9cb49926a9fc1c5f0b45952f0fac0e4
+  generationVersion: 2.269.0
+  releaseVersion: 0.10.0
+  configChecksum: 679cc0c6a0d60207edd737d284b93ed2
   repoURL: https://github.com/BoltApp/Bolt-Typescript-SDK.git
   repoSubDirectory: .
   installationURL: https://github.com/BoltApp/Bolt-Typescript-SDK
@@ -22,6 +22,7 @@ features:
     inputOutputModels: 2.82.0
     methodSecurity: 2.82.1
     nameOverrides: 2.81.1
+    responseFormat: 0.1.0
     unions: 2.85.2
 generatedFiles:
   - src/sdk/account.ts

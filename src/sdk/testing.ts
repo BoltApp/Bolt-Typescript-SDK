@@ -61,7 +61,6 @@ export class Testing extends ClientSDK {
         headers$.set("Accept", "application/json");
 
         const payload$ = operations.TestingAccountCreateRequest$.outboundSchema.parse(input$);
-
         const body$ = enc$.encodeJSON("body", payload$["account-test-creation-data"], {
             explode: true,
         });

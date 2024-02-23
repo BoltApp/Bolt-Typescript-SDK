@@ -61,7 +61,6 @@ export class LoggedIn extends ClientSDK {
         headers$.set("Accept", "application/json");
 
         const payload$ = operations.PaymentsInitializeRequest$.outboundSchema.parse(input$);
-
         const body$ = enc$.encodeJSON("body", payload$["payment-initialize-request"], {
             explode: true,
         });
@@ -155,7 +154,6 @@ export class LoggedIn extends ClientSDK {
         headers$.set("Accept", "application/json");
 
         const payload$ = operations.PaymentsUpdateRequest$.outboundSchema.parse(input$);
-
         const body$ = enc$.encodeJSON("body", payload$["payment-update-request"], {
             explode: true,
         });
@@ -252,7 +250,6 @@ export class LoggedIn extends ClientSDK {
         headers$.set("Accept", "application/json");
 
         const payload$ = operations.PaymentsActionRequest$.outboundSchema.parse(input$);
-
         const body$ = enc$.encodeJSON("body", payload$["payment-action-request"], {
             explode: true,
         });

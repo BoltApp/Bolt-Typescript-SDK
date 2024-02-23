@@ -62,7 +62,6 @@ export class Guest extends ClientSDK {
         headers$.set("Accept", "application/json");
 
         const payload$ = operations.GuestPaymentsInitializeRequest$.outboundSchema.parse(input$);
-
         const body$ = enc$.encodeJSON("body", payload$["guest-payment-initialize-request"], {
             explode: true,
         });
@@ -155,7 +154,6 @@ export class Guest extends ClientSDK {
         headers$.set("Accept", "application/json");
 
         const payload$ = operations.GuestPaymentsUpdateRequest$.outboundSchema.parse(input$);
-
         const body$ = enc$.encodeJSON("body", payload$["payment-update-request"], {
             explode: true,
         });
@@ -251,7 +249,6 @@ export class Guest extends ClientSDK {
         headers$.set("Accept", "application/json");
 
         const payload$ = operations.GuestPaymentsActionRequest$.outboundSchema.parse(input$);
-
         const body$ = enc$.encodeJSON("body", payload$["payment-action-request"], {
             explode: true,
         });
