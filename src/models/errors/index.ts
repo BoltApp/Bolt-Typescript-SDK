@@ -17,5 +17,6 @@ export * from "./paymentsaction";
 export * from "./paymentsinitialize";
 export * from "./paymentsupdate";
 export * from "./sdkerror";
+export * from "./sdkvalidationerror";
 export * from "./testingaccountcreate";
 export * from "./testingcreditcardget";

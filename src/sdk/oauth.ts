@@ -6,6 +6,7 @@ import { SDKHooks } from "../hooks";
 import { SDK_METADATA, SDKOptions, serverURLFromOptions } from "../lib/config";
 import * as enc$ from "../lib/encodings";
 import { HTTPClient } from "../lib/http";
+import * as schemas$ from "../lib/schemas";
 import { ClientSDK, RequestOptions } from "../lib/sdks";
 import * as components from "../models/components";
 import * as errors from "../models/errors";
@@ -53,7 +54,11 @@ export class OAuth extends ClientSDK {
         headers$.set("Content-Type", "application/x-www-form-urlencoded");
         headers$.set("Accept", "application/json");
 
-        const payload$ = components.TokenRequest$.outboundSchema.parse(input);
+        const payload$ = schemas$.parse(
+            input,
+            (value$) => components.TokenRequest$.outboundSchema.parse(value$),
+            "Input validation failed"
+        );
         const body$ = Object.entries(payload$ || {})
             .map(([k, v]) => {
                 return enc$.encodeBodyForm(k, v, { charEncoding: "percent" });
@@ -64,24 +69,10 @@ export class OAuth extends ClientSDK {
 
         const query$ = "";
 
-        const security$ =
-            typeof this.options$.security === "function"
-                ? await this.options$.security()
-                : this.options$.security;
-        const securitySettings$ = this.resolveGlobalSecurity(security$);
-
         const context = { operationID: "oauthGetToken" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
-        const request = await this.createRequest$(
-            {
-                context,
-                security: securitySettings$,
-                method: "POST",
-                path: path$,
-                headers: headers$,
-                query: query$,
-                body: body$,
-            },
+        const request = this.createRequest$(
+            { method: "POST", path: path$, headers: headers$, query: query$, body: body$ },
             options
         );
 
@@ -95,17 +86,29 @@ export class OAuth extends ClientSDK {
 
         if (this.matchResponse(response, 200, "application/json")) {
             const responseBody = await response.json();
-            const result = operations.OauthGetTokenResponse$.inboundSchema.parse({
-                ...responseFields$,
-                "get-access-token-response": responseBody,
-            });
+            const result = schemas$.parse(
+                responseBody,
+                (val$) => {
+                    return operations.OauthGetTokenResponse$.inboundSchema.parse({
+                        ...responseFields$,
+                        "get-access-token-response": val$,
+                    });
+                },
+                "Response validation failed"
+            );
             return result;
         } else if (this.matchResponse(response, "4XX", "application/json")) {
             const responseBody = await response.json();
-            const result = errors.OauthGetTokenResponseBody$.inboundSchema.parse({
-                ...responseFields$,
-                ...responseBody,
-            });
+            const result = schemas$.parse(
+                responseBody,
+                (val$) => {
+                    return errors.OauthGetTokenResponseBody$.inboundSchema.parse({
+                        ...responseFields$,
+                        ...val$,
+                    });
+                },
+                "Response validation failed"
+            );
             throw result;
         } else if (this.matchStatusCode(response, "default")) {
             // fallthrough
@@ -114,6 +117,10 @@ export class OAuth extends ClientSDK {
             throw new errors.SDKError("Unexpected API response", response, responseBody);
         }
 
-        return operations.OauthGetTokenResponse$.inboundSchema.parse(responseFields$);
+        return schemas$.parse(
+            undefined,
+            () => operations.OauthGetTokenResponse$.inboundSchema.parse(responseFields$),
+            "Response validation failed"
+        );
     }
 }

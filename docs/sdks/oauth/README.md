@@ -23,11 +23,7 @@ import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { GrantType, Scope } from "@boltpay/bolt-typescript-sdk/models/components";
 
 async function run() {
-  const sdk = new BoltTypescriptSDK({
-    security: {
-      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
-    },
-  });
+  const sdk = new BoltTypescriptSDK();
 
   const result = await sdk.oAuth.getToken({
       grantType: GrantType.AuthorizationCode,

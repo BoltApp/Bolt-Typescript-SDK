@@ -6,6 +6,7 @@ import { SDKHooks } from "../hooks";
 import { SDK_METADATA, SDKOptions, serverURLFromOptions } from "../lib/config";
 import * as enc$ from "../lib/encodings";
 import { HTTPClient } from "../lib/http";
+import * as schemas$ from "../lib/schemas";
 import { ClientSDK, RequestOptions } from "../lib/sdks";
 import * as components from "../models/components";
 import * as errors from "../models/errors";
@@ -60,7 +61,11 @@ export class Testing extends ClientSDK {
         headers$.set("Content-Type", "application/json");
         headers$.set("Accept", "application/json");
 
-        const payload$ = operations.TestingAccountCreateRequest$.outboundSchema.parse(input$);
+        const payload$ = schemas$.parse(
+            input$,
+            (value$) => operations.TestingAccountCreateRequest$.outboundSchema.parse(value$),
+            "Input validation failed"
+        );
         const body$ = enc$.encodeJSON("body", payload$["account-test-creation-data"], {
             explode: true,
         });
@@ -83,9 +88,8 @@ export class Testing extends ClientSDK {
 
         const context = { operationID: "testingAccountCreate" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
-        const request = await this.createRequest$(
+        const request = this.createRequest$(
             {
-                context,
                 security: securitySettings$,
                 method: "POST",
                 path: path$,
@@ -106,17 +110,29 @@ export class Testing extends ClientSDK {
 
         if (this.matchResponse(response, 200, "application/json")) {
             const responseBody = await response.json();
-            const result = operations.TestingAccountCreateResponse$.inboundSchema.parse({
-                ...responseFields$,
-                "account-test-creation-data": responseBody,
-            });
+            const result = schemas$.parse(
+                responseBody,
+                (val$) => {
+                    return operations.TestingAccountCreateResponse$.inboundSchema.parse({
+                        ...responseFields$,
+                        "account-test-creation-data": val$,
+                    });
+                },
+                "Response validation failed"
+            );
             return result;
         } else if (this.matchResponse(response, "4XX", "application/json")) {
             const responseBody = await response.json();
-            const result = errors.TestingAccountCreateResponseBody$.inboundSchema.parse({
-                ...responseFields$,
-                ...responseBody,
-            });
+            const result = schemas$.parse(
+                responseBody,
+                (val$) => {
+                    return errors.TestingAccountCreateResponseBody$.inboundSchema.parse({
+                        ...responseFields$,
+                        ...val$,
+                    });
+                },
+                "Response validation failed"
+            );
             throw result;
         } else if (this.matchStatusCode(response, "default")) {
             // fallthrough
@@ -125,7 +141,11 @@ export class Testing extends ClientSDK {
             throw new errors.SDKError("Unexpected API response", response, responseBody);
         }
 
-        return operations.TestingAccountCreateResponse$.inboundSchema.parse(responseFields$);
+        return schemas$.parse(
+            undefined,
+            () => operations.TestingAccountCreateResponse$.inboundSchema.parse(responseFields$),
+            "Response validation failed"
+        );
     }
 
     /**
@@ -145,7 +165,11 @@ export class Testing extends ClientSDK {
         headers$.set("Content-Type", "application/json");
         headers$.set("Accept", "application/json");
 
-        const payload$ = operations.TestingCreditCardGetRequestBody$.outboundSchema.parse(input);
+        const payload$ = schemas$.parse(
+            input,
+            (value$) => operations.TestingCreditCardGetRequestBody$.outboundSchema.parse(value$),
+            "Input validation failed"
+        );
         const body$ = enc$.encodeJSON("body", payload$, { explode: true });
 
         const path$ = this.templateURLComponent("/testing/credit-cards")();
@@ -158,9 +182,8 @@ export class Testing extends ClientSDK {
 
         const context = { operationID: "testingCreditCardGet" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
-        const request = await this.createRequest$(
+        const request = this.createRequest$(
             {
-                context,
                 security: securitySettings$,
                 method: "POST",
                 path: path$,
@@ -181,17 +204,29 @@ export class Testing extends ClientSDK {
 
         if (this.matchResponse(response, 200, "application/json")) {
             const responseBody = await response.json();
-            const result = operations.TestingCreditCardGetResponse$.inboundSchema.parse({
-                ...responseFields$,
-                "test-credit-card": responseBody,
-            });
+            const result = schemas$.parse(
+                responseBody,
+                (val$) => {
+                    return operations.TestingCreditCardGetResponse$.inboundSchema.parse({
+                        ...responseFields$,
+                        "test-credit-card": val$,
+                    });
+                },
+                "Response validation failed"
+            );
             return result;
         } else if (this.matchResponse(response, "4XX", "application/json")) {
             const responseBody = await response.json();
-            const result = errors.TestingCreditCardGetResponseBody$.inboundSchema.parse({
-                ...responseFields$,
-                ...responseBody,
-            });
+            const result = schemas$.parse(
+                responseBody,
+                (val$) => {
+                    return errors.TestingCreditCardGetResponseBody$.inboundSchema.parse({
+                        ...responseFields$,
+                        ...val$,
+                    });
+                },
+                "Response validation failed"
+            );
             throw result;
         } else if (this.matchStatusCode(response, "default")) {
             // fallthrough
@@ -200,6 +235,10 @@ export class Testing extends ClientSDK {
             throw new errors.SDKError("Unexpected API response", response, responseBody);
         }
 
-        return operations.TestingCreditCardGetResponse$.inboundSchema.parse(responseFields$);
+        return schemas$.parse(
+            undefined,
+            () => operations.TestingCreditCardGetResponse$.inboundSchema.parse(responseFields$),
+            "Response validation failed"
+        );
     }
 }

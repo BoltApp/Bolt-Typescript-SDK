@@ -6,6 +6,7 @@ import { SDKHooks } from "../hooks";
 import { SDK_METADATA, SDKOptions, serverURLFromOptions } from "../lib/config";
 import * as enc$ from "../lib/encodings";
 import { HTTPClient } from "../lib/http";
+import * as schemas$ from "../lib/schemas";
 import { ClientSDK, RequestOptions } from "../lib/sdks";
 import * as components from "../models/components";
 import * as errors from "../models/errors";
@@ -60,7 +61,11 @@ export class LoggedIn extends ClientSDK {
         headers$.set("Content-Type", "application/json");
         headers$.set("Accept", "application/json");
 
-        const payload$ = operations.PaymentsInitializeRequest$.outboundSchema.parse(input$);
+        const payload$ = schemas$.parse(
+            input$,
+            (value$) => operations.PaymentsInitializeRequest$.outboundSchema.parse(value$),
+            "Input validation failed"
+        );
         const body$ = enc$.encodeJSON("body", payload$["payment-initialize-request"], {
             explode: true,
         });
@@ -85,9 +90,8 @@ export class LoggedIn extends ClientSDK {
 
         const context = { operationID: "paymentsInitialize" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
-        const request = await this.createRequest$(
+        const request = this.createRequest$(
             {
-                context,
                 security: securitySettings$,
                 method: "POST",
                 path: path$,
@@ -108,17 +112,29 @@ export class LoggedIn extends ClientSDK {
 
         if (this.matchResponse(response, 200, "application/json")) {
             const responseBody = await response.json();
-            const result = operations.PaymentsInitializeResponse$.inboundSchema.parse({
-                ...responseFields$,
-                "payment-response": responseBody,
-            });
+            const result = schemas$.parse(
+                responseBody,
+                (val$) => {
+                    return operations.PaymentsInitializeResponse$.inboundSchema.parse({
+                        ...responseFields$,
+                        "payment-response": val$,
+                    });
+                },
+                "Response validation failed"
+            );
             return result;
         } else if (this.matchResponse(response, "4XX", "application/json")) {
             const responseBody = await response.json();
-            const result = errors.PaymentsInitializeResponseBody$.inboundSchema.parse({
-                ...responseFields$,
-                ...responseBody,
-            });
+            const result = schemas$.parse(
+                responseBody,
+                (val$) => {
+                    return errors.PaymentsInitializeResponseBody$.inboundSchema.parse({
+                        ...responseFields$,
+                        ...val$,
+                    });
+                },
+                "Response validation failed"
+            );
             throw result;
         } else if (this.matchStatusCode(response, "default")) {
             // fallthrough
@@ -127,7 +143,11 @@ export class LoggedIn extends ClientSDK {
             throw new errors.SDKError("Unexpected API response", response, responseBody);
         }
 
-        return operations.PaymentsInitializeResponse$.inboundSchema.parse(responseFields$);
+        return schemas$.parse(
+            undefined,
+            () => operations.PaymentsInitializeResponse$.inboundSchema.parse(responseFields$),
+            "Response validation failed"
+        );
     }
 
     /**
@@ -153,7 +173,11 @@ export class LoggedIn extends ClientSDK {
         headers$.set("Content-Type", "application/json");
         headers$.set("Accept", "application/json");
 
-        const payload$ = operations.PaymentsUpdateRequest$.outboundSchema.parse(input$);
+        const payload$ = schemas$.parse(
+            input$,
+            (value$) => operations.PaymentsUpdateRequest$.outboundSchema.parse(value$),
+            "Input validation failed"
+        );
         const body$ = enc$.encodeJSON("body", payload$["payment-update-request"], {
             explode: true,
         });
@@ -181,9 +205,8 @@ export class LoggedIn extends ClientSDK {
 
         const context = { operationID: "paymentsUpdate" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
-        const request = await this.createRequest$(
+        const request = this.createRequest$(
             {
-                context,
                 security: securitySettings$,
                 method: "PATCH",
                 path: path$,
@@ -204,17 +227,29 @@ export class LoggedIn extends ClientSDK {
 
         if (this.matchResponse(response, 200, "application/json")) {
             const responseBody = await response.json();
-            const result = operations.PaymentsUpdateResponse$.inboundSchema.parse({
-                ...responseFields$,
-                "payment-response": responseBody,
-            });
+            const result = schemas$.parse(
+                responseBody,
+                (val$) => {
+                    return operations.PaymentsUpdateResponse$.inboundSchema.parse({
+                        ...responseFields$,
+                        "payment-response": val$,
+                    });
+                },
+                "Response validation failed"
+            );
             return result;
         } else if (this.matchResponse(response, "4XX", "application/json")) {
             const responseBody = await response.json();
-            const result = errors.PaymentsUpdateResponseBody$.inboundSchema.parse({
-                ...responseFields$,
-                ...responseBody,
-            });
+            const result = schemas$.parse(
+                responseBody,
+                (val$) => {
+                    return errors.PaymentsUpdateResponseBody$.inboundSchema.parse({
+                        ...responseFields$,
+                        ...val$,
+                    });
+                },
+                "Response validation failed"
+            );
             throw result;
         } else if (this.matchStatusCode(response, "default")) {
             // fallthrough
@@ -223,7 +258,11 @@ export class LoggedIn extends ClientSDK {
             throw new errors.SDKError("Unexpected API response", response, responseBody);
         }
 
-        return operations.PaymentsUpdateResponse$.inboundSchema.parse(responseFields$);
+        return schemas$.parse(
+            undefined,
+            () => operations.PaymentsUpdateResponse$.inboundSchema.parse(responseFields$),
+            "Response validation failed"
+        );
     }
 
     /**
@@ -249,7 +288,11 @@ export class LoggedIn extends ClientSDK {
         headers$.set("Content-Type", "application/json");
         headers$.set("Accept", "application/json");
 
-        const payload$ = operations.PaymentsActionRequest$.outboundSchema.parse(input$);
+        const payload$ = schemas$.parse(
+            input$,
+            (value$) => operations.PaymentsActionRequest$.outboundSchema.parse(value$),
+            "Input validation failed"
+        );
         const body$ = enc$.encodeJSON("body", payload$["payment-action-request"], {
             explode: true,
         });
@@ -277,9 +320,8 @@ export class LoggedIn extends ClientSDK {
 
         const context = { operationID: "paymentsAction" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
-        const request = await this.createRequest$(
+        const request = this.createRequest$(
             {
-                context,
                 security: securitySettings$,
                 method: "POST",
                 path: path$,
@@ -300,17 +342,29 @@ export class LoggedIn extends ClientSDK {
 
         if (this.matchResponse(response, 200, "application/json")) {
             const responseBody = await response.json();
-            const result = operations.PaymentsActionResponse$.inboundSchema.parse({
-                ...responseFields$,
-                "payment-response": responseBody,
-            });
+            const result = schemas$.parse(
+                responseBody,
+                (val$) => {
+                    return operations.PaymentsActionResponse$.inboundSchema.parse({
+                        ...responseFields$,
+                        "payment-response": val$,
+                    });
+                },
+                "Response validation failed"
+            );
             return result;
         } else if (this.matchResponse(response, "4XX", "application/json")) {
             const responseBody = await response.json();
-            const result = errors.PaymentsActionResponseBody$.inboundSchema.parse({
-                ...responseFields$,
-                ...responseBody,
-            });
+            const result = schemas$.parse(
+                responseBody,
+                (val$) => {
+                    return errors.PaymentsActionResponseBody$.inboundSchema.parse({
+                        ...responseFields$,
+                        ...val$,
+                    });
+                },
+                "Response validation failed"
+            );
             throw result;
         } else if (this.matchStatusCode(response, "default")) {
             // fallthrough
@@ -319,6 +373,10 @@ export class LoggedIn extends ClientSDK {
             throw new errors.SDKError("Unexpected API response", response, responseBody);
         }
 
-        return operations.PaymentsActionResponse$.inboundSchema.parse(responseFields$);
+        return schemas$.parse(
+            undefined,
+            () => operations.PaymentsActionResponse$.inboundSchema.parse(responseFields$),
+            "Response validation failed"
+        );
     }
 }

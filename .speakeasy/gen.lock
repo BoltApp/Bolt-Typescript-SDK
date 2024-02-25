@@ -4,18 +4,18 @@ management:
   docChecksum: bc06a11b6267820dda5725a5536b1a6e
   docVersion: 3.0.2
   speakeasyVersion: internal
-  generationVersion: 2.269.0
-  releaseVersion: 0.10.0
-  configChecksum: 679cc0c6a0d60207edd737d284b93ed2
+  generationVersion: 2.272.4
+  releaseVersion: 0.11.0
+  configChecksum: 223a0b6ece966be1af0a363f8d8c77df
   repoURL: https://github.com/BoltApp/Bolt-Typescript-SDK.git
   repoSubDirectory: .
   installationURL: https://github.com/BoltApp/Bolt-Typescript-SDK
   published: true
 features:
   typescript:
-    core: 3.5.1
+    core: 3.6.1
     flattening: 2.81.1
-    globalSecurity: 2.82.2
+    globalSecurity: 2.82.3
     globalServerURLs: 2.82.3
     groups: 2.81.2
     ignores: 2.81.1
@@ -44,11 +44,13 @@ generatedFiles:
   - src/lib/event-streams.ts
   - src/lib/http.ts
   - src/lib/retries.ts
+  - src/lib/schemas.ts
   - src/lib/sdks.ts
   - src/lib/security.ts
   - src/lib/url.ts
   - src/sdk/index.ts
   - src/models/errors/sdkerror.ts
+  - src/models/errors/sdkvalidationerror.ts
   - src/types/blobs.ts
   - src/types/decimal.ts
   - src/types/index.ts

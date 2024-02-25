@@ -6,6 +6,7 @@ import { SDKHooks } from "../hooks";
 import { SDK_METADATA, SDKOptions, serverURLFromOptions } from "../lib/config";
 import * as enc$ from "../lib/encodings";
 import { HTTPClient } from "../lib/http";
+import * as schemas$ from "../lib/schemas";
 import { ClientSDK, RequestOptions } from "../lib/sdks";
 import * as components from "../models/components";
 import * as errors from "../models/errors";
@@ -55,7 +56,11 @@ export class Account extends ClientSDK {
         headers$.set("user-agent", SDK_METADATA.userAgent);
         headers$.set("Accept", "application/json");
 
-        const payload$ = operations.AccountGetRequest$.outboundSchema.parse(input$);
+        const payload$ = schemas$.parse(
+            input$,
+            (value$) => operations.AccountGetRequest$.outboundSchema.parse(value$),
+            "Input validation failed"
+        );
         const body$ = null;
 
         const path$ = this.templateURLComponent("/account")();
@@ -78,9 +83,8 @@ export class Account extends ClientSDK {
 
         const context = { operationID: "accountGet" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
-        const request = await this.createRequest$(
+        const request = this.createRequest$(
             {
-                context,
                 security: securitySettings$,
                 method: "GET",
                 path: path$,
@@ -101,17 +105,29 @@ export class Account extends ClientSDK {
 
         if (this.matchResponse(response, 200, "application/json")) {
             const responseBody = await response.json();
-            const result = operations.AccountGetResponse$.inboundSchema.parse({
-                ...responseFields$,
-                account: responseBody,
-            });
+            const result = schemas$.parse(
+                responseBody,
+                (val$) => {
+                    return operations.AccountGetResponse$.inboundSchema.parse({
+                        ...responseFields$,
+                        account: val$,
+                    });
+                },
+                "Response validation failed"
+            );
             return result;
         } else if (this.matchResponse(response, "4XX", "application/json")) {
             const responseBody = await response.json();
-            const result = errors.AccountGetResponseBody$.inboundSchema.parse({
-                ...responseFields$,
-                ...responseBody,
-            });
+            const result = schemas$.parse(
+                responseBody,
+                (val$) => {
+                    return errors.AccountGetResponseBody$.inboundSchema.parse({
+                        ...responseFields$,
+                        ...val$,
+                    });
+                },
+                "Response validation failed"
+            );
             throw result;
         } else if (this.matchStatusCode(response, "default")) {
             // fallthrough
@@ -120,7 +136,11 @@ export class Account extends ClientSDK {
             throw new errors.SDKError("Unexpected API response", response, responseBody);
         }
 
-        return operations.AccountGetResponse$.inboundSchema.parse(responseFields$);
+        return schemas$.parse(
+            undefined,
+            () => operations.AccountGetResponse$.inboundSchema.parse(responseFields$),
+            "Response validation failed"
+        );
     }
 
     /**
@@ -143,7 +163,11 @@ export class Account extends ClientSDK {
         headers$.set("Content-Type", "application/json");
         headers$.set("Accept", "application/json");
 
-        const payload$ = operations.AccountAddressCreateRequest$.outboundSchema.parse(input$);
+        const payload$ = schemas$.parse(
+            input$,
+            (value$) => operations.AccountAddressCreateRequest$.outboundSchema.parse(value$),
+            "Input validation failed"
+        );
         const body$ = enc$.encodeJSON("body", payload$["address-listing"], { explode: true });
 
         const path$ = this.templateURLComponent("/account/addresses")();
@@ -166,9 +190,8 @@ export class Account extends ClientSDK {
 
         const context = { operationID: "accountAddressCreate" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
-        const request = await this.createRequest$(
+        const request = this.createRequest$(
             {
-                context,
                 security: securitySettings$,
                 method: "POST",
                 path: path$,
@@ -189,17 +212,29 @@ export class Account extends ClientSDK {
 
         if (this.matchResponse(response, 200, "application/json")) {
             const responseBody = await response.json();
-            const result = operations.AccountAddressCreateResponse$.inboundSchema.parse({
-                ...responseFields$,
-                "address-listing": responseBody,
-            });
+            const result = schemas$.parse(
+                responseBody,
+                (val$) => {
+                    return operations.AccountAddressCreateResponse$.inboundSchema.parse({
+                        ...responseFields$,
+                        "address-listing": val$,
+                    });
+                },
+                "Response validation failed"
+            );
             return result;
         } else if (this.matchResponse(response, "4XX", "application/json")) {
             const responseBody = await response.json();
-            const result = errors.AccountAddressCreateResponseBody$.inboundSchema.parse({
-                ...responseFields$,
-                ...responseBody,
-            });
+            const result = schemas$.parse(
+                responseBody,
+                (val$) => {
+                    return errors.AccountAddressCreateResponseBody$.inboundSchema.parse({
+                        ...responseFields$,
+                        ...val$,
+                    });
+                },
+                "Response validation failed"
+            );
             throw result;
         } else if (this.matchStatusCode(response, "default")) {
             // fallthrough
@@ -208,7 +243,11 @@ export class Account extends ClientSDK {
             throw new errors.SDKError("Unexpected API response", response, responseBody);
         }
 
-        return operations.AccountAddressCreateResponse$.inboundSchema.parse(responseFields$);
+        return schemas$.parse(
+            undefined,
+            () => operations.AccountAddressCreateResponse$.inboundSchema.parse(responseFields$),
+            "Response validation failed"
+        );
     }
 
     /**
@@ -236,7 +275,11 @@ export class Account extends ClientSDK {
         headers$.set("Content-Type", "application/json");
         headers$.set("Accept", "application/json");
 
-        const payload$ = operations.AccountAddressEditRequest$.outboundSchema.parse(input$);
+        const payload$ = schemas$.parse(
+            input$,
+            (value$) => operations.AccountAddressEditRequest$.outboundSchema.parse(value$),
+            "Input validation failed"
+        );
         const body$ = enc$.encodeJSON("body", payload$["address-listing"], { explode: true });
 
         const pathParams$ = {
@@ -262,9 +305,8 @@ export class Account extends ClientSDK {
 
         const context = { operationID: "accountAddressEdit" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
-        const request = await this.createRequest$(
+        const request = this.createRequest$(
             {
-                context,
                 security: securitySettings$,
                 method: "PUT",
                 path: path$,
@@ -285,17 +327,29 @@ export class Account extends ClientSDK {
 
         if (this.matchResponse(response, 200, "application/json")) {
             const responseBody = await response.json();
-            const result = operations.AccountAddressEditResponse$.inboundSchema.parse({
-                ...responseFields$,
-                "address-listing": responseBody,
-            });
+            const result = schemas$.parse(
+                responseBody,
+                (val$) => {
+                    return operations.AccountAddressEditResponse$.inboundSchema.parse({
+                        ...responseFields$,
+                        "address-listing": val$,
+                    });
+                },
+                "Response validation failed"
+            );
             return result;
         } else if (this.matchResponse(response, "4XX", "application/json")) {
             const responseBody = await response.json();
-            const result = errors.AccountAddressEditResponseBody$.inboundSchema.parse({
-                ...responseFields$,
-                ...responseBody,
-            });
+            const result = schemas$.parse(
+                responseBody,
+                (val$) => {
+                    return errors.AccountAddressEditResponseBody$.inboundSchema.parse({
+                        ...responseFields$,
+                        ...val$,
+                    });
+                },
+                "Response validation failed"
+            );
             throw result;
         } else if (this.matchStatusCode(response, "default")) {
             // fallthrough
@@ -304,7 +358,11 @@ export class Account extends ClientSDK {
             throw new errors.SDKError("Unexpected API response", response, responseBody);
         }
 
-        return operations.AccountAddressEditResponse$.inboundSchema.parse(responseFields$);
+        return schemas$.parse(
+            undefined,
+            () => operations.AccountAddressEditResponse$.inboundSchema.parse(responseFields$),
+            "Response validation failed"
+        );
     }
 
     /**
@@ -328,7 +386,11 @@ export class Account extends ClientSDK {
         headers$.set("user-agent", SDK_METADATA.userAgent);
         headers$.set("Accept", "application/json");
 
-        const payload$ = operations.AccountAddressDeleteRequest$.outboundSchema.parse(input$);
+        const payload$ = schemas$.parse(
+            input$,
+            (value$) => operations.AccountAddressDeleteRequest$.outboundSchema.parse(value$),
+            "Input validation failed"
+        );
         const body$ = null;
 
         const pathParams$ = {
@@ -354,9 +416,8 @@ export class Account extends ClientSDK {
 
         const context = { operationID: "accountAddressDelete" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
-        const request = await this.createRequest$(
+        const request = this.createRequest$(
             {
-                context,
                 security: securitySettings$,
                 method: "DELETE",
                 path: path$,
@@ -377,10 +438,16 @@ export class Account extends ClientSDK {
 
         if (this.matchResponse(response, "4XX", "application/json")) {
             const responseBody = await response.json();
-            const result = errors.AccountAddressDeleteResponseBody$.inboundSchema.parse({
-                ...responseFields$,
-                ...responseBody,
-            });
+            const result = schemas$.parse(
+                responseBody,
+                (val$) => {
+                    return errors.AccountAddressDeleteResponseBody$.inboundSchema.parse({
+                        ...responseFields$,
+                        ...val$,
+                    });
+                },
+                "Response validation failed"
+            );
             throw result;
         } else if (this.matchStatusCode(response, [200, "default"])) {
             // fallthrough
@@ -389,7 +456,11 @@ export class Account extends ClientSDK {
             throw new errors.SDKError("Unexpected API response", response, responseBody);
         }
 
-        return operations.AccountAddressDeleteResponse$.inboundSchema.parse(responseFields$);
+        return schemas$.parse(
+            undefined,
+            () => operations.AccountAddressDeleteResponse$.inboundSchema.parse(responseFields$),
+            "Response validation failed"
+        );
     }
 
     /**
@@ -416,7 +487,11 @@ export class Account extends ClientSDK {
         headers$.set("Content-Type", "application/json");
         headers$.set("Accept", "application/json");
 
-        const payload$ = operations.AccountAddPaymentMethodRequest$.outboundSchema.parse(input$);
+        const payload$ = schemas$.parse(
+            input$,
+            (value$) => operations.AccountAddPaymentMethodRequest$.outboundSchema.parse(value$),
+            "Input validation failed"
+        );
         const body$ = enc$.encodeJSON("body", payload$["payment-method"], { explode: true });
 
         const path$ = this.templateURLComponent("/account/payment-methods")();
@@ -439,9 +514,8 @@ export class Account extends ClientSDK {
 
         const context = { operationID: "accountAddPaymentMethod" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
-        const request = await this.createRequest$(
+        const request = this.createRequest$(
             {
-                context,
                 security: securitySettings$,
                 method: "POST",
                 path: path$,
@@ -462,17 +536,29 @@ export class Account extends ClientSDK {
 
         if (this.matchResponse(response, 200, "application/json")) {
             const responseBody = await response.json();
-            const result = operations.AccountAddPaymentMethodResponse$.inboundSchema.parse({
-                ...responseFields$,
-                "payment-method": responseBody,
-            });
+            const result = schemas$.parse(
+                responseBody,
+                (val$) => {
+                    return operations.AccountAddPaymentMethodResponse$.inboundSchema.parse({
+                        ...responseFields$,
+                        "payment-method": val$,
+                    });
+                },
+                "Response validation failed"
+            );
             return result;
         } else if (this.matchResponse(response, "4XX", "application/json")) {
             const responseBody = await response.json();
-            const result = errors.AccountAddPaymentMethodResponseBody$.inboundSchema.parse({
-                ...responseFields$,
-                ...responseBody,
-            });
+            const result = schemas$.parse(
+                responseBody,
+                (val$) => {
+                    return errors.AccountAddPaymentMethodResponseBody$.inboundSchema.parse({
+                        ...responseFields$,
+                        ...val$,
+                    });
+                },
+                "Response validation failed"
+            );
             throw result;
         } else if (this.matchStatusCode(response, "default")) {
             // fallthrough
@@ -481,7 +567,11 @@ export class Account extends ClientSDK {
             throw new errors.SDKError("Unexpected API response", response, responseBody);
         }
 
-        return operations.AccountAddPaymentMethodResponse$.inboundSchema.parse(responseFields$);
+        return schemas$.parse(
+            undefined,
+            () => operations.AccountAddPaymentMethodResponse$.inboundSchema.parse(responseFields$),
+            "Response validation failed"
+        );
     }
 
     /**
@@ -505,7 +595,11 @@ export class Account extends ClientSDK {
         headers$.set("user-agent", SDK_METADATA.userAgent);
         headers$.set("Accept", "application/json");
 
-        const payload$ = operations.AccountPaymentMethodDeleteRequest$.outboundSchema.parse(input$);
+        const payload$ = schemas$.parse(
+            input$,
+            (value$) => operations.AccountPaymentMethodDeleteRequest$.outboundSchema.parse(value$),
+            "Input validation failed"
+        );
         const body$ = null;
 
         const pathParams$ = {
@@ -531,9 +625,8 @@ export class Account extends ClientSDK {
 
         const context = { operationID: "accountPaymentMethodDelete" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
-        const request = await this.createRequest$(
+        const request = this.createRequest$(
             {
-                context,
                 security: securitySettings$,
                 method: "DELETE",
                 path: path$,
@@ -554,10 +647,16 @@ export class Account extends ClientSDK {
 
         if (this.matchResponse(response, "4XX", "application/json")) {
             const responseBody = await response.json();
-            const result = errors.AccountPaymentMethodDeleteResponseBody$.inboundSchema.parse({
-                ...responseFields$,
-                ...responseBody,
-            });
+            const result = schemas$.parse(
+                responseBody,
+                (val$) => {
+                    return errors.AccountPaymentMethodDeleteResponseBody$.inboundSchema.parse({
+                        ...responseFields$,
+                        ...val$,
+                    });
+                },
+                "Response validation failed"
+            );
             throw result;
         } else if (this.matchStatusCode(response, [200, "default"])) {
             // fallthrough
@@ -566,6 +665,11 @@ export class Account extends ClientSDK {
             throw new errors.SDKError("Unexpected API response", response, responseBody);
         }
 
-        return operations.AccountPaymentMethodDeleteResponse$.inboundSchema.parse(responseFields$);
+        return schemas$.parse(
+            undefined,
+            () =>
+                operations.AccountPaymentMethodDeleteResponse$.inboundSchema.parse(responseFields$),
+            "Response validation failed"
+        );
     }
 }
