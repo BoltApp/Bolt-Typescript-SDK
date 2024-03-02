@@ -37,6 +37,37 @@ export type OrdersCreateResponse = {
 };
 
 /** @internal */
+export namespace OrdersCreateSecurity$ {
+    export type Inbound = {
+        "api-key": string;
+    };
+
+    export const inboundSchema: z.ZodType<OrdersCreateSecurity, z.ZodTypeDef, Inbound> = z
+        .object({
+            "api-key": z.string(),
+        })
+        .transform((v) => {
+            return {
+                apiKey: v["api-key"],
+            };
+        });
+
+    export type Outbound = {
+        "api-key": string;
+    };
+
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, OrdersCreateSecurity> = z
+        .object({
+            apiKey: z.string(),
+        })
+        .transform((v) => {
+            return {
+                "api-key": v.apiKey,
+            };
+        });
+}
+
+/** @internal */
 export namespace OrdersCreateRequest$ {
     export type Inbound = {
         "X-Publishable-Key": string;

@@ -37,6 +37,37 @@ export type TestingAccountCreateResponse = {
 };
 
 /** @internal */
+export namespace TestingAccountCreateSecurity$ {
+    export type Inbound = {
+        "api-key": string;
+    };
+
+    export const inboundSchema: z.ZodType<TestingAccountCreateSecurity, z.ZodTypeDef, Inbound> = z
+        .object({
+            "api-key": z.string(),
+        })
+        .transform((v) => {
+            return {
+                apiKey: v["api-key"],
+            };
+        });
+
+    export type Outbound = {
+        "api-key": string;
+    };
+
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, TestingAccountCreateSecurity> = z
+        .object({
+            apiKey: z.string(),
+        })
+        .transform((v) => {
+            return {
+                "api-key": v.apiKey,
+            };
+        });
+}
+
+/** @internal */
 export namespace TestingAccountCreateRequest$ {
     export type Inbound = {
         "X-Publishable-Key": string;

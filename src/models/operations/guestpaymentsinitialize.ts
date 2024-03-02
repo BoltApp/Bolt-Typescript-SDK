@@ -37,6 +37,42 @@ export type GuestPaymentsInitializeResponse = {
 };
 
 /** @internal */
+export namespace GuestPaymentsInitializeSecurity$ {
+    export type Inbound = {
+        "api-key": string;
+    };
+
+    export const inboundSchema: z.ZodType<GuestPaymentsInitializeSecurity, z.ZodTypeDef, Inbound> =
+        z
+            .object({
+                "api-key": z.string(),
+            })
+            .transform((v) => {
+                return {
+                    apiKey: v["api-key"],
+                };
+            });
+
+    export type Outbound = {
+        "api-key": string;
+    };
+
+    export const outboundSchema: z.ZodType<
+        Outbound,
+        z.ZodTypeDef,
+        GuestPaymentsInitializeSecurity
+    > = z
+        .object({
+            apiKey: z.string(),
+        })
+        .transform((v) => {
+            return {
+                "api-key": v.apiKey,
+            };
+        });
+}
+
+/** @internal */
 export namespace GuestPaymentsInitializeRequest$ {
     export type Inbound = {
         "X-Publishable-Key": string;

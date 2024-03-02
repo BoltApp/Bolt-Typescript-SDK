@@ -86,9 +86,14 @@ export class LoggedIn extends ClientSDK {
             typeof this.options$.security === "function"
                 ? await this.options$.security()
                 : this.options$.security;
+
+        const context = {
+            operationID: "paymentsInitialize",
+            oAuth2Scopes: [],
+            securitySource: this.options$.security,
+        };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const context = { operationID: "paymentsInitialize" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request = this.createRequest$(
             {
@@ -201,9 +206,14 @@ export class LoggedIn extends ClientSDK {
             typeof this.options$.security === "function"
                 ? await this.options$.security()
                 : this.options$.security;
+
+        const context = {
+            operationID: "paymentsUpdate",
+            oAuth2Scopes: [],
+            securitySource: this.options$.security,
+        };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const context = { operationID: "paymentsUpdate" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request = this.createRequest$(
             {
@@ -316,9 +326,14 @@ export class LoggedIn extends ClientSDK {
             typeof this.options$.security === "function"
                 ? await this.options$.security()
                 : this.options$.security;
+
+        const context = {
+            operationID: "paymentsAction",
+            oAuth2Scopes: [],
+            securitySource: this.options$.security,
+        };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const context = { operationID: "paymentsAction" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request = this.createRequest$(
             {

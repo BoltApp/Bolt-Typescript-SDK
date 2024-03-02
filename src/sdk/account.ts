@@ -79,9 +79,14 @@ export class Account extends ClientSDK {
             typeof this.options$.security === "function"
                 ? await this.options$.security()
                 : this.options$.security;
+
+        const context = {
+            operationID: "accountGet",
+            oAuth2Scopes: [],
+            securitySource: this.options$.security,
+        };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const context = { operationID: "accountGet" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request = this.createRequest$(
             {
@@ -186,9 +191,14 @@ export class Account extends ClientSDK {
             typeof this.options$.security === "function"
                 ? await this.options$.security()
                 : this.options$.security;
+
+        const context = {
+            operationID: "accountAddressCreate",
+            oAuth2Scopes: [],
+            securitySource: this.options$.security,
+        };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const context = { operationID: "accountAddressCreate" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request = this.createRequest$(
             {
@@ -301,9 +311,14 @@ export class Account extends ClientSDK {
             typeof this.options$.security === "function"
                 ? await this.options$.security()
                 : this.options$.security;
+
+        const context = {
+            operationID: "accountAddressEdit",
+            oAuth2Scopes: [],
+            securitySource: this.options$.security,
+        };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const context = { operationID: "accountAddressEdit" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request = this.createRequest$(
             {
@@ -412,9 +427,14 @@ export class Account extends ClientSDK {
             typeof this.options$.security === "function"
                 ? await this.options$.security()
                 : this.options$.security;
+
+        const context = {
+            operationID: "accountAddressDelete",
+            oAuth2Scopes: [],
+            securitySource: this.options$.security,
+        };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const context = { operationID: "accountAddressDelete" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request = this.createRequest$(
             {
@@ -510,9 +530,14 @@ export class Account extends ClientSDK {
             typeof this.options$.security === "function"
                 ? await this.options$.security()
                 : this.options$.security;
+
+        const context = {
+            operationID: "accountAddPaymentMethod",
+            oAuth2Scopes: [],
+            securitySource: this.options$.security,
+        };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const context = { operationID: "accountAddPaymentMethod" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request = this.createRequest$(
             {
@@ -621,9 +646,14 @@ export class Account extends ClientSDK {
             typeof this.options$.security === "function"
                 ? await this.options$.security()
                 : this.options$.security;
+
+        const context = {
+            operationID: "accountPaymentMethodDelete",
+            oAuth2Scopes: [],
+            securitySource: this.options$.security,
+        };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const context = { operationID: "accountPaymentMethodDelete" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request = this.createRequest$(
             {

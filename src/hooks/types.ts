@@ -3,12 +3,11 @@
  */
 
 import { HTTPClient } from "../lib/http";
-import * as components from "../models/components";
 
 export type HookContext = {
     operationID: string;
     oAuth2Scopes?: string[];
-    security?: components.Security | (() => Promise<components.Security>);
+    securitySource?: any | (() => Promise<any>);
 };
 
 export type Awaitable<T> = T | Promise<T>;

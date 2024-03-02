@@ -8,6 +8,7 @@ import * as enc$ from "../lib/encodings";
 import { HTTPClient } from "../lib/http";
 import * as schemas$ from "../lib/schemas";
 import { ClientSDK, RequestOptions } from "../lib/sdks";
+import { SecurityInput } from "../lib/security";
 import * as components from "../models/components";
 import * as errors from "../models/errors";
 import * as operations from "../models/operations";
@@ -81,12 +82,16 @@ export class Testing extends ClientSDK {
                 charEncoding: "none",
             })
         );
+        const security$: SecurityInput[][] = [
+            [{ value: security?.apiKey, fieldName: "X-API-Key", type: "apiKey:header" }],
+        ];
+        const securitySettings$ = this.resolveSecurity(...security$);
+        const context = {
+            operationID: "testingAccountCreate",
+            oAuth2Scopes: [],
+            securitySource: security$,
+        };
 
-        const securitySettings$ = this.resolveSecurity([
-            { value: security?.apiKey, fieldName: "X-API-Key", type: "apiKey:header" },
-        ]);
-
-        const context = { operationID: "testingAccountCreate" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request = this.createRequest$(
             {
@@ -176,11 +181,16 @@ export class Testing extends ClientSDK {
 
         const query$ = "";
 
-        const securitySettings$ = this.resolveSecurity([
-            { value: security?.apiKey, fieldName: "X-API-Key", type: "apiKey:header" },
-        ]);
+        const security$: SecurityInput[][] = [
+            [{ value: security?.apiKey, fieldName: "X-API-Key", type: "apiKey:header" }],
+        ];
+        const securitySettings$ = this.resolveSecurity(...security$);
+        const context = {
+            operationID: "testingCreditCardGet",
+            oAuth2Scopes: [],
+            securitySource: security$,
+        };
 
-        const context = { operationID: "testingCreditCardGet" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request = this.createRequest$(
             {

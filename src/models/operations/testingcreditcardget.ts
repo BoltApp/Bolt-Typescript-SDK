@@ -44,6 +44,37 @@ export type TestingCreditCardGetResponse = {
 };
 
 /** @internal */
+export namespace TestingCreditCardGetSecurity$ {
+    export type Inbound = {
+        "api-key": string;
+    };
+
+    export const inboundSchema: z.ZodType<TestingCreditCardGetSecurity, z.ZodTypeDef, Inbound> = z
+        .object({
+            "api-key": z.string(),
+        })
+        .transform((v) => {
+            return {
+                apiKey: v["api-key"],
+            };
+        });
+
+    export type Outbound = {
+        "api-key": string;
+    };
+
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, TestingCreditCardGetSecurity> = z
+        .object({
+            apiKey: z.string(),
+        })
+        .transform((v) => {
+            return {
+                "api-key": v.apiKey,
+            };
+        });
+}
+
+/** @internal */
 export const Type$ = z.nativeEnum(Type);
 
 /** @internal */

@@ -8,6 +8,7 @@ import * as enc$ from "../lib/encodings";
 import { HTTPClient } from "../lib/http";
 import * as schemas$ from "../lib/schemas";
 import { ClientSDK, RequestOptions } from "../lib/sdks";
+import { SecurityInput } from "../lib/security";
 import * as components from "../models/components";
 import * as errors from "../models/errors";
 import * as operations from "../models/operations";
@@ -82,12 +83,16 @@ export class Guest extends ClientSDK {
                 charEncoding: "none",
             })
         );
+        const security$: SecurityInput[][] = [
+            [{ value: security?.apiKey, fieldName: "X-API-Key", type: "apiKey:header" }],
+        ];
+        const securitySettings$ = this.resolveSecurity(...security$);
+        const context = {
+            operationID: "guestPaymentsInitialize",
+            oAuth2Scopes: [],
+            securitySource: security$,
+        };
 
-        const securitySettings$ = this.resolveSecurity([
-            { value: security?.apiKey, fieldName: "X-API-Key", type: "apiKey:header" },
-        ]);
-
-        const context = { operationID: "guestPaymentsInitialize" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request = this.createRequest$(
             {
@@ -196,12 +201,16 @@ export class Guest extends ClientSDK {
                 charEncoding: "none",
             })
         );
+        const security$: SecurityInput[][] = [
+            [{ value: security?.apiKey, fieldName: "X-API-Key", type: "apiKey:header" }],
+        ];
+        const securitySettings$ = this.resolveSecurity(...security$);
+        const context = {
+            operationID: "guestPaymentsUpdate",
+            oAuth2Scopes: [],
+            securitySource: security$,
+        };
 
-        const securitySettings$ = this.resolveSecurity([
-            { value: security?.apiKey, fieldName: "X-API-Key", type: "apiKey:header" },
-        ]);
-
-        const context = { operationID: "guestPaymentsUpdate" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request = this.createRequest$(
             {
@@ -310,12 +319,16 @@ export class Guest extends ClientSDK {
                 charEncoding: "none",
             })
         );
+        const security$: SecurityInput[][] = [
+            [{ value: security?.apiKey, fieldName: "X-API-Key", type: "apiKey:header" }],
+        ];
+        const securitySettings$ = this.resolveSecurity(...security$);
+        const context = {
+            operationID: "guestPaymentsAction",
+            oAuth2Scopes: [],
+            securitySource: security$,
+        };
 
-        const securitySettings$ = this.resolveSecurity([
-            { value: security?.apiKey, fieldName: "X-API-Key", type: "apiKey:header" },
-        ]);
-
-        const context = { operationID: "guestPaymentsAction" };
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request = this.createRequest$(
             {

@@ -41,6 +41,37 @@ export type GuestPaymentsUpdateResponse = {
 };
 
 /** @internal */
+export namespace GuestPaymentsUpdateSecurity$ {
+    export type Inbound = {
+        "api-key": string;
+    };
+
+    export const inboundSchema: z.ZodType<GuestPaymentsUpdateSecurity, z.ZodTypeDef, Inbound> = z
+        .object({
+            "api-key": z.string(),
+        })
+        .transform((v) => {
+            return {
+                apiKey: v["api-key"],
+            };
+        });
+
+    export type Outbound = {
+        "api-key": string;
+    };
+
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, GuestPaymentsUpdateSecurity> = z
+        .object({
+            apiKey: z.string(),
+        })
+        .transform((v) => {
+            return {
+                "api-key": v.apiKey,
+            };
+        });
+}
+
+/** @internal */
 export namespace GuestPaymentsUpdateRequest$ {
     export type Inbound = {
         id: string;

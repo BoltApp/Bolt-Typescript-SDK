@@ -69,7 +69,8 @@ export class OAuth extends ClientSDK {
 
         const query$ = "";
 
-        const context = { operationID: "oauthGetToken" };
+        const context = { operationID: "oauthGetToken", oAuth2Scopes: [], securitySource: null };
+
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request = this.createRequest$(
             { method: "POST", path: path$, headers: headers$, query: query$, body: body$ },
