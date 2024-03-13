@@ -51,9 +51,12 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
         },
     ];
     let params: Record<string, string> = {};
-    const serverIdx = options.serverIdx ?? 0;
 
     if (!serverURL) {
+        const serverIdx = options.serverIdx ?? 0;
+        if (serverIdx < 0 || serverIdx >= ServerList.length) {
+            throw new Error(`Invalid server index ${serverIdx}`);
+        }
         serverURL = ServerList[serverIdx] || "";
         params = serverParams[serverIdx] || {};
     }
@@ -65,7 +68,7 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
 export const SDK_METADATA = Object.freeze({
     language: "typescript",
     openapiDocVersion: "3.0.2",
-    sdkVersion: "0.11.1",
-    genVersion: "2.277.0",
-    userAgent: "speakeasy-sdk/typescript 0.11.1 2.277.0 3.0.2 @boltpay/bolt-typescript-sdk",
+    sdkVersion: "0.12.0",
+    genVersion: "2.280.6",
+    userAgent: "speakeasy-sdk/typescript 0.12.0 2.280.6 3.0.2 @boltpay/bolt-typescript-sdk",
 });

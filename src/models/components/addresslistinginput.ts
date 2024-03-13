@@ -3,7 +3,7 @@
  */
 
 import { CountryCode, CountryCode$ } from "./countrycode";
-import { z } from "zod";
+import * as z from "zod";
 
 /**
  * An address saved on an account, i.e. a physical address plus any additional account-specific metadata.

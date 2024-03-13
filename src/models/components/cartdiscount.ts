@@ -3,7 +3,7 @@
  */
 
 import { Amount, Amount$ } from "./amount";
-import { z } from "zod";
+import * as z from "zod";
 
 export type CartDiscount = {
     /**

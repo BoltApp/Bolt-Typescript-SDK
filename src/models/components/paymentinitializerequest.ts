@@ -4,7 +4,7 @@
 
 import { Cart, Cart$ } from "./cart";
 import { PaymentMethodExtended, PaymentMethodExtended$ } from "./paymentmethodextended";
-import { z } from "zod";
+import * as z from "zod";
 
 export type PaymentInitializeRequest = {
     cart: Cart;

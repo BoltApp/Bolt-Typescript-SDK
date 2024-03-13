@@ -5,7 +5,7 @@
 import { Cart, Cart$ } from "./cart";
 import { PaymentMethodInput, PaymentMethodInput$ } from "./paymentmethodinput";
 import { ProfileCreationData, ProfileCreationData$ } from "./profilecreationdata";
-import { z } from "zod";
+import * as z from "zod";
 
 export type GuestPaymentInitializeRequest = {
     profile: ProfileCreationData;

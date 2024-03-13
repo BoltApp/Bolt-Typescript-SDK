@@ -37,7 +37,7 @@ import {
     PaymentMethodPaypalOutput$,
     PaymentMethodPaypalTag,
 } from "./paymentmethodpaypaloutput";
-import { z } from "zod";
+import * as z from "zod";
 
 export type PaymentMethod =
     | (PaymentMethodPaypalOutput & { dotTag: PaymentMethodPaypalTag.Paypal })
@@ -75,7 +75,6 @@ export namespace PaymentMethod$ {
               ".tag": PaymentMethodKlarnaPaynowTag.KlarnaPaynow;
           })
         | (PaymentMethodCreditCard$.Outbound & { ".tag": DotTag.CreditCard });
-
     export const inboundSchema: z.ZodType<PaymentMethod, z.ZodTypeDef, Inbound> = z.union([
         PaymentMethodPaypalOutput$.inboundSchema.and(
             z
@@ -113,7 +112,6 @@ export namespace PaymentMethod$ {
                 .transform((v) => ({ dotTag: v[".tag"] }))
         ),
     ]);
-
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentMethod> = z.union([
         PaymentMethodPaypalOutput$.outboundSchema.and(
             z

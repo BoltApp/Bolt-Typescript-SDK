@@ -12,7 +12,7 @@ import {
     PaymentResponsePending$,
     PaymentResponsePendingTag,
 } from "./paymentresponsepending";
-import { z } from "zod";
+import * as z from "zod";
 
 export type PaymentResponse =
     | (PaymentResponseFinalized & { dotTag: PaymentResponseFinalizedTag.Finalized })
@@ -27,7 +27,6 @@ export namespace PaymentResponse$ {
     export type Outbound =
         | (PaymentResponseFinalized$.Outbound & { ".tag": PaymentResponseFinalizedTag.Finalized })
         | (PaymentResponsePending$.Outbound & { ".tag": PaymentResponsePendingTag.Pending });
-
     export const inboundSchema: z.ZodType<PaymentResponse, z.ZodTypeDef, Inbound> = z.union([
         PaymentResponseFinalized$.inboundSchema.and(
             z
@@ -40,7 +39,6 @@ export namespace PaymentResponse$ {
                 .transform((v) => ({ dotTag: v[".tag"] }))
         ),
     ]);
-
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentResponse> = z.union([
         PaymentResponseFinalized$.outboundSchema.and(
             z

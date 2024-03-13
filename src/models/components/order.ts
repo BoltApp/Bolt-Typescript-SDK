@@ -4,7 +4,7 @@
 
 import { Cart, Cart$ } from "./cart";
 import { Profile, Profile$ } from "./profile";
-import { z } from "zod";
+import * as z from "zod";
 
 export type Order = {
     profile: Profile;

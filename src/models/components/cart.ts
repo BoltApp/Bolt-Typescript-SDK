@@ -6,7 +6,7 @@ import { Amount, Amount$ } from "./amount";
 import { CartDiscount, CartDiscount$ } from "./cartdiscount";
 import { CartItem, CartItem$ } from "./cartitem";
 import { CartShipment, CartShipment$ } from "./cartshipment";
-import { z } from "zod";
+import * as z from "zod";
 
 export type Cart = {
     /**

@@ -4,7 +4,7 @@
 
 import { AddressReferenceInput, AddressReferenceInput$ } from "./addressreferenceinput";
 import { Amount, Amount$ } from "./amount";
-import { z } from "zod";
+import * as z from "zod";
 
 export type CartShipment = {
     address?: AddressReferenceInput | undefined;

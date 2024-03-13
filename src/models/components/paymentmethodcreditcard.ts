@@ -5,7 +5,7 @@
 import { AddressReference, AddressReference$ } from "./addressreference";
 import { AddressReferenceInput, AddressReferenceInput$ } from "./addressreferenceinput";
 import { CreditCardNetwork, CreditCardNetwork$ } from "./creditcardnetwork";
-import { z } from "zod";
+import * as z from "zod";
 
 export enum DotTag {
     CreditCard = "credit_card",

@@ -4,7 +4,7 @@
 
 import { AuthorizationCodeRequest, AuthorizationCodeRequest$ } from "./authorizationcoderequest";
 import { RefreshTokenRequest, RefreshTokenRequest$ } from "./refreshtokenrequest";
-import { z } from "zod";
+import * as z from "zod";
 
 export type TokenRequest = AuthorizationCodeRequest | RefreshTokenRequest;
 
@@ -13,12 +13,10 @@ export namespace TokenRequest$ {
     export type Inbound = AuthorizationCodeRequest$.Inbound | RefreshTokenRequest$.Inbound;
 
     export type Outbound = AuthorizationCodeRequest$.Outbound | RefreshTokenRequest$.Outbound;
-
     export const inboundSchema: z.ZodType<TokenRequest, z.ZodTypeDef, Inbound> = z.union([
         AuthorizationCodeRequest$.inboundSchema,
         RefreshTokenRequest$.inboundSchema,
     ]);
-
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, TokenRequest> = z.union([
         AuthorizationCodeRequest$.outboundSchema,
         RefreshTokenRequest$.outboundSchema,

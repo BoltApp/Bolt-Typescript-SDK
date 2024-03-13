@@ -5,7 +5,7 @@
 import { AddressListing, AddressListing$ } from "./addresslisting";
 import { PaymentMethod, PaymentMethod$ } from "./paymentmethod";
 import { Profile, Profile$ } from "./profile";
-import { z } from "zod";
+import * as z from "zod";
 
 export type Account = {
     /**

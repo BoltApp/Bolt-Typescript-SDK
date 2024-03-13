@@ -3,7 +3,7 @@
  */
 
 import { CountryCode, CountryCode$ } from "./countrycode";
-import { z } from "zod";
+import * as z from "zod";
 
 /**
  * The type of address reference

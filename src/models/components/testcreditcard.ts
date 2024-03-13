@@ -3,7 +3,7 @@
  */
 
 import { CreditCardNetwork, CreditCardNetwork$ } from "./creditcardnetwork";
-import { z } from "zod";
+import * as z from "zod";
 
 export type TestCreditCard = {
     /**

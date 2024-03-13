@@ -3,7 +3,7 @@
  */
 
 import { Cart, Cart$ } from "./cart";
-import { z } from "zod";
+import * as z from "zod";
 
 export type PaymentUpdateRequest = {
     cart?: Cart | undefined;

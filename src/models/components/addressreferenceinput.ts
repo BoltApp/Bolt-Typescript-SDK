@@ -12,7 +12,7 @@ import {
     AddressReferenceId$,
     AddressReferenceIdTag,
 } from "./addressreferenceid";
-import { z } from "zod";
+import * as z from "zod";
 
 export type AddressReferenceInput =
     | (AddressReferenceId & { dotTag: AddressReferenceIdTag.Id })
@@ -31,7 +31,6 @@ export namespace AddressReferenceInput$ {
         | (AddressReferenceExplicitInput$.Outbound & {
               ".tag": AddressReferenceExplicitTag.Explicit;
           });
-
     export const inboundSchema: z.ZodType<AddressReferenceInput, z.ZodTypeDef, Inbound> = z.union([
         AddressReferenceId$.inboundSchema.and(
             z
@@ -44,7 +43,6 @@ export namespace AddressReferenceInput$ {
                 .transform((v) => ({ dotTag: v[".tag"] }))
         ),
     ]);
-
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, AddressReferenceInput> = z.union(
         [
             AddressReferenceId$.outboundSchema.and(
