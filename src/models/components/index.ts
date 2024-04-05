@@ -4,6 +4,7 @@
 
 export * from "./account";
 export * from "./accounttestcreationdataoutput";
+export * from "./accounttestphonedata";
 export * from "./addresslisting";
 export * from "./addresslistinginput";
 export * from "./addressreference";

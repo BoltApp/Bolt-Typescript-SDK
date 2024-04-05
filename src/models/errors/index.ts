@@ -19,4 +19,5 @@ export * from "./paymentsupdate";
 export * from "./sdkerror";
 export * from "./sdkvalidationerror";
 export * from "./testingaccountcreate";
+export * from "./testingaccountphoneget";
 export * from "./testingcreditcardget";

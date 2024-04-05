@@ -10,6 +10,7 @@ flows in non-production environments.
 ### Available Operations
 
 * [createAccount](#createaccount) - Create a test account
+* [testingAccountPhoneGet](#testingaccountphoneget) - Get a random phone number
 * [getCreditCard](#getcreditcard) - Retrieve a test credit card, including its token
 
 ## createAccount
@@ -65,6 +66,51 @@ run();
 | --------------------------------------- | --------------------------------------- | --------------------------------------- |
 | errors.TestingAccountCreateResponseBody | 4XX                                     | application/json                        |
 | errors.SDKError                         | 4xx-5xx                                 | */*                                     |
+
+## testingAccountPhoneGet
+
+Get a random, fictitious phone number that is not assigned to any existing account.
+
+
+### Example Usage
+
+```typescript
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
+
+async function run() {
+  const sdk = new BoltTypescriptSDK();
+
+  const xPublishableKey = "<value>";
+  const operationSecurity = "<YOUR_API_KEY_HERE>";
+  
+  const result = await sdk.testing.testingAccountPhoneGet(operationSecurity, xPublishableKey);
+
+  // Handle the result
+  console.log(result)
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [operations.TestingAccountPhoneGetSecurity](../../models/operations/testingaccountphonegetsecurity.md)                                                                         | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
+| `xPublishableKey`                                                                                                                                                              | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The publicly viewable identifier used to identify a merchant division.                                                                                                         |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+
+
+### Response
+
+**Promise<[operations.TestingAccountPhoneGetResponse](../../models/operations/testingaccountphonegetresponse.md)>**
+### Errors
+
+| Error Object                              | Status Code                               | Content Type                              |
+| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
+| errors.TestingAccountPhoneGetResponseBody | 4XX                                       | application/json                          |
+| errors.SDKError                           | 4xx-5xx                                   | */*                                       |
 
 ## getCreditCard
 

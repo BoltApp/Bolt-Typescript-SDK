@@ -154,6 +154,114 @@ export class Testing extends ClientSDK {
     }
 
     /**
+     * Get a random phone number
+     *
+     * @remarks
+     * Get a random, fictitious phone number that is not assigned to any existing account.
+     *
+     */
+    async testingAccountPhoneGet(
+        security: operations.TestingAccountPhoneGetSecurity,
+        xPublishableKey: string,
+        options?: RequestOptions
+    ): Promise<operations.TestingAccountPhoneGetResponse> {
+        const input$: operations.TestingAccountPhoneGetRequest = {
+            xPublishableKey: xPublishableKey,
+        };
+        const headers$ = new Headers();
+        headers$.set("user-agent", SDK_METADATA.userAgent);
+        headers$.set("Accept", "application/json");
+
+        const payload$ = schemas$.parse(
+            input$,
+            (value$) => operations.TestingAccountPhoneGetRequest$.outboundSchema.parse(value$),
+            "Input validation failed"
+        );
+        const body$ = null;
+
+        const path$ = this.templateURLComponent("/testing/accounts/phones")();
+
+        const query$ = "";
+
+        headers$.set(
+            "X-Publishable-Key",
+            enc$.encodeSimple("X-Publishable-Key", payload$["X-Publishable-Key"], {
+                explode: false,
+                charEncoding: "none",
+            })
+        );
+        const security$: SecurityInput[][] = [
+            [{ value: security?.apiKey, fieldName: "X-API-Key", type: "apiKey:header" }],
+        ];
+        const securitySettings$ = this.resolveSecurity(...security$);
+        const context = {
+            operationID: "testingAccountPhoneGet",
+            oAuth2Scopes: [],
+            securitySource: security$,
+        };
+
+        const doOptions = { context, errorCodes: ["4XX", "5XX"] };
+        const request = this.createRequest$(
+            {
+                security: securitySettings$,
+                method: "GET",
+                path: path$,
+                headers: headers$,
+                query: query$,
+                body: body$,
+            },
+            options
+        );
+
+        const response = await this.do$(request, doOptions);
+
+        const responseFields$ = {
+            ContentType: response.headers.get("content-type") ?? "application/octet-stream",
+            StatusCode: response.status,
+            RawResponse: response,
+        };
+
+        if (this.matchResponse(response, 200, "application/json")) {
+            const responseBody = await response.json();
+            const result = schemas$.parse(
+                responseBody,
+                (val$) => {
+                    return operations.TestingAccountPhoneGetResponse$.inboundSchema.parse({
+                        ...responseFields$,
+                        "account-test-phone-data": val$,
+                    });
+                },
+                "Response validation failed"
+            );
+            return result;
+        } else if (this.matchResponse(response, "4XX", "application/json")) {
+            const responseBody = await response.json();
+            const result = schemas$.parse(
+                responseBody,
+                (val$) => {
+                    return errors.TestingAccountPhoneGetResponseBody$.inboundSchema.parse({
+                        ...responseFields$,
+                        ...val$,
+                    });
+                },
+                "Response validation failed"
+            );
+            throw result;
+        } else if (this.matchStatusCode(response, "default")) {
+            // fallthrough
+        } else {
+            const responseBody = await response.text();
+            throw new errors.SDKError("Unexpected API response", response, responseBody);
+        }
+
+        return schemas$.parse(
+            undefined,
+            () => operations.TestingAccountPhoneGetResponse$.inboundSchema.parse(responseFields$),
+            "Response validation failed"
+        );
+    }
+
+    /**
      * Retrieve a test credit card, including its token
      *
      * @remarks

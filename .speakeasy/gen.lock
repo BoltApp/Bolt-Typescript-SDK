@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 79fa0df9-852a-493c-b998-1d82654b5f18
 management:
-  docChecksum: bc06a11b6267820dda5725a5536b1a6e
-  docVersion: 3.0.2
-  speakeasyVersion: 1.209.2
+  docChecksum: 52a4491de6268327ef41bf826024fc20
+  docVersion: 3.0.3
+  speakeasyVersion: 1.210.0
   generationVersion: 2.281.2
-  releaseVersion: 0.12.1
-  configChecksum: 11cfc4aa7d5b1a563bc00d645c64bb5e
+  releaseVersion: 0.12.2
+  configChecksum: c3476a33bb73d8233d85382659c2795f
   repoURL: https://github.com/BoltApp/Bolt-Typescript-SDK.git
   repoSubDirectory: .
   installationURL: https://github.com/BoltApp/Bolt-Typescript-SDK
@@ -70,6 +70,7 @@ generatedFiles:
   - src/models/operations/oauthgettoken.ts
   - src/models/operations/orderscreate.ts
   - src/models/operations/testingaccountcreate.ts
+  - src/models/operations/testingaccountphoneget.ts
   - src/models/operations/testingcreditcardget.ts
   - src/models/components/account.ts
   - src/models/components/profile.ts
@@ -117,6 +118,7 @@ generatedFiles:
   - src/models/components/orderresponse.ts
   - src/models/components/order.ts
   - src/models/components/accounttestcreationdataoutput.ts
+  - src/models/components/accounttestphonedata.ts
   - src/models/components/testcreditcard.ts
   - src/models/components/security.ts
   - src/models/errors/accountget.ts
@@ -134,6 +136,7 @@ generatedFiles:
   - src/models/errors/oauthgettoken.ts
   - src/models/errors/orderscreate.ts
   - src/models/errors/testingaccountcreate.ts
+  - src/models/errors/testingaccountphoneget.ts
   - src/models/errors/testingcreditcardget.ts
   - src/models/errors/index.ts
   - src/models/operations/index.ts
@@ -172,6 +175,9 @@ generatedFiles:
   - docs/models/operations/testingaccountcreatesecurity.md
   - docs/models/operations/testingaccountcreaterequest.md
   - docs/models/operations/testingaccountcreateresponse.md
+  - docs/models/operations/testingaccountphonegetsecurity.md
+  - docs/models/operations/testingaccountphonegetrequest.md
+  - docs/models/operations/testingaccountphonegetresponse.md
   - docs/models/operations/testingcreditcardgetsecurity.md
   - docs/models/operations/type.md
   - docs/models/operations/testingcreditcardgetrequestbody.md
@@ -258,6 +264,7 @@ generatedFiles:
   - docs/models/components/phonestate.md
   - docs/models/components/accounttestcreationdataoutput.md
   - docs/models/components/accounttestcreationdata.md
+  - docs/models/components/accounttestphonedata.md
   - docs/models/components/testcreditcard.md
   - docs/models/components/security.md
   - docs/models/errors/accountgetresponsebody.md
@@ -275,6 +282,7 @@ generatedFiles:
   - docs/models/errors/oauthgettokenresponsebody.md
   - docs/models/errors/orderscreateresponsebody.md
   - docs/models/errors/testingaccountcreateresponsebody.md
+  - docs/models/errors/testingaccountphonegetresponsebody.md
   - docs/models/errors/testingcreditcardgetresponsebody.md
   - docs/sdks/bolttypescriptsdk/README.md
   - docs/sdks/account/README.md

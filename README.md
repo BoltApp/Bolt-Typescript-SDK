@@ -84,6 +84,7 @@ run();
 ### [testing](docs/sdks/testing/README.md)
 
 * [createAccount](docs/sdks/testing/README.md#createaccount) - Create a test account
+* [testingAccountPhoneGet](docs/sdks/testing/README.md#testingaccountphoneget) - Get a random phone number
 * [getCreditCard](docs/sdks/testing/README.md#getcreditcard) - Retrieve a test credit card, including its token
 <!-- End Available Resources and Operations [operations] -->
 

@@ -17,4 +17,5 @@ export * from "./paymentsaction";
 export * from "./paymentsinitialize";
 export * from "./paymentsupdate";
 export * from "./testingaccountcreate";
+export * from "./testingaccountphoneget";
 export * from "./testingcreditcardget";
