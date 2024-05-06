@@ -24,7 +24,7 @@ jobs:
       openapi_docs: |
         - https://api-docs.bolt.com/api.bundle.yaml
       publish_typescript: true
-      speakeasy_version: 1.210.0
+      speakeasy_version: latest
     secrets:
       github_access_token: ${{ secrets.GITHUB_TOKEN }}
       npm_token: ${{ secrets.NPM_TOKEN }}
