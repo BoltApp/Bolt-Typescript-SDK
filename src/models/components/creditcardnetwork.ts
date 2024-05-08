@@ -19,4 +19,5 @@ export enum CreditCardNetwork {
 }
 
 /** @internal */
-export const CreditCardNetwork$ = z.nativeEnum(CreditCardNetwork);
+export const CreditCardNetwork$: z.ZodNativeEnum<typeof CreditCardNetwork> =
+    z.nativeEnum(CreditCardNetwork);

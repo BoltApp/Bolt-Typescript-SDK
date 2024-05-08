@@ -1,4 +1,4 @@
-# CreditCardErrorTag
+# SchemasCreditCardErrorTag
 
 The type of error returned
 

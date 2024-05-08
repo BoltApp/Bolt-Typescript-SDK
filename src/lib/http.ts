@@ -7,15 +7,38 @@ export type Fetcher = (
   init?: RequestInit,
 ) => Promise<Response>;
 
-const DEFAULT_FETCHER: Fetcher = (input, init) => fetch(input, init);
+export type Awaitable<T> = T | Promise<T>;
+
+const DEFAULT_FETCHER: Fetcher = (input, init) => {
+  // If input is a Request and init is undefined, Bun will discard the method,
+  // headers, body and other options that were set on the request object.
+  // Node.js and browers would ignore an undefined init value. This check is
+  // therefore needed for interop with Bun.
+  if (init == null) {
+    return fetch(input);
+  } else {
+    return fetch(input, init);
+  }
+};
+
+export type RequestInput = {
+  /**
+   * The URL the request will use.
+   */
+  url: URL;
+  /**
+   * Options used to create a [`Request`](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request).
+   */
+  options?: RequestInit | undefined;
+};
 
 export interface HTTPClientOptions {
   fetcher?: Fetcher;
 }
 
-type BeforeRequestHook = (req: Request) => Request | void;
-type RequestErrorHook = (err: unknown, req: Request) => void;
-type ResponseHook = (res: Response, req: Request) => void;
+export type BeforeRequestHook = (req: Request) => Awaitable<Request | void>;
+export type RequestErrorHook = (err: unknown, req: Request) => Awaitable<void>;
+export type ResponseHook = (res: Response, req: Request) => Awaitable<void>;
 
 export class HTTPClient {
   private fetcher: Fetcher;
@@ -28,17 +51,27 @@ export class HTTPClient {
   }
 
   async request(request: Request): Promise<Response> {
-    const req = this.requestHooks.reduce((currentReq, fn) => {
-      const nextRequest = fn(currentReq);
-      return nextRequest || currentReq;
-    }, request);
+    let req = request;
+    for (const hook of this.requestHooks) {
+      const nextRequest = await hook(req);
+      if (nextRequest) {
+        req = nextRequest;
+      }
+    }
 
     try {
       const res = await this.fetcher(req);
-      this.responseHooks.forEach((fn) => fn(res, req));
+
+      for (const hook of this.responseHooks) {
+        await hook(res, req);
+      }
+
       return res;
     } catch (err) {
-      this.requestErrorHooks.forEach((fn) => fn(err, req));
+      for (const hook of this.requestErrorHooks) {
+        await hook(err, req);
+      }
+
       throw err;
     }
   }
@@ -88,7 +121,7 @@ export class HTTPClient {
       | [hook: "beforeRequest", fn: BeforeRequestHook]
       | [hook: "requestError", fn: RequestErrorHook]
       | [hook: "response", fn: ResponseHook]
-  ) {
+  ): this {
     let target: unknown[];
     if (args[0] === "beforeRequest") {
       target = this.requestHooks;
@@ -108,7 +141,7 @@ export class HTTPClient {
     return this;
   }
 
-  clone() {
+  clone(): HTTPClient {
     const child = new HTTPClient(this.options);
     child.requestHooks = this.requestHooks.slice();
     child.requestErrorHooks = this.requestErrorHooks.slice();
@@ -118,29 +151,56 @@ export class HTTPClient {
   }
 }
 
-export function matchContentType(response: Response, pattern: string): boolean {
-  if (pattern === "*" || pattern === "*/*") {
+// A semicolon surrounded by optional whitespace characters is used to separate
+// segments in a media type string.
+const mediaParamSeparator = /\s*;\s*/g;
+
+function matchContentType(response: Response, pattern: string): boolean {
+  // `*` is a special case which means anything is acceptable.
+  if (pattern === "*") {
     return true;
   }
 
-  const contentType =
-    response.headers.get("content-type") ?? "application/octet-stream";
+  let contentType =
+    response.headers.get("content-type")?.trim() || "application/octet-stream";
+  contentType = contentType.toLowerCase();
 
-  const idx = contentType.split(";").findIndex((raw) => {
-    const ctype = raw.trim();
-    if (ctype === pattern) {
-      return true;
-    }
+  const wantParts = pattern.toLowerCase().trim().split(mediaParamSeparator);
+  const [wantType = "", ...wantParams] = wantParts;
 
-    const parts = ctype.split("/");
-    if (parts.length !== 2) {
+  if (wantType.split("/").length !== 2) {
+    return false;
+  }
+
+  const gotParts = contentType.split(mediaParamSeparator);
+  const [gotType = "", ...gotParams] = gotParts;
+
+  const [type = "", subtype = ""] = gotType.split("/");
+  if (!type || !subtype) {
+    return false;
+  }
+
+  if (
+    wantType !== "*/*" &&
+    gotType !== wantType &&
+    `${type}/*` !== wantType &&
+    `*/${subtype}` !== wantType
+  ) {
+    return false;
+  }
+
+  if (gotParams.length < wantParams.length) {
+    return false;
+  }
+
+  const params = new Set(gotParams);
+  for (const wantParam of wantParams) {
+    if (!params.has(wantParam)) {
       return false;
     }
+  }
 
-    return `${parts[0]}/*` === pattern || `*/${parts[1]}` === pattern;
-  });
-
-  return idx >= 0;
+  return true;
 }
 
 const codeRangeRE = new RegExp("^[0-9]xx$", "i");
@@ -148,7 +208,7 @@ const codeRangeRE = new RegExp("^[0-9]xx$", "i");
 export function matchStatusCode(
   response: Response,
   codes: number | string | (number | string)[],
-) {
+): boolean {
   const actual = `${response.status}`;
   const expectedCodes = Array.isArray(codes) ? codes : [codes];
   if (!expectedCodes.length) {

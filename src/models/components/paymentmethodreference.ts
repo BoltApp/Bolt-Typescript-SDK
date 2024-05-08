@@ -17,7 +17,8 @@ export type PaymentMethodReference = {
 };
 
 /** @internal */
-export const PaymentMethodReferenceTag$ = z.nativeEnum(PaymentMethodReferenceTag);
+export const PaymentMethodReferenceTag$: z.ZodNativeEnum<typeof PaymentMethodReferenceTag> =
+    z.nativeEnum(PaymentMethodReferenceTag);
 
 /** @internal */
 export namespace PaymentMethodReference$ {

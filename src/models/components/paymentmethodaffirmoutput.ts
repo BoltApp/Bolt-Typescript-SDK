@@ -21,7 +21,8 @@ export type PaymentMethodAffirm = {
 };
 
 /** @internal */
-export const PaymentMethodAffirmTag$ = z.nativeEnum(PaymentMethodAffirmTag);
+export const PaymentMethodAffirmTag$: z.ZodNativeEnum<typeof PaymentMethodAffirmTag> =
+    z.nativeEnum(PaymentMethodAffirmTag);
 
 /** @internal */
 export namespace PaymentMethodAffirmOutput$ {

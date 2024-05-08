@@ -89,6 +89,7 @@ export class Account extends ClientSDK {
 
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request = this.createRequest$(
+            context,
             {
                 security: securitySettings$,
                 method: "GET",
@@ -106,6 +107,7 @@ export class Account extends ClientSDK {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
             StatusCode: response.status,
             RawResponse: response,
+            Headers: {},
         };
 
         if (this.matchResponse(response, 200, "application/json")) {
@@ -138,7 +140,11 @@ export class Account extends ClientSDK {
             // fallthrough
         } else {
             const responseBody = await response.text();
-            throw new errors.SDKError("Unexpected API response", response, responseBody);
+            throw new errors.SDKError(
+                "Unexpected API response status or content-type",
+                response,
+                responseBody
+            );
         }
 
         return schemas$.parse(
@@ -201,6 +207,7 @@ export class Account extends ClientSDK {
 
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request = this.createRequest$(
+            context,
             {
                 security: securitySettings$,
                 method: "POST",
@@ -218,6 +225,7 @@ export class Account extends ClientSDK {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
             StatusCode: response.status,
             RawResponse: response,
+            Headers: {},
         };
 
         if (this.matchResponse(response, 200, "application/json")) {
@@ -250,7 +258,11 @@ export class Account extends ClientSDK {
             // fallthrough
         } else {
             const responseBody = await response.text();
-            throw new errors.SDKError("Unexpected API response", response, responseBody);
+            throw new errors.SDKError(
+                "Unexpected API response status or content-type",
+                response,
+                responseBody
+            );
         }
 
         return schemas$.parse(
@@ -321,6 +333,7 @@ export class Account extends ClientSDK {
 
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request = this.createRequest$(
+            context,
             {
                 security: securitySettings$,
                 method: "PUT",
@@ -338,6 +351,7 @@ export class Account extends ClientSDK {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
             StatusCode: response.status,
             RawResponse: response,
+            Headers: {},
         };
 
         if (this.matchResponse(response, 200, "application/json")) {
@@ -370,7 +384,11 @@ export class Account extends ClientSDK {
             // fallthrough
         } else {
             const responseBody = await response.text();
-            throw new errors.SDKError("Unexpected API response", response, responseBody);
+            throw new errors.SDKError(
+                "Unexpected API response status or content-type",
+                response,
+                responseBody
+            );
         }
 
         return schemas$.parse(
@@ -437,6 +455,7 @@ export class Account extends ClientSDK {
 
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request = this.createRequest$(
+            context,
             {
                 security: securitySettings$,
                 method: "DELETE",
@@ -454,6 +473,7 @@ export class Account extends ClientSDK {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
             StatusCode: response.status,
             RawResponse: response,
+            Headers: {},
         };
 
         if (this.matchResponse(response, "4XX", "application/json")) {
@@ -473,7 +493,11 @@ export class Account extends ClientSDK {
             // fallthrough
         } else {
             const responseBody = await response.text();
-            throw new errors.SDKError("Unexpected API response", response, responseBody);
+            throw new errors.SDKError(
+                "Unexpected API response status or content-type",
+                response,
+                responseBody
+            );
         }
 
         return schemas$.parse(
@@ -540,6 +564,7 @@ export class Account extends ClientSDK {
 
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request = this.createRequest$(
+            context,
             {
                 security: securitySettings$,
                 method: "POST",
@@ -557,6 +582,7 @@ export class Account extends ClientSDK {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
             StatusCode: response.status,
             RawResponse: response,
+            Headers: {},
         };
 
         if (this.matchResponse(response, 200, "application/json")) {
@@ -589,7 +615,11 @@ export class Account extends ClientSDK {
             // fallthrough
         } else {
             const responseBody = await response.text();
-            throw new errors.SDKError("Unexpected API response", response, responseBody);
+            throw new errors.SDKError(
+                "Unexpected API response status or content-type",
+                response,
+                responseBody
+            );
         }
 
         return schemas$.parse(
@@ -656,6 +686,7 @@ export class Account extends ClientSDK {
 
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request = this.createRequest$(
+            context,
             {
                 security: securitySettings$,
                 method: "DELETE",
@@ -673,6 +704,7 @@ export class Account extends ClientSDK {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
             StatusCode: response.status,
             RawResponse: response,
+            Headers: {},
         };
 
         if (this.matchResponse(response, "4XX", "application/json")) {
@@ -692,7 +724,11 @@ export class Account extends ClientSDK {
             // fallthrough
         } else {
             const responseBody = await response.text();
-            throw new errors.SDKError("Unexpected API response", response, responseBody);
+            throw new errors.SDKError(
+                "Unexpected API response status or content-type",
+                response,
+                responseBody
+            );
         }
 
         return schemas$.parse(

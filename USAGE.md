@@ -2,16 +2,16 @@
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 
-async function run() {
-    const sdk = new BoltTypescriptSDK({
-        security: {
-            oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
-        },
-    });
+const boltTypescriptSDK = new BoltTypescriptSDK({
+    security: {
+        oauth: "<YOUR_OAUTH_HERE>",
+    },
+});
 
+async function run() {
     const xPublishableKey = "<value>";
 
-    const result = await sdk.account.getDetails(xPublishableKey);
+    const result = await boltTypescriptSDK.account.getDetails(xPublishableKey);
 
     // Handle the result
     console.log(result);

@@ -40,27 +40,27 @@ export class BoltTypescriptSDK extends ClientSDK {
     }
 
     private _account?: Account;
-    get account() {
+    get account(): Account {
         return (this._account ??= new Account(this.options$));
     }
 
     private _payments?: Payments;
-    get payments() {
+    get payments(): Payments {
         return (this._payments ??= new Payments(this.options$));
     }
 
     private _oAuth?: OAuth;
-    get oAuth() {
+    get oAuth(): OAuth {
         return (this._oAuth ??= new OAuth(this.options$));
     }
 
     private _orders?: Orders;
-    get orders() {
+    get orders(): Orders {
         return (this._orders ??= new Orders(this.options$));
     }
 
     private _testing?: Testing;
-    get testing() {
+    get testing(): Testing {
         return (this._testing ??= new Testing(this.options$));
     }
 }

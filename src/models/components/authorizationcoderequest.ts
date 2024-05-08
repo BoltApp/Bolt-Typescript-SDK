@@ -60,10 +60,10 @@ export type AuthorizationCodeRequest = {
 };
 
 /** @internal */
-export const GrantType$ = z.nativeEnum(GrantType);
+export const GrantType$: z.ZodNativeEnum<typeof GrantType> = z.nativeEnum(GrantType);
 
 /** @internal */
-export const Scope$ = z.nativeEnum(Scope);
+export const Scope$: z.ZodNativeEnum<typeof Scope> = z.nativeEnum(Scope);
 
 /** @internal */
 export namespace AuthorizationCodeRequest$ {

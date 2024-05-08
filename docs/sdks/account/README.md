@@ -25,16 +25,16 @@ Retrieve a shopper's account details, such as addresses and payment information
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 
-async function run() {
-  const sdk = new BoltTypescriptSDK({
-    security: {
-      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
-    },
-  });
+const boltTypescriptSDK = new BoltTypescriptSDK({
+  security: {
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
 
+async function run() {
   const xPublishableKey = "<value>";
   
-  const result = await sdk.account.getDetails(xPublishableKey);
+  const result = await boltTypescriptSDK.account.getDetails(xPublishableKey);
 
   // Handle the result
   console.log(result)
@@ -72,13 +72,13 @@ Add an address to the shopper's account
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { CountryCode } from "@boltpay/bolt-typescript-sdk/models/components";
 
-async function run() {
-  const sdk = new BoltTypescriptSDK({
-    security: {
-      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
-    },
-  });
+const boltTypescriptSDK = new BoltTypescriptSDK({
+  security: {
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
 
+async function run() {
   const xPublishableKey = "<value>";
   const addressListing = {
     firstName: "Alice",
@@ -94,7 +94,7 @@ async function run() {
     phone: "+14155550199",
   };
   
-  const result = await sdk.account.addAddress(xPublishableKey, addressListing);
+  const result = await boltTypescriptSDK.account.addAddress(xPublishableKey, addressListing);
 
   // Handle the result
   console.log(result)
@@ -136,13 +136,13 @@ shipments.
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { CountryCode } from "@boltpay/bolt-typescript-sdk/models/components";
 
-async function run() {
-  const sdk = new BoltTypescriptSDK({
-    security: {
-      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
-    },
-  });
+const boltTypescriptSDK = new BoltTypescriptSDK({
+  security: {
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
 
+async function run() {
   const id = "D4g3h5tBuVYK9";
   const xPublishableKey = "<value>";
   const addressListing = {
@@ -159,7 +159,7 @@ async function run() {
     phone: "+14155550199",
   };
   
-  const result = await sdk.account.updateAddress(id, xPublishableKey, addressListing);
+  const result = await boltTypescriptSDK.account.updateAddress(id, xPublishableKey, addressListing);
 
   // Handle the result
   console.log(result)
@@ -200,17 +200,17 @@ shipments that are associated with it.
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 
-async function run() {
-  const sdk = new BoltTypescriptSDK({
-    security: {
-      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
-    },
-  });
+const boltTypescriptSDK = new BoltTypescriptSDK({
+  security: {
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
 
+async function run() {
   const id = "D4g3h5tBuVYK9";
   const xPublishableKey = "<value>";
   
-  const result = await sdk.account.deleteAddress(id, xPublishableKey);
+  const result = await boltTypescriptSDK.account.deleteAddress(id, xPublishableKey);
 
   // Handle the result
   console.log(result)
@@ -253,20 +253,20 @@ which is documented in [Install the Bolt Tokenizer](https://help.bolt.com/develo
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { PaymentMethodAffirmTag } from "@boltpay/bolt-typescript-sdk/models/components";
 
-async function run() {
-  const sdk = new BoltTypescriptSDK({
-    security: {
-      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
-    },
-  });
+const boltTypescriptSDK = new BoltTypescriptSDK({
+  security: {
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
 
+async function run() {
   const xPublishableKey = "<value>";
   const paymentMethod = {
       dotTag: PaymentMethodAffirmTag.Affirm,
       returnUrl: "www.example.com/handle_affirm_success",
     };
   
-  const result = await sdk.account.addPaymentMethod(xPublishableKey, paymentMethod);
+  const result = await boltTypescriptSDK.account.addPaymentMethod(xPublishableKey, paymentMethod);
 
   // Handle the result
   console.log(result)
@@ -306,17 +306,17 @@ orders that are associated with it.
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 
-async function run() {
-  const sdk = new BoltTypescriptSDK({
-    security: {
-      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
-    },
-  });
+const boltTypescriptSDK = new BoltTypescriptSDK({
+  security: {
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
 
+async function run() {
   const id = "D4g3h5tBuVYK9";
   const xPublishableKey = "<value>";
   
-  const result = await sdk.account.deletePaymentMethod(id, xPublishableKey);
+  const result = await boltTypescriptSDK.account.deletePaymentMethod(id, xPublishableKey);
 
   // Handle the result
   console.log(result)

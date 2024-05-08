@@ -19,9 +19,9 @@ Bolt when it is updated or finalized for guest shoppers.
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { AddressReferenceIdTag, Currency, PaymentMethodAffirmTag } from "@boltpay/bolt-typescript-sdk/models/components";
 
-async function run() {
-  const sdk = new BoltTypescriptSDK();
+const boltTypescriptSDK = new BoltTypescriptSDK();
 
+async function run() {
   const xPublishableKey = "<value>";
   const guestPaymentInitializeRequest = {
     profile: {
@@ -88,7 +88,7 @@ async function run() {
   };
   const operationSecurity = "<YOUR_API_KEY_HERE>";
   
-  const result = await sdk.payments.guest.initialize(operationSecurity, xPublishableKey, guestPaymentInitializeRequest);
+  const result = await boltTypescriptSDK.payments.guest.initialize(operationSecurity, xPublishableKey, guestPaymentInitializeRequest);
 
   // Handle the result
   console.log(result)
@@ -129,9 +129,9 @@ Update a pending guest payment
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { AddressReferenceExplicitTag, CountryCode, Currency } from "@boltpay/bolt-typescript-sdk/models/components";
 
-async function run() {
-  const sdk = new BoltTypescriptSDK();
+const boltTypescriptSDK = new BoltTypescriptSDK();
 
+async function run() {
   const id = "iKv7t5bgt1gg";
   const xPublishableKey = "<value>";
   const paymentUpdateRequest = {
@@ -198,7 +198,7 @@ async function run() {
   };
   const operationSecurity = "<YOUR_API_KEY_HERE>";
   
-  const result = await sdk.payments.guest.update(operationSecurity, id, xPublishableKey, paymentUpdateRequest);
+  const result = await boltTypescriptSDK.payments.guest.update(operationSecurity, id, xPublishableKey, paymentUpdateRequest);
 
   // Handle the result
   console.log(result)
@@ -240,9 +240,9 @@ Perform an irreversible action on a pending guest payment, such as finalizing it
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { PaymentActionRequestTag } from "@boltpay/bolt-typescript-sdk/models/components";
 
-async function run() {
-  const sdk = new BoltTypescriptSDK();
+const boltTypescriptSDK = new BoltTypescriptSDK();
 
+async function run() {
   const id = "iKv7t5bgt1gg";
   const xPublishableKey = "<value>";
   const paymentActionRequest = {
@@ -251,7 +251,7 @@ async function run() {
   };
   const operationSecurity = "<YOUR_API_KEY_HERE>";
   
-  const result = await sdk.payments.guest.performAction(operationSecurity, id, xPublishableKey, paymentActionRequest);
+  const result = await boltTypescriptSDK.payments.guest.performAction(operationSecurity, id, xPublishableKey, paymentActionRequest);
 
   // Handle the result
   console.log(result)

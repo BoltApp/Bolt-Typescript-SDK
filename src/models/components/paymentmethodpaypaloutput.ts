@@ -25,7 +25,8 @@ export type PaymentMethodPaypal = {
 };
 
 /** @internal */
-export const PaymentMethodPaypalTag$ = z.nativeEnum(PaymentMethodPaypalTag);
+export const PaymentMethodPaypalTag$: z.ZodNativeEnum<typeof PaymentMethodPaypalTag> =
+    z.nativeEnum(PaymentMethodPaypalTag);
 
 /** @internal */
 export namespace PaymentMethodPaypalOutput$ {

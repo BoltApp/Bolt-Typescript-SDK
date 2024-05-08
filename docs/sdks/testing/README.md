@@ -24,9 +24,9 @@ Create a Bolt shopper account for testing purposes.
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { EmailState, PhoneState } from "@boltpay/bolt-typescript-sdk/models/components";
 
-async function run() {
-  const sdk = new BoltTypescriptSDK();
+const boltTypescriptSDK = new BoltTypescriptSDK();
 
+async function run() {
   const xPublishableKey = "<value>";
   const accountTestCreationData = {
     emailState: EmailState.Unverified,
@@ -37,7 +37,7 @@ async function run() {
   };
   const operationSecurity = "<YOUR_API_KEY_HERE>";
   
-  const result = await sdk.testing.createAccount(operationSecurity, xPublishableKey, accountTestCreationData);
+  const result = await boltTypescriptSDK.testing.createAccount(operationSecurity, xPublishableKey, accountTestCreationData);
 
   // Handle the result
   console.log(result)
@@ -77,13 +77,13 @@ Get a random, fictitious phone number that is not assigned to any existing accou
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 
-async function run() {
-  const sdk = new BoltTypescriptSDK();
+const boltTypescriptSDK = new BoltTypescriptSDK();
 
+async function run() {
   const xPublishableKey = "<value>";
   const operationSecurity = "<YOUR_API_KEY_HERE>";
   
-  const result = await sdk.testing.testingAccountPhoneGet(operationSecurity, xPublishableKey);
+  const result = await boltTypescriptSDK.testing.testingAccountPhoneGet(operationSecurity, xPublishableKey);
 
   // Handle the result
   console.log(result)
@@ -123,12 +123,12 @@ Retrieve test credit card information. This includes its token, which can be use
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { Type } from "@boltpay/bolt-typescript-sdk/models/operations";
 
-async function run() {
-  const sdk = new BoltTypescriptSDK();
+const boltTypescriptSDK = new BoltTypescriptSDK();
 
+async function run() {
   const operationSecurity = "<YOUR_API_KEY_HERE>";
   
-  const result = await sdk.testing.getCreditCard({
+  const result = await boltTypescriptSDK.testing.getCreditCard({
     type: Type.Approve,
   }, operationSecurity);
 

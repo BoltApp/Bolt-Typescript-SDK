@@ -17,7 +17,8 @@ export type PaymentActionRequest = {
 };
 
 /** @internal */
-export const PaymentActionRequestTag$ = z.nativeEnum(PaymentActionRequestTag);
+export const PaymentActionRequestTag$: z.ZodNativeEnum<typeof PaymentActionRequestTag> =
+    z.nativeEnum(PaymentActionRequestTag);
 
 /** @internal */
 export namespace PaymentActionRequest$ {

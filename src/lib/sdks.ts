@@ -40,7 +40,11 @@ export class ClientSDK {
         this.client = client;
     }
 
-    protected createRequest$(conf: RequestConfig, options?: RequestOptions) {
+    protected createRequest$(
+        context: HookContext,
+        conf: RequestConfig,
+        options?: RequestOptions
+    ): Request {
         const { method, path, query, headers: opHeaders, security } = conf;
 
         const base = conf.baseURL ?? this.baseURL;
@@ -71,10 +75,10 @@ export class ClientSDK {
 
         const headers = new Headers(opHeaders);
 
-        const username = security?.basic.username || "";
-        const password = security?.basic.password || "";
-        if (username || password) {
-            const encoded = stringToBase64([username, password].join(":"));
+        const username = security?.basic.username;
+        const password = security?.basic.password;
+        if (username != null || password != null) {
+            const encoded = stringToBase64([username || "", password || ""].join(":"));
             headers.set("Authorization", `Basic ${encoded}`);
         }
 
@@ -95,12 +99,17 @@ export class ClientSDK {
             headers.set(k, v);
         }
 
-        return new Request(reqURL, {
-            ...options?.fetchOptions,
-            body: conf.body ?? null,
-            headers,
-            method,
+        const input = this.hooks$.beforeCreateRequest(context, {
+            url: reqURL,
+            options: {
+                ...options?.fetchOptions,
+                body: conf.body ?? null,
+                headers,
+                method,
+            },
         });
+
+        return new Request(input.url, input.options);
     }
 
     protected async do$(
@@ -109,7 +118,7 @@ export class ClientSDK {
             context: HookContext;
             errorCodes: number | string | (number | string)[];
         }
-    ) {
+    ): Promise<Response> {
         const { context, errorCodes } = options;
 
         let response = await this.client.request(await this.hooks$.beforeRequest(context, req));

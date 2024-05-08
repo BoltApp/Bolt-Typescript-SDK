@@ -19,13 +19,13 @@ Bolt when it is updated or finalized for logged in shoppers.
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { AddressReferenceIdTag, Currency, PaymentMethodAffirmTag } from "@boltpay/bolt-typescript-sdk/models/components";
 
-async function run() {
-  const sdk = new BoltTypescriptSDK({
-    security: {
-      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
-    },
-  });
+const boltTypescriptSDK = new BoltTypescriptSDK({
+  security: {
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
 
+async function run() {
   const xPublishableKey = "<value>";
   const paymentInitializeRequest = {
     cart: {
@@ -84,7 +84,7 @@ async function run() {
       },
   };
   
-  const result = await sdk.payments.loggedIn.initialize(xPublishableKey, paymentInitializeRequest);
+  const result = await boltTypescriptSDK.payments.loggedIn.initialize(xPublishableKey, paymentInitializeRequest);
 
   // Handle the result
   console.log(result)
@@ -124,13 +124,13 @@ Update a pending payment
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { AddressReferenceExplicitTag, CountryCode, Currency } from "@boltpay/bolt-typescript-sdk/models/components";
 
-async function run() {
-  const sdk = new BoltTypescriptSDK({
-    security: {
-      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
-    },
-  });
+const boltTypescriptSDK = new BoltTypescriptSDK({
+  security: {
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
 
+async function run() {
   const id = "iKv7t5bgt1gg";
   const xPublishableKey = "<value>";
   const paymentUpdateRequest = {
@@ -196,7 +196,7 @@ async function run() {
     },
   };
   
-  const result = await sdk.payments.loggedIn.update(id, xPublishableKey, paymentUpdateRequest);
+  const result = await boltTypescriptSDK.payments.loggedIn.update(id, xPublishableKey, paymentUpdateRequest);
 
   // Handle the result
   console.log(result)
@@ -237,13 +237,13 @@ Perform an irreversible action on a pending payment, such as finalizing it.
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { PaymentActionRequestTag } from "@boltpay/bolt-typescript-sdk/models/components";
 
-async function run() {
-  const sdk = new BoltTypescriptSDK({
-    security: {
-      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
-    },
-  });
+const boltTypescriptSDK = new BoltTypescriptSDK({
+  security: {
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
 
+async function run() {
   const id = "iKv7t5bgt1gg";
   const xPublishableKey = "<value>";
   const paymentActionRequest = {
@@ -251,7 +251,7 @@ async function run() {
     redirectResult: "eyJ0cmFuc",
   };
   
-  const result = await sdk.payments.loggedIn.performAction(id, xPublishableKey, paymentActionRequest);
+  const result = await boltTypescriptSDK.payments.loggedIn.performAction(id, xPublishableKey, paymentActionRequest);
 
   // Handle the result
   console.log(result)

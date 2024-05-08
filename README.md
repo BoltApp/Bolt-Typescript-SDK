@@ -28,16 +28,16 @@ yarn add @boltpay/bolt-typescript-sdk
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 
-async function run() {
-    const sdk = new BoltTypescriptSDK({
-        security: {
-            oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
-        },
-    });
+const boltTypescriptSDK = new BoltTypescriptSDK({
+    security: {
+        oauth: "<YOUR_OAUTH_HERE>",
+    },
+});
 
+async function run() {
     const xPublishableKey = "<value>";
 
-    const result = await sdk.account.getDetails(xPublishableKey);
+    const result = await boltTypescriptSDK.account.getDetails(xPublishableKey);
 
     // Handle the result
     console.log(result);
@@ -105,18 +105,18 @@ Validation errors can also occur when either method arguments or data returned f
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import * as errors from "@boltpay/bolt-typescript-sdk/models/errors";
 
-async function run() {
-    const sdk = new BoltTypescriptSDK({
-        security: {
-            oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
-        },
-    });
+const boltTypescriptSDK = new BoltTypescriptSDK({
+    security: {
+        oauth: "<YOUR_OAUTH_HERE>",
+    },
+});
 
+async function run() {
     const xPublishableKey = "<value>";
 
     let result;
     try {
-        result = await sdk.account.getDetails(xPublishableKey);
+        result = await boltTypescriptSDK.account.getDetails(xPublishableKey);
     } catch (err) {
         switch (true) {
             case err instanceof errors.SDKValidationError: {
@@ -159,17 +159,17 @@ You can override the default server globally by passing a server index to the `s
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 
-async function run() {
-    const sdk = new BoltTypescriptSDK({
-        serverIdx: 0,
-        security: {
-            oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
-        },
-    });
+const boltTypescriptSDK = new BoltTypescriptSDK({
+    serverIdx: 0,
+    security: {
+        oauth: "<YOUR_OAUTH_HERE>",
+    },
+});
 
+async function run() {
     const xPublishableKey = "<value>";
 
-    const result = await sdk.account.getDetails(xPublishableKey);
+    const result = await boltTypescriptSDK.account.getDetails(xPublishableKey);
 
     // Handle the result
     console.log(result);
@@ -191,17 +191,17 @@ The default server can also be overridden globally by passing a URL to the `serv
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 
-async function run() {
-    const sdk = new BoltTypescriptSDK({
-        serverURL: "https://{environment}.bolt.com/v3",
-        security: {
-            oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
-        },
-    });
+const boltTypescriptSDK = new BoltTypescriptSDK({
+    serverURL: "https://{environment}.bolt.com/v3",
+    security: {
+        oauth: "<YOUR_OAUTH_HERE>",
+    },
+});
 
+async function run() {
     const xPublishableKey = "<value>";
 
-    const result = await sdk.account.getDetails(xPublishableKey);
+    const result = await boltTypescriptSDK.account.getDetails(xPublishableKey);
 
     // Handle the result
     console.log(result);
@@ -277,16 +277,16 @@ You can set the security parameters through the `security` optional parameter wh
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 
-async function run() {
-    const sdk = new BoltTypescriptSDK({
-        security: {
-            oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
-        },
-    });
+const boltTypescriptSDK = new BoltTypescriptSDK({
+    security: {
+        oauth: "<YOUR_OAUTH_HERE>",
+    },
+});
 
+async function run() {
     const xPublishableKey = "<value>";
 
-    const result = await sdk.account.getDetails(xPublishableKey);
+    const result = await boltTypescriptSDK.account.getDetails(xPublishableKey);
 
     // Handle the result
     console.log(result);
@@ -307,9 +307,9 @@ import {
     PaymentMethodAffirmTag,
 } from "@boltpay/bolt-typescript-sdk/models/components";
 
-async function run() {
-    const sdk = new BoltTypescriptSDK();
+const boltTypescriptSDK = new BoltTypescriptSDK();
 
+async function run() {
     const xPublishableKey = "<value>";
     const guestPaymentInitializeRequest = {
         profile: {
@@ -376,7 +376,7 @@ async function run() {
     };
     const operationSecurity = "<YOUR_API_KEY_HERE>";
 
-    const result = await sdk.payments.guest.initialize(
+    const result = await boltTypescriptSDK.payments.guest.initialize(
         operationSecurity,
         xPublishableKey,
         guestPaymentInitializeRequest

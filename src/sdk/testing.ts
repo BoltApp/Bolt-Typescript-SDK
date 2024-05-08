@@ -83,7 +83,13 @@ export class Testing extends ClientSDK {
             })
         );
         const security$: SecurityInput[][] = [
-            [{ value: security?.apiKey, fieldName: "X-API-Key", type: "apiKey:header" }],
+            [
+                {
+                    fieldName: "X-API-Key",
+                    type: "apiKey:header",
+                    value: security?.apiKey,
+                },
+            ],
         ];
         const securitySettings$ = this.resolveSecurity(...security$);
         const context = {
@@ -94,6 +100,7 @@ export class Testing extends ClientSDK {
 
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request = this.createRequest$(
+            context,
             {
                 security: securitySettings$,
                 method: "POST",
@@ -111,6 +118,7 @@ export class Testing extends ClientSDK {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
             StatusCode: response.status,
             RawResponse: response,
+            Headers: {},
         };
 
         if (this.matchResponse(response, 200, "application/json")) {
@@ -143,7 +151,11 @@ export class Testing extends ClientSDK {
             // fallthrough
         } else {
             const responseBody = await response.text();
-            throw new errors.SDKError("Unexpected API response", response, responseBody);
+            throw new errors.SDKError(
+                "Unexpected API response status or content-type",
+                response,
+                responseBody
+            );
         }
 
         return schemas$.parse(
@@ -191,7 +203,13 @@ export class Testing extends ClientSDK {
             })
         );
         const security$: SecurityInput[][] = [
-            [{ value: security?.apiKey, fieldName: "X-API-Key", type: "apiKey:header" }],
+            [
+                {
+                    fieldName: "X-API-Key",
+                    type: "apiKey:header",
+                    value: security?.apiKey,
+                },
+            ],
         ];
         const securitySettings$ = this.resolveSecurity(...security$);
         const context = {
@@ -202,6 +220,7 @@ export class Testing extends ClientSDK {
 
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request = this.createRequest$(
+            context,
             {
                 security: securitySettings$,
                 method: "GET",
@@ -219,6 +238,7 @@ export class Testing extends ClientSDK {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
             StatusCode: response.status,
             RawResponse: response,
+            Headers: {},
         };
 
         if (this.matchResponse(response, 200, "application/json")) {
@@ -251,7 +271,11 @@ export class Testing extends ClientSDK {
             // fallthrough
         } else {
             const responseBody = await response.text();
-            throw new errors.SDKError("Unexpected API response", response, responseBody);
+            throw new errors.SDKError(
+                "Unexpected API response status or content-type",
+                response,
+                responseBody
+            );
         }
 
         return schemas$.parse(
@@ -290,7 +314,13 @@ export class Testing extends ClientSDK {
         const query$ = "";
 
         const security$: SecurityInput[][] = [
-            [{ value: security?.apiKey, fieldName: "X-API-Key", type: "apiKey:header" }],
+            [
+                {
+                    fieldName: "X-API-Key",
+                    type: "apiKey:header",
+                    value: security?.apiKey,
+                },
+            ],
         ];
         const securitySettings$ = this.resolveSecurity(...security$);
         const context = {
@@ -301,6 +331,7 @@ export class Testing extends ClientSDK {
 
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request = this.createRequest$(
+            context,
             {
                 security: securitySettings$,
                 method: "POST",
@@ -318,6 +349,7 @@ export class Testing extends ClientSDK {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
             StatusCode: response.status,
             RawResponse: response,
+            Headers: {},
         };
 
         if (this.matchResponse(response, 200, "application/json")) {
@@ -350,7 +382,11 @@ export class Testing extends ClientSDK {
             // fallthrough
         } else {
             const responseBody = await response.text();
-            throw new errors.SDKError("Unexpected API response", response, responseBody);
+            throw new errors.SDKError(
+                "Unexpected API response status or content-type",
+                response,
+                responseBody
+            );
         }
 
         return schemas$.parse(

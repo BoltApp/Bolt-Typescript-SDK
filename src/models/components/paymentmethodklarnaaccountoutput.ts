@@ -21,7 +21,8 @@ export type PaymentMethodKlarnaAccount = {
 };
 
 /** @internal */
-export const PaymentMethodKlarnaAccountTag$ = z.nativeEnum(PaymentMethodKlarnaAccountTag);
+export const PaymentMethodKlarnaAccountTag$: z.ZodNativeEnum<typeof PaymentMethodKlarnaAccountTag> =
+    z.nativeEnum(PaymentMethodKlarnaAccountTag);
 
 /** @internal */
 export namespace PaymentMethodKlarnaAccountOutput$ {

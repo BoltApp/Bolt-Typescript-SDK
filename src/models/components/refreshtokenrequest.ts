@@ -60,10 +60,12 @@ export type RefreshTokenRequest = {
 };
 
 /** @internal */
-export const RefreshTokenRequestGrantType$ = z.nativeEnum(RefreshTokenRequestGrantType);
+export const RefreshTokenRequestGrantType$: z.ZodNativeEnum<typeof RefreshTokenRequestGrantType> =
+    z.nativeEnum(RefreshTokenRequestGrantType);
 
 /** @internal */
-export const RefreshTokenRequestScope$ = z.nativeEnum(RefreshTokenRequestScope);
+export const RefreshTokenRequestScope$: z.ZodNativeEnum<typeof RefreshTokenRequestScope> =
+    z.nativeEnum(RefreshTokenRequestScope);
 
 /** @internal */
 export namespace RefreshTokenRequest$ {

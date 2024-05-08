@@ -1,4 +1,4 @@
-# ErrorTag
+# DotTag
 
 The type of error returned
 

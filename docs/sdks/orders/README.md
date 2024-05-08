@@ -21,9 +21,9 @@ Create an order that was placed outside the Bolt ecosystem.
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import { AddressReferenceExplicitTag, CountryCode, Currency } from "@boltpay/bolt-typescript-sdk/models/components";
 
-async function run() {
-  const sdk = new BoltTypescriptSDK();
+const boltTypescriptSDK = new BoltTypescriptSDK();
 
+async function run() {
   const xPublishableKey = "<value>";
   const order = {
     profile: {
@@ -95,7 +95,7 @@ async function run() {
   };
   const operationSecurity = "<YOUR_API_KEY_HERE>";
   
-  const result = await sdk.orders.ordersCreate(operationSecurity, xPublishableKey, order);
+  const result = await boltTypescriptSDK.orders.ordersCreate(operationSecurity, xPublishableKey, order);
 
   // Handle the result
   console.log(result)

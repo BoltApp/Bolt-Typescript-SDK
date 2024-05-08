@@ -25,13 +25,15 @@ export type PaymentResponsePending = {
 };
 
 /** @internal */
-export const PaymentResponsePendingTag$ = z.nativeEnum(PaymentResponsePendingTag);
+export const PaymentResponsePendingTag$: z.ZodNativeEnum<typeof PaymentResponsePendingTag> =
+    z.nativeEnum(PaymentResponsePendingTag);
 
 /** @internal */
-export const PaymentResponsePendingStatus$ = z.nativeEnum(PaymentResponsePendingStatus);
+export const PaymentResponsePendingStatus$: z.ZodNativeEnum<typeof PaymentResponsePendingStatus> =
+    z.nativeEnum(PaymentResponsePendingStatus);
 
 /** @internal */
-export const Action$ = z.nativeEnum(Action);
+export const Action$: z.ZodNativeEnum<typeof Action> = z.nativeEnum(Action);
 
 /** @internal */
 export namespace PaymentResponsePending$ {

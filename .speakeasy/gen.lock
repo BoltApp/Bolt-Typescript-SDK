@@ -3,27 +3,28 @@ id: 79fa0df9-852a-493c-b998-1d82654b5f18
 management:
   docChecksum: 52a4491de6268327ef41bf826024fc20
   docVersion: 3.0.3
-  speakeasyVersion: 1.210.0
-  generationVersion: 2.281.2
-  releaseVersion: 0.12.2
-  configChecksum: c3476a33bb73d8233d85382659c2795f
+  speakeasyVersion: 1.283.1
+  generationVersion: 2.324.0
+  releaseVersion: 0.13.0
+  configChecksum: 0d9d31cf103e4d1a4d96305e0f837c95
   repoURL: https://github.com/BoltApp/Bolt-Typescript-SDK.git
   repoSubDirectory: .
   installationURL: https://github.com/BoltApp/Bolt-Typescript-SDK
   published: true
 features:
   typescript:
-    core: 3.6.1
+    core: 3.9.3
+    errorUnions: 0.1.0
     flattening: 2.81.1
-    globalSecurity: 2.82.6
+    globalSecurity: 2.82.9
     globalServerURLs: 2.82.4
     groups: 2.81.2
     ignores: 2.81.1
     inputOutputModels: 2.82.0
-    methodSecurity: 2.82.3
-    nameOverrides: 2.81.1
-    responseFormat: 0.2.2
-    unions: 2.85.3
+    methodSecurity: 2.82.4
+    nameOverrides: 2.81.2
+    responseFormat: 0.2.3
+    unions: 2.85.4
 generatedFiles:
   - src/sdk/account.ts
   - src/sdk/guest.ts
@@ -36,6 +37,7 @@ generatedFiles:
   - .eslintrc.js
   - .npmignore
   - RUNTIMES.md
+  - jsr.json
   - package.json
   - src/index.ts
   - src/lib/base64.ts
@@ -88,17 +90,13 @@ generatedFiles:
   - src/models/components/paymentmethodklarnaaccountoutput.ts
   - src/models/components/paymentmethodklarnapaynowoutput.ts
   - src/models/components/addresslisting.ts
-  - src/models/components/error.ts
-  - src/models/components/fielderror.ts
   - src/models/components/addresslistinginput.ts
-  - src/models/components/creditcarderror.ts
   - src/models/components/paymentmethodinput.ts
   - src/models/components/addressreferenceinput.ts
   - src/models/components/paymentresponse.ts
   - src/models/components/paymentresponsefinalized.ts
   - src/models/components/transaction.ts
   - src/models/components/paymentresponsepending.ts
-  - src/models/components/carterror.ts
   - src/models/components/guestpaymentinitializerequest.ts
   - src/models/components/cart.ts
   - src/models/components/amount.ts
@@ -122,12 +120,16 @@ generatedFiles:
   - src/models/components/testcreditcard.ts
   - src/models/components/security.ts
   - src/models/errors/accountget.ts
+  - src/models/errors/error.ts
+  - src/models/errors/fielderror.ts
   - src/models/errors/accountaddresscreate.ts
   - src/models/errors/accountaddressedit.ts
   - src/models/errors/accountaddressdelete.ts
   - src/models/errors/accountaddpaymentmethod.ts
+  - src/models/errors/creditcarderror.ts
   - src/models/errors/accountpaymentmethoddelete.ts
   - src/models/errors/guestpaymentsinitialize.ts
+  - src/models/errors/carterror.ts
   - src/models/errors/guestpaymentsupdate.ts
   - src/models/errors/guestpaymentsaction.ts
   - src/models/errors/paymentsinitialize.ts
@@ -207,13 +209,7 @@ generatedFiles:
   - docs/models/components/paymentmethodklarnapaynowtag.md
   - docs/models/components/paymentmethodklarnapaynowoutput.md
   - docs/models/components/addresslisting.md
-  - docs/models/components/errortag.md
-  - docs/models/components/errort.md
-  - docs/models/components/fielderrortag.md
-  - docs/models/components/fielderror.md
   - docs/models/components/addresslistinginput.md
-  - docs/models/components/creditcarderrortag.md
-  - docs/models/components/creditcarderror.md
   - docs/models/components/paymentmethodinput.md
   - docs/models/components/paymentmethodcreditcardinput.md
   - docs/models/components/addressreferenceinput.md
@@ -233,8 +229,6 @@ generatedFiles:
   - docs/models/components/paymentresponsependingstatus.md
   - docs/models/components/action.md
   - docs/models/components/paymentresponsepending.md
-  - docs/models/components/carterrortag.md
-  - docs/models/components/carterror.md
   - docs/models/components/guestpaymentinitializerequest.md
   - docs/models/components/cart.md
   - docs/models/components/currency.md
@@ -268,12 +262,20 @@ generatedFiles:
   - docs/models/components/testcreditcard.md
   - docs/models/components/security.md
   - docs/models/errors/accountgetresponsebody.md
+  - docs/models/errors/dottag.md
+  - docs/models/errors/errort.md
+  - docs/models/errors/schemastag.md
+  - docs/models/errors/fielderror.md
   - docs/models/errors/accountaddresscreateresponsebody.md
   - docs/models/errors/accountaddresseditresponsebody.md
   - docs/models/errors/accountaddressdeleteresponsebody.md
   - docs/models/errors/accountaddpaymentmethodresponsebody.md
+  - docs/models/errors/schemascreditcarderrortag.md
+  - docs/models/errors/creditcarderror.md
   - docs/models/errors/accountpaymentmethoddeleteresponsebody.md
   - docs/models/errors/guestpaymentsinitializeresponsebody.md
+  - docs/models/errors/schemascarterrortag.md
+  - docs/models/errors/carterror.md
   - docs/models/errors/guestpaymentsupdateresponsebody.md
   - docs/models/errors/guestpaymentsactionresponsebody.md
   - docs/models/errors/paymentsinitializeresponsebody.md

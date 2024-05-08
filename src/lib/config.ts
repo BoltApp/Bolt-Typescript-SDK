@@ -5,7 +5,7 @@
 import * as components from "../models/components";
 import { HTTPClient } from "./http";
 import { RetryConfig } from "./retries";
-import { pathToFunc } from "./url";
+import { Params, pathToFunc } from "./url";
 
 /**
  * Contains the list of servers available to the SDK
@@ -45,12 +45,12 @@ export type SDKOptions = {
 export function serverURLFromOptions(options: SDKOptions): URL | null {
     let serverURL = options.serverURL;
 
-    const serverParams = [
+    const serverParams: Params[] = [
         {
-            environment: options.environment?.toString() ?? "api-sandbox",
+            environment: options.environment ?? "api-sandbox",
         },
     ];
-    let params: Record<string, string> = {};
+    let params: Params = {};
 
     if (!serverURL) {
         const serverIdx = options.serverIdx ?? 0;
@@ -65,10 +65,10 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
     return new URL(u);
 }
 
-export const SDK_METADATA = Object.freeze({
+export const SDK_METADATA = {
     language: "typescript",
     openapiDocVersion: "3.0.3",
-    sdkVersion: "0.12.2",
-    genVersion: "2.281.2",
-    userAgent: "speakeasy-sdk/typescript 0.12.2 2.281.2 3.0.3 @boltpay/bolt-typescript-sdk",
-});
+    sdkVersion: "0.13.0",
+    genVersion: "2.324.0",
+    userAgent: "speakeasy-sdk/typescript 0.13.0 2.324.0 3.0.3 @boltpay/bolt-typescript-sdk",
+} as const;

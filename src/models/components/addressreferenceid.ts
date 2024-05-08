@@ -23,7 +23,8 @@ export type AddressReferenceId = {
 };
 
 /** @internal */
-export const AddressReferenceIdTag$ = z.nativeEnum(AddressReferenceIdTag);
+export const AddressReferenceIdTag$: z.ZodNativeEnum<typeof AddressReferenceIdTag> =
+    z.nativeEnum(AddressReferenceIdTag);
 
 /** @internal */
 export namespace AddressReferenceId$ {

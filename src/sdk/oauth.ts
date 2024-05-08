@@ -73,6 +73,7 @@ export class OAuth extends ClientSDK {
 
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request = this.createRequest$(
+            context,
             { method: "POST", path: path$, headers: headers$, query: query$, body: body$ },
             options
         );
@@ -83,6 +84,7 @@ export class OAuth extends ClientSDK {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
             StatusCode: response.status,
             RawResponse: response,
+            Headers: {},
         };
 
         if (this.matchResponse(response, 200, "application/json")) {
@@ -115,7 +117,11 @@ export class OAuth extends ClientSDK {
             // fallthrough
         } else {
             const responseBody = await response.text();
-            throw new errors.SDKError("Unexpected API response", response, responseBody);
+            throw new errors.SDKError(
+                "Unexpected API response status or content-type",
+                response,
+                responseBody
+            );
         }
 
         return schemas$.parse(

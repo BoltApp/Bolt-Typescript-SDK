@@ -21,7 +21,8 @@ export type PaymentMethodAfterpay = {
 };
 
 /** @internal */
-export const PaymentMethodAfterpayTag$ = z.nativeEnum(PaymentMethodAfterpayTag);
+export const PaymentMethodAfterpayTag$: z.ZodNativeEnum<typeof PaymentMethodAfterpayTag> =
+    z.nativeEnum(PaymentMethodAfterpayTag);
 
 /** @internal */
 export namespace PaymentMethodAfterpayOutput$ {

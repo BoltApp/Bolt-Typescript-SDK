@@ -30,21 +30,15 @@ export class SecurityError extends Error {
 }
 
 export type SecurityState = {
-    basic: { username: string; password?: string };
+    basic: { username?: string | undefined; password?: string | undefined };
     headers: Record<string, string>;
     queryParams: Record<string, string>;
     cookies: Record<string, string>;
 };
 
-type SecurityInputBasicPacked = {
-    type: "http:basic";
-    value: { username: string; password?: string } | null | undefined;
-};
-
 type SecurityInputBasic = {
     type: "http:basic";
-    value: string | null | undefined;
-    fieldName: "username" | "password";
+    value: { username?: string | undefined; password?: string | undefined } | null | undefined;
 };
 
 type SecurityInputBearer = {
@@ -73,13 +67,11 @@ type SecurityInputOAuth2 = {
 
 type SecurityInputOAuth2ClientCredentials = {
     type: "oauth2:client_credentials";
-    value: string | null | undefined;
-    fieldName: "clientID" | "clientSecret";
+    value: { clientID?: string | undefined; clientSecret?: string | undefined } | null | undefined;
 };
 
 export type SecurityInput =
     | SecurityInputBasic
-    | SecurityInputBasicPacked
     | SecurityInputBearer
     | SecurityInputAPIKey
     | SecurityInputOAuth2
@@ -94,7 +86,23 @@ export function resolveSecurity(...options: SecurityInput[][]): SecurityState | 
         cookies: {},
     };
 
-    const option = options.find((opts) => opts.every((o) => Boolean(o.value)));
+    const option = options.find((opts) => {
+        return opts.every((o) => {
+            if (o.value == null) {
+                return false;
+            } else if (o.type === "http:basic") {
+                return o.value.username != null || o.value.password != null;
+            } else if (o.type === "oauth2:client_credentials") {
+                return o.value.clientID != null || o.value.clientSecret != null;
+            } else if (typeof o.value === "string") {
+                return !!o.value;
+            } else {
+                throw new Error(
+                    `Unrecognized security type: ${o.type} (value type: ${typeof o.value})`
+                );
+            }
+        });
+    });
     if (option == null) {
         return null;
     }
@@ -139,16 +147,12 @@ export function resolveSecurity(...options: SecurityInput[][]): SecurityState | 
     return state;
 }
 
-function applyBasic(state: SecurityState, spec: SecurityInputBasic | SecurityInputBasicPacked) {
+function applyBasic(state: SecurityState, spec: SecurityInputBasic) {
     if (spec.value == null) {
         return;
     }
 
-    if ("fieldName" in spec) {
-        state.basic[spec.fieldName] = spec.value;
-    } else {
-        state.basic = spec.value;
-    }
+    state.basic = spec.value;
 }
 
 function applyBearer(
@@ -166,9 +170,19 @@ function applyBearer(
 
     state.headers[spec.fieldName] = value;
 }
-export function resolveGlobalSecurity(security: Partial<components.Security> | null | undefined) {
-    return resolveSecurity(
-        [{ value: security?.oauth, fieldName: "Authorization", type: "oauth2" }],
-        [{ value: security?.apiKey, fieldName: "X-API-Key", type: "apiKey:header" }]
-    );
+export function resolveGlobalSecurity(
+    security: Partial<components.Security> | null | undefined
+): SecurityState | null {
+    return resolveSecurity([
+        {
+            fieldName: "Authorization",
+            type: "oauth2",
+            value: security?.oauth,
+        },
+        {
+            fieldName: "X-API-Key",
+            type: "apiKey:header",
+            value: security?.apiKey,
+        },
+    ]);
 }

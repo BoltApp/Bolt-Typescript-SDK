@@ -55,7 +55,7 @@ export type PaymentMethodCreditCardInput = {
 };
 
 /** @internal */
-export const DotTag$ = z.nativeEnum(DotTag);
+export const DotTag$: z.ZodNativeEnum<typeof DotTag> = z.nativeEnum(DotTag);
 
 /** @internal */
 export namespace PaymentMethodCreditCard$ {

@@ -34,10 +34,10 @@ export type AccountTestCreationData = {
 };
 
 /** @internal */
-export const EmailState$ = z.nativeEnum(EmailState);
+export const EmailState$: z.ZodNativeEnum<typeof EmailState> = z.nativeEnum(EmailState);
 
 /** @internal */
-export const PhoneState$ = z.nativeEnum(PhoneState);
+export const PhoneState$: z.ZodNativeEnum<typeof PhoneState> = z.nativeEnum(PhoneState);
 
 /** @internal */
 export namespace AccountTestCreationDataOutput$ {

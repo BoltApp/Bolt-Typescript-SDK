@@ -21,10 +21,11 @@ export type PaymentResponseFinalized = {
 };
 
 /** @internal */
-export const PaymentResponseFinalizedTag$ = z.nativeEnum(PaymentResponseFinalizedTag);
+export const PaymentResponseFinalizedTag$: z.ZodNativeEnum<typeof PaymentResponseFinalizedTag> =
+    z.nativeEnum(PaymentResponseFinalizedTag);
 
 /** @internal */
-export const Status$ = z.nativeEnum(Status);
+export const Status$: z.ZodNativeEnum<typeof Status> = z.nativeEnum(Status);
 
 /** @internal */
 export namespace PaymentResponseFinalized$ {

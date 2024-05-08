@@ -30,7 +30,7 @@ export type Amount = {
 };
 
 /** @internal */
-export const Currency$ = z.nativeEnum(Currency);
+export const Currency$: z.ZodNativeEnum<typeof Currency> = z.nativeEnum(Currency);
 
 /** @internal */
 export namespace Amount$ {

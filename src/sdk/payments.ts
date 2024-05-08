@@ -37,12 +37,12 @@ export class Payments extends ClientSDK {
     }
 
     private _guest?: Guest;
-    get guest() {
+    get guest(): Guest {
         return (this._guest ??= new Guest(this.options$));
     }
 
     private _loggedIn?: LoggedIn;
-    get loggedIn() {
+    get loggedIn(): LoggedIn {
         return (this._loggedIn ??= new LoggedIn(this.options$));
     }
 }

@@ -125,7 +125,8 @@ export type AddressReferenceExplicitInput = {
 };
 
 /** @internal */
-export const AddressReferenceExplicitTag$ = z.nativeEnum(AddressReferenceExplicitTag);
+export const AddressReferenceExplicitTag$: z.ZodNativeEnum<typeof AddressReferenceExplicitTag> =
+    z.nativeEnum(AddressReferenceExplicitTag);
 
 /** @internal */
 export namespace AddressReferenceExplicit$ {
