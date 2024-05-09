@@ -32,9 +32,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 });
 
 async function run() {
-  const xPublishableKey = "<value>";
-  
-  const result = await boltTypescriptSDK.account.getDetails(xPublishableKey);
+  const result = await boltTypescriptSDK.account.getDetails("<value>");
 
   // Handle the result
   console.log(result)
@@ -79,8 +77,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 });
 
 async function run() {
-  const xPublishableKey = "<value>";
-  const addressListing = {
+  const result = await boltTypescriptSDK.account.addAddress("<value>", {
     firstName: "Alice",
     lastName: "Baker",
     company: "ACME Corporation",
@@ -92,9 +89,7 @@ async function run() {
     countryCode: CountryCode.Us,
     email: "alice@example.com",
     phone: "+14155550199",
-  };
-  
-  const result = await boltTypescriptSDK.account.addAddress(xPublishableKey, addressListing);
+  });
 
   // Handle the result
   console.log(result)
@@ -143,9 +138,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 });
 
 async function run() {
-  const id = "D4g3h5tBuVYK9";
-  const xPublishableKey = "<value>";
-  const addressListing = {
+  const result = await boltTypescriptSDK.account.updateAddress("D4g3h5tBuVYK9", "<value>", {
     firstName: "Alice",
     lastName: "Baker",
     company: "ACME Corporation",
@@ -157,9 +150,7 @@ async function run() {
     countryCode: CountryCode.Us,
     email: "alice@example.com",
     phone: "+14155550199",
-  };
-  
-  const result = await boltTypescriptSDK.account.updateAddress(id, xPublishableKey, addressListing);
+  });
 
   // Handle the result
   console.log(result)
@@ -207,10 +198,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 });
 
 async function run() {
-  const id = "D4g3h5tBuVYK9";
-  const xPublishableKey = "<value>";
-  
-  const result = await boltTypescriptSDK.account.deleteAddress(id, xPublishableKey);
+  const result = await boltTypescriptSDK.account.deleteAddress("D4g3h5tBuVYK9", "<value>");
 
   // Handle the result
   console.log(result)
@@ -251,7 +239,7 @@ which is documented in [Install the Bolt Tokenizer](https://help.bolt.com/develo
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { PaymentMethodAffirmTag } from "@boltpay/bolt-typescript-sdk/models/components";
+import { AddressReferenceIdTag, CreditCardNetwork, DotTag } from "@boltpay/bolt-typescript-sdk/models/components";
 
 const boltTypescriptSDK = new BoltTypescriptSDK({
   security: {
@@ -260,13 +248,18 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 });
 
 async function run() {
-  const xPublishableKey = "<value>";
-  const paymentMethod = {
-      dotTag: PaymentMethodAffirmTag.Affirm,
-      returnUrl: "www.example.com/handle_affirm_success",
-    };
-  
-  const result = await boltTypescriptSDK.account.addPaymentMethod(xPublishableKey, paymentMethod);
+  const result = await boltTypescriptSDK.account.addPaymentMethod("<value>", {
+      dotTag: DotTag.CreditCard,
+    billingAddress:     {
+          dotTag: AddressReferenceIdTag.Id,
+          id: "D4g3h5tBuVYK9",
+        },
+      network: CreditCardNetwork.Visa,
+      bin: "411111",
+      last4: "1004",
+      expiration: "2025-03",
+      token: "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0",
+    });
 
   // Handle the result
   console.log(result)
@@ -313,10 +306,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 });
 
 async function run() {
-  const id = "D4g3h5tBuVYK9";
-  const xPublishableKey = "<value>";
-  
-  const result = await boltTypescriptSDK.account.deletePaymentMethod(id, xPublishableKey);
+  const result = await boltTypescriptSDK.account.deletePaymentMethod("D4g3h5tBuVYK9", "<value>");
 
   // Handle the result
   console.log(result)

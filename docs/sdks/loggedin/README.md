@@ -17,7 +17,7 @@ Bolt when it is updated or finalized for logged in shoppers.
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { AddressReferenceIdTag, Currency, PaymentMethodAffirmTag } from "@boltpay/bolt-typescript-sdk/models/components";
+import { AddressReferenceIdTag, Currency, PaymentMethodReferenceTag } from "@boltpay/bolt-typescript-sdk/models/components";
 
 const boltTypescriptSDK = new BoltTypescriptSDK({
   security: {
@@ -26,8 +26,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 });
 
 async function run() {
-  const xPublishableKey = "<value>";
-  const paymentInitializeRequest = {
+  const result = await boltTypescriptSDK.payments.loggedIn.initialize("<value>", {
     cart: {
       orderReference: "order_100",
       orderDescription: "Order #1234567890",
@@ -40,7 +39,7 @@ async function run() {
             },
           cost: {
             currency: Currency.Usd,
-            units: 900,
+            units: 10000,
           },
           carrier: "FedEx",
         },
@@ -49,7 +48,7 @@ async function run() {
         {
           amount: {
             currency: Currency.Usd,
-            units: 900,
+            units: 10000,
           },
           code: "SUMMER10DISCOUNT",
           detailsUrl: "https://www.example.com/SUMMER-SALE",
@@ -62,29 +61,27 @@ async function run() {
           description: "Large tote with Bolt logo.",
           totalAmount: {
             currency: Currency.Usd,
-            units: 900,
+            units: 9000,
           },
           unitPrice: 1000,
-          quantity: 1,
+          quantity: 9,
           imageUrl: "https://www.example.com/products/123456/images/1.png",
         },
       ],
       total: {
         currency: Currency.Usd,
-        units: 900,
+        units: 9000,
       },
       tax: {
         currency: Currency.Usd,
-        units: 900,
+        units: 100,
       },
     },
   paymentMethod:     {
-        dotTag: PaymentMethodAffirmTag.Affirm,
-        returnUrl: "www.example.com/handle_affirm_success",
+        dotTag: PaymentMethodReferenceTag.Id,
+        id: "X5h6j8uLpVGK",
       },
-  };
-  
-  const result = await boltTypescriptSDK.payments.loggedIn.initialize(xPublishableKey, paymentInitializeRequest);
+  });
 
   // Handle the result
   console.log(result)
@@ -131,9 +128,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 });
 
 async function run() {
-  const id = "iKv7t5bgt1gg";
-  const xPublishableKey = "<value>";
-  const paymentUpdateRequest = {
+  const result = await boltTypescriptSDK.payments.loggedIn.update("iKv7t5bgt1gg", "<value>", {
     cart: {
       orderReference: "order_100",
       orderDescription: "Order #1234567890",
@@ -194,9 +189,7 @@ async function run() {
         units: 900,
       },
     },
-  };
-  
-  const result = await boltTypescriptSDK.payments.loggedIn.update(id, xPublishableKey, paymentUpdateRequest);
+  });
 
   // Handle the result
   console.log(result)
@@ -244,14 +237,10 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 });
 
 async function run() {
-  const id = "iKv7t5bgt1gg";
-  const xPublishableKey = "<value>";
-  const paymentActionRequest = {
+  const result = await boltTypescriptSDK.payments.loggedIn.performAction("iKv7t5bgt1gg", "<value>", {
     dotTag: PaymentActionRequestTag.Finalize,
     redirectResult: "eyJ0cmFuc",
-  };
-  
-  const result = await boltTypescriptSDK.payments.loggedIn.performAction(id, xPublishableKey, paymentActionRequest);
+  });
 
   // Handle the result
   console.log(result)

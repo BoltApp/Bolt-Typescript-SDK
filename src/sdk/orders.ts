@@ -97,7 +97,7 @@ export class Orders extends ClientSDK {
         };
 
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
-        const request = this.createRequest$(
+        const request$ = this.createRequest$(
             context,
             {
                 security: securitySettings$,
@@ -110,7 +110,7 @@ export class Orders extends ClientSDK {
             options
         );
 
-        const response = await this.do$(request, doOptions);
+        const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",

@@ -19,42 +19,31 @@ Create an order that was placed outside the Bolt ecosystem.
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { AddressReferenceExplicitTag, CountryCode, Currency } from "@boltpay/bolt-typescript-sdk/models/components";
+import { AddressReferenceIdTag, Currency } from "@boltpay/bolt-typescript-sdk/models/components";
 
 const boltTypescriptSDK = new BoltTypescriptSDK();
 
 async function run() {
-  const xPublishableKey = "<value>";
-  const order = {
+  const result = await boltTypescriptSDK.orders.ordersCreate("<YOUR_API_KEY_HERE>", "<value>", {
     profile: {
-      firstName: "Alice",
-      lastName: "Baker",
-      email: "alice@example.com",
-      phone: "+14155550199",
+      firstName: "Charlie",
+      lastName: "Dunn",
+      email: "charlie@example.com",
+      phone: "+14085551111",
     },
     cart: {
-      orderReference: "order_100",
-      orderDescription: "Order #1234567890",
-      displayId: "215614191",
+      orderReference: "instore_20240116-878",
+      orderDescription: "Order #878",
+      displayId: "20240116-878",
       shipments: [
         {
         address:     {
-              dotTag: AddressReferenceExplicitTag.Explicit,
-              firstName: "Alice",
-              lastName: "Baker",
-              company: "ACME Corporation",
-              streetAddress1: "535 Mission St, Ste 1401",
-              streetAddress2: "c/o Shipping Department",
-              locality: "San Francisco",
-              postalCode: "94105",
-              region: "CA",
-              countryCode: CountryCode.Us,
-              email: "alice@example.com",
-              phone: "+14155550199",
+              dotTag: AddressReferenceIdTag.Id,
+              id: "D4g3h5tBuVYK9",
             },
           cost: {
             currency: Currency.Usd,
-            units: 900,
+            units: 10000,
           },
           carrier: "FedEx",
         },
@@ -71,31 +60,28 @@ async function run() {
       ],
       items: [
         {
-          name: "Bolt Swag Bag",
-          reference: "item_100",
-          description: "Large tote with Bolt logo.",
+          name: "Red Fidget Spinner",
+          reference: "sku-984",
+          description: "Single-packed fidget spinner, red",
           totalAmount: {
             currency: Currency.Usd,
-            units: 900,
+            units: 1000,
           },
           unitPrice: 1000,
           quantity: 1,
-          imageUrl: "https://www.example.com/products/123456/images/1.png",
+          imageUrl: "https://www.example.com/products/984/image.png",
         },
       ],
       total: {
         currency: Currency.Usd,
-        units: 900,
+        units: 1000,
       },
       tax: {
         currency: Currency.Usd,
-        units: 900,
+        units: 100,
       },
     },
-  };
-  const operationSecurity = "<YOUR_API_KEY_HERE>";
-  
-  const result = await boltTypescriptSDK.orders.ordersCreate(operationSecurity, xPublishableKey, order);
+  });
 
   // Handle the result
   console.log(result)

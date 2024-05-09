@@ -3,20 +3,22 @@ id: 79fa0df9-852a-493c-b998-1d82654b5f18
 management:
   docChecksum: 52a4491de6268327ef41bf826024fc20
   docVersion: 3.0.3
-  speakeasyVersion: 1.283.1
-  generationVersion: 2.324.0
-  releaseVersion: 0.13.0
-  configChecksum: 0d9d31cf103e4d1a4d96305e0f837c95
+  speakeasyVersion: 1.285.1
+  generationVersion: 2.326.3
+  releaseVersion: 0.14.0
+  configChecksum: 613ebd90b351487c6a5b6d86dbe736aa
   repoURL: https://github.com/BoltApp/Bolt-Typescript-SDK.git
   repoSubDirectory: .
   installationURL: https://github.com/BoltApp/Bolt-Typescript-SDK
   published: true
 features:
   typescript:
+    additionalDependencies: 0.1.0
     core: 3.9.3
     errorUnions: 0.1.0
     flattening: 2.81.1
     globalSecurity: 2.82.9
+    globalSecurityCallbacks: 0.1.0
     globalServerURLs: 2.82.4
     groups: 2.81.2
     ignores: 2.81.1
@@ -24,6 +26,7 @@ features:
     methodSecurity: 2.82.4
     nameOverrides: 2.81.2
     responseFormat: 0.2.3
+    sdkHooks: 0.1.0
     unions: 2.85.4
 generatedFiles:
   - src/sdk/account.ts

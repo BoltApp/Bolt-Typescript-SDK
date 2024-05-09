@@ -99,7 +99,7 @@ export class Testing extends ClientSDK {
         };
 
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
-        const request = this.createRequest$(
+        const request$ = this.createRequest$(
             context,
             {
                 security: securitySettings$,
@@ -112,7 +112,7 @@ export class Testing extends ClientSDK {
             options
         );
 
-        const response = await this.do$(request, doOptions);
+        const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
@@ -219,7 +219,7 @@ export class Testing extends ClientSDK {
         };
 
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
-        const request = this.createRequest$(
+        const request$ = this.createRequest$(
             context,
             {
                 security: securitySettings$,
@@ -232,7 +232,7 @@ export class Testing extends ClientSDK {
             options
         );
 
-        const response = await this.do$(request, doOptions);
+        const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
@@ -293,17 +293,18 @@ export class Testing extends ClientSDK {
      *
      */
     async getCreditCard(
-        input: operations.TestingCreditCardGetRequestBody,
+        request: operations.TestingCreditCardGetRequestBody,
         security: operations.TestingCreditCardGetSecurity,
         options?: RequestOptions
     ): Promise<operations.TestingCreditCardGetResponse> {
+        const input$ = request;
         const headers$ = new Headers();
         headers$.set("user-agent", SDK_METADATA.userAgent);
         headers$.set("Content-Type", "application/json");
         headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
-            input,
+            input$,
             (value$) => operations.TestingCreditCardGetRequestBody$.outboundSchema.parse(value$),
             "Input validation failed"
         );
@@ -330,7 +331,7 @@ export class Testing extends ClientSDK {
         };
 
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
-        const request = this.createRequest$(
+        const request$ = this.createRequest$(
             context,
             {
                 security: securitySettings$,
@@ -343,7 +344,7 @@ export class Testing extends ClientSDK {
             options
         );
 
-        const response = await this.do$(request, doOptions);
+        const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",

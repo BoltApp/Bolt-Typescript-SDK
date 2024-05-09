@@ -27,17 +27,13 @@ import { EmailState, PhoneState } from "@boltpay/bolt-typescript-sdk/models/comp
 const boltTypescriptSDK = new BoltTypescriptSDK();
 
 async function run() {
-  const xPublishableKey = "<value>";
-  const accountTestCreationData = {
+  const result = await boltTypescriptSDK.testing.createAccount("<YOUR_API_KEY_HERE>", "<value>", {
     emailState: EmailState.Unverified,
     phoneState: PhoneState.Verified,
     isMigrated: true,
     hasAddress: true,
     hasCreditCard: true,
-  };
-  const operationSecurity = "<YOUR_API_KEY_HERE>";
-  
-  const result = await boltTypescriptSDK.testing.createAccount(operationSecurity, xPublishableKey, accountTestCreationData);
+  });
 
   // Handle the result
   console.log(result)
@@ -80,10 +76,7 @@ import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 const boltTypescriptSDK = new BoltTypescriptSDK();
 
 async function run() {
-  const xPublishableKey = "<value>";
-  const operationSecurity = "<YOUR_API_KEY_HERE>";
-  
-  const result = await boltTypescriptSDK.testing.testingAccountPhoneGet(operationSecurity, xPublishableKey);
+  const result = await boltTypescriptSDK.testing.testingAccountPhoneGet("<YOUR_API_KEY_HERE>", "<value>");
 
   // Handle the result
   console.log(result)
@@ -126,11 +119,9 @@ import { Type } from "@boltpay/bolt-typescript-sdk/models/operations";
 const boltTypescriptSDK = new BoltTypescriptSDK();
 
 async function run() {
-  const operationSecurity = "<YOUR_API_KEY_HERE>";
-  
   const result = await boltTypescriptSDK.testing.getCreditCard({
     type: Type.Approve,
-  }, operationSecurity);
+  }, "<YOUR_API_KEY_HERE>");
 
   // Handle the result
   console.log(result)

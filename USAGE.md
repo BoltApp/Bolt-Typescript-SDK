@@ -9,9 +9,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 });
 
 async function run() {
-    const xPublishableKey = "<value>";
-
-    const result = await boltTypescriptSDK.account.getDetails(xPublishableKey);
+    const result = await boltTypescriptSDK.account.getDetails("<value>");
 
     // Handle the result
     console.log(result);

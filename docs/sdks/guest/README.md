@@ -17,13 +17,12 @@ Bolt when it is updated or finalized for guest shoppers.
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { AddressReferenceIdTag, Currency, PaymentMethodAffirmTag } from "@boltpay/bolt-typescript-sdk/models/components";
+import { AddressReferenceIdTag, CreditCardNetwork, Currency, DotTag } from "@boltpay/bolt-typescript-sdk/models/components";
 
 const boltTypescriptSDK = new BoltTypescriptSDK();
 
 async function run() {
-  const xPublishableKey = "<value>";
-  const guestPaymentInitializeRequest = {
+  const result = await boltTypescriptSDK.payments.guest.initialize("<YOUR_API_KEY_HERE>", "<value>", {
     profile: {
       createAccount: true,
       firstName: "Alice",
@@ -43,7 +42,7 @@ async function run() {
             },
           cost: {
             currency: Currency.Usd,
-            units: 900,
+            units: 10000,
           },
           carrier: "FedEx",
         },
@@ -52,7 +51,7 @@ async function run() {
         {
           amount: {
             currency: Currency.Usd,
-            units: 900,
+            units: 10000,
           },
           code: "SUMMER10DISCOUNT",
           detailsUrl: "https://www.example.com/SUMMER-SALE",
@@ -65,30 +64,35 @@ async function run() {
           description: "Large tote with Bolt logo.",
           totalAmount: {
             currency: Currency.Usd,
-            units: 900,
+            units: 9000,
           },
           unitPrice: 1000,
-          quantity: 1,
+          quantity: 9,
           imageUrl: "https://www.example.com/products/123456/images/1.png",
         },
       ],
       total: {
         currency: Currency.Usd,
-        units: 900,
+        units: 9000,
       },
       tax: {
         currency: Currency.Usd,
-        units: 900,
+        units: 100,
       },
     },
   paymentMethod:     {
-        dotTag: PaymentMethodAffirmTag.Affirm,
-        returnUrl: "www.example.com/handle_affirm_success",
+        dotTag: DotTag.CreditCard,
+      billingAddress:     {
+            dotTag: AddressReferenceIdTag.Id,
+            id: "D4g3h5tBuVYK9",
+          },
+        network: CreditCardNetwork.Visa,
+        bin: "411111",
+        last4: "1004",
+        expiration: "2025-03",
+        token: "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0",
       },
-  };
-  const operationSecurity = "<YOUR_API_KEY_HERE>";
-  
-  const result = await boltTypescriptSDK.payments.guest.initialize(operationSecurity, xPublishableKey, guestPaymentInitializeRequest);
+  });
 
   // Handle the result
   console.log(result)
@@ -132,9 +136,7 @@ import { AddressReferenceExplicitTag, CountryCode, Currency } from "@boltpay/bol
 const boltTypescriptSDK = new BoltTypescriptSDK();
 
 async function run() {
-  const id = "iKv7t5bgt1gg";
-  const xPublishableKey = "<value>";
-  const paymentUpdateRequest = {
+  const result = await boltTypescriptSDK.payments.guest.update("<YOUR_API_KEY_HERE>", "iKv7t5bgt1gg", "<value>", {
     cart: {
       orderReference: "order_100",
       orderDescription: "Order #1234567890",
@@ -195,10 +197,7 @@ async function run() {
         units: 900,
       },
     },
-  };
-  const operationSecurity = "<YOUR_API_KEY_HERE>";
-  
-  const result = await boltTypescriptSDK.payments.guest.update(operationSecurity, id, xPublishableKey, paymentUpdateRequest);
+  });
 
   // Handle the result
   console.log(result)
@@ -243,15 +242,10 @@ import { PaymentActionRequestTag } from "@boltpay/bolt-typescript-sdk/models/com
 const boltTypescriptSDK = new BoltTypescriptSDK();
 
 async function run() {
-  const id = "iKv7t5bgt1gg";
-  const xPublishableKey = "<value>";
-  const paymentActionRequest = {
+  const result = await boltTypescriptSDK.payments.guest.performAction("<YOUR_API_KEY_HERE>", "iKv7t5bgt1gg", "<value>", {
     dotTag: PaymentActionRequestTag.Finalize,
     redirectResult: "eyJ0cmFuc",
-  };
-  const operationSecurity = "<YOUR_API_KEY_HERE>";
-  
-  const result = await boltTypescriptSDK.payments.guest.performAction(operationSecurity, id, xPublishableKey, paymentActionRequest);
+  });
 
   // Handle the result
   console.log(result)

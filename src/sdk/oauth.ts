@@ -46,16 +46,17 @@ export class OAuth extends ClientSDK {
      * Retrieve a new or refresh an existing OAuth token.
      */
     async getToken(
-        input: components.TokenRequest,
+        request: components.TokenRequest,
         options?: RequestOptions
     ): Promise<operations.OauthGetTokenResponse> {
+        const input$ = request;
         const headers$ = new Headers();
         headers$.set("user-agent", SDK_METADATA.userAgent);
         headers$.set("Content-Type", "application/x-www-form-urlencoded");
         headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
-            input,
+            input$,
             (value$) => components.TokenRequest$.outboundSchema.parse(value$),
             "Input validation failed"
         );
@@ -72,13 +73,13 @@ export class OAuth extends ClientSDK {
         const context = { operationID: "oauthGetToken", oAuth2Scopes: [], securitySource: null };
 
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
-        const request = this.createRequest$(
+        const request$ = this.createRequest$(
             context,
             { method: "POST", path: path$, headers: headers$, query: query$, body: body$ },
             options
         );
 
-        const response = await this.do$(request, doOptions);
+        const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",

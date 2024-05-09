@@ -35,9 +35,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 });
 
 async function run() {
-    const xPublishableKey = "<value>";
-
-    const result = await boltTypescriptSDK.account.getDetails(xPublishableKey);
+    const result = await boltTypescriptSDK.account.getDetails("<value>");
 
     // Handle the result
     console.log(result);
@@ -112,11 +110,9 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 });
 
 async function run() {
-    const xPublishableKey = "<value>";
-
     let result;
     try {
-        result = await boltTypescriptSDK.account.getDetails(xPublishableKey);
+        result = await boltTypescriptSDK.account.getDetails("<value>");
     } catch (err) {
         switch (true) {
             case err instanceof errors.SDKValidationError: {
@@ -167,9 +163,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 });
 
 async function run() {
-    const xPublishableKey = "<value>";
-
-    const result = await boltTypescriptSDK.account.getDetails(xPublishableKey);
+    const result = await boltTypescriptSDK.account.getDetails("<value>");
 
     // Handle the result
     console.log(result);
@@ -199,9 +193,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 });
 
 async function run() {
-    const xPublishableKey = "<value>";
-
-    const result = await boltTypescriptSDK.account.getDetails(xPublishableKey);
+    const result = await boltTypescriptSDK.account.getDetails("<value>");
 
     // Handle the result
     console.log(result);
@@ -242,7 +234,7 @@ const httpClient = new HTTPClient({
 
 httpClient.addHook("beforeRequest", (request) => {
   const nextRequest = new Request(request, {
-    signal: request.signal || AbortSignal.timeout(5000);
+    signal: request.signal || AbortSignal.timeout(5000)
   });
 
   nextRequest.headers.set("x-custom-header", "custom value");
@@ -284,9 +276,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 });
 
 async function run() {
-    const xPublishableKey = "<value>";
-
-    const result = await boltTypescriptSDK.account.getDetails(xPublishableKey);
+    const result = await boltTypescriptSDK.account.getDetails("<value>");
 
     // Handle the result
     console.log(result);
@@ -303,83 +293,88 @@ Some operations in this SDK require the security scheme to be specified at the r
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import {
     AddressReferenceIdTag,
+    CreditCardNetwork,
     Currency,
-    PaymentMethodAffirmTag,
+    DotTag,
 } from "@boltpay/bolt-typescript-sdk/models/components";
 
 const boltTypescriptSDK = new BoltTypescriptSDK();
 
 async function run() {
-    const xPublishableKey = "<value>";
-    const guestPaymentInitializeRequest = {
-        profile: {
-            createAccount: true,
-            firstName: "Alice",
-            lastName: "Baker",
-            email: "alice@example.com",
-            phone: "+14155550199",
-        },
-        cart: {
-            orderReference: "order_100",
-            orderDescription: "Order #1234567890",
-            displayId: "215614191",
-            shipments: [
-                {
-                    address: {
-                        dotTag: AddressReferenceIdTag.Id,
-                        id: "D4g3h5tBuVYK9",
-                    },
-                    cost: {
-                        currency: Currency.Usd,
-                        units: 900,
-                    },
-                    carrier: "FedEx",
-                },
-            ],
-            discounts: [
-                {
-                    amount: {
-                        currency: Currency.Usd,
-                        units: 900,
-                    },
-                    code: "SUMMER10DISCOUNT",
-                    detailsUrl: "https://www.example.com/SUMMER-SALE",
-                },
-            ],
-            items: [
-                {
-                    name: "Bolt Swag Bag",
-                    reference: "item_100",
-                    description: "Large tote with Bolt logo.",
-                    totalAmount: {
-                        currency: Currency.Usd,
-                        units: 900,
-                    },
-                    unitPrice: 1000,
-                    quantity: 1,
-                    imageUrl: "https://www.example.com/products/123456/images/1.png",
-                },
-            ],
-            total: {
-                currency: Currency.Usd,
-                units: 900,
-            },
-            tax: {
-                currency: Currency.Usd,
-                units: 900,
-            },
-        },
-        paymentMethod: {
-            dotTag: PaymentMethodAffirmTag.Affirm,
-            returnUrl: "www.example.com/handle_affirm_success",
-        },
-    };
-    const operationSecurity = "<YOUR_API_KEY_HERE>";
-
     const result = await boltTypescriptSDK.payments.guest.initialize(
-        operationSecurity,
-        xPublishableKey,
-        guestPaymentInitializeRequest
+        "<YOUR_API_KEY_HERE>",
+        "<value>",
+        {
+            profile: {
+                createAccount: true,
+                firstName: "Alice",
+                lastName: "Baker",
+                email: "alice@example.com",
+                phone: "+14155550199",
+            },
+            cart: {
+                orderReference: "order_100",
+                orderDescription: "Order #1234567890",
+                displayId: "215614191",
+                shipments: [
+                    {
+                        address: {
+                            dotTag: AddressReferenceIdTag.Id,
+                            id: "D4g3h5tBuVYK9",
+                        },
+                        cost: {
+                            currency: Currency.Usd,
+                            units: 10000,
+                        },
+                        carrier: "FedEx",
+                    },
+                ],
+                discounts: [
+                    {
+                        amount: {
+                            currency: Currency.Usd,
+                            units: 10000,
+                        },
+                        code: "SUMMER10DISCOUNT",
+                        detailsUrl: "https://www.example.com/SUMMER-SALE",
+                    },
+                ],
+                items: [
+                    {
+                        name: "Bolt Swag Bag",
+                        reference: "item_100",
+                        description: "Large tote with Bolt logo.",
+                        totalAmount: {
+                            currency: Currency.Usd,
+                            units: 9000,
+                        },
+                        unitPrice: 1000,
+                        quantity: 9,
+                        imageUrl: "https://www.example.com/products/123456/images/1.png",
+                    },
+                ],
+                total: {
+                    currency: Currency.Usd,
+                    units: 9000,
+                },
+                tax: {
+                    currency: Currency.Usd,
+                    units: 100,
+                },
+            },
+            paymentMethod: {
+                dotTag: DotTag.CreditCard,
+                billingAddress: {
+                    dotTag: AddressReferenceIdTag.Id,
+                    id: "D4g3h5tBuVYK9",
+                },
+                network: CreditCardNetwork.Visa,
+                bin: "411111",
+                last4: "1004",
+                expiration: "2025-03",
+                token: "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0",
+            },
+        }
     );
 
     // Handle the result

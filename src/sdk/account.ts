@@ -88,7 +88,7 @@ export class Account extends ClientSDK {
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
-        const request = this.createRequest$(
+        const request$ = this.createRequest$(
             context,
             {
                 security: securitySettings$,
@@ -101,7 +101,7 @@ export class Account extends ClientSDK {
             options
         );
 
-        const response = await this.do$(request, doOptions);
+        const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
@@ -206,7 +206,7 @@ export class Account extends ClientSDK {
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
-        const request = this.createRequest$(
+        const request$ = this.createRequest$(
             context,
             {
                 security: securitySettings$,
@@ -219,7 +219,7 @@ export class Account extends ClientSDK {
             options
         );
 
-        const response = await this.do$(request, doOptions);
+        const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
@@ -332,7 +332,7 @@ export class Account extends ClientSDK {
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
-        const request = this.createRequest$(
+        const request$ = this.createRequest$(
             context,
             {
                 security: securitySettings$,
@@ -345,7 +345,7 @@ export class Account extends ClientSDK {
             options
         );
 
-        const response = await this.do$(request, doOptions);
+        const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
@@ -454,7 +454,7 @@ export class Account extends ClientSDK {
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
-        const request = this.createRequest$(
+        const request$ = this.createRequest$(
             context,
             {
                 security: securitySettings$,
@@ -467,7 +467,7 @@ export class Account extends ClientSDK {
             options
         );
 
-        const response = await this.do$(request, doOptions);
+        const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
@@ -563,7 +563,7 @@ export class Account extends ClientSDK {
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
-        const request = this.createRequest$(
+        const request$ = this.createRequest$(
             context,
             {
                 security: securitySettings$,
@@ -576,7 +576,7 @@ export class Account extends ClientSDK {
             options
         );
 
-        const response = await this.do$(request, doOptions);
+        const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
@@ -685,7 +685,7 @@ export class Account extends ClientSDK {
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
         const doOptions = { context, errorCodes: ["4XX", "5XX"] };
-        const request = this.createRequest$(
+        const request$ = this.createRequest$(
             context,
             {
                 security: securitySettings$,
@@ -698,7 +698,7 @@ export class Account extends ClientSDK {
             options
         );
 
-        const response = await this.do$(request, doOptions);
+        const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
