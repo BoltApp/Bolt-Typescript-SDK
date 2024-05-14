@@ -34,12 +34,7 @@ export type AccountAddPaymentMethodResponse = {
 
 /** @internal */
 export namespace AccountAddPaymentMethodRequest$ {
-    export type Inbound = {
-        "X-Publishable-Key": string;
-        "payment-method": components.PaymentMethodInput$.Inbound;
-    };
-
-    export const inboundSchema: z.ZodType<AccountAddPaymentMethodRequest, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<AccountAddPaymentMethodRequest, z.ZodTypeDef, unknown> = z
         .object({
             "X-Publishable-Key": z.string(),
             "payment-method": components.PaymentMethodInput$.inboundSchema,
@@ -72,14 +67,7 @@ export namespace AccountAddPaymentMethodRequest$ {
 
 /** @internal */
 export namespace AccountAddPaymentMethodResponse$ {
-    export type Inbound = {
-        ContentType: string;
-        StatusCode: number;
-        RawResponse: Response;
-        "payment-method"?: components.PaymentMethod$.Inbound | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<AccountAddPaymentMethodResponse, z.ZodTypeDef, Inbound> =
+    export const inboundSchema: z.ZodType<AccountAddPaymentMethodResponse, z.ZodTypeDef, unknown> =
         z
             .object({
                 ContentType: z.string(),

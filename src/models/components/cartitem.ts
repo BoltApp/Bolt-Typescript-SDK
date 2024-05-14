@@ -38,17 +38,7 @@ export type CartItem = {
 
 /** @internal */
 export namespace CartItem$ {
-    export type Inbound = {
-        name: string;
-        reference: string;
-        description?: string | undefined;
-        total_amount: Amount$.Inbound;
-        unit_price: number;
-        quantity: number;
-        image_url?: string | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<CartItem, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<CartItem, z.ZodTypeDef, unknown> = z
         .object({
             name: z.string(),
             reference: z.string(),

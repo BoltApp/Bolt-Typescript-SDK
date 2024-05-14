@@ -42,11 +42,7 @@ export type GuestPaymentsUpdateResponse = {
 
 /** @internal */
 export namespace GuestPaymentsUpdateSecurity$ {
-    export type Inbound = {
-        "api-key": string;
-    };
-
-    export const inboundSchema: z.ZodType<GuestPaymentsUpdateSecurity, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<GuestPaymentsUpdateSecurity, z.ZodTypeDef, unknown> = z
         .object({
             "api-key": z.string(),
         })
@@ -73,13 +69,7 @@ export namespace GuestPaymentsUpdateSecurity$ {
 
 /** @internal */
 export namespace GuestPaymentsUpdateRequest$ {
-    export type Inbound = {
-        id: string;
-        "X-Publishable-Key": string;
-        "payment-update-request": components.PaymentUpdateRequest$.Inbound;
-    };
-
-    export const inboundSchema: z.ZodType<GuestPaymentsUpdateRequest, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<GuestPaymentsUpdateRequest, z.ZodTypeDef, unknown> = z
         .object({
             id: z.string(),
             "X-Publishable-Key": z.string(),
@@ -116,14 +106,7 @@ export namespace GuestPaymentsUpdateRequest$ {
 
 /** @internal */
 export namespace GuestPaymentsUpdateResponse$ {
-    export type Inbound = {
-        ContentType: string;
-        StatusCode: number;
-        RawResponse: Response;
-        "payment-response"?: components.PaymentResponse$.Inbound | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<GuestPaymentsUpdateResponse, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<GuestPaymentsUpdateResponse, z.ZodTypeDef, unknown> = z
         .object({
             ContentType: z.string(),
             StatusCode: z.number().int(),

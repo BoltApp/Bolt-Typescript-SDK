@@ -36,18 +36,7 @@ export type Cart = {
 
 /** @internal */
 export namespace Cart$ {
-    export type Inbound = {
-        order_reference: string;
-        order_description?: string | undefined;
-        display_id?: string | undefined;
-        shipments?: Array<CartShipment$.Inbound> | undefined;
-        discounts?: Array<CartDiscount$.Inbound> | undefined;
-        items?: Array<CartItem$.Inbound> | undefined;
-        total: Amount$.Inbound;
-        tax: Amount$.Inbound;
-    };
-
-    export const inboundSchema: z.ZodType<Cart, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<Cart, z.ZodTypeDef, unknown> = z
         .object({
             order_reference: z.string(),
             order_description: z.string().optional(),

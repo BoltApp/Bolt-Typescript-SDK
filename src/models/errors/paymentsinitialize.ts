@@ -15,24 +15,19 @@ export type PaymentsInitializeResponseBody = ErrorT | FieldError | CartError | C
 
 /** @internal */
 export namespace PaymentsInitializeResponseBody$ {
-    export type Inbound =
-        | ErrorT$.Inbound
-        | FieldError$.Inbound
-        | CartError$.Inbound
-        | CreditCardError$.Inbound;
-
-    export type Outbound =
-        | ErrorT$.Outbound
-        | FieldError$.Outbound
-        | CartError$.Outbound
-        | CreditCardError$.Outbound;
-    export const inboundSchema: z.ZodType<PaymentsInitializeResponseBody, z.ZodTypeDef, Inbound> =
+    export const inboundSchema: z.ZodType<PaymentsInitializeResponseBody, z.ZodTypeDef, unknown> =
         z.union([
             ErrorT$.inboundSchema,
             FieldError$.inboundSchema,
             CartError$.inboundSchema,
             CreditCardError$.inboundSchema,
         ]);
+
+    export type Outbound =
+        | ErrorT$.Outbound
+        | FieldError$.Outbound
+        | CartError$.Outbound
+        | CreditCardError$.Outbound;
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentsInitializeResponseBody> =
         z.union([
             ErrorT$.outboundSchema,

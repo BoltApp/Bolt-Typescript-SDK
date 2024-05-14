@@ -41,16 +41,7 @@ export const PhoneState$: z.ZodNativeEnum<typeof PhoneState> = z.nativeEnum(Phon
 
 /** @internal */
 export namespace AccountTestCreationDataOutput$ {
-    export type Inbound = {
-        email: string;
-        email_state: EmailState;
-        phone: string;
-        phone_state: PhoneState;
-        otp_code: string;
-        oauth_code: string;
-    };
-
-    export const inboundSchema: z.ZodType<AccountTestCreationDataOutput, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<AccountTestCreationDataOutput, z.ZodTypeDef, unknown> = z
         .object({
             email: z.string(),
             email_state: EmailState$,
@@ -103,15 +94,7 @@ export namespace AccountTestCreationDataOutput$ {
 
 /** @internal */
 export namespace AccountTestCreationData$ {
-    export type Inbound = {
-        email_state: EmailState;
-        phone_state: PhoneState;
-        is_migrated?: boolean | undefined;
-        has_address?: boolean | undefined;
-        has_credit_card?: boolean | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<AccountTestCreationData, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<AccountTestCreationData, z.ZodTypeDef, unknown> = z
         .object({
             email_state: EmailState$,
             phone_state: PhoneState$,

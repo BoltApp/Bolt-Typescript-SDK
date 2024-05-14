@@ -13,11 +13,10 @@ export type PaymentsActionResponseBody = ErrorT | FieldError;
 
 /** @internal */
 export namespace PaymentsActionResponseBody$ {
-    export type Inbound = ErrorT$.Inbound | FieldError$.Inbound;
+    export const inboundSchema: z.ZodType<PaymentsActionResponseBody, z.ZodTypeDef, unknown> =
+        z.union([ErrorT$.inboundSchema, FieldError$.inboundSchema]);
 
     export type Outbound = ErrorT$.Outbound | FieldError$.Outbound;
-    export const inboundSchema: z.ZodType<PaymentsActionResponseBody, z.ZodTypeDef, Inbound> =
-        z.union([ErrorT$.inboundSchema, FieldError$.inboundSchema]);
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentsActionResponseBody> =
         z.union([ErrorT$.outboundSchema, FieldError$.outboundSchema]);
 }

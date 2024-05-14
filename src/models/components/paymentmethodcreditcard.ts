@@ -59,16 +59,7 @@ export const DotTag$: z.ZodNativeEnum<typeof DotTag> = z.nativeEnum(DotTag);
 
 /** @internal */
 export namespace PaymentMethodCreditCard$ {
-    export type Inbound = {
-        ".tag": DotTag;
-        id?: string | undefined;
-        billing_address: AddressReference$.Inbound;
-        network: CreditCardNetwork;
-        last4: string;
-        expiration: string;
-    };
-
-    export const inboundSchema: z.ZodType<PaymentMethodCreditCard, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<PaymentMethodCreditCard, z.ZodTypeDef, unknown> = z
         .object({
             ".tag": DotTag$,
             id: z.string().optional(),
@@ -120,17 +111,7 @@ export namespace PaymentMethodCreditCard$ {
 
 /** @internal */
 export namespace PaymentMethodCreditCardInput$ {
-    export type Inbound = {
-        ".tag": DotTag;
-        billing_address: AddressReferenceInput$.Inbound;
-        network: CreditCardNetwork;
-        bin: string;
-        last4: string;
-        expiration: string;
-        token: string;
-    };
-
-    export const inboundSchema: z.ZodType<PaymentMethodCreditCardInput, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<PaymentMethodCreditCardInput, z.ZodTypeDef, unknown> = z
         .object({
             ".tag": DotTag$,
             billing_address: AddressReferenceInput$.inboundSchema,

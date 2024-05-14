@@ -245,29 +245,7 @@ export const DotTag$: z.ZodNativeEnum<typeof DotTag> = z.nativeEnum(DotTag);
 
 /** @internal */
 export namespace ErrorT$ {
-    export type Inbound = {
-        ".tag": DotTag;
-        message: string;
-        RawResponse?: Response | undefined;
-        RawResponse1?: Response | undefined;
-        RawResponse2?: Response | undefined;
-        RawResponse3?: Response | undefined;
-        RawResponse4?: Response | undefined;
-        RawResponse5?: Response | undefined;
-        RawResponse6?: Response | undefined;
-        RawResponse7?: Response | undefined;
-        RawResponse8?: Response | undefined;
-        RawResponse9?: Response | undefined;
-        RawResponse10?: Response | undefined;
-        RawResponse11?: Response | undefined;
-        RawResponse12?: Response | undefined;
-        RawResponse13?: Response | undefined;
-        RawResponse14?: Response | undefined;
-        RawResponse15?: Response | undefined;
-        RawResponse16?: Response | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<ErrorT, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<ErrorT, z.ZodTypeDef, unknown> = z
         .object({
             ".tag": DotTag$,
             message: z.string(),

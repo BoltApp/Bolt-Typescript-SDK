@@ -13,11 +13,10 @@ export type AccountAddressCreateResponseBody = ErrorT | FieldError;
 
 /** @internal */
 export namespace AccountAddressCreateResponseBody$ {
-    export type Inbound = ErrorT$.Inbound | FieldError$.Inbound;
+    export const inboundSchema: z.ZodType<AccountAddressCreateResponseBody, z.ZodTypeDef, unknown> =
+        z.union([ErrorT$.inboundSchema, FieldError$.inboundSchema]);
 
     export type Outbound = ErrorT$.Outbound | FieldError$.Outbound;
-    export const inboundSchema: z.ZodType<AccountAddressCreateResponseBody, z.ZodTypeDef, Inbound> =
-        z.union([ErrorT$.inboundSchema, FieldError$.inboundSchema]);
     export const outboundSchema: z.ZodType<
         Outbound,
         z.ZodTypeDef,

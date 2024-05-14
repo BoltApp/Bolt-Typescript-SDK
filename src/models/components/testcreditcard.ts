@@ -30,15 +30,7 @@ export type TestCreditCard = {
 
 /** @internal */
 export namespace TestCreditCard$ {
-    export type Inbound = {
-        network: CreditCardNetwork;
-        bin: string;
-        last4: string;
-        expiration: string;
-        token: string;
-    };
-
-    export const inboundSchema: z.ZodType<TestCreditCard, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<TestCreditCard, z.ZodTypeDef, unknown> = z
         .object({
             network: CreditCardNetwork$,
             bin: z.string(),

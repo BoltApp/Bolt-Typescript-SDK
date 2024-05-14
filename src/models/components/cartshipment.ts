@@ -20,13 +20,7 @@ export type CartShipment = {
 
 /** @internal */
 export namespace CartShipment$ {
-    export type Inbound = {
-        address?: AddressReferenceInput$.Inbound | undefined;
-        cost?: Amount$.Inbound | undefined;
-        carrier?: string | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<CartShipment, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<CartShipment, z.ZodTypeDef, unknown> = z
         .object({
             address: AddressReferenceInput$.inboundSchema.optional(),
             cost: Amount$.inboundSchema.optional(),

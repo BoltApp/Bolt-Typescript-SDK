@@ -28,12 +28,7 @@ export const AddressReferenceIdTag$: z.ZodNativeEnum<typeof AddressReferenceIdTa
 
 /** @internal */
 export namespace AddressReferenceId$ {
-    export type Inbound = {
-        ".tag": AddressReferenceIdTag;
-        id: string;
-    };
-
-    export const inboundSchema: z.ZodType<AddressReferenceId, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<AddressReferenceId, z.ZodTypeDef, unknown> = z
         .object({
             ".tag": AddressReferenceIdTag$,
             id: z.string(),

@@ -29,15 +29,7 @@ export type ProfileCreationData = {
 
 /** @internal */
 export namespace ProfileCreationData$ {
-    export type Inbound = {
-        create_account: boolean;
-        first_name: string;
-        last_name: string;
-        email: string;
-        phone?: string | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<ProfileCreationData, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<ProfileCreationData, z.ZodTypeDef, unknown> = z
         .object({
             create_account: z.boolean(),
             first_name: z.string(),

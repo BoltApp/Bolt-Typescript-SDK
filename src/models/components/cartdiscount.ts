@@ -22,13 +22,7 @@ export type CartDiscount = {
 
 /** @internal */
 export namespace CartDiscount$ {
-    export type Inbound = {
-        amount: Amount$.Inbound;
-        code?: string | undefined;
-        details_url?: string | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<CartDiscount, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<CartDiscount, z.ZodTypeDef, unknown> = z
         .object({
             amount: Amount$.inboundSchema,
             code: z.string().optional(),

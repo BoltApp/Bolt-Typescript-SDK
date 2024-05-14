@@ -33,11 +33,7 @@ export type AccountGetResponse = {
 
 /** @internal */
 export namespace AccountGetRequest$ {
-    export type Inbound = {
-        "X-Publishable-Key": string;
-    };
-
-    export const inboundSchema: z.ZodType<AccountGetRequest, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<AccountGetRequest, z.ZodTypeDef, unknown> = z
         .object({
             "X-Publishable-Key": z.string(),
         })
@@ -64,14 +60,7 @@ export namespace AccountGetRequest$ {
 
 /** @internal */
 export namespace AccountGetResponse$ {
-    export type Inbound = {
-        ContentType: string;
-        StatusCode: number;
-        RawResponse: Response;
-        account?: components.Account$.Inbound | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<AccountGetResponse, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<AccountGetResponse, z.ZodTypeDef, unknown> = z
         .object({
             ContentType: z.string(),
             StatusCode: z.number().int(),

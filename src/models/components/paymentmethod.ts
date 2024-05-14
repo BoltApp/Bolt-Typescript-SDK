@@ -50,32 +50,7 @@ export type PaymentMethod =
 
 /** @internal */
 export namespace PaymentMethod$ {
-    export type Inbound =
-        | (PaymentMethodPaypalOutput$.Inbound & { ".tag": PaymentMethodPaypalTag.Paypal })
-        | (PaymentMethodAffirmOutput$.Inbound & { ".tag": PaymentMethodAffirmTag.Affirm })
-        | (PaymentMethodAfterpayOutput$.Inbound & { ".tag": PaymentMethodAfterpayTag.Afterpay })
-        | (PaymentMethodKlarnaOutput$.Inbound & { ".tag": PaymentMethodKlarnaTag.Klarna })
-        | (PaymentMethodKlarnaAccountOutput$.Inbound & {
-              ".tag": PaymentMethodKlarnaAccountTag.KlarnaAccount;
-          })
-        | (PaymentMethodKlarnaPaynowOutput$.Inbound & {
-              ".tag": PaymentMethodKlarnaPaynowTag.KlarnaPaynow;
-          })
-        | (PaymentMethodCreditCard$.Inbound & { ".tag": DotTag.CreditCard });
-
-    export type Outbound =
-        | (PaymentMethodPaypalOutput$.Outbound & { ".tag": PaymentMethodPaypalTag.Paypal })
-        | (PaymentMethodAffirmOutput$.Outbound & { ".tag": PaymentMethodAffirmTag.Affirm })
-        | (PaymentMethodAfterpayOutput$.Outbound & { ".tag": PaymentMethodAfterpayTag.Afterpay })
-        | (PaymentMethodKlarnaOutput$.Outbound & { ".tag": PaymentMethodKlarnaTag.Klarna })
-        | (PaymentMethodKlarnaAccountOutput$.Outbound & {
-              ".tag": PaymentMethodKlarnaAccountTag.KlarnaAccount;
-          })
-        | (PaymentMethodKlarnaPaynowOutput$.Outbound & {
-              ".tag": PaymentMethodKlarnaPaynowTag.KlarnaPaynow;
-          })
-        | (PaymentMethodCreditCard$.Outbound & { ".tag": DotTag.CreditCard });
-    export const inboundSchema: z.ZodType<PaymentMethod, z.ZodTypeDef, Inbound> = z.union([
+    export const inboundSchema: z.ZodType<PaymentMethod, z.ZodTypeDef, unknown> = z.union([
         PaymentMethodPaypalOutput$.inboundSchema.and(
             z
                 .object({ ".tag": z.literal(PaymentMethodPaypalTag.Paypal) })
@@ -112,6 +87,19 @@ export namespace PaymentMethod$ {
                 .transform((v) => ({ dotTag: v[".tag"] }))
         ),
     ]);
+
+    export type Outbound =
+        | (PaymentMethodPaypalOutput$.Outbound & { ".tag": PaymentMethodPaypalTag.Paypal })
+        | (PaymentMethodAffirmOutput$.Outbound & { ".tag": PaymentMethodAffirmTag.Affirm })
+        | (PaymentMethodAfterpayOutput$.Outbound & { ".tag": PaymentMethodAfterpayTag.Afterpay })
+        | (PaymentMethodKlarnaOutput$.Outbound & { ".tag": PaymentMethodKlarnaTag.Klarna })
+        | (PaymentMethodKlarnaAccountOutput$.Outbound & {
+              ".tag": PaymentMethodKlarnaAccountTag.KlarnaAccount;
+          })
+        | (PaymentMethodKlarnaPaynowOutput$.Outbound & {
+              ".tag": PaymentMethodKlarnaPaynowTag.KlarnaPaynow;
+          })
+        | (PaymentMethodCreditCard$.Outbound & { ".tag": DotTag.CreditCard });
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentMethod> = z.union([
         PaymentMethodPaypalOutput$.outboundSchema.and(
             z

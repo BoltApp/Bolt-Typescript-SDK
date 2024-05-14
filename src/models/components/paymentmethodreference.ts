@@ -22,12 +22,7 @@ export const PaymentMethodReferenceTag$: z.ZodNativeEnum<typeof PaymentMethodRef
 
 /** @internal */
 export namespace PaymentMethodReference$ {
-    export type Inbound = {
-        ".tag": PaymentMethodReferenceTag;
-        id: string;
-    };
-
-    export const inboundSchema: z.ZodType<PaymentMethodReference, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<PaymentMethodReference, z.ZodTypeDef, unknown> = z
         .object({
             ".tag": PaymentMethodReferenceTag$,
             id: z.string(),

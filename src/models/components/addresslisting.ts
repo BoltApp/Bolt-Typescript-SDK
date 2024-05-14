@@ -65,23 +65,7 @@ export type AddressListing = {
 
 /** @internal */
 export namespace AddressListing$ {
-    export type Inbound = {
-        id?: string | undefined;
-        first_name: string;
-        last_name: string;
-        company?: string | undefined;
-        street_address1: string;
-        street_address2?: string | undefined;
-        locality: string;
-        postal_code: string;
-        region?: string | undefined;
-        country_code: CountryCode;
-        email?: string | undefined;
-        phone?: string | undefined;
-        is_default?: boolean | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<AddressListing, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<AddressListing, z.ZodTypeDef, unknown> = z
         .object({
             id: z.string().optional(),
             first_name: z.string(),

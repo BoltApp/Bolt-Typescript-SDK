@@ -13,12 +13,7 @@ export type PaymentInitializeRequest = {
 
 /** @internal */
 export namespace PaymentInitializeRequest$ {
-    export type Inbound = {
-        cart: Cart$.Inbound;
-        payment_method: PaymentMethodExtended$.Inbound;
-    };
-
-    export const inboundSchema: z.ZodType<PaymentInitializeRequest, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<PaymentInitializeRequest, z.ZodTypeDef, unknown> = z
         .object({
             cart: Cart$.inboundSchema,
             payment_method: PaymentMethodExtended$.inboundSchema,

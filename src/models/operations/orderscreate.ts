@@ -38,11 +38,7 @@ export type OrdersCreateResponse = {
 
 /** @internal */
 export namespace OrdersCreateSecurity$ {
-    export type Inbound = {
-        "api-key": string;
-    };
-
-    export const inboundSchema: z.ZodType<OrdersCreateSecurity, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<OrdersCreateSecurity, z.ZodTypeDef, unknown> = z
         .object({
             "api-key": z.string(),
         })
@@ -69,12 +65,7 @@ export namespace OrdersCreateSecurity$ {
 
 /** @internal */
 export namespace OrdersCreateRequest$ {
-    export type Inbound = {
-        "X-Publishable-Key": string;
-        order: components.Order$.Inbound;
-    };
-
-    export const inboundSchema: z.ZodType<OrdersCreateRequest, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<OrdersCreateRequest, z.ZodTypeDef, unknown> = z
         .object({
             "X-Publishable-Key": z.string(),
             order: components.Order$.inboundSchema,
@@ -106,14 +97,7 @@ export namespace OrdersCreateRequest$ {
 
 /** @internal */
 export namespace OrdersCreateResponse$ {
-    export type Inbound = {
-        ContentType: string;
-        StatusCode: number;
-        RawResponse: Response;
-        "order-response"?: components.OrderResponse$.Inbound | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<OrdersCreateResponse, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<OrdersCreateResponse, z.ZodTypeDef, unknown> = z
         .object({
             ContentType: z.string(),
             StatusCode: z.number().int(),

@@ -38,13 +38,7 @@ export type AccountAddressEditResponse = {
 
 /** @internal */
 export namespace AccountAddressEditRequest$ {
-    export type Inbound = {
-        id: string;
-        "X-Publishable-Key": string;
-        "address-listing": components.AddressListingInput$.Inbound;
-    };
-
-    export const inboundSchema: z.ZodType<AccountAddressEditRequest, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<AccountAddressEditRequest, z.ZodTypeDef, unknown> = z
         .object({
             id: z.string(),
             "X-Publishable-Key": z.string(),
@@ -81,14 +75,7 @@ export namespace AccountAddressEditRequest$ {
 
 /** @internal */
 export namespace AccountAddressEditResponse$ {
-    export type Inbound = {
-        ContentType: string;
-        StatusCode: number;
-        RawResponse: Response;
-        "address-listing"?: components.AddressListing$.Inbound | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<AccountAddressEditResponse, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<AccountAddressEditResponse, z.ZodTypeDef, unknown> = z
         .object({
             ContentType: z.string(),
             StatusCode: z.number().int(),

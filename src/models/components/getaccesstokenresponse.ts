@@ -41,17 +41,7 @@ export type GetAccessTokenResponse = {
 
 /** @internal */
 export namespace GetAccessTokenResponse$ {
-    export type Inbound = {
-        id_token?: string | undefined;
-        access_token?: string | undefined;
-        expires_in?: number | undefined;
-        refresh_token?: string | undefined;
-        refresh_token_scope?: string | undefined;
-        scope?: string | undefined;
-        token_type?: string | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<GetAccessTokenResponse, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<GetAccessTokenResponse, z.ZodTypeDef, unknown> = z
         .object({
             id_token: z.string().optional(),
             access_token: z.string().optional(),

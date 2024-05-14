@@ -45,11 +45,7 @@ export type TestingCreditCardGetResponse = {
 
 /** @internal */
 export namespace TestingCreditCardGetSecurity$ {
-    export type Inbound = {
-        "api-key": string;
-    };
-
-    export const inboundSchema: z.ZodType<TestingCreditCardGetSecurity, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<TestingCreditCardGetSecurity, z.ZodTypeDef, unknown> = z
         .object({
             "api-key": z.string(),
         })
@@ -79,11 +75,7 @@ export const Type$: z.ZodNativeEnum<typeof Type> = z.nativeEnum(Type);
 
 /** @internal */
 export namespace TestingCreditCardGetRequestBody$ {
-    export type Inbound = {
-        type: Type;
-    };
-
-    export const inboundSchema: z.ZodType<TestingCreditCardGetRequestBody, z.ZodTypeDef, Inbound> =
+    export const inboundSchema: z.ZodType<TestingCreditCardGetRequestBody, z.ZodTypeDef, unknown> =
         z
             .object({
                 type: Type$,
@@ -115,14 +107,7 @@ export namespace TestingCreditCardGetRequestBody$ {
 
 /** @internal */
 export namespace TestingCreditCardGetResponse$ {
-    export type Inbound = {
-        ContentType: string;
-        StatusCode: number;
-        RawResponse: Response;
-        "test-credit-card"?: components.TestCreditCard$.Inbound | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<TestingCreditCardGetResponse, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<TestingCreditCardGetResponse, z.ZodTypeDef, unknown> = z
         .object({
             ContentType: z.string(),
             StatusCode: z.number().int(),

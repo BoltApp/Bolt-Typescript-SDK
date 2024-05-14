@@ -26,11 +26,7 @@ export const PaymentMethodAffirmTag$: z.ZodNativeEnum<typeof PaymentMethodAffirm
 
 /** @internal */
 export namespace PaymentMethodAffirmOutput$ {
-    export type Inbound = {
-        ".tag": PaymentMethodAffirmTag;
-    };
-
-    export const inboundSchema: z.ZodType<PaymentMethodAffirmOutput, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<PaymentMethodAffirmOutput, z.ZodTypeDef, unknown> = z
         .object({
             ".tag": PaymentMethodAffirmTag$,
         })
@@ -57,12 +53,7 @@ export namespace PaymentMethodAffirmOutput$ {
 
 /** @internal */
 export namespace PaymentMethodAffirm$ {
-    export type Inbound = {
-        ".tag": PaymentMethodAffirmTag;
-        return_url: string;
-    };
-
-    export const inboundSchema: z.ZodType<PaymentMethodAffirm, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<PaymentMethodAffirm, z.ZodTypeDef, unknown> = z
         .object({
             ".tag": PaymentMethodAffirmTag$,
             return_url: z.string(),

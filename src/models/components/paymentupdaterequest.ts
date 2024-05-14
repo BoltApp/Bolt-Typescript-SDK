@@ -11,11 +11,7 @@ export type PaymentUpdateRequest = {
 
 /** @internal */
 export namespace PaymentUpdateRequest$ {
-    export type Inbound = {
-        cart?: Cart$.Inbound | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<PaymentUpdateRequest, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<PaymentUpdateRequest, z.ZodTypeDef, unknown> = z
         .object({
             cart: Cart$.inboundSchema.optional(),
         })

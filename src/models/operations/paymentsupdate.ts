@@ -38,13 +38,7 @@ export type PaymentsUpdateResponse = {
 
 /** @internal */
 export namespace PaymentsUpdateRequest$ {
-    export type Inbound = {
-        id: string;
-        "X-Publishable-Key": string;
-        "payment-update-request": components.PaymentUpdateRequest$.Inbound;
-    };
-
-    export const inboundSchema: z.ZodType<PaymentsUpdateRequest, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<PaymentsUpdateRequest, z.ZodTypeDef, unknown> = z
         .object({
             id: z.string(),
             "X-Publishable-Key": z.string(),
@@ -81,14 +75,7 @@ export namespace PaymentsUpdateRequest$ {
 
 /** @internal */
 export namespace PaymentsUpdateResponse$ {
-    export type Inbound = {
-        ContentType: string;
-        StatusCode: number;
-        RawResponse: Response;
-        "payment-response"?: components.PaymentResponse$.Inbound | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<PaymentsUpdateResponse, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<PaymentsUpdateResponse, z.ZodTypeDef, unknown> = z
         .object({
             ContentType: z.string(),
             StatusCode: z.number().int(),

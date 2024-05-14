@@ -14,14 +14,13 @@ export type AccountAddPaymentMethodResponseBody = ErrorT | FieldError | CreditCa
 
 /** @internal */
 export namespace AccountAddPaymentMethodResponseBody$ {
-    export type Inbound = ErrorT$.Inbound | FieldError$.Inbound | CreditCardError$.Inbound;
-
-    export type Outbound = ErrorT$.Outbound | FieldError$.Outbound | CreditCardError$.Outbound;
     export const inboundSchema: z.ZodType<
         AccountAddPaymentMethodResponseBody,
         z.ZodTypeDef,
-        Inbound
+        unknown
     > = z.union([ErrorT$.inboundSchema, FieldError$.inboundSchema, CreditCardError$.inboundSchema]);
+
+    export type Outbound = ErrorT$.Outbound | FieldError$.Outbound | CreditCardError$.Outbound;
     export const outboundSchema: z.ZodType<
         Outbound,
         z.ZodTypeDef,

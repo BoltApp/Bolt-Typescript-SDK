@@ -26,11 +26,7 @@ export const PaymentMethodKlarnaTag$: z.ZodNativeEnum<typeof PaymentMethodKlarna
 
 /** @internal */
 export namespace PaymentMethodKlarnaOutput$ {
-    export type Inbound = {
-        ".tag": PaymentMethodKlarnaTag;
-    };
-
-    export const inboundSchema: z.ZodType<PaymentMethodKlarnaOutput, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<PaymentMethodKlarnaOutput, z.ZodTypeDef, unknown> = z
         .object({
             ".tag": PaymentMethodKlarnaTag$,
         })
@@ -57,12 +53,7 @@ export namespace PaymentMethodKlarnaOutput$ {
 
 /** @internal */
 export namespace PaymentMethodKlarna$ {
-    export type Inbound = {
-        ".tag": PaymentMethodKlarnaTag;
-        return_url: string;
-    };
-
-    export const inboundSchema: z.ZodType<PaymentMethodKlarna, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<PaymentMethodKlarna, z.ZodTypeDef, unknown> = z
         .object({
             ".tag": PaymentMethodKlarnaTag$,
             return_url: z.string(),

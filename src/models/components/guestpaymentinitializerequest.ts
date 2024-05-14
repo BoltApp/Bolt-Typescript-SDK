@@ -15,13 +15,7 @@ export type GuestPaymentInitializeRequest = {
 
 /** @internal */
 export namespace GuestPaymentInitializeRequest$ {
-    export type Inbound = {
-        profile: ProfileCreationData$.Inbound;
-        cart: Cart$.Inbound;
-        payment_method: PaymentMethodInput$.Inbound;
-    };
-
-    export const inboundSchema: z.ZodType<GuestPaymentInitializeRequest, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<GuestPaymentInitializeRequest, z.ZodTypeDef, unknown> = z
         .object({
             profile: ProfileCreationData$.inboundSchema,
             cart: Cart$.inboundSchema,

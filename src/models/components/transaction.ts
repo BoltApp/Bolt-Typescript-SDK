@@ -10,11 +10,7 @@ export type Transaction = {
 
 /** @internal */
 export namespace Transaction$ {
-    export type Inbound = {
-        reference?: string | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<Transaction, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<Transaction, z.ZodTypeDef, unknown> = z
         .object({
             reference: z.string().optional(),
         })

@@ -67,16 +67,7 @@ export const Scope$: z.ZodNativeEnum<typeof Scope> = z.nativeEnum(Scope);
 
 /** @internal */
 export namespace AuthorizationCodeRequest$ {
-    export type Inbound = {
-        grant_type: GrantType;
-        code: string;
-        client_id: string;
-        client_secret: string;
-        scope: Array<Scope>;
-        state?: string | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<AuthorizationCodeRequest, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<AuthorizationCodeRequest, z.ZodTypeDef, unknown> = z
         .object({
             grant_type: GrantType$,
             code: z.string(),

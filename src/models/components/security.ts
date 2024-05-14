@@ -11,12 +11,7 @@ export type Security = {
 
 /** @internal */
 export namespace Security$ {
-    export type Inbound = {
-        oauth?: string | undefined;
-        "api-key"?: string | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<Security, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<Security, z.ZodTypeDef, unknown> = z
         .object({
             oauth: z.string().optional(),
             "api-key": z.string().optional(),

@@ -12,12 +12,7 @@ export type OrderResponse = {
 
 /** @internal */
 export namespace OrderResponse$ {
-    export type Inbound = {
-        id: string;
-        transaction: Transaction$.Inbound;
-    };
-
-    export const inboundSchema: z.ZodType<OrderResponse, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<OrderResponse, z.ZodTypeDef, unknown> = z
         .object({
             id: z.string(),
             transaction: Transaction$.inboundSchema,

@@ -96,15 +96,7 @@ export const SchemasCreditCardErrorTag$: z.ZodNativeEnum<typeof SchemasCreditCar
 
 /** @internal */
 export namespace CreditCardError$ {
-    export type Inbound = {
-        ".tag": SchemasCreditCardErrorTag;
-        message: string;
-        RawResponse?: Response | undefined;
-        RawResponse1?: Response | undefined;
-        RawResponse2?: Response | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<CreditCardError, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<CreditCardError, z.ZodTypeDef, unknown> = z
         .object({
             ".tag": SchemasCreditCardErrorTag$,
             message: z.string(),

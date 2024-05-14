@@ -21,13 +21,7 @@ export type Account = {
 
 /** @internal */
 export namespace Account$ {
-    export type Inbound = {
-        addresses: Array<AddressListing$.Inbound>;
-        payment_methods: Array<PaymentMethod$.Inbound>;
-        profile?: Profile$.Inbound | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<Account, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<Account, z.ZodTypeDef, unknown> = z
         .object({
             addresses: z.array(AddressListing$.inboundSchema),
             payment_methods: z.array(PaymentMethod$.inboundSchema),

@@ -25,14 +25,7 @@ export type Profile = {
 
 /** @internal */
 export namespace Profile$ {
-    export type Inbound = {
-        first_name: string;
-        last_name: string;
-        email: string;
-        phone?: string | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<Profile, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<Profile, z.ZodTypeDef, unknown> = z
         .object({
             first_name: z.string(),
             last_name: z.string(),

@@ -37,15 +37,7 @@ export const Action$: z.ZodNativeEnum<typeof Action> = z.nativeEnum(Action);
 
 /** @internal */
 export namespace PaymentResponsePending$ {
-    export type Inbound = {
-        ".tag": PaymentResponsePendingTag;
-        id?: string | undefined;
-        status: PaymentResponsePendingStatus;
-        action: Action;
-        url: string;
-    };
-
-    export const inboundSchema: z.ZodType<PaymentResponsePending, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<PaymentResponsePending, z.ZodTypeDef, unknown> = z
         .object({
             ".tag": PaymentResponsePendingTag$,
             id: z.string().optional(),

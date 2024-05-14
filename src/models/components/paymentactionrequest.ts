@@ -22,12 +22,7 @@ export const PaymentActionRequestTag$: z.ZodNativeEnum<typeof PaymentActionReque
 
 /** @internal */
 export namespace PaymentActionRequest$ {
-    export type Inbound = {
-        ".tag": PaymentActionRequestTag;
-        redirect_result?: string | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<PaymentActionRequest, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<PaymentActionRequest, z.ZodTypeDef, unknown> = z
         .object({
             ".tag": PaymentActionRequestTag$,
             redirect_result: z.string().optional(),

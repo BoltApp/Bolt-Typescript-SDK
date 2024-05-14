@@ -130,23 +130,7 @@ export const AddressReferenceExplicitTag$: z.ZodNativeEnum<typeof AddressReferen
 
 /** @internal */
 export namespace AddressReferenceExplicit$ {
-    export type Inbound = {
-        ".tag": AddressReferenceExplicitTag;
-        id?: string | undefined;
-        first_name: string;
-        last_name: string;
-        company?: string | undefined;
-        street_address1: string;
-        street_address2?: string | undefined;
-        locality: string;
-        postal_code: string;
-        region?: string | undefined;
-        country_code: CountryCode;
-        email?: string | undefined;
-        phone?: string | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<AddressReferenceExplicit, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<AddressReferenceExplicit, z.ZodTypeDef, unknown> = z
         .object({
             ".tag": AddressReferenceExplicitTag$,
             id: z.string().optional(),
@@ -233,22 +217,7 @@ export namespace AddressReferenceExplicit$ {
 
 /** @internal */
 export namespace AddressReferenceExplicitInput$ {
-    export type Inbound = {
-        ".tag": AddressReferenceExplicitTag;
-        first_name: string;
-        last_name: string;
-        company?: string | undefined;
-        street_address1: string;
-        street_address2?: string | undefined;
-        locality: string;
-        postal_code: string;
-        region?: string | undefined;
-        country_code: CountryCode;
-        email?: string | undefined;
-        phone?: string | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<AddressReferenceExplicitInput, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<AddressReferenceExplicitInput, z.ZodTypeDef, unknown> = z
         .object({
             ".tag": AddressReferenceExplicitTag$,
             first_name: z.string(),

@@ -13,12 +13,7 @@ export type Order = {
 
 /** @internal */
 export namespace Order$ {
-    export type Inbound = {
-        profile: Profile$.Inbound;
-        cart: Cart$.Inbound;
-    };
-
-    export const inboundSchema: z.ZodType<Order, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<Order, z.ZodTypeDef, unknown> = z
         .object({
             profile: Profile$.inboundSchema,
             cart: Cart$.inboundSchema,

@@ -69,16 +69,7 @@ export const RefreshTokenRequestScope$: z.ZodNativeEnum<typeof RefreshTokenReque
 
 /** @internal */
 export namespace RefreshTokenRequest$ {
-    export type Inbound = {
-        grant_type: RefreshTokenRequestGrantType;
-        refresh_token: string;
-        client_id: string;
-        client_secret: string;
-        scope: Array<RefreshTokenRequestScope>;
-        state?: string | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<RefreshTokenRequest, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<RefreshTokenRequest, z.ZodTypeDef, unknown> = z
         .object({
             grant_type: RefreshTokenRequestGrantType$,
             refresh_token: z.string(),

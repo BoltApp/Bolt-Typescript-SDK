@@ -32,15 +32,10 @@ export type AccountPaymentMethodDeleteResponse = {
 
 /** @internal */
 export namespace AccountPaymentMethodDeleteRequest$ {
-    export type Inbound = {
-        id: string;
-        "X-Publishable-Key": string;
-    };
-
     export const inboundSchema: z.ZodType<
         AccountPaymentMethodDeleteRequest,
         z.ZodTypeDef,
-        Inbound
+        unknown
     > = z
         .object({
             id: z.string(),
@@ -77,16 +72,10 @@ export namespace AccountPaymentMethodDeleteRequest$ {
 
 /** @internal */
 export namespace AccountPaymentMethodDeleteResponse$ {
-    export type Inbound = {
-        ContentType: string;
-        StatusCode: number;
-        RawResponse: Response;
-    };
-
     export const inboundSchema: z.ZodType<
         AccountPaymentMethodDeleteResponse,
         z.ZodTypeDef,
-        Inbound
+        unknown
     > = z
         .object({
             ContentType: z.string(),

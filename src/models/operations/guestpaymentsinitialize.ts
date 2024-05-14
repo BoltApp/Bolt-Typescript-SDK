@@ -38,11 +38,7 @@ export type GuestPaymentsInitializeResponse = {
 
 /** @internal */
 export namespace GuestPaymentsInitializeSecurity$ {
-    export type Inbound = {
-        "api-key": string;
-    };
-
-    export const inboundSchema: z.ZodType<GuestPaymentsInitializeSecurity, z.ZodTypeDef, Inbound> =
+    export const inboundSchema: z.ZodType<GuestPaymentsInitializeSecurity, z.ZodTypeDef, unknown> =
         z
             .object({
                 "api-key": z.string(),
@@ -74,12 +70,7 @@ export namespace GuestPaymentsInitializeSecurity$ {
 
 /** @internal */
 export namespace GuestPaymentsInitializeRequest$ {
-    export type Inbound = {
-        "X-Publishable-Key": string;
-        "guest-payment-initialize-request": components.GuestPaymentInitializeRequest$.Inbound;
-    };
-
-    export const inboundSchema: z.ZodType<GuestPaymentsInitializeRequest, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<GuestPaymentsInitializeRequest, z.ZodTypeDef, unknown> = z
         .object({
             "X-Publishable-Key": z.string(),
             "guest-payment-initialize-request":
@@ -114,14 +105,7 @@ export namespace GuestPaymentsInitializeRequest$ {
 
 /** @internal */
 export namespace GuestPaymentsInitializeResponse$ {
-    export type Inbound = {
-        ContentType: string;
-        StatusCode: number;
-        RawResponse: Response;
-        "payment-response"?: components.PaymentResponse$.Inbound | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<GuestPaymentsInitializeResponse, z.ZodTypeDef, Inbound> =
+    export const inboundSchema: z.ZodType<GuestPaymentsInitializeResponse, z.ZodTypeDef, unknown> =
         z
             .object({
                 ContentType: z.string(),

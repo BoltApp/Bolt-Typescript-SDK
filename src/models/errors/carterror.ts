@@ -79,14 +79,7 @@ export const SchemasCartErrorTag$: z.ZodNativeEnum<typeof SchemasCartErrorTag> =
 
 /** @internal */
 export namespace CartError$ {
-    export type Inbound = {
-        ".tag": SchemasCartErrorTag;
-        message: string;
-        RawResponse?: Response | undefined;
-        RawResponse1?: Response | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<CartError, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<CartError, z.ZodTypeDef, unknown> = z
         .object({
             ".tag": SchemasCartErrorTag$,
             message: z.string(),

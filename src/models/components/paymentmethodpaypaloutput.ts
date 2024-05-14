@@ -30,11 +30,7 @@ export const PaymentMethodPaypalTag$: z.ZodNativeEnum<typeof PaymentMethodPaypal
 
 /** @internal */
 export namespace PaymentMethodPaypalOutput$ {
-    export type Inbound = {
-        ".tag": PaymentMethodPaypalTag;
-    };
-
-    export const inboundSchema: z.ZodType<PaymentMethodPaypalOutput, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<PaymentMethodPaypalOutput, z.ZodTypeDef, unknown> = z
         .object({
             ".tag": PaymentMethodPaypalTag$,
         })
@@ -61,13 +57,7 @@ export namespace PaymentMethodPaypalOutput$ {
 
 /** @internal */
 export namespace PaymentMethodPaypal$ {
-    export type Inbound = {
-        ".tag": PaymentMethodPaypalTag;
-        success_url: string;
-        cancel_url: string;
-    };
-
-    export const inboundSchema: z.ZodType<PaymentMethodPaypal, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<PaymentMethodPaypal, z.ZodTypeDef, unknown> = z
         .object({
             ".tag": PaymentMethodPaypalTag$,
             success_url: z.string(),

@@ -34,12 +34,7 @@ export const Currency$: z.ZodNativeEnum<typeof Currency> = z.nativeEnum(Currency
 
 /** @internal */
 export namespace Amount$ {
-    export type Inbound = {
-        currency: Currency;
-        units: number;
-    };
-
-    export const inboundSchema: z.ZodType<Amount, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<Amount, z.ZodTypeDef, unknown> = z
         .object({
             currency: Currency$,
             units: z.number().int(),

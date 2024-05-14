@@ -26,14 +26,7 @@ export type OauthGetTokenResponse = {
 
 /** @internal */
 export namespace OauthGetTokenResponse$ {
-    export type Inbound = {
-        ContentType: string;
-        StatusCode: number;
-        RawResponse: Response;
-        "get-access-token-response"?: components.GetAccessTokenResponse$.Inbound | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<OauthGetTokenResponse, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<OauthGetTokenResponse, z.ZodTypeDef, unknown> = z
         .object({
             ContentType: z.string(),
             StatusCode: z.number().int(),

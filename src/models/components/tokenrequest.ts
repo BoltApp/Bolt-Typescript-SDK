@@ -10,13 +10,12 @@ export type TokenRequest = AuthorizationCodeRequest | RefreshTokenRequest;
 
 /** @internal */
 export namespace TokenRequest$ {
-    export type Inbound = AuthorizationCodeRequest$.Inbound | RefreshTokenRequest$.Inbound;
-
-    export type Outbound = AuthorizationCodeRequest$.Outbound | RefreshTokenRequest$.Outbound;
-    export const inboundSchema: z.ZodType<TokenRequest, z.ZodTypeDef, Inbound> = z.union([
+    export const inboundSchema: z.ZodType<TokenRequest, z.ZodTypeDef, unknown> = z.union([
         AuthorizationCodeRequest$.inboundSchema,
         RefreshTokenRequest$.inboundSchema,
     ]);
+
+    export type Outbound = AuthorizationCodeRequest$.Outbound | RefreshTokenRequest$.Outbound;
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, TokenRequest> = z.union([
         AuthorizationCodeRequest$.outboundSchema,
         RefreshTokenRequest$.outboundSchema,

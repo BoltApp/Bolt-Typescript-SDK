@@ -38,11 +38,7 @@ export type TestingAccountCreateResponse = {
 
 /** @internal */
 export namespace TestingAccountCreateSecurity$ {
-    export type Inbound = {
-        "api-key": string;
-    };
-
-    export const inboundSchema: z.ZodType<TestingAccountCreateSecurity, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<TestingAccountCreateSecurity, z.ZodTypeDef, unknown> = z
         .object({
             "api-key": z.string(),
         })
@@ -69,12 +65,7 @@ export namespace TestingAccountCreateSecurity$ {
 
 /** @internal */
 export namespace TestingAccountCreateRequest$ {
-    export type Inbound = {
-        "X-Publishable-Key": string;
-        "account-test-creation-data": components.AccountTestCreationData$.Inbound;
-    };
-
-    export const inboundSchema: z.ZodType<TestingAccountCreateRequest, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<TestingAccountCreateRequest, z.ZodTypeDef, unknown> = z
         .object({
             "X-Publishable-Key": z.string(),
             "account-test-creation-data": components.AccountTestCreationData$.inboundSchema,
@@ -106,16 +97,7 @@ export namespace TestingAccountCreateRequest$ {
 
 /** @internal */
 export namespace TestingAccountCreateResponse$ {
-    export type Inbound = {
-        ContentType: string;
-        StatusCode: number;
-        RawResponse: Response;
-        "account-test-creation-data"?:
-            | components.AccountTestCreationDataOutput$.Inbound
-            | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<TestingAccountCreateResponse, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<TestingAccountCreateResponse, z.ZodTypeDef, unknown> = z
         .object({
             ContentType: z.string(),
             StatusCode: z.number().int(),

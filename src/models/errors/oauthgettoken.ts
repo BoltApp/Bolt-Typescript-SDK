@@ -13,11 +13,10 @@ export type OauthGetTokenResponseBody = ErrorT | FieldError;
 
 /** @internal */
 export namespace OauthGetTokenResponseBody$ {
-    export type Inbound = ErrorT$.Inbound | FieldError$.Inbound;
+    export const inboundSchema: z.ZodType<OauthGetTokenResponseBody, z.ZodTypeDef, unknown> =
+        z.union([ErrorT$.inboundSchema, FieldError$.inboundSchema]);
 
     export type Outbound = ErrorT$.Outbound | FieldError$.Outbound;
-    export const inboundSchema: z.ZodType<OauthGetTokenResponseBody, z.ZodTypeDef, Inbound> =
-        z.union([ErrorT$.inboundSchema, FieldError$.inboundSchema]);
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, OauthGetTokenResponseBody> =
         z.union([ErrorT$.outboundSchema, FieldError$.outboundSchema]);
 }

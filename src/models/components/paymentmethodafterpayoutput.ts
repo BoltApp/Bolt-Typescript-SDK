@@ -26,11 +26,7 @@ export const PaymentMethodAfterpayTag$: z.ZodNativeEnum<typeof PaymentMethodAfte
 
 /** @internal */
 export namespace PaymentMethodAfterpayOutput$ {
-    export type Inbound = {
-        ".tag": PaymentMethodAfterpayTag;
-    };
-
-    export const inboundSchema: z.ZodType<PaymentMethodAfterpayOutput, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<PaymentMethodAfterpayOutput, z.ZodTypeDef, unknown> = z
         .object({
             ".tag": PaymentMethodAfterpayTag$,
         })
@@ -57,12 +53,7 @@ export namespace PaymentMethodAfterpayOutput$ {
 
 /** @internal */
 export namespace PaymentMethodAfterpay$ {
-    export type Inbound = {
-        ".tag": PaymentMethodAfterpayTag;
-        return_url: string;
-    };
-
-    export const inboundSchema: z.ZodType<PaymentMethodAfterpay, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<PaymentMethodAfterpay, z.ZodTypeDef, unknown> = z
         .object({
             ".tag": PaymentMethodAfterpayTag$,
             return_url: z.string(),

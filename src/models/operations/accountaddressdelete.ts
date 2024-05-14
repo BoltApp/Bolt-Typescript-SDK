@@ -32,12 +32,7 @@ export type AccountAddressDeleteResponse = {
 
 /** @internal */
 export namespace AccountAddressDeleteRequest$ {
-    export type Inbound = {
-        id: string;
-        "X-Publishable-Key": string;
-    };
-
-    export const inboundSchema: z.ZodType<AccountAddressDeleteRequest, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<AccountAddressDeleteRequest, z.ZodTypeDef, unknown> = z
         .object({
             id: z.string(),
             "X-Publishable-Key": z.string(),
@@ -69,13 +64,7 @@ export namespace AccountAddressDeleteRequest$ {
 
 /** @internal */
 export namespace AccountAddressDeleteResponse$ {
-    export type Inbound = {
-        ContentType: string;
-        StatusCode: number;
-        RawResponse: Response;
-    };
-
-    export const inboundSchema: z.ZodType<AccountAddressDeleteResponse, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<AccountAddressDeleteResponse, z.ZodTypeDef, unknown> = z
         .object({
             ContentType: z.string(),
             StatusCode: z.number().int(),

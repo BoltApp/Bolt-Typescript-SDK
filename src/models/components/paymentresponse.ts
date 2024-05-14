@@ -20,14 +20,7 @@ export type PaymentResponse =
 
 /** @internal */
 export namespace PaymentResponse$ {
-    export type Inbound =
-        | (PaymentResponseFinalized$.Inbound & { ".tag": PaymentResponseFinalizedTag.Finalized })
-        | (PaymentResponsePending$.Inbound & { ".tag": PaymentResponsePendingTag.Pending });
-
-    export type Outbound =
-        | (PaymentResponseFinalized$.Outbound & { ".tag": PaymentResponseFinalizedTag.Finalized })
-        | (PaymentResponsePending$.Outbound & { ".tag": PaymentResponsePendingTag.Pending });
-    export const inboundSchema: z.ZodType<PaymentResponse, z.ZodTypeDef, Inbound> = z.union([
+    export const inboundSchema: z.ZodType<PaymentResponse, z.ZodTypeDef, unknown> = z.union([
         PaymentResponseFinalized$.inboundSchema.and(
             z
                 .object({ ".tag": z.literal(PaymentResponseFinalizedTag.Finalized) })
@@ -39,6 +32,10 @@ export namespace PaymentResponse$ {
                 .transform((v) => ({ dotTag: v[".tag"] }))
         ),
     ]);
+
+    export type Outbound =
+        | (PaymentResponseFinalized$.Outbound & { ".tag": PaymentResponseFinalizedTag.Finalized })
+        | (PaymentResponsePending$.Outbound & { ".tag": PaymentResponsePendingTag.Pending });
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentResponse> = z.union([
         PaymentResponseFinalized$.outboundSchema.and(
             z

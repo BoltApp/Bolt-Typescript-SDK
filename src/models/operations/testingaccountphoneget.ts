@@ -37,11 +37,7 @@ export type TestingAccountPhoneGetResponse = {
 
 /** @internal */
 export namespace TestingAccountPhoneGetSecurity$ {
-    export type Inbound = {
-        "api-key": string;
-    };
-
-    export const inboundSchema: z.ZodType<TestingAccountPhoneGetSecurity, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<TestingAccountPhoneGetSecurity, z.ZodTypeDef, unknown> = z
         .object({
             "api-key": z.string(),
         })
@@ -69,11 +65,7 @@ export namespace TestingAccountPhoneGetSecurity$ {
 
 /** @internal */
 export namespace TestingAccountPhoneGetRequest$ {
-    export type Inbound = {
-        "X-Publishable-Key": string;
-    };
-
-    export const inboundSchema: z.ZodType<TestingAccountPhoneGetRequest, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<TestingAccountPhoneGetRequest, z.ZodTypeDef, unknown> = z
         .object({
             "X-Publishable-Key": z.string(),
         })
@@ -101,14 +93,7 @@ export namespace TestingAccountPhoneGetRequest$ {
 
 /** @internal */
 export namespace TestingAccountPhoneGetResponse$ {
-    export type Inbound = {
-        ContentType: string;
-        StatusCode: number;
-        RawResponse: Response;
-        "account-test-phone-data"?: components.AccountTestPhoneData$.Inbound | undefined;
-    };
-
-    export const inboundSchema: z.ZodType<TestingAccountPhoneGetResponse, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<TestingAccountPhoneGetResponse, z.ZodTypeDef, unknown> = z
         .object({
             ContentType: z.string(),
             StatusCode: z.number().int(),

@@ -13,11 +13,7 @@ export type AccountTestPhoneData = {
 
 /** @internal */
 export namespace AccountTestPhoneData$ {
-    export type Inbound = {
-        phone: string;
-    };
-
-    export const inboundSchema: z.ZodType<AccountTestPhoneData, z.ZodTypeDef, Inbound> = z
+    export const inboundSchema: z.ZodType<AccountTestPhoneData, z.ZodTypeDef, unknown> = z
         .object({
             phone: z.string(),
         })
