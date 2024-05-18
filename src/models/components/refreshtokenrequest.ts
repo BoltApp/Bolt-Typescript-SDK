@@ -60,22 +60,26 @@ export type RefreshTokenRequest = {
 };
 
 /** @internal */
-export const RefreshTokenRequestGrantType$: z.ZodNativeEnum<typeof RefreshTokenRequestGrantType> =
-    z.nativeEnum(RefreshTokenRequestGrantType);
+export namespace RefreshTokenRequestGrantType$ {
+    export const inboundSchema = z.nativeEnum(RefreshTokenRequestGrantType);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
-export const RefreshTokenRequestScope$: z.ZodNativeEnum<typeof RefreshTokenRequestScope> =
-    z.nativeEnum(RefreshTokenRequestScope);
+export namespace RefreshTokenRequestScope$ {
+    export const inboundSchema = z.nativeEnum(RefreshTokenRequestScope);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
 export namespace RefreshTokenRequest$ {
     export const inboundSchema: z.ZodType<RefreshTokenRequest, z.ZodTypeDef, unknown> = z
         .object({
-            grant_type: RefreshTokenRequestGrantType$,
+            grant_type: RefreshTokenRequestGrantType$.inboundSchema,
             refresh_token: z.string(),
             client_id: z.string(),
             client_secret: z.string(),
-            scope: z.array(RefreshTokenRequestScope$),
+            scope: z.array(RefreshTokenRequestScope$.inboundSchema),
             state: z.string().optional(),
         })
         .transform((v) => {
@@ -90,21 +94,21 @@ export namespace RefreshTokenRequest$ {
         });
 
     export type Outbound = {
-        grant_type: RefreshTokenRequestGrantType;
+        grant_type: string;
         refresh_token: string;
         client_id: string;
         client_secret: string;
-        scope: Array<RefreshTokenRequestScope>;
+        scope: Array<string>;
         state?: string | undefined;
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, RefreshTokenRequest> = z
         .object({
-            grantType: RefreshTokenRequestGrantType$,
+            grantType: RefreshTokenRequestGrantType$.outboundSchema,
             refreshToken: z.string(),
             clientId: z.string(),
             clientSecret: z.string(),
-            scope: z.array(RefreshTokenRequestScope$),
+            scope: z.array(RefreshTokenRequestScope$.outboundSchema),
             state: z.string().optional(),
         })
         .transform((v) => {

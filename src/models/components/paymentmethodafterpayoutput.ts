@@ -21,14 +21,16 @@ export type PaymentMethodAfterpay = {
 };
 
 /** @internal */
-export const PaymentMethodAfterpayTag$: z.ZodNativeEnum<typeof PaymentMethodAfterpayTag> =
-    z.nativeEnum(PaymentMethodAfterpayTag);
+export namespace PaymentMethodAfterpayTag$ {
+    export const inboundSchema = z.nativeEnum(PaymentMethodAfterpayTag);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
 export namespace PaymentMethodAfterpayOutput$ {
     export const inboundSchema: z.ZodType<PaymentMethodAfterpayOutput, z.ZodTypeDef, unknown> = z
         .object({
-            ".tag": PaymentMethodAfterpayTag$,
+            ".tag": PaymentMethodAfterpayTag$.inboundSchema,
         })
         .transform((v) => {
             return {
@@ -37,12 +39,12 @@ export namespace PaymentMethodAfterpayOutput$ {
         });
 
     export type Outbound = {
-        ".tag": PaymentMethodAfterpayTag;
+        ".tag": string;
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentMethodAfterpayOutput> = z
         .object({
-            dotTag: PaymentMethodAfterpayTag$,
+            dotTag: PaymentMethodAfterpayTag$.outboundSchema,
         })
         .transform((v) => {
             return {
@@ -55,7 +57,7 @@ export namespace PaymentMethodAfterpayOutput$ {
 export namespace PaymentMethodAfterpay$ {
     export const inboundSchema: z.ZodType<PaymentMethodAfterpay, z.ZodTypeDef, unknown> = z
         .object({
-            ".tag": PaymentMethodAfterpayTag$,
+            ".tag": PaymentMethodAfterpayTag$.inboundSchema,
             return_url: z.string(),
         })
         .transform((v) => {
@@ -66,13 +68,13 @@ export namespace PaymentMethodAfterpay$ {
         });
 
     export type Outbound = {
-        ".tag": PaymentMethodAfterpayTag;
+        ".tag": string;
         return_url: string;
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentMethodAfterpay> = z
         .object({
-            dotTag: PaymentMethodAfterpayTag$,
+            dotTag: PaymentMethodAfterpayTag$.outboundSchema,
             returnUrl: z.string(),
         })
         .transform((v) => {

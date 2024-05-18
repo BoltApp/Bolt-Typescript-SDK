@@ -17,14 +17,16 @@ export type PaymentMethodReference = {
 };
 
 /** @internal */
-export const PaymentMethodReferenceTag$: z.ZodNativeEnum<typeof PaymentMethodReferenceTag> =
-    z.nativeEnum(PaymentMethodReferenceTag);
+export namespace PaymentMethodReferenceTag$ {
+    export const inboundSchema = z.nativeEnum(PaymentMethodReferenceTag);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
 export namespace PaymentMethodReference$ {
     export const inboundSchema: z.ZodType<PaymentMethodReference, z.ZodTypeDef, unknown> = z
         .object({
-            ".tag": PaymentMethodReferenceTag$,
+            ".tag": PaymentMethodReferenceTag$.inboundSchema,
             id: z.string(),
         })
         .transform((v) => {
@@ -35,13 +37,13 @@ export namespace PaymentMethodReference$ {
         });
 
     export type Outbound = {
-        ".tag": PaymentMethodReferenceTag;
+        ".tag": string;
         id: string;
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentMethodReference> = z
         .object({
-            dotTag: PaymentMethodReferenceTag$,
+            dotTag: PaymentMethodReferenceTag$.outboundSchema,
             id: z.string(),
         })
         .transform((v) => {

@@ -19,5 +19,7 @@ export enum CreditCardNetwork {
 }
 
 /** @internal */
-export const CreditCardNetwork$: z.ZodNativeEnum<typeof CreditCardNetwork> =
-    z.nativeEnum(CreditCardNetwork);
+export namespace CreditCardNetwork$ {
+    export const inboundSchema = z.nativeEnum(CreditCardNetwork);
+    export const outboundSchema = inboundSchema;
+}

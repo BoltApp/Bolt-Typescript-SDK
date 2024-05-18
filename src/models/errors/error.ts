@@ -241,13 +241,16 @@ export class ErrorT extends Error {
 }
 
 /** @internal */
-export const DotTag$: z.ZodNativeEnum<typeof DotTag> = z.nativeEnum(DotTag);
+export namespace DotTag$ {
+    export const inboundSchema = z.nativeEnum(DotTag);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
 export namespace ErrorT$ {
     export const inboundSchema: z.ZodType<ErrorT, z.ZodTypeDef, unknown> = z
         .object({
-            ".tag": DotTag$,
+            ".tag": DotTag$.inboundSchema,
             message: z.string(),
             RawResponse: z.instanceof(Response).optional(),
             RawResponse1: z.instanceof(Response).optional(),
@@ -292,7 +295,7 @@ export namespace ErrorT$ {
         });
 
     export type Outbound = {
-        ".tag": DotTag;
+        ".tag": string;
         message: string;
         RawResponse?: never | undefined;
         RawResponse1?: never | undefined;
@@ -319,7 +322,7 @@ export namespace ErrorT$ {
         .pipe(
             z
                 .object({
-                    dotTag: DotTag$,
+                    dotTag: DotTag$.outboundSchema,
                     message: z.string(),
                     rawResponse: z
                         .instanceof(Response)

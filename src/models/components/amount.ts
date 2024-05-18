@@ -30,13 +30,16 @@ export type Amount = {
 };
 
 /** @internal */
-export const Currency$: z.ZodNativeEnum<typeof Currency> = z.nativeEnum(Currency);
+export namespace Currency$ {
+    export const inboundSchema = z.nativeEnum(Currency);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
 export namespace Amount$ {
     export const inboundSchema: z.ZodType<Amount, z.ZodTypeDef, unknown> = z
         .object({
-            currency: Currency$,
+            currency: Currency$.inboundSchema,
             units: z.number().int(),
         })
         .transform((v) => {
@@ -47,13 +50,13 @@ export namespace Amount$ {
         });
 
     export type Outbound = {
-        currency: Currency;
+        currency: string;
         units: number;
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, Amount> = z
         .object({
-            currency: Currency$,
+            currency: Currency$.outboundSchema,
             units: z.number().int(),
         })
         .transform((v) => {

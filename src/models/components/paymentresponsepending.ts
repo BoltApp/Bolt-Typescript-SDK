@@ -25,24 +25,31 @@ export type PaymentResponsePending = {
 };
 
 /** @internal */
-export const PaymentResponsePendingTag$: z.ZodNativeEnum<typeof PaymentResponsePendingTag> =
-    z.nativeEnum(PaymentResponsePendingTag);
+export namespace PaymentResponsePendingTag$ {
+    export const inboundSchema = z.nativeEnum(PaymentResponsePendingTag);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
-export const PaymentResponsePendingStatus$: z.ZodNativeEnum<typeof PaymentResponsePendingStatus> =
-    z.nativeEnum(PaymentResponsePendingStatus);
+export namespace PaymentResponsePendingStatus$ {
+    export const inboundSchema = z.nativeEnum(PaymentResponsePendingStatus);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
-export const Action$: z.ZodNativeEnum<typeof Action> = z.nativeEnum(Action);
+export namespace Action$ {
+    export const inboundSchema = z.nativeEnum(Action);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
 export namespace PaymentResponsePending$ {
     export const inboundSchema: z.ZodType<PaymentResponsePending, z.ZodTypeDef, unknown> = z
         .object({
-            ".tag": PaymentResponsePendingTag$,
+            ".tag": PaymentResponsePendingTag$.inboundSchema,
             id: z.string().optional(),
-            status: PaymentResponsePendingStatus$,
-            action: Action$,
+            status: PaymentResponsePendingStatus$.inboundSchema,
+            action: Action$.inboundSchema,
             url: z.string(),
         })
         .transform((v) => {
@@ -56,19 +63,19 @@ export namespace PaymentResponsePending$ {
         });
 
     export type Outbound = {
-        ".tag": PaymentResponsePendingTag;
+        ".tag": string;
         id?: string | undefined;
-        status: PaymentResponsePendingStatus;
-        action: Action;
+        status: string;
+        action: string;
         url: string;
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentResponsePending> = z
         .object({
-            dotTag: PaymentResponsePendingTag$,
+            dotTag: PaymentResponsePendingTag$.outboundSchema,
             id: z.string().optional(),
-            status: PaymentResponsePendingStatus$,
-            action: Action$,
+            status: PaymentResponsePendingStatus$.outboundSchema,
+            action: Action$.outboundSchema,
             url: z.string(),
         })
         .transform((v) => {

@@ -17,14 +17,16 @@ export type PaymentActionRequest = {
 };
 
 /** @internal */
-export const PaymentActionRequestTag$: z.ZodNativeEnum<typeof PaymentActionRequestTag> =
-    z.nativeEnum(PaymentActionRequestTag);
+export namespace PaymentActionRequestTag$ {
+    export const inboundSchema = z.nativeEnum(PaymentActionRequestTag);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
 export namespace PaymentActionRequest$ {
     export const inboundSchema: z.ZodType<PaymentActionRequest, z.ZodTypeDef, unknown> = z
         .object({
-            ".tag": PaymentActionRequestTag$,
+            ".tag": PaymentActionRequestTag$.inboundSchema,
             redirect_result: z.string().optional(),
         })
         .transform((v) => {
@@ -35,13 +37,13 @@ export namespace PaymentActionRequest$ {
         });
 
     export type Outbound = {
-        ".tag": PaymentActionRequestTag;
+        ".tag": string;
         redirect_result?: string | undefined;
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentActionRequest> = z
         .object({
-            dotTag: PaymentActionRequestTag$,
+            dotTag: PaymentActionRequestTag$.outboundSchema,
             redirectResult: z.string().optional(),
         })
         .transform((v) => {

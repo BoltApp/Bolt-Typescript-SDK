@@ -60,20 +60,26 @@ export type AuthorizationCodeRequest = {
 };
 
 /** @internal */
-export const GrantType$: z.ZodNativeEnum<typeof GrantType> = z.nativeEnum(GrantType);
+export namespace GrantType$ {
+    export const inboundSchema = z.nativeEnum(GrantType);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
-export const Scope$: z.ZodNativeEnum<typeof Scope> = z.nativeEnum(Scope);
+export namespace Scope$ {
+    export const inboundSchema = z.nativeEnum(Scope);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
 export namespace AuthorizationCodeRequest$ {
     export const inboundSchema: z.ZodType<AuthorizationCodeRequest, z.ZodTypeDef, unknown> = z
         .object({
-            grant_type: GrantType$,
+            grant_type: GrantType$.inboundSchema,
             code: z.string(),
             client_id: z.string(),
             client_secret: z.string(),
-            scope: z.array(Scope$),
+            scope: z.array(Scope$.inboundSchema),
             state: z.string().optional(),
         })
         .transform((v) => {
@@ -88,21 +94,21 @@ export namespace AuthorizationCodeRequest$ {
         });
 
     export type Outbound = {
-        grant_type: GrantType;
+        grant_type: string;
         code: string;
         client_id: string;
         client_secret: string;
-        scope: Array<Scope>;
+        scope: Array<string>;
         state?: string | undefined;
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, AuthorizationCodeRequest> = z
         .object({
-            grantType: GrantType$,
+            grantType: GrantType$.outboundSchema,
             code: z.string(),
             clientId: z.string(),
             clientSecret: z.string(),
-            scope: z.array(Scope$),
+            scope: z.array(Scope$.outboundSchema),
             state: z.string().optional(),
         })
         .transform((v) => {

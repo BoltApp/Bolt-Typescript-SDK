@@ -74,14 +74,16 @@ export class CartError extends Error {
 }
 
 /** @internal */
-export const SchemasCartErrorTag$: z.ZodNativeEnum<typeof SchemasCartErrorTag> =
-    z.nativeEnum(SchemasCartErrorTag);
+export namespace SchemasCartErrorTag$ {
+    export const inboundSchema = z.nativeEnum(SchemasCartErrorTag);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
 export namespace CartError$ {
     export const inboundSchema: z.ZodType<CartError, z.ZodTypeDef, unknown> = z
         .object({
-            ".tag": SchemasCartErrorTag$,
+            ".tag": SchemasCartErrorTag$.inboundSchema,
             message: z.string(),
             RawResponse: z.instanceof(Response).optional(),
             RawResponse1: z.instanceof(Response).optional(),
@@ -96,7 +98,7 @@ export namespace CartError$ {
         });
 
     export type Outbound = {
-        ".tag": SchemasCartErrorTag;
+        ".tag": string;
         message: string;
         RawResponse?: never | undefined;
         RawResponse1?: never | undefined;
@@ -108,7 +110,7 @@ export namespace CartError$ {
         .pipe(
             z
                 .object({
-                    dotTag: SchemasCartErrorTag$,
+                    dotTag: SchemasCartErrorTag$.outboundSchema,
                     message: z.string(),
                     rawResponse: z
                         .instanceof(Response)

@@ -1,6 +1,6 @@
 {
   "name": "@boltpay/bolt-typescript-sdk",
-  "version": "0.14.1",
+  "version": "0.14.2",
   "author": "BoltPublicAPI",  
   "main": "./index.js",
   "sideEffects": false,

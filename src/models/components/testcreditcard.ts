@@ -32,7 +32,7 @@ export type TestCreditCard = {
 export namespace TestCreditCard$ {
     export const inboundSchema: z.ZodType<TestCreditCard, z.ZodTypeDef, unknown> = z
         .object({
-            network: CreditCardNetwork$,
+            network: CreditCardNetwork$.inboundSchema,
             bin: z.string(),
             last4: z.string(),
             expiration: z
@@ -52,7 +52,7 @@ export namespace TestCreditCard$ {
         });
 
     export type Outbound = {
-        network: CreditCardNetwork;
+        network: string;
         bin: string;
         last4: string;
         expiration: string;
@@ -61,7 +61,7 @@ export namespace TestCreditCard$ {
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, TestCreditCard> = z
         .object({
-            network: CreditCardNetwork$,
+            network: CreditCardNetwork$.outboundSchema,
             bin: z.string(),
             last4: z.string(),
             expiration: z.date().transform((v) => v.toISOString()),

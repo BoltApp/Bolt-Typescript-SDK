@@ -25,14 +25,16 @@ export type PaymentMethodPaypal = {
 };
 
 /** @internal */
-export const PaymentMethodPaypalTag$: z.ZodNativeEnum<typeof PaymentMethodPaypalTag> =
-    z.nativeEnum(PaymentMethodPaypalTag);
+export namespace PaymentMethodPaypalTag$ {
+    export const inboundSchema = z.nativeEnum(PaymentMethodPaypalTag);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
 export namespace PaymentMethodPaypalOutput$ {
     export const inboundSchema: z.ZodType<PaymentMethodPaypalOutput, z.ZodTypeDef, unknown> = z
         .object({
-            ".tag": PaymentMethodPaypalTag$,
+            ".tag": PaymentMethodPaypalTag$.inboundSchema,
         })
         .transform((v) => {
             return {
@@ -41,12 +43,12 @@ export namespace PaymentMethodPaypalOutput$ {
         });
 
     export type Outbound = {
-        ".tag": PaymentMethodPaypalTag;
+        ".tag": string;
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentMethodPaypalOutput> = z
         .object({
-            dotTag: PaymentMethodPaypalTag$,
+            dotTag: PaymentMethodPaypalTag$.outboundSchema,
         })
         .transform((v) => {
             return {
@@ -59,7 +61,7 @@ export namespace PaymentMethodPaypalOutput$ {
 export namespace PaymentMethodPaypal$ {
     export const inboundSchema: z.ZodType<PaymentMethodPaypal, z.ZodTypeDef, unknown> = z
         .object({
-            ".tag": PaymentMethodPaypalTag$,
+            ".tag": PaymentMethodPaypalTag$.inboundSchema,
             success_url: z.string(),
             cancel_url: z.string(),
         })
@@ -72,14 +74,14 @@ export namespace PaymentMethodPaypal$ {
         });
 
     export type Outbound = {
-        ".tag": PaymentMethodPaypalTag;
+        ".tag": string;
         success_url: string;
         cancel_url: string;
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentMethodPaypal> = z
         .object({
-            dotTag: PaymentMethodPaypalTag$,
+            dotTag: PaymentMethodPaypalTag$.outboundSchema,
             successUrl: z.string(),
             cancelUrl: z.string(),
         })

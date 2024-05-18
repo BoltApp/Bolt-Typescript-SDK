@@ -34,19 +34,25 @@ export type AccountTestCreationData = {
 };
 
 /** @internal */
-export const EmailState$: z.ZodNativeEnum<typeof EmailState> = z.nativeEnum(EmailState);
+export namespace EmailState$ {
+    export const inboundSchema = z.nativeEnum(EmailState);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
-export const PhoneState$: z.ZodNativeEnum<typeof PhoneState> = z.nativeEnum(PhoneState);
+export namespace PhoneState$ {
+    export const inboundSchema = z.nativeEnum(PhoneState);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
 export namespace AccountTestCreationDataOutput$ {
     export const inboundSchema: z.ZodType<AccountTestCreationDataOutput, z.ZodTypeDef, unknown> = z
         .object({
             email: z.string(),
-            email_state: EmailState$,
+            email_state: EmailState$.inboundSchema,
             phone: z.string(),
-            phone_state: PhoneState$,
+            phone_state: PhoneState$.inboundSchema,
             otp_code: z.string(),
             oauth_code: z.string(),
         })
@@ -63,9 +69,9 @@ export namespace AccountTestCreationDataOutput$ {
 
     export type Outbound = {
         email: string;
-        email_state: EmailState;
+        email_state: string;
         phone: string;
-        phone_state: PhoneState;
+        phone_state: string;
         otp_code: string;
         oauth_code: string;
     };
@@ -74,9 +80,9 @@ export namespace AccountTestCreationDataOutput$ {
         z
             .object({
                 email: z.string(),
-                emailState: EmailState$,
+                emailState: EmailState$.outboundSchema,
                 phone: z.string(),
-                phoneState: PhoneState$,
+                phoneState: PhoneState$.outboundSchema,
                 otpCode: z.string(),
                 oauthCode: z.string(),
             })
@@ -96,8 +102,8 @@ export namespace AccountTestCreationDataOutput$ {
 export namespace AccountTestCreationData$ {
     export const inboundSchema: z.ZodType<AccountTestCreationData, z.ZodTypeDef, unknown> = z
         .object({
-            email_state: EmailState$,
-            phone_state: PhoneState$,
+            email_state: EmailState$.inboundSchema,
+            phone_state: PhoneState$.inboundSchema,
             is_migrated: z.boolean().optional(),
             has_address: z.boolean().optional(),
             has_credit_card: z.boolean().optional(),
@@ -113,8 +119,8 @@ export namespace AccountTestCreationData$ {
         });
 
     export type Outbound = {
-        email_state: EmailState;
-        phone_state: PhoneState;
+        email_state: string;
+        phone_state: string;
         is_migrated?: boolean | undefined;
         has_address?: boolean | undefined;
         has_credit_card?: boolean | undefined;
@@ -122,8 +128,8 @@ export namespace AccountTestCreationData$ {
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, AccountTestCreationData> = z
         .object({
-            emailState: EmailState$,
-            phoneState: PhoneState$,
+            emailState: EmailState$.outboundSchema,
+            phoneState: PhoneState$.outboundSchema,
             isMigrated: z.boolean().optional(),
             hasAddress: z.boolean().optional(),
             hasCreditCard: z.boolean().optional(),

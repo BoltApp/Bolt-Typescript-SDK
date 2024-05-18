@@ -23,14 +23,16 @@ export type AddressReferenceId = {
 };
 
 /** @internal */
-export const AddressReferenceIdTag$: z.ZodNativeEnum<typeof AddressReferenceIdTag> =
-    z.nativeEnum(AddressReferenceIdTag);
+export namespace AddressReferenceIdTag$ {
+    export const inboundSchema = z.nativeEnum(AddressReferenceIdTag);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
 export namespace AddressReferenceId$ {
     export const inboundSchema: z.ZodType<AddressReferenceId, z.ZodTypeDef, unknown> = z
         .object({
-            ".tag": AddressReferenceIdTag$,
+            ".tag": AddressReferenceIdTag$.inboundSchema,
             id: z.string(),
         })
         .transform((v) => {
@@ -41,13 +43,13 @@ export namespace AddressReferenceId$ {
         });
 
     export type Outbound = {
-        ".tag": AddressReferenceIdTag;
+        ".tag": string;
         id: string;
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, AddressReferenceId> = z
         .object({
-            dotTag: AddressReferenceIdTag$,
+            dotTag: AddressReferenceIdTag$.outboundSchema,
             id: z.string(),
         })
         .transform((v) => {

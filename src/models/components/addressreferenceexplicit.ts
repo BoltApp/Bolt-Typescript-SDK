@@ -125,14 +125,16 @@ export type AddressReferenceExplicitInput = {
 };
 
 /** @internal */
-export const AddressReferenceExplicitTag$: z.ZodNativeEnum<typeof AddressReferenceExplicitTag> =
-    z.nativeEnum(AddressReferenceExplicitTag);
+export namespace AddressReferenceExplicitTag$ {
+    export const inboundSchema = z.nativeEnum(AddressReferenceExplicitTag);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
 export namespace AddressReferenceExplicit$ {
     export const inboundSchema: z.ZodType<AddressReferenceExplicit, z.ZodTypeDef, unknown> = z
         .object({
-            ".tag": AddressReferenceExplicitTag$,
+            ".tag": AddressReferenceExplicitTag$.inboundSchema,
             id: z.string().optional(),
             first_name: z.string(),
             last_name: z.string(),
@@ -142,7 +144,7 @@ export namespace AddressReferenceExplicit$ {
             locality: z.string(),
             postal_code: z.string(),
             region: z.string().optional(),
-            country_code: CountryCode$,
+            country_code: CountryCode$.inboundSchema,
             email: z.string().optional(),
             phone: z.string().optional(),
         })
@@ -165,7 +167,7 @@ export namespace AddressReferenceExplicit$ {
         });
 
     export type Outbound = {
-        ".tag": AddressReferenceExplicitTag;
+        ".tag": string;
         id?: string | undefined;
         first_name: string;
         last_name: string;
@@ -175,14 +177,14 @@ export namespace AddressReferenceExplicit$ {
         locality: string;
         postal_code: string;
         region?: string | undefined;
-        country_code: CountryCode;
+        country_code: string;
         email?: string | undefined;
         phone?: string | undefined;
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, AddressReferenceExplicit> = z
         .object({
-            dotTag: AddressReferenceExplicitTag$,
+            dotTag: AddressReferenceExplicitTag$.outboundSchema,
             id: z.string().optional(),
             firstName: z.string(),
             lastName: z.string(),
@@ -192,7 +194,7 @@ export namespace AddressReferenceExplicit$ {
             locality: z.string(),
             postalCode: z.string(),
             region: z.string().optional(),
-            countryCode: CountryCode$,
+            countryCode: CountryCode$.outboundSchema,
             email: z.string().optional(),
             phone: z.string().optional(),
         })
@@ -219,7 +221,7 @@ export namespace AddressReferenceExplicit$ {
 export namespace AddressReferenceExplicitInput$ {
     export const inboundSchema: z.ZodType<AddressReferenceExplicitInput, z.ZodTypeDef, unknown> = z
         .object({
-            ".tag": AddressReferenceExplicitTag$,
+            ".tag": AddressReferenceExplicitTag$.inboundSchema,
             first_name: z.string(),
             last_name: z.string(),
             company: z.string().optional(),
@@ -228,7 +230,7 @@ export namespace AddressReferenceExplicitInput$ {
             locality: z.string(),
             postal_code: z.string(),
             region: z.string().optional(),
-            country_code: CountryCode$,
+            country_code: CountryCode$.inboundSchema,
             email: z.string().optional(),
             phone: z.string().optional(),
         })
@@ -250,7 +252,7 @@ export namespace AddressReferenceExplicitInput$ {
         });
 
     export type Outbound = {
-        ".tag": AddressReferenceExplicitTag;
+        ".tag": string;
         first_name: string;
         last_name: string;
         company?: string | undefined;
@@ -259,7 +261,7 @@ export namespace AddressReferenceExplicitInput$ {
         locality: string;
         postal_code: string;
         region?: string | undefined;
-        country_code: CountryCode;
+        country_code: string;
         email?: string | undefined;
         phone?: string | undefined;
     };
@@ -267,7 +269,7 @@ export namespace AddressReferenceExplicitInput$ {
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, AddressReferenceExplicitInput> =
         z
             .object({
-                dotTag: AddressReferenceExplicitTag$,
+                dotTag: AddressReferenceExplicitTag$.outboundSchema,
                 firstName: z.string(),
                 lastName: z.string(),
                 company: z.string().optional(),
@@ -276,7 +278,7 @@ export namespace AddressReferenceExplicitInput$ {
                 locality: z.string(),
                 postalCode: z.string(),
                 region: z.string().optional(),
-                countryCode: CountryCode$,
+                countryCode: CountryCode$.outboundSchema,
                 email: z.string().optional(),
                 phone: z.string().optional(),
             })

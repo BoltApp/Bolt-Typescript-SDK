@@ -1,6 +1,19 @@
-speakeasyVersion: 1.286.3
-sources: {}
-targets: {}
+speakeasyVersion: 1.293.1
+sources:
+    my-source:
+        sourceNamespace: my-source
+        sourceRevisionDigest: sha256:04ad95a238b0a37b4953a95a34dd8be14b5ba56a1ee8c0c6f7f4e3d0343ea8ff
+        sourceBlobDigest: sha256:1622667b1aa3958ca8abcdc37f8deb506eeec23576ed078ff5bb5664d4d12606
+        tags:
+            - latest
+            - main
+targets:
+    bolt-typescript:
+        source: my-source
+        sourceNamespace: my-source
+        sourceRevisionDigest: sha256:04ad95a238b0a37b4953a95a34dd8be14b5ba56a1ee8c0c6f7f4e3d0343ea8ff
+        sourceBlobDigest: sha256:1622667b1aa3958ca8abcdc37f8deb506eeec23576ed078ff5bb5664d4d12606
+        outLocation: /github/workspace/repo
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -8,6 +21,8 @@ workflow:
         my-source:
             inputs:
                 - location: https://api-docs.bolt.com/api.bundle.yaml
+            registry:
+                location: registry.speakeasyapi.dev/bolt/boltpublicapi/my-source
     targets:
         bolt-typescript:
             target: typescript

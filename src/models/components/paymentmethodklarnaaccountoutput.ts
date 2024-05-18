@@ -21,15 +21,17 @@ export type PaymentMethodKlarnaAccount = {
 };
 
 /** @internal */
-export const PaymentMethodKlarnaAccountTag$: z.ZodNativeEnum<typeof PaymentMethodKlarnaAccountTag> =
-    z.nativeEnum(PaymentMethodKlarnaAccountTag);
+export namespace PaymentMethodKlarnaAccountTag$ {
+    export const inboundSchema = z.nativeEnum(PaymentMethodKlarnaAccountTag);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
 export namespace PaymentMethodKlarnaAccountOutput$ {
     export const inboundSchema: z.ZodType<PaymentMethodKlarnaAccountOutput, z.ZodTypeDef, unknown> =
         z
             .object({
-                ".tag": PaymentMethodKlarnaAccountTag$,
+                ".tag": PaymentMethodKlarnaAccountTag$.inboundSchema,
             })
             .transform((v) => {
                 return {
@@ -38,7 +40,7 @@ export namespace PaymentMethodKlarnaAccountOutput$ {
             });
 
     export type Outbound = {
-        ".tag": PaymentMethodKlarnaAccountTag;
+        ".tag": string;
     };
 
     export const outboundSchema: z.ZodType<
@@ -47,7 +49,7 @@ export namespace PaymentMethodKlarnaAccountOutput$ {
         PaymentMethodKlarnaAccountOutput
     > = z
         .object({
-            dotTag: PaymentMethodKlarnaAccountTag$,
+            dotTag: PaymentMethodKlarnaAccountTag$.outboundSchema,
         })
         .transform((v) => {
             return {
@@ -60,7 +62,7 @@ export namespace PaymentMethodKlarnaAccountOutput$ {
 export namespace PaymentMethodKlarnaAccount$ {
     export const inboundSchema: z.ZodType<PaymentMethodKlarnaAccount, z.ZodTypeDef, unknown> = z
         .object({
-            ".tag": PaymentMethodKlarnaAccountTag$,
+            ".tag": PaymentMethodKlarnaAccountTag$.inboundSchema,
             return_url: z.string(),
         })
         .transform((v) => {
@@ -71,13 +73,13 @@ export namespace PaymentMethodKlarnaAccount$ {
         });
 
     export type Outbound = {
-        ".tag": PaymentMethodKlarnaAccountTag;
+        ".tag": string;
         return_url: string;
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentMethodKlarnaAccount> = z
         .object({
-            dotTag: PaymentMethodKlarnaAccountTag$,
+            dotTag: PaymentMethodKlarnaAccountTag$.outboundSchema,
             returnUrl: z.string(),
         })
         .transform((v) => {

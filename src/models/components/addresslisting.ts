@@ -76,7 +76,7 @@ export namespace AddressListing$ {
             locality: z.string(),
             postal_code: z.string(),
             region: z.string().optional(),
-            country_code: CountryCode$,
+            country_code: CountryCode$.inboundSchema,
             email: z.string().optional(),
             phone: z.string().optional(),
             is_default: z.boolean().optional(),
@@ -109,7 +109,7 @@ export namespace AddressListing$ {
         locality: string;
         postal_code: string;
         region?: string | undefined;
-        country_code: CountryCode;
+        country_code: string;
         email?: string | undefined;
         phone?: string | undefined;
         is_default?: boolean | undefined;
@@ -126,7 +126,7 @@ export namespace AddressListing$ {
             locality: z.string(),
             postalCode: z.string(),
             region: z.string().optional(),
-            countryCode: CountryCode$,
+            countryCode: CountryCode$.outboundSchema,
             email: z.string().optional(),
             phone: z.string().optional(),
             isDefault: z.boolean().optional(),

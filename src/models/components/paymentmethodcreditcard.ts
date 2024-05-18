@@ -55,16 +55,19 @@ export type PaymentMethodCreditCardInput = {
 };
 
 /** @internal */
-export const DotTag$: z.ZodNativeEnum<typeof DotTag> = z.nativeEnum(DotTag);
+export namespace DotTag$ {
+    export const inboundSchema = z.nativeEnum(DotTag);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
 export namespace PaymentMethodCreditCard$ {
     export const inboundSchema: z.ZodType<PaymentMethodCreditCard, z.ZodTypeDef, unknown> = z
         .object({
-            ".tag": DotTag$,
+            ".tag": DotTag$.inboundSchema,
             id: z.string().optional(),
             billing_address: AddressReference$.inboundSchema,
-            network: CreditCardNetwork$,
+            network: CreditCardNetwork$.inboundSchema,
             last4: z.string(),
             expiration: z.string(),
         })
@@ -80,20 +83,20 @@ export namespace PaymentMethodCreditCard$ {
         });
 
     export type Outbound = {
-        ".tag": DotTag;
+        ".tag": string;
         id?: string | undefined;
         billing_address: AddressReference$.Outbound;
-        network: CreditCardNetwork;
+        network: string;
         last4: string;
         expiration: string;
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentMethodCreditCard> = z
         .object({
-            dotTag: DotTag$,
+            dotTag: DotTag$.outboundSchema,
             id: z.string().optional(),
             billingAddress: AddressReference$.outboundSchema,
-            network: CreditCardNetwork$,
+            network: CreditCardNetwork$.outboundSchema,
             last4: z.string(),
             expiration: z.string(),
         })
@@ -113,9 +116,9 @@ export namespace PaymentMethodCreditCard$ {
 export namespace PaymentMethodCreditCardInput$ {
     export const inboundSchema: z.ZodType<PaymentMethodCreditCardInput, z.ZodTypeDef, unknown> = z
         .object({
-            ".tag": DotTag$,
+            ".tag": DotTag$.inboundSchema,
             billing_address: AddressReferenceInput$.inboundSchema,
-            network: CreditCardNetwork$,
+            network: CreditCardNetwork$.inboundSchema,
             bin: z.string(),
             last4: z.string(),
             expiration: z.string(),
@@ -134,9 +137,9 @@ export namespace PaymentMethodCreditCardInput$ {
         });
 
     export type Outbound = {
-        ".tag": DotTag;
+        ".tag": string;
         billing_address: AddressReferenceInput$.Outbound;
-        network: CreditCardNetwork;
+        network: string;
         bin: string;
         last4: string;
         expiration: string;
@@ -145,9 +148,9 @@ export namespace PaymentMethodCreditCardInput$ {
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentMethodCreditCardInput> = z
         .object({
-            dotTag: DotTag$,
+            dotTag: DotTag$.outboundSchema,
             billingAddress: AddressReferenceInput$.outboundSchema,
-            network: CreditCardNetwork$,
+            network: CreditCardNetwork$.outboundSchema,
             bin: z.string(),
             last4: z.string(),
             expiration: z.string(),

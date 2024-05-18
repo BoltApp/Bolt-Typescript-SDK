@@ -21,19 +21,24 @@ export type PaymentResponseFinalized = {
 };
 
 /** @internal */
-export const PaymentResponseFinalizedTag$: z.ZodNativeEnum<typeof PaymentResponseFinalizedTag> =
-    z.nativeEnum(PaymentResponseFinalizedTag);
+export namespace PaymentResponseFinalizedTag$ {
+    export const inboundSchema = z.nativeEnum(PaymentResponseFinalizedTag);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
-export const Status$: z.ZodNativeEnum<typeof Status> = z.nativeEnum(Status);
+export namespace Status$ {
+    export const inboundSchema = z.nativeEnum(Status);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
 export namespace PaymentResponseFinalized$ {
     export const inboundSchema: z.ZodType<PaymentResponseFinalized, z.ZodTypeDef, unknown> = z
         .object({
-            ".tag": PaymentResponseFinalizedTag$,
+            ".tag": PaymentResponseFinalizedTag$.inboundSchema,
             id: z.string().optional(),
-            status: Status$,
+            status: Status$.inboundSchema,
             transaction: Transaction$.inboundSchema,
         })
         .transform((v) => {
@@ -46,17 +51,17 @@ export namespace PaymentResponseFinalized$ {
         });
 
     export type Outbound = {
-        ".tag": PaymentResponseFinalizedTag;
+        ".tag": string;
         id?: string | undefined;
-        status: Status;
+        status: string;
         transaction: Transaction$.Outbound;
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentResponseFinalized> = z
         .object({
-            dotTag: PaymentResponseFinalizedTag$,
+            dotTag: PaymentResponseFinalizedTag$.outboundSchema,
             id: z.string().optional(),
-            status: Status$,
+            status: Status$.outboundSchema,
             transaction: Transaction$.outboundSchema,
         })
         .transform((v) => {

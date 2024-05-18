@@ -21,14 +21,16 @@ export type PaymentMethodAffirm = {
 };
 
 /** @internal */
-export const PaymentMethodAffirmTag$: z.ZodNativeEnum<typeof PaymentMethodAffirmTag> =
-    z.nativeEnum(PaymentMethodAffirmTag);
+export namespace PaymentMethodAffirmTag$ {
+    export const inboundSchema = z.nativeEnum(PaymentMethodAffirmTag);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
 export namespace PaymentMethodAffirmOutput$ {
     export const inboundSchema: z.ZodType<PaymentMethodAffirmOutput, z.ZodTypeDef, unknown> = z
         .object({
-            ".tag": PaymentMethodAffirmTag$,
+            ".tag": PaymentMethodAffirmTag$.inboundSchema,
         })
         .transform((v) => {
             return {
@@ -37,12 +39,12 @@ export namespace PaymentMethodAffirmOutput$ {
         });
 
     export type Outbound = {
-        ".tag": PaymentMethodAffirmTag;
+        ".tag": string;
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentMethodAffirmOutput> = z
         .object({
-            dotTag: PaymentMethodAffirmTag$,
+            dotTag: PaymentMethodAffirmTag$.outboundSchema,
         })
         .transform((v) => {
             return {
@@ -55,7 +57,7 @@ export namespace PaymentMethodAffirmOutput$ {
 export namespace PaymentMethodAffirm$ {
     export const inboundSchema: z.ZodType<PaymentMethodAffirm, z.ZodTypeDef, unknown> = z
         .object({
-            ".tag": PaymentMethodAffirmTag$,
+            ".tag": PaymentMethodAffirmTag$.inboundSchema,
             return_url: z.string(),
         })
         .transform((v) => {
@@ -66,13 +68,13 @@ export namespace PaymentMethodAffirm$ {
         });
 
     export type Outbound = {
-        ".tag": PaymentMethodAffirmTag;
+        ".tag": string;
         return_url: string;
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentMethodAffirm> = z
         .object({
-            dotTag: PaymentMethodAffirmTag$,
+            dotTag: PaymentMethodAffirmTag$.outboundSchema,
             returnUrl: z.string(),
         })
         .transform((v) => {

@@ -253,13 +253,16 @@ export class FieldError extends Error {
 }
 
 /** @internal */
-export const SchemasTag$: z.ZodNativeEnum<typeof SchemasTag> = z.nativeEnum(SchemasTag);
+export namespace SchemasTag$ {
+    export const inboundSchema = z.nativeEnum(SchemasTag);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
 export namespace FieldError$ {
     export const inboundSchema: z.ZodType<FieldError, z.ZodTypeDef, unknown> = z
         .object({
-            ".tag": SchemasTag$,
+            ".tag": SchemasTag$.inboundSchema,
             message: z.string(),
             field: z.string(),
             RawResponse: z.instanceof(Response).optional(),
@@ -306,7 +309,7 @@ export namespace FieldError$ {
         });
 
     export type Outbound = {
-        ".tag": SchemasTag;
+        ".tag": string;
         message: string;
         field: string;
         RawResponse?: never | undefined;
@@ -334,7 +337,7 @@ export namespace FieldError$ {
         .pipe(
             z
                 .object({
-                    dotTag: SchemasTag$,
+                    dotTag: SchemasTag$.outboundSchema,
                     message: z.string(),
                     field: z.string(),
                     rawResponse: z

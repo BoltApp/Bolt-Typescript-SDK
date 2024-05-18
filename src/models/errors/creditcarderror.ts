@@ -91,14 +91,16 @@ export class CreditCardError extends Error {
 }
 
 /** @internal */
-export const SchemasCreditCardErrorTag$: z.ZodNativeEnum<typeof SchemasCreditCardErrorTag> =
-    z.nativeEnum(SchemasCreditCardErrorTag);
+export namespace SchemasCreditCardErrorTag$ {
+    export const inboundSchema = z.nativeEnum(SchemasCreditCardErrorTag);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
 export namespace CreditCardError$ {
     export const inboundSchema: z.ZodType<CreditCardError, z.ZodTypeDef, unknown> = z
         .object({
-            ".tag": SchemasCreditCardErrorTag$,
+            ".tag": SchemasCreditCardErrorTag$.inboundSchema,
             message: z.string(),
             RawResponse: z.instanceof(Response).optional(),
             RawResponse1: z.instanceof(Response).optional(),
@@ -115,7 +117,7 @@ export namespace CreditCardError$ {
         });
 
     export type Outbound = {
-        ".tag": SchemasCreditCardErrorTag;
+        ".tag": string;
         message: string;
         RawResponse?: never | undefined;
         RawResponse1?: never | undefined;
@@ -128,7 +130,7 @@ export namespace CreditCardError$ {
         .pipe(
             z
                 .object({
-                    dotTag: SchemasCreditCardErrorTag$,
+                    dotTag: SchemasCreditCardErrorTag$.outboundSchema,
                     message: z.string(),
                     rawResponse: z
                         .instanceof(Response)

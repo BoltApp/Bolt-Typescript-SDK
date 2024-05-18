@@ -71,14 +71,17 @@ export namespace TestingCreditCardGetSecurity$ {
 }
 
 /** @internal */
-export const Type$: z.ZodNativeEnum<typeof Type> = z.nativeEnum(Type);
+export namespace Type$ {
+    export const inboundSchema = z.nativeEnum(Type);
+    export const outboundSchema = inboundSchema;
+}
 
 /** @internal */
 export namespace TestingCreditCardGetRequestBody$ {
     export const inboundSchema: z.ZodType<TestingCreditCardGetRequestBody, z.ZodTypeDef, unknown> =
         z
             .object({
-                type: Type$,
+                type: Type$.inboundSchema,
             })
             .transform((v) => {
                 return {
@@ -87,7 +90,7 @@ export namespace TestingCreditCardGetRequestBody$ {
             });
 
     export type Outbound = {
-        type: Type;
+        type: string;
     };
 
     export const outboundSchema: z.ZodType<
@@ -96,7 +99,7 @@ export namespace TestingCreditCardGetRequestBody$ {
         TestingCreditCardGetRequestBody
     > = z
         .object({
-            type: Type$,
+            type: Type$.outboundSchema,
         })
         .transform((v) => {
             return {

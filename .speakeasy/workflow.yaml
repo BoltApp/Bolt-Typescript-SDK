@@ -4,6 +4,8 @@ sources:
     my-source:
         inputs:
             - location: https://api-docs.bolt.com/api.bundle.yaml
+        registry:
+            location: registry.speakeasyapi.dev/bolt/boltpublicapi/my-source
 targets:
     bolt-typescript:
         target: typescript
