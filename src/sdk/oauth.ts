@@ -88,47 +88,13 @@ export class OAuth extends ClientSDK {
             Headers: {},
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.OauthGetTokenResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        "get-access-token-response": val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else if (this.matchResponse(response, "4XX", "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return errors.OauthGetTokenResponseBody$.inboundSchema.parse({
-                        ...responseFields$,
-                        ...val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            throw result;
-        } else if (this.matchStatusCode(response, "default")) {
-            // fallthrough
-        } else {
-            const responseBody = await response.text();
-            throw new errors.SDKError(
-                "Unexpected API response status or content-type",
-                response,
-                responseBody
-            );
-        }
+        const [result$] = await this.matcher<operations.OauthGetTokenResponse>()
+            .json(200, operations.OauthGetTokenResponse$, { key: "get-access-token-response" })
+            .json("4XX", errors.OauthGetTokenResponseBody$, { err: true })
+            .fail("5XX")
+            .void("default", operations.OauthGetTokenResponse$)
+            .match(response, { extraFields: responseFields$ });
 
-        return schemas$.parse(
-            undefined,
-            () => operations.OauthGetTokenResponse$.inboundSchema.parse(responseFields$),
-            "Response validation failed"
-        );
+        return result$;
     }
 }

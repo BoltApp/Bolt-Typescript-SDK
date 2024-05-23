@@ -55,7 +55,7 @@ run();
 
 ### Response
 
-**Promise<[operations.TestingAccountCreateResponse](../../models/operations/testingaccountcreateresponse.md)>**
+**Promise\<[operations.TestingAccountCreateResponse](../../models/operations/testingaccountcreateresponse.md)\>**
 ### Errors
 
 | Error Object                            | Status Code                             | Content Type                            |
@@ -97,7 +97,7 @@ run();
 
 ### Response
 
-**Promise<[operations.TestingAccountPhoneGetResponse](../../models/operations/testingaccountphonegetresponse.md)>**
+**Promise\<[operations.TestingAccountPhoneGetResponse](../../models/operations/testingaccountphonegetresponse.md)\>**
 ### Errors
 
 | Error Object                              | Status Code                               | Content Type                              |
@@ -142,7 +142,7 @@ run();
 
 ### Response
 
-**Promise<[operations.TestingCreditCardGetResponse](../../models/operations/testingcreditcardgetresponse.md)>**
+**Promise\<[operations.TestingCreditCardGetResponse](../../models/operations/testingcreditcardgetresponse.md)\>**
 ### Errors
 
 | Error Object                            | Status Code                             | Content Type                            |

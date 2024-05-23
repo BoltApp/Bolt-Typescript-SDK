@@ -110,48 +110,14 @@ export class Account extends ClientSDK {
             Headers: {},
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.AccountGetResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        account: val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else if (this.matchResponse(response, "4XX", "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return errors.AccountGetResponseBody$.inboundSchema.parse({
-                        ...responseFields$,
-                        ...val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            throw result;
-        } else if (this.matchStatusCode(response, "default")) {
-            // fallthrough
-        } else {
-            const responseBody = await response.text();
-            throw new errors.SDKError(
-                "Unexpected API response status or content-type",
-                response,
-                responseBody
-            );
-        }
+        const [result$] = await this.matcher<operations.AccountGetResponse>()
+            .json(200, operations.AccountGetResponse$, { key: "account" })
+            .json("4XX", errors.AccountGetResponseBody$, { err: true })
+            .fail("5XX")
+            .void("default", operations.AccountGetResponse$)
+            .match(response, { extraFields: responseFields$ });
 
-        return schemas$.parse(
-            undefined,
-            () => operations.AccountGetResponse$.inboundSchema.parse(responseFields$),
-            "Response validation failed"
-        );
+        return result$;
     }
 
     /**
@@ -228,48 +194,14 @@ export class Account extends ClientSDK {
             Headers: {},
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.AccountAddressCreateResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        "address-listing": val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else if (this.matchResponse(response, "4XX", "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return errors.AccountAddressCreateResponseBody$.inboundSchema.parse({
-                        ...responseFields$,
-                        ...val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            throw result;
-        } else if (this.matchStatusCode(response, "default")) {
-            // fallthrough
-        } else {
-            const responseBody = await response.text();
-            throw new errors.SDKError(
-                "Unexpected API response status or content-type",
-                response,
-                responseBody
-            );
-        }
+        const [result$] = await this.matcher<operations.AccountAddressCreateResponse>()
+            .json(200, operations.AccountAddressCreateResponse$, { key: "address-listing" })
+            .json("4XX", errors.AccountAddressCreateResponseBody$, { err: true })
+            .fail("5XX")
+            .void("default", operations.AccountAddressCreateResponse$)
+            .match(response, { extraFields: responseFields$ });
 
-        return schemas$.parse(
-            undefined,
-            () => operations.AccountAddressCreateResponse$.inboundSchema.parse(responseFields$),
-            "Response validation failed"
-        );
+        return result$;
     }
 
     /**
@@ -354,48 +286,14 @@ export class Account extends ClientSDK {
             Headers: {},
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.AccountAddressEditResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        "address-listing": val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else if (this.matchResponse(response, "4XX", "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return errors.AccountAddressEditResponseBody$.inboundSchema.parse({
-                        ...responseFields$,
-                        ...val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            throw result;
-        } else if (this.matchStatusCode(response, "default")) {
-            // fallthrough
-        } else {
-            const responseBody = await response.text();
-            throw new errors.SDKError(
-                "Unexpected API response status or content-type",
-                response,
-                responseBody
-            );
-        }
+        const [result$] = await this.matcher<operations.AccountAddressEditResponse>()
+            .json(200, operations.AccountAddressEditResponse$, { key: "address-listing" })
+            .json("4XX", errors.AccountAddressEditResponseBody$, { err: true })
+            .fail("5XX")
+            .void("default", operations.AccountAddressEditResponse$)
+            .match(response, { extraFields: responseFields$ });
 
-        return schemas$.parse(
-            undefined,
-            () => operations.AccountAddressEditResponse$.inboundSchema.parse(responseFields$),
-            "Response validation failed"
-        );
+        return result$;
     }
 
     /**
@@ -476,35 +374,13 @@ export class Account extends ClientSDK {
             Headers: {},
         };
 
-        if (this.matchResponse(response, "4XX", "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return errors.AccountAddressDeleteResponseBody$.inboundSchema.parse({
-                        ...responseFields$,
-                        ...val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            throw result;
-        } else if (this.matchStatusCode(response, [200, "default"])) {
-            // fallthrough
-        } else {
-            const responseBody = await response.text();
-            throw new errors.SDKError(
-                "Unexpected API response status or content-type",
-                response,
-                responseBody
-            );
-        }
+        const [result$] = await this.matcher<operations.AccountAddressDeleteResponse>()
+            .json("4XX", errors.AccountAddressDeleteResponseBody$, { err: true })
+            .fail("5XX")
+            .void([200, "default"], operations.AccountAddressDeleteResponse$)
+            .match(response, { extraFields: responseFields$ });
 
-        return schemas$.parse(
-            undefined,
-            () => operations.AccountAddressDeleteResponse$.inboundSchema.parse(responseFields$),
-            "Response validation failed"
-        );
+        return result$;
     }
 
     /**
@@ -585,48 +461,14 @@ export class Account extends ClientSDK {
             Headers: {},
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.AccountAddPaymentMethodResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        "payment-method": val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else if (this.matchResponse(response, "4XX", "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return errors.AccountAddPaymentMethodResponseBody$.inboundSchema.parse({
-                        ...responseFields$,
-                        ...val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            throw result;
-        } else if (this.matchStatusCode(response, "default")) {
-            // fallthrough
-        } else {
-            const responseBody = await response.text();
-            throw new errors.SDKError(
-                "Unexpected API response status or content-type",
-                response,
-                responseBody
-            );
-        }
+        const [result$] = await this.matcher<operations.AccountAddPaymentMethodResponse>()
+            .json(200, operations.AccountAddPaymentMethodResponse$, { key: "payment-method" })
+            .json("4XX", errors.AccountAddPaymentMethodResponseBody$, { err: true })
+            .fail("5XX")
+            .void("default", operations.AccountAddPaymentMethodResponse$)
+            .match(response, { extraFields: responseFields$ });
 
-        return schemas$.parse(
-            undefined,
-            () => operations.AccountAddPaymentMethodResponse$.inboundSchema.parse(responseFields$),
-            "Response validation failed"
-        );
+        return result$;
     }
 
     /**
@@ -707,35 +549,12 @@ export class Account extends ClientSDK {
             Headers: {},
         };
 
-        if (this.matchResponse(response, "4XX", "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return errors.AccountPaymentMethodDeleteResponseBody$.inboundSchema.parse({
-                        ...responseFields$,
-                        ...val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            throw result;
-        } else if (this.matchStatusCode(response, [200, "default"])) {
-            // fallthrough
-        } else {
-            const responseBody = await response.text();
-            throw new errors.SDKError(
-                "Unexpected API response status or content-type",
-                response,
-                responseBody
-            );
-        }
+        const [result$] = await this.matcher<operations.AccountPaymentMethodDeleteResponse>()
+            .json("4XX", errors.AccountPaymentMethodDeleteResponseBody$, { err: true })
+            .fail("5XX")
+            .void([200, "default"], operations.AccountPaymentMethodDeleteResponse$)
+            .match(response, { extraFields: responseFields$ });
 
-        return schemas$.parse(
-            undefined,
-            () =>
-                operations.AccountPaymentMethodDeleteResponse$.inboundSchema.parse(responseFields$),
-            "Response validation failed"
-        );
+        return result$;
     }
 }

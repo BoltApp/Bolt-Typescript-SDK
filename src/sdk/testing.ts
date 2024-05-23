@@ -121,48 +121,16 @@ export class Testing extends ClientSDK {
             Headers: {},
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.TestingAccountCreateResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        "account-test-creation-data": val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else if (this.matchResponse(response, "4XX", "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return errors.TestingAccountCreateResponseBody$.inboundSchema.parse({
-                        ...responseFields$,
-                        ...val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            throw result;
-        } else if (this.matchStatusCode(response, "default")) {
-            // fallthrough
-        } else {
-            const responseBody = await response.text();
-            throw new errors.SDKError(
-                "Unexpected API response status or content-type",
-                response,
-                responseBody
-            );
-        }
+        const [result$] = await this.matcher<operations.TestingAccountCreateResponse>()
+            .json(200, operations.TestingAccountCreateResponse$, {
+                key: "account-test-creation-data",
+            })
+            .json("4XX", errors.TestingAccountCreateResponseBody$, { err: true })
+            .fail("5XX")
+            .void("default", operations.TestingAccountCreateResponse$)
+            .match(response, { extraFields: responseFields$ });
 
-        return schemas$.parse(
-            undefined,
-            () => operations.TestingAccountCreateResponse$.inboundSchema.parse(responseFields$),
-            "Response validation failed"
-        );
+        return result$;
     }
 
     /**
@@ -241,48 +209,16 @@ export class Testing extends ClientSDK {
             Headers: {},
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.TestingAccountPhoneGetResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        "account-test-phone-data": val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else if (this.matchResponse(response, "4XX", "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return errors.TestingAccountPhoneGetResponseBody$.inboundSchema.parse({
-                        ...responseFields$,
-                        ...val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            throw result;
-        } else if (this.matchStatusCode(response, "default")) {
-            // fallthrough
-        } else {
-            const responseBody = await response.text();
-            throw new errors.SDKError(
-                "Unexpected API response status or content-type",
-                response,
-                responseBody
-            );
-        }
+        const [result$] = await this.matcher<operations.TestingAccountPhoneGetResponse>()
+            .json(200, operations.TestingAccountPhoneGetResponse$, {
+                key: "account-test-phone-data",
+            })
+            .json("4XX", errors.TestingAccountPhoneGetResponseBody$, { err: true })
+            .fail("5XX")
+            .void("default", operations.TestingAccountPhoneGetResponse$)
+            .match(response, { extraFields: responseFields$ });
 
-        return schemas$.parse(
-            undefined,
-            () => operations.TestingAccountPhoneGetResponse$.inboundSchema.parse(responseFields$),
-            "Response validation failed"
-        );
+        return result$;
     }
 
     /**
@@ -353,47 +289,13 @@ export class Testing extends ClientSDK {
             Headers: {},
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.TestingCreditCardGetResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        "test-credit-card": val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else if (this.matchResponse(response, "4XX", "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return errors.TestingCreditCardGetResponseBody$.inboundSchema.parse({
-                        ...responseFields$,
-                        ...val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            throw result;
-        } else if (this.matchStatusCode(response, "default")) {
-            // fallthrough
-        } else {
-            const responseBody = await response.text();
-            throw new errors.SDKError(
-                "Unexpected API response status or content-type",
-                response,
-                responseBody
-            );
-        }
+        const [result$] = await this.matcher<operations.TestingCreditCardGetResponse>()
+            .json(200, operations.TestingCreditCardGetResponse$, { key: "test-credit-card" })
+            .json("4XX", errors.TestingCreditCardGetResponseBody$, { err: true })
+            .fail("5XX")
+            .void("default", operations.TestingCreditCardGetResponse$)
+            .match(response, { extraFields: responseFields$ });
 
-        return schemas$.parse(
-            undefined,
-            () => operations.TestingCreditCardGetResponse$.inboundSchema.parse(responseFields$),
-            "Response validation failed"
-        );
+        return result$;
     }
 }

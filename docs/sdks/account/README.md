@@ -52,7 +52,7 @@ run();
 
 ### Response
 
-**Promise<[operations.AccountGetResponse](../../models/operations/accountgetresponse.md)>**
+**Promise\<[operations.AccountGetResponse](../../models/operations/accountgetresponse.md)\>**
 ### Errors
 
 | Error Object                  | Status Code                   | Content Type                  |
@@ -110,7 +110,7 @@ run();
 
 ### Response
 
-**Promise<[operations.AccountAddressCreateResponse](../../models/operations/accountaddresscreateresponse.md)>**
+**Promise\<[operations.AccountAddressCreateResponse](../../models/operations/accountaddresscreateresponse.md)\>**
 ### Errors
 
 | Error Object                            | Status Code                             | Content Type                            |
@@ -172,7 +172,7 @@ run();
 
 ### Response
 
-**Promise<[operations.AccountAddressEditResponse](../../models/operations/accountaddresseditresponse.md)>**
+**Promise\<[operations.AccountAddressEditResponse](../../models/operations/accountaddresseditresponse.md)\>**
 ### Errors
 
 | Error Object                          | Status Code                           | Content Type                          |
@@ -219,7 +219,7 @@ run();
 
 ### Response
 
-**Promise<[operations.AccountAddressDeleteResponse](../../models/operations/accountaddressdeleteresponse.md)>**
+**Promise\<[operations.AccountAddressDeleteResponse](../../models/operations/accountaddressdeleteresponse.md)\>**
 ### Errors
 
 | Error Object                            | Status Code                             | Content Type                            |
@@ -280,7 +280,7 @@ run();
 
 ### Response
 
-**Promise<[operations.AccountAddPaymentMethodResponse](../../models/operations/accountaddpaymentmethodresponse.md)>**
+**Promise\<[operations.AccountAddPaymentMethodResponse](../../models/operations/accountaddpaymentmethodresponse.md)\>**
 ### Errors
 
 | Error Object                               | Status Code                                | Content Type                               |
@@ -327,7 +327,7 @@ run();
 
 ### Response
 
-**Promise<[operations.AccountPaymentMethodDeleteResponse](../../models/operations/accountpaymentmethoddeleteresponse.md)>**
+**Promise\<[operations.AccountPaymentMethodDeleteResponse](../../models/operations/accountpaymentmethoddeleteresponse.md)\>**
 ### Errors
 
 | Error Object                                  | Status Code                                   | Content Type                                  |

@@ -114,7 +114,7 @@ run();
 
 ### Response
 
-**Promise<[operations.GuestPaymentsInitializeResponse](../../models/operations/guestpaymentsinitializeresponse.md)>**
+**Promise\<[operations.GuestPaymentsInitializeResponse](../../models/operations/guestpaymentsinitializeresponse.md)\>**
 ### Errors
 
 | Error Object                               | Status Code                                | Content Type                               |
@@ -220,7 +220,7 @@ run();
 
 ### Response
 
-**Promise<[operations.GuestPaymentsUpdateResponse](../../models/operations/guestpaymentsupdateresponse.md)>**
+**Promise\<[operations.GuestPaymentsUpdateResponse](../../models/operations/guestpaymentsupdateresponse.md)\>**
 ### Errors
 
 | Error Object                           | Status Code                            | Content Type                           |
@@ -268,7 +268,7 @@ run();
 
 ### Response
 
-**Promise<[operations.GuestPaymentsActionResponse](../../models/operations/guestpaymentsactionresponse.md)>**
+**Promise\<[operations.GuestPaymentsActionResponse](../../models/operations/guestpaymentsactionresponse.md)\>**
 ### Errors
 
 | Error Object                           | Status Code                            | Content Type                           |

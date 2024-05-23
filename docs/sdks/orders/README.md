@@ -103,7 +103,7 @@ run();
 
 ### Response
 
-**Promise<[operations.OrdersCreateResponse](../../models/operations/orderscreateresponse.md)>**
+**Promise\<[operations.OrdersCreateResponse](../../models/operations/orderscreateresponse.md)\>**
 ### Errors
 
 | Error Object                    | Status Code                     | Content Type                    |

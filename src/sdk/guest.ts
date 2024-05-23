@@ -122,48 +122,14 @@ export class Guest extends ClientSDK {
             Headers: {},
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.GuestPaymentsInitializeResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        "payment-response": val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else if (this.matchResponse(response, "4XX", "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return errors.GuestPaymentsInitializeResponseBody$.inboundSchema.parse({
-                        ...responseFields$,
-                        ...val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            throw result;
-        } else if (this.matchStatusCode(response, "default")) {
-            // fallthrough
-        } else {
-            const responseBody = await response.text();
-            throw new errors.SDKError(
-                "Unexpected API response status or content-type",
-                response,
-                responseBody
-            );
-        }
+        const [result$] = await this.matcher<operations.GuestPaymentsInitializeResponse>()
+            .json(200, operations.GuestPaymentsInitializeResponse$, { key: "payment-response" })
+            .json("4XX", errors.GuestPaymentsInitializeResponseBody$, { err: true })
+            .fail("5XX")
+            .void("default", operations.GuestPaymentsInitializeResponse$)
+            .match(response, { extraFields: responseFields$ });
 
-        return schemas$.parse(
-            undefined,
-            () => operations.GuestPaymentsInitializeResponse$.inboundSchema.parse(responseFields$),
-            "Response validation failed"
-        );
+        return result$;
     }
 
     /**
@@ -252,48 +218,14 @@ export class Guest extends ClientSDK {
             Headers: {},
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.GuestPaymentsUpdateResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        "payment-response": val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else if (this.matchResponse(response, "4XX", "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return errors.GuestPaymentsUpdateResponseBody$.inboundSchema.parse({
-                        ...responseFields$,
-                        ...val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            throw result;
-        } else if (this.matchStatusCode(response, "default")) {
-            // fallthrough
-        } else {
-            const responseBody = await response.text();
-            throw new errors.SDKError(
-                "Unexpected API response status or content-type",
-                response,
-                responseBody
-            );
-        }
+        const [result$] = await this.matcher<operations.GuestPaymentsUpdateResponse>()
+            .json(200, operations.GuestPaymentsUpdateResponse$, { key: "payment-response" })
+            .json("4XX", errors.GuestPaymentsUpdateResponseBody$, { err: true })
+            .fail("5XX")
+            .void("default", operations.GuestPaymentsUpdateResponse$)
+            .match(response, { extraFields: responseFields$ });
 
-        return schemas$.parse(
-            undefined,
-            () => operations.GuestPaymentsUpdateResponse$.inboundSchema.parse(responseFields$),
-            "Response validation failed"
-        );
+        return result$;
     }
 
     /**
@@ -382,47 +314,13 @@ export class Guest extends ClientSDK {
             Headers: {},
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.GuestPaymentsActionResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        "payment-response": val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else if (this.matchResponse(response, "4XX", "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return errors.GuestPaymentsActionResponseBody$.inboundSchema.parse({
-                        ...responseFields$,
-                        ...val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            throw result;
-        } else if (this.matchStatusCode(response, "default")) {
-            // fallthrough
-        } else {
-            const responseBody = await response.text();
-            throw new errors.SDKError(
-                "Unexpected API response status or content-type",
-                response,
-                responseBody
-            );
-        }
+        const [result$] = await this.matcher<operations.GuestPaymentsActionResponse>()
+            .json(200, operations.GuestPaymentsActionResponse$, { key: "payment-response" })
+            .json("4XX", errors.GuestPaymentsActionResponseBody$, { err: true })
+            .fail("5XX")
+            .void("default", operations.GuestPaymentsActionResponse$)
+            .match(response, { extraFields: responseFields$ });
 
-        return schemas$.parse(
-            undefined,
-            () => operations.GuestPaymentsActionResponse$.inboundSchema.parse(responseFields$),
-            "Response validation failed"
-        );
+        return result$;
     }
 }

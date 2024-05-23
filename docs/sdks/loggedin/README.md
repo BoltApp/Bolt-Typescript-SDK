@@ -102,7 +102,7 @@ run();
 
 ### Response
 
-**Promise<[operations.PaymentsInitializeResponse](../../models/operations/paymentsinitializeresponse.md)>**
+**Promise\<[operations.PaymentsInitializeResponse](../../models/operations/paymentsinitializeresponse.md)\>**
 ### Errors
 
 | Error Object                          | Status Code                           | Content Type                          |
@@ -211,7 +211,7 @@ run();
 
 ### Response
 
-**Promise<[operations.PaymentsUpdateResponse](../../models/operations/paymentsupdateresponse.md)>**
+**Promise\<[operations.PaymentsUpdateResponse](../../models/operations/paymentsupdateresponse.md)\>**
 ### Errors
 
 | Error Object                      | Status Code                       | Content Type                      |
@@ -262,7 +262,7 @@ run();
 
 ### Response
 
-**Promise<[operations.PaymentsActionResponse](../../models/operations/paymentsactionresponse.md)>**
+**Promise\<[operations.PaymentsActionResponse](../../models/operations/paymentsactionresponse.md)\>**
 ### Errors
 
 | Error Object                      | Status Code                       | Content Type                      |

@@ -56,7 +56,7 @@ run();
 
 ### Response
 
-**Promise<[operations.OauthGetTokenResponse](../../models/operations/oauthgettokenresponse.md)>**
+**Promise\<[operations.OauthGetTokenResponse](../../models/operations/oauthgettokenresponse.md)\>**
 ### Errors
 
 | Error Object                     | Status Code                      | Content Type                     |
