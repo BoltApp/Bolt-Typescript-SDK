@@ -13,27 +13,17 @@ export type AccountTestPhoneData = {
 
 /** @internal */
 export namespace AccountTestPhoneData$ {
-    export const inboundSchema: z.ZodType<AccountTestPhoneData, z.ZodTypeDef, unknown> = z
-        .object({
-            phone: z.string(),
-        })
-        .transform((v) => {
-            return {
-                phone: v.phone,
-            };
-        });
+    export const inboundSchema: z.ZodType<AccountTestPhoneData, z.ZodTypeDef, unknown> = z.object({
+        phone: z.string(),
+    });
 
     export type Outbound = {
         phone: string;
     };
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, AccountTestPhoneData> = z
-        .object({
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, AccountTestPhoneData> = z.object(
+        {
             phone: z.string(),
-        })
-        .transform((v) => {
-            return {
-                phone: v.phone,
-            };
-        });
+        }
+    );
 }

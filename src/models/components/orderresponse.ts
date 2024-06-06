@@ -12,32 +12,18 @@ export type OrderResponse = {
 
 /** @internal */
 export namespace OrderResponse$ {
-    export const inboundSchema: z.ZodType<OrderResponse, z.ZodTypeDef, unknown> = z
-        .object({
-            id: z.string(),
-            transaction: Transaction$.inboundSchema,
-        })
-        .transform((v) => {
-            return {
-                id: v.id,
-                transaction: v.transaction,
-            };
-        });
+    export const inboundSchema: z.ZodType<OrderResponse, z.ZodTypeDef, unknown> = z.object({
+        id: z.string(),
+        transaction: Transaction$.inboundSchema,
+    });
 
     export type Outbound = {
         id: string;
         transaction: Transaction$.Outbound;
     };
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, OrderResponse> = z
-        .object({
-            id: z.string(),
-            transaction: Transaction$.outboundSchema,
-        })
-        .transform((v) => {
-            return {
-                id: v.id,
-                transaction: v.transaction,
-            };
-        });
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, OrderResponse> = z.object({
+        id: z.string(),
+        transaction: Transaction$.outboundSchema,
+    });
 }

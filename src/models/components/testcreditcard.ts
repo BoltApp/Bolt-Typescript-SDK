@@ -30,26 +30,16 @@ export type TestCreditCard = {
 
 /** @internal */
 export namespace TestCreditCard$ {
-    export const inboundSchema: z.ZodType<TestCreditCard, z.ZodTypeDef, unknown> = z
-        .object({
-            network: CreditCardNetwork$.inboundSchema,
-            bin: z.string(),
-            last4: z.string(),
-            expiration: z
-                .string()
-                .datetime({ offset: true })
-                .transform((v) => new Date(v)),
-            token: z.string(),
-        })
-        .transform((v) => {
-            return {
-                network: v.network,
-                bin: v.bin,
-                last4: v.last4,
-                expiration: v.expiration,
-                token: v.token,
-            };
-        });
+    export const inboundSchema: z.ZodType<TestCreditCard, z.ZodTypeDef, unknown> = z.object({
+        network: CreditCardNetwork$.inboundSchema,
+        bin: z.string(),
+        last4: z.string(),
+        expiration: z
+            .string()
+            .datetime({ offset: true })
+            .transform((v) => new Date(v)),
+        token: z.string(),
+    });
 
     export type Outbound = {
         network: string;
@@ -59,21 +49,11 @@ export namespace TestCreditCard$ {
         token: string;
     };
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, TestCreditCard> = z
-        .object({
-            network: CreditCardNetwork$.outboundSchema,
-            bin: z.string(),
-            last4: z.string(),
-            expiration: z.date().transform((v) => v.toISOString()),
-            token: z.string(),
-        })
-        .transform((v) => {
-            return {
-                network: v.network,
-                bin: v.bin,
-                last4: v.last4,
-                expiration: v.expiration,
-                token: v.token,
-            };
-        });
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, TestCreditCard> = z.object({
+        network: CreditCardNetwork$.outboundSchema,
+        bin: z.string(),
+        last4: z.string(),
+        expiration: z.date().transform((v) => v.toISOString()),
+        token: z.string(),
+    });
 }

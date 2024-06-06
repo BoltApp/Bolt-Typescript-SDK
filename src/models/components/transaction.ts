@@ -10,27 +10,15 @@ export type Transaction = {
 
 /** @internal */
 export namespace Transaction$ {
-    export const inboundSchema: z.ZodType<Transaction, z.ZodTypeDef, unknown> = z
-        .object({
-            reference: z.string().optional(),
-        })
-        .transform((v) => {
-            return {
-                ...(v.reference === undefined ? null : { reference: v.reference }),
-            };
-        });
+    export const inboundSchema: z.ZodType<Transaction, z.ZodTypeDef, unknown> = z.object({
+        reference: z.string().optional(),
+    });
 
     export type Outbound = {
         reference?: string | undefined;
     };
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, Transaction> = z
-        .object({
-            reference: z.string().optional(),
-        })
-        .transform((v) => {
-            return {
-                ...(v.reference === undefined ? null : { reference: v.reference }),
-            };
-        });
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, Transaction> = z.object({
+        reference: z.string().optional(),
+    });
 }

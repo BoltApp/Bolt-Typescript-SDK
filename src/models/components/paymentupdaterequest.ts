@@ -11,27 +11,17 @@ export type PaymentUpdateRequest = {
 
 /** @internal */
 export namespace PaymentUpdateRequest$ {
-    export const inboundSchema: z.ZodType<PaymentUpdateRequest, z.ZodTypeDef, unknown> = z
-        .object({
-            cart: Cart$.inboundSchema.optional(),
-        })
-        .transform((v) => {
-            return {
-                ...(v.cart === undefined ? null : { cart: v.cart }),
-            };
-        });
+    export const inboundSchema: z.ZodType<PaymentUpdateRequest, z.ZodTypeDef, unknown> = z.object({
+        cart: Cart$.inboundSchema.optional(),
+    });
 
     export type Outbound = {
         cart?: Cart$.Outbound | undefined;
     };
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentUpdateRequest> = z
-        .object({
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PaymentUpdateRequest> = z.object(
+        {
             cart: Cart$.outboundSchema.optional(),
-        })
-        .transform((v) => {
-            return {
-                ...(v.cart === undefined ? null : { cart: v.cart }),
-            };
-        });
+        }
+    );
 }

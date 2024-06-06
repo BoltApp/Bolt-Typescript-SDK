@@ -37,32 +37,18 @@ export namespace Currency$ {
 
 /** @internal */
 export namespace Amount$ {
-    export const inboundSchema: z.ZodType<Amount, z.ZodTypeDef, unknown> = z
-        .object({
-            currency: Currency$.inboundSchema,
-            units: z.number().int(),
-        })
-        .transform((v) => {
-            return {
-                currency: v.currency,
-                units: v.units,
-            };
-        });
+    export const inboundSchema: z.ZodType<Amount, z.ZodTypeDef, unknown> = z.object({
+        currency: Currency$.inboundSchema,
+        units: z.number().int(),
+    });
 
     export type Outbound = {
         currency: string;
         units: number;
     };
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, Amount> = z
-        .object({
-            currency: Currency$.outboundSchema,
-            units: z.number().int(),
-        })
-        .transform((v) => {
-            return {
-                currency: v.currency,
-                units: v.units,
-            };
-        });
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, Amount> = z.object({
+        currency: Currency$.outboundSchema,
+        units: z.number().int(),
+    });
 }

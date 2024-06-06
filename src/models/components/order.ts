@@ -13,32 +13,18 @@ export type Order = {
 
 /** @internal */
 export namespace Order$ {
-    export const inboundSchema: z.ZodType<Order, z.ZodTypeDef, unknown> = z
-        .object({
-            profile: Profile$.inboundSchema,
-            cart: Cart$.inboundSchema,
-        })
-        .transform((v) => {
-            return {
-                profile: v.profile,
-                cart: v.cart,
-            };
-        });
+    export const inboundSchema: z.ZodType<Order, z.ZodTypeDef, unknown> = z.object({
+        profile: Profile$.inboundSchema,
+        cart: Cart$.inboundSchema,
+    });
 
     export type Outbound = {
         profile: Profile$.Outbound;
         cart: Cart$.Outbound;
     };
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, Order> = z
-        .object({
-            profile: Profile$.outboundSchema,
-            cart: Cart$.outboundSchema,
-        })
-        .transform((v) => {
-            return {
-                profile: v.profile,
-                cart: v.cart,
-            };
-        });
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, Order> = z.object({
+        profile: Profile$.outboundSchema,
+        cart: Cart$.outboundSchema,
+    });
 }

@@ -20,19 +20,11 @@ export type CartShipment = {
 
 /** @internal */
 export namespace CartShipment$ {
-    export const inboundSchema: z.ZodType<CartShipment, z.ZodTypeDef, unknown> = z
-        .object({
-            address: AddressReferenceInput$.inboundSchema.optional(),
-            cost: Amount$.inboundSchema.optional(),
-            carrier: z.string().optional(),
-        })
-        .transform((v) => {
-            return {
-                ...(v.address === undefined ? null : { address: v.address }),
-                ...(v.cost === undefined ? null : { cost: v.cost }),
-                ...(v.carrier === undefined ? null : { carrier: v.carrier }),
-            };
-        });
+    export const inboundSchema: z.ZodType<CartShipment, z.ZodTypeDef, unknown> = z.object({
+        address: AddressReferenceInput$.inboundSchema.optional(),
+        cost: Amount$.inboundSchema.optional(),
+        carrier: z.string().optional(),
+    });
 
     export type Outbound = {
         address?: AddressReferenceInput$.Outbound | undefined;
@@ -40,17 +32,9 @@ export namespace CartShipment$ {
         carrier?: string | undefined;
     };
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, CartShipment> = z
-        .object({
-            address: AddressReferenceInput$.outboundSchema.optional(),
-            cost: Amount$.outboundSchema.optional(),
-            carrier: z.string().optional(),
-        })
-        .transform((v) => {
-            return {
-                ...(v.address === undefined ? null : { address: v.address }),
-                ...(v.cost === undefined ? null : { cost: v.cost }),
-                ...(v.carrier === undefined ? null : { carrier: v.carrier }),
-            };
-        });
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, CartShipment> = z.object({
+        address: AddressReferenceInput$.outboundSchema.optional(),
+        cost: Amount$.outboundSchema.optional(),
+        carrier: z.string().optional(),
+    });
 }
