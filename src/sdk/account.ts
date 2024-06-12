@@ -4,7 +4,7 @@
 
 import { SDKHooks } from "../hooks";
 import { SDK_METADATA, SDKOptions, serverURLFromOptions } from "../lib/config";
-import * as enc$ from "../lib/encodings";
+import { encodeJSON as encodeJSON$, encodeSimple as encodeSimple$ } from "../lib/encodings";
 import { HTTPClient } from "../lib/http";
 import * as schemas$ from "../lib/schemas";
 import { ClientSDK, RequestOptions } from "../lib/sdks";
@@ -69,7 +69,7 @@ export class Account extends ClientSDK {
 
         headers$.set(
             "X-Publishable-Key",
-            enc$.encodeSimple("X-Publishable-Key", payload$["X-Publishable-Key"], {
+            encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",
             })
@@ -145,7 +145,7 @@ export class Account extends ClientSDK {
             (value$) => operations.AccountAddressCreateRequest$.outboundSchema.parse(value$),
             "Input validation failed"
         );
-        const body$ = enc$.encodeJSON("body", payload$["address-listing"], { explode: true });
+        const body$ = encodeJSON$("body", payload$["address-listing"], { explode: true });
 
         const path$ = this.templateURLComponent("/account/addresses")();
 
@@ -153,7 +153,7 @@ export class Account extends ClientSDK {
 
         headers$.set(
             "X-Publishable-Key",
-            enc$.encodeSimple("X-Publishable-Key", payload$["X-Publishable-Key"], {
+            encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",
             })
@@ -234,10 +234,10 @@ export class Account extends ClientSDK {
             (value$) => operations.AccountAddressEditRequest$.outboundSchema.parse(value$),
             "Input validation failed"
         );
-        const body$ = enc$.encodeJSON("body", payload$["address-listing"], { explode: true });
+        const body$ = encodeJSON$("body", payload$["address-listing"], { explode: true });
 
         const pathParams$ = {
-            id: enc$.encodeSimple("id", payload$.id, { explode: false, charEncoding: "percent" }),
+            id: encodeSimple$("id", payload$.id, { explode: false, charEncoding: "percent" }),
         };
         const path$ = this.templateURLComponent("/account/addresses/{id}")(pathParams$);
 
@@ -245,7 +245,7 @@ export class Account extends ClientSDK {
 
         headers$.set(
             "X-Publishable-Key",
-            enc$.encodeSimple("X-Publishable-Key", payload$["X-Publishable-Key"], {
+            encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",
             })
@@ -325,7 +325,7 @@ export class Account extends ClientSDK {
         const body$ = null;
 
         const pathParams$ = {
-            id: enc$.encodeSimple("id", payload$.id, { explode: false, charEncoding: "percent" }),
+            id: encodeSimple$("id", payload$.id, { explode: false, charEncoding: "percent" }),
         };
         const path$ = this.templateURLComponent("/account/addresses/{id}")(pathParams$);
 
@@ -333,7 +333,7 @@ export class Account extends ClientSDK {
 
         headers$.set(
             "X-Publishable-Key",
-            enc$.encodeSimple("X-Publishable-Key", payload$["X-Publishable-Key"], {
+            encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",
             })
@@ -412,7 +412,7 @@ export class Account extends ClientSDK {
             (value$) => operations.AccountAddPaymentMethodRequest$.outboundSchema.parse(value$),
             "Input validation failed"
         );
-        const body$ = enc$.encodeJSON("body", payload$["payment-method"], { explode: true });
+        const body$ = encodeJSON$("body", payload$["payment-method"], { explode: true });
 
         const path$ = this.templateURLComponent("/account/payment-methods")();
 
@@ -420,7 +420,7 @@ export class Account extends ClientSDK {
 
         headers$.set(
             "X-Publishable-Key",
-            enc$.encodeSimple("X-Publishable-Key", payload$["X-Publishable-Key"], {
+            encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",
             })
@@ -500,7 +500,7 @@ export class Account extends ClientSDK {
         const body$ = null;
 
         const pathParams$ = {
-            id: enc$.encodeSimple("id", payload$.id, { explode: false, charEncoding: "percent" }),
+            id: encodeSimple$("id", payload$.id, { explode: false, charEncoding: "percent" }),
         };
         const path$ = this.templateURLComponent("/account/payment-methods/{id}")(pathParams$);
 
@@ -508,7 +508,7 @@ export class Account extends ClientSDK {
 
         headers$.set(
             "X-Publishable-Key",
-            enc$.encodeSimple("X-Publishable-Key", payload$["X-Publishable-Key"], {
+            encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",
             })

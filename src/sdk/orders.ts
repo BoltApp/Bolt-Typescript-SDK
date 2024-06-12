@@ -4,7 +4,7 @@
 
 import { SDKHooks } from "../hooks";
 import { SDK_METADATA, SDKOptions, serverURLFromOptions } from "../lib/config";
-import * as enc$ from "../lib/encodings";
+import { encodeJSON as encodeJSON$, encodeSimple as encodeSimple$ } from "../lib/encodings";
 import { HTTPClient } from "../lib/http";
 import * as schemas$ from "../lib/schemas";
 import { ClientSDK, RequestOptions } from "../lib/sdks";
@@ -67,7 +67,7 @@ export class Orders extends ClientSDK {
             (value$) => operations.OrdersCreateRequest$.outboundSchema.parse(value$),
             "Input validation failed"
         );
-        const body$ = enc$.encodeJSON("body", payload$.order, { explode: true });
+        const body$ = encodeJSON$("body", payload$.order, { explode: true });
 
         const path$ = this.templateURLComponent("/orders")();
 
@@ -75,7 +75,7 @@ export class Orders extends ClientSDK {
 
         headers$.set(
             "X-Publishable-Key",
-            enc$.encodeSimple("X-Publishable-Key", payload$["X-Publishable-Key"], {
+            encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",
             })

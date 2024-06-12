@@ -4,7 +4,7 @@
 
 import { SDKHooks } from "../hooks";
 import { SDK_METADATA, SDKOptions, serverURLFromOptions } from "../lib/config";
-import * as enc$ from "../lib/encodings";
+import { encodeJSON as encodeJSON$, encodeSimple as encodeSimple$ } from "../lib/encodings";
 import { HTTPClient } from "../lib/http";
 import * as schemas$ from "../lib/schemas";
 import { ClientSDK, RequestOptions } from "../lib/sdks";
@@ -66,7 +66,7 @@ export class LoggedIn extends ClientSDK {
             (value$) => operations.PaymentsInitializeRequest$.outboundSchema.parse(value$),
             "Input validation failed"
         );
-        const body$ = enc$.encodeJSON("body", payload$["payment-initialize-request"], {
+        const body$ = encodeJSON$("body", payload$["payment-initialize-request"], {
             explode: true,
         });
 
@@ -76,7 +76,7 @@ export class LoggedIn extends ClientSDK {
 
         headers$.set(
             "X-Publishable-Key",
-            enc$.encodeSimple("X-Publishable-Key", payload$["X-Publishable-Key"], {
+            encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",
             })
@@ -155,12 +155,10 @@ export class LoggedIn extends ClientSDK {
             (value$) => operations.PaymentsUpdateRequest$.outboundSchema.parse(value$),
             "Input validation failed"
         );
-        const body$ = enc$.encodeJSON("body", payload$["payment-update-request"], {
-            explode: true,
-        });
+        const body$ = encodeJSON$("body", payload$["payment-update-request"], { explode: true });
 
         const pathParams$ = {
-            id: enc$.encodeSimple("id", payload$.id, { explode: false, charEncoding: "percent" }),
+            id: encodeSimple$("id", payload$.id, { explode: false, charEncoding: "percent" }),
         };
         const path$ = this.templateURLComponent("/payments/{id}")(pathParams$);
 
@@ -168,7 +166,7 @@ export class LoggedIn extends ClientSDK {
 
         headers$.set(
             "X-Publishable-Key",
-            enc$.encodeSimple("X-Publishable-Key", payload$["X-Publishable-Key"], {
+            encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",
             })
@@ -247,12 +245,10 @@ export class LoggedIn extends ClientSDK {
             (value$) => operations.PaymentsActionRequest$.outboundSchema.parse(value$),
             "Input validation failed"
         );
-        const body$ = enc$.encodeJSON("body", payload$["payment-action-request"], {
-            explode: true,
-        });
+        const body$ = encodeJSON$("body", payload$["payment-action-request"], { explode: true });
 
         const pathParams$ = {
-            id: enc$.encodeSimple("id", payload$.id, { explode: false, charEncoding: "percent" }),
+            id: encodeSimple$("id", payload$.id, { explode: false, charEncoding: "percent" }),
         };
         const path$ = this.templateURLComponent("/payments/{id}")(pathParams$);
 
@@ -260,7 +256,7 @@ export class LoggedIn extends ClientSDK {
 
         headers$.set(
             "X-Publishable-Key",
-            enc$.encodeSimple("X-Publishable-Key", payload$["X-Publishable-Key"], {
+            encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",
             })

@@ -4,7 +4,7 @@
 
 import { SDKHooks } from "../hooks";
 import { SDK_METADATA, SDKOptions, serverURLFromOptions } from "../lib/config";
-import * as enc$ from "../lib/encodings";
+import { encodeBodyForm as encodeBodyForm$ } from "../lib/encodings";
 import { HTTPClient } from "../lib/http";
 import * as schemas$ from "../lib/schemas";
 import { ClientSDK, RequestOptions } from "../lib/sdks";
@@ -62,7 +62,7 @@ export class OAuth extends ClientSDK {
         );
         const body$ = Object.entries(payload$ || {})
             .map(([k, v]) => {
-                return enc$.encodeBodyForm(k, v, { charEncoding: "percent" });
+                return encodeBodyForm$(k, v, { charEncoding: "percent" });
             })
             .join("&");
 
