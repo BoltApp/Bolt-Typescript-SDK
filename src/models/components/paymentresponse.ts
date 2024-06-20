@@ -6,12 +6,12 @@ import {
     PaymentResponseFinalized,
     PaymentResponseFinalized$,
     PaymentResponseFinalizedTag,
-} from "./paymentresponsefinalized";
+} from "./paymentresponsefinalized.js";
 import {
     PaymentResponsePending,
     PaymentResponsePending$,
     PaymentResponsePendingTag,
-} from "./paymentresponsepending";
+} from "./paymentresponsepending.js";
 import * as z from "zod";
 
 export type PaymentResponse =

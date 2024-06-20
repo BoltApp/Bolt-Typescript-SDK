@@ -6,12 +6,12 @@ import {
     AddressReferenceExplicitInput,
     AddressReferenceExplicitInput$,
     AddressReferenceExplicitTag,
-} from "./addressreferenceexplicit";
+} from "./addressreferenceexplicit.js";
 import {
     AddressReferenceId,
     AddressReferenceId$,
     AddressReferenceIdTag,
-} from "./addressreferenceid";
+} from "./addressreferenceid.js";
 import * as z from "zod";
 
 export type AddressReferenceInput =

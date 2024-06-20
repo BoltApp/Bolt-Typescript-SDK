@@ -31,8 +31,8 @@ export type Amount = {
 
 /** @internal */
 export namespace Currency$ {
-    export const inboundSchema = z.nativeEnum(Currency);
-    export const outboundSchema = inboundSchema;
+    export const inboundSchema: z.ZodNativeEnum<typeof Currency> = z.nativeEnum(Currency);
+    export const outboundSchema: z.ZodNativeEnum<typeof Currency> = inboundSchema;
 }
 
 /** @internal */

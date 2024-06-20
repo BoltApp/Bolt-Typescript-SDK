@@ -13,10 +13,25 @@
 npm add @boltpay/bolt-typescript-sdk
 ```
 
+### PNPM
+
+```bash
+pnpm add @boltpay/bolt-typescript-sdk
+```
+
+### Bun
+
+```bash
+bun add @boltpay/bolt-typescript-sdk
+```
+
 ### Yarn
 
 ```bash
-yarn add @boltpay/bolt-typescript-sdk
+yarn add @boltpay/bolt-typescript-sdk zod
+
+# Note that Yarn does not install peer dependencies automatically. You will need
+# to install zod as shown above.
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -101,7 +116,7 @@ Validation errors can also occur when either method arguments or data returned f
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import * as errors from "@boltpay/bolt-typescript-sdk/models/errors";
+import { SDKValidationError } from "@boltpay/bolt-typescript-sdk/models/errors";
 
 const boltTypescriptSDK = new BoltTypescriptSDK({
     security: {
@@ -115,7 +130,7 @@ async function run() {
         result = await boltTypescriptSDK.account.getDetails("<value>");
     } catch (err) {
         switch (true) {
-            case err instanceof errors.SDKValidationError: {
+            case err instanceof SDKValidationError: {
                 // Validation errors can be pretty-printed
                 console.error(err.pretty());
                 // Raw value may also be inspected

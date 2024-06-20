@@ -261,6 +261,6 @@ export enum CountryCode {
 
 /** @internal */
 export namespace CountryCode$ {
-    export const inboundSchema = z.nativeEnum(CountryCode);
-    export const outboundSchema = inboundSchema;
+    export const inboundSchema: z.ZodNativeEnum<typeof CountryCode> = z.nativeEnum(CountryCode);
+    export const outboundSchema: z.ZodNativeEnum<typeof CountryCode> = inboundSchema;
 }

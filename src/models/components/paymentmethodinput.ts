@@ -6,37 +6,37 @@ import {
     PaymentMethodAffirm,
     PaymentMethodAffirm$,
     PaymentMethodAffirmTag,
-} from "./paymentmethodaffirmoutput";
+} from "./paymentmethodaffirmoutput.js";
 import {
     PaymentMethodAfterpay,
     PaymentMethodAfterpay$,
     PaymentMethodAfterpayTag,
-} from "./paymentmethodafterpayoutput";
+} from "./paymentmethodafterpayoutput.js";
 import {
     DotTag,
     PaymentMethodCreditCardInput,
     PaymentMethodCreditCardInput$,
-} from "./paymentmethodcreditcard";
+} from "./paymentmethodcreditcard.js";
 import {
     PaymentMethodKlarnaAccount,
     PaymentMethodKlarnaAccount$,
     PaymentMethodKlarnaAccountTag,
-} from "./paymentmethodklarnaaccountoutput";
+} from "./paymentmethodklarnaaccountoutput.js";
 import {
     PaymentMethodKlarna,
     PaymentMethodKlarna$,
     PaymentMethodKlarnaTag,
-} from "./paymentmethodklarnaoutput";
+} from "./paymentmethodklarnaoutput.js";
 import {
     PaymentMethodKlarnaPaynow,
     PaymentMethodKlarnaPaynow$,
     PaymentMethodKlarnaPaynowTag,
-} from "./paymentmethodklarnapaynowoutput";
+} from "./paymentmethodklarnapaynowoutput.js";
 import {
     PaymentMethodPaypal,
     PaymentMethodPaypal$,
     PaymentMethodPaypalTag,
-} from "./paymentmethodpaypaloutput";
+} from "./paymentmethodpaypaloutput.js";
 import * as z from "zod";
 
 export type PaymentMethodInput =
