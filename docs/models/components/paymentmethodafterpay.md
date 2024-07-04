@@ -1,9 +1,0 @@
-# PaymentMethodAfterpay
-
-
-## Fields
-
-| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                | Example                                                                                    |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `dotTag`                                                                                   | [components.PaymentMethodAfterpayTag](../../models/components/paymentmethodafterpaytag.md) | :heavy_check_mark:                                                                         | N/A                                                                                        | afterpay                                                                                   |
-| `returnUrl`                                                                                | *string*                                                                                   | :heavy_check_mark:                                                                         | Return URL to return to after payment completion in Afterpay.                              | www.example.com/handle_afterpay_success                                                    |
