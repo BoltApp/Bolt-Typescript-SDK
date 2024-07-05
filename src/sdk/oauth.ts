@@ -3,7 +3,7 @@
  */
 
 import { SDKHooks } from "../hooks/hooks.js";
-import { SDK_METADATA, SDKOptions, serverURLFromOptions } from "../lib/config.js";
+import { SDKOptions, serverURLFromOptions } from "../lib/config.js";
 import { encodeBodyForm as encodeBodyForm$ } from "../lib/encodings.js";
 import { HTTPClient } from "../lib/http.js";
 import * as schemas$ from "../lib/schemas.js";
@@ -50,10 +50,6 @@ export class OAuth extends ClientSDK {
         options?: RequestOptions
     ): Promise<operations.OauthGetTokenResponse> {
         const input$ = request;
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Content-Type", "application/x-www-form-urlencoded");
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
@@ -70,16 +66,20 @@ export class OAuth extends ClientSDK {
 
         const query$ = "";
 
+        const headers$ = new Headers({
+            "Content-Type": "application/x-www-form-urlencoded",
+            Accept: "application/json",
+        });
+
         const context = { operationID: "oauthGetToken", oAuth2Scopes: [], securitySource: null };
 
-        const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request$ = this.createRequest$(
             context,
             { method: "POST", path: path$, headers: headers$, query: query$, body: body$ },
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, { context, errorCodes: ["4XX", "5XX"] });
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",

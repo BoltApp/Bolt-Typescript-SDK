@@ -3,7 +3,7 @@
  */
 
 import { SDKHooks } from "../hooks/hooks.js";
-import { SDK_METADATA, SDKOptions, serverURLFromOptions } from "../lib/config.js";
+import { SDKOptions, serverURLFromOptions } from "../lib/config.js";
 import { encodeJSON as encodeJSON$, encodeSimple as encodeSimple$ } from "../lib/encodings.js";
 import { HTTPClient } from "../lib/http.js";
 import * as schemas$ from "../lib/schemas.js";
@@ -58,10 +58,6 @@ export class Guest extends ClientSDK {
             xPublishableKey: xPublishableKey,
             guestPaymentInitializeRequest: guestPaymentInitializeRequest,
         };
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Content-Type", "application/json");
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
@@ -76,13 +72,15 @@ export class Guest extends ClientSDK {
 
         const query$ = "";
 
-        headers$.set(
-            "X-Publishable-Key",
-            encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
+        const headers$ = new Headers({
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "X-Publishable-Key": encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",
-            })
-        );
+            }),
+        });
+
         const security$: SecurityInput[][] = [
             [
                 {
@@ -99,7 +97,6 @@ export class Guest extends ClientSDK {
             securitySource: security$,
         };
 
-        const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -113,7 +110,7 @@ export class Guest extends ClientSDK {
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, { context, errorCodes: ["4XX", "5XX"] });
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
@@ -151,10 +148,6 @@ export class Guest extends ClientSDK {
             xPublishableKey: xPublishableKey,
             paymentUpdateRequest: paymentUpdateRequest,
         };
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Content-Type", "application/json");
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
@@ -170,13 +163,15 @@ export class Guest extends ClientSDK {
 
         const query$ = "";
 
-        headers$.set(
-            "X-Publishable-Key",
-            encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
+        const headers$ = new Headers({
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "X-Publishable-Key": encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",
-            })
-        );
+            }),
+        });
+
         const security$: SecurityInput[][] = [
             [
                 {
@@ -193,7 +188,6 @@ export class Guest extends ClientSDK {
             securitySource: security$,
         };
 
-        const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -207,7 +201,7 @@ export class Guest extends ClientSDK {
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, { context, errorCodes: ["4XX", "5XX"] });
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
@@ -245,10 +239,6 @@ export class Guest extends ClientSDK {
             xPublishableKey: xPublishableKey,
             paymentActionRequest: paymentActionRequest,
         };
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Content-Type", "application/json");
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
@@ -264,13 +254,15 @@ export class Guest extends ClientSDK {
 
         const query$ = "";
 
-        headers$.set(
-            "X-Publishable-Key",
-            encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
+        const headers$ = new Headers({
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "X-Publishable-Key": encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",
-            })
-        );
+            }),
+        });
+
         const security$: SecurityInput[][] = [
             [
                 {
@@ -287,7 +279,6 @@ export class Guest extends ClientSDK {
             securitySource: security$,
         };
 
-        const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -301,7 +292,7 @@ export class Guest extends ClientSDK {
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, { context, errorCodes: ["4XX", "5XX"] });
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
