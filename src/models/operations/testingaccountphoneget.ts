@@ -37,102 +37,162 @@ export type TestingAccountPhoneGetResponse = {
 };
 
 /** @internal */
+export const TestingAccountPhoneGetSecurity$inboundSchema: z.ZodType<
+    TestingAccountPhoneGetSecurity,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        "api-key": z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            "api-key": "apiKey",
+        });
+    });
+
+/** @internal */
+export type TestingAccountPhoneGetSecurity$Outbound = {
+    "api-key": string;
+};
+
+/** @internal */
+export const TestingAccountPhoneGetSecurity$outboundSchema: z.ZodType<
+    TestingAccountPhoneGetSecurity$Outbound,
+    z.ZodTypeDef,
+    TestingAccountPhoneGetSecurity
+> = z
+    .object({
+        apiKey: z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            apiKey: "api-key",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace TestingAccountPhoneGetSecurity$ {
-    export const inboundSchema: z.ZodType<TestingAccountPhoneGetSecurity, z.ZodTypeDef, unknown> = z
-        .object({
-            "api-key": z.string(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                "api-key": "apiKey",
-            });
-        });
-
-    export type Outbound = {
-        "api-key": string;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, TestingAccountPhoneGetSecurity> =
-        z
-            .object({
-                apiKey: z.string(),
-            })
-            .transform((v) => {
-                return remap$(v, {
-                    apiKey: "api-key",
-                });
-            });
+    /** @deprecated use `TestingAccountPhoneGetSecurity$inboundSchema` instead. */
+    export const inboundSchema = TestingAccountPhoneGetSecurity$inboundSchema;
+    /** @deprecated use `TestingAccountPhoneGetSecurity$outboundSchema` instead. */
+    export const outboundSchema = TestingAccountPhoneGetSecurity$outboundSchema;
+    /** @deprecated use `TestingAccountPhoneGetSecurity$Outbound` instead. */
+    export type Outbound = TestingAccountPhoneGetSecurity$Outbound;
 }
 
 /** @internal */
+export const TestingAccountPhoneGetRequest$inboundSchema: z.ZodType<
+    TestingAccountPhoneGetRequest,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        "X-Publishable-Key": z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            "X-Publishable-Key": "xPublishableKey",
+        });
+    });
+
+/** @internal */
+export type TestingAccountPhoneGetRequest$Outbound = {
+    "X-Publishable-Key": string;
+};
+
+/** @internal */
+export const TestingAccountPhoneGetRequest$outboundSchema: z.ZodType<
+    TestingAccountPhoneGetRequest$Outbound,
+    z.ZodTypeDef,
+    TestingAccountPhoneGetRequest
+> = z
+    .object({
+        xPublishableKey: z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            xPublishableKey: "X-Publishable-Key",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace TestingAccountPhoneGetRequest$ {
-    export const inboundSchema: z.ZodType<TestingAccountPhoneGetRequest, z.ZodTypeDef, unknown> = z
-        .object({
-            "X-Publishable-Key": z.string(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                "X-Publishable-Key": "xPublishableKey",
-            });
-        });
-
-    export type Outbound = {
-        "X-Publishable-Key": string;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, TestingAccountPhoneGetRequest> =
-        z
-            .object({
-                xPublishableKey: z.string(),
-            })
-            .transform((v) => {
-                return remap$(v, {
-                    xPublishableKey: "X-Publishable-Key",
-                });
-            });
+    /** @deprecated use `TestingAccountPhoneGetRequest$inboundSchema` instead. */
+    export const inboundSchema = TestingAccountPhoneGetRequest$inboundSchema;
+    /** @deprecated use `TestingAccountPhoneGetRequest$outboundSchema` instead. */
+    export const outboundSchema = TestingAccountPhoneGetRequest$outboundSchema;
+    /** @deprecated use `TestingAccountPhoneGetRequest$Outbound` instead. */
+    export type Outbound = TestingAccountPhoneGetRequest$Outbound;
 }
 
 /** @internal */
-export namespace TestingAccountPhoneGetResponse$ {
-    export const inboundSchema: z.ZodType<TestingAccountPhoneGetResponse, z.ZodTypeDef, unknown> = z
-        .object({
-            ContentType: z.string(),
-            StatusCode: z.number().int(),
-            RawResponse: z.instanceof(Response),
-            "account-test-phone-data": components.AccountTestPhoneData$.inboundSchema.optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                ContentType: "contentType",
-                StatusCode: "statusCode",
-                RawResponse: "rawResponse",
-                "account-test-phone-data": "accountTestPhoneData",
-            });
+export const TestingAccountPhoneGetResponse$inboundSchema: z.ZodType<
+    TestingAccountPhoneGetResponse,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        ContentType: z.string(),
+        StatusCode: z.number().int(),
+        RawResponse: z.instanceof(Response),
+        "account-test-phone-data": components.AccountTestPhoneData$inboundSchema.optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            ContentType: "contentType",
+            StatusCode: "statusCode",
+            RawResponse: "rawResponse",
+            "account-test-phone-data": "accountTestPhoneData",
         });
+    });
 
-    export type Outbound = {
-        ContentType: string;
-        StatusCode: number;
-        RawResponse: never;
-        "account-test-phone-data"?: components.AccountTestPhoneData$.Outbound | undefined;
-    };
+/** @internal */
+export type TestingAccountPhoneGetResponse$Outbound = {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    "account-test-phone-data"?: components.AccountTestPhoneData$Outbound | undefined;
+};
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, TestingAccountPhoneGetResponse> =
-        z
-            .object({
-                contentType: z.string(),
-                statusCode: z.number().int(),
-                rawResponse: z.instanceof(Response).transform(() => {
-                    throw new Error("Response cannot be serialized");
-                }),
-                accountTestPhoneData: components.AccountTestPhoneData$.outboundSchema.optional(),
-            })
-            .transform((v) => {
-                return remap$(v, {
-                    contentType: "ContentType",
-                    statusCode: "StatusCode",
-                    rawResponse: "RawResponse",
-                    accountTestPhoneData: "account-test-phone-data",
-                });
-            });
+/** @internal */
+export const TestingAccountPhoneGetResponse$outboundSchema: z.ZodType<
+    TestingAccountPhoneGetResponse$Outbound,
+    z.ZodTypeDef,
+    TestingAccountPhoneGetResponse
+> = z
+    .object({
+        contentType: z.string(),
+        statusCode: z.number().int(),
+        rawResponse: z.instanceof(Response).transform(() => {
+            throw new Error("Response cannot be serialized");
+        }),
+        accountTestPhoneData: components.AccountTestPhoneData$outboundSchema.optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            contentType: "ContentType",
+            statusCode: "StatusCode",
+            rawResponse: "RawResponse",
+            accountTestPhoneData: "account-test-phone-data",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace TestingAccountPhoneGetResponse$ {
+    /** @deprecated use `TestingAccountPhoneGetResponse$inboundSchema` instead. */
+    export const inboundSchema = TestingAccountPhoneGetResponse$inboundSchema;
+    /** @deprecated use `TestingAccountPhoneGetResponse$outboundSchema` instead. */
+    export const outboundSchema = TestingAccountPhoneGetResponse$outboundSchema;
+    /** @deprecated use `TestingAccountPhoneGetResponse$Outbound` instead. */
+    export type Outbound = TestingAccountPhoneGetResponse$Outbound;
 }

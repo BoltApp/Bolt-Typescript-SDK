@@ -45,98 +45,167 @@ export type TestingCreditCardGetResponse = {
 };
 
 /** @internal */
-export namespace TestingCreditCardGetSecurity$ {
-    export const inboundSchema: z.ZodType<TestingCreditCardGetSecurity, z.ZodTypeDef, unknown> = z
-        .object({
-            "api-key": z.string(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                "api-key": "apiKey",
-            });
+export const TestingCreditCardGetSecurity$inboundSchema: z.ZodType<
+    TestingCreditCardGetSecurity,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        "api-key": z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            "api-key": "apiKey",
         });
-
-    export type Outbound = {
-        "api-key": string;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, TestingCreditCardGetSecurity> = z
-        .object({
-            apiKey: z.string(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                apiKey: "api-key",
-            });
-        });
-}
-
-/** @internal */
-export namespace Type$ {
-    export const inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(Type);
-    export const outboundSchema: z.ZodNativeEnum<typeof Type> = inboundSchema;
-}
-
-/** @internal */
-export namespace TestingCreditCardGetRequestBody$ {
-    export const inboundSchema: z.ZodType<TestingCreditCardGetRequestBody, z.ZodTypeDef, unknown> =
-        z.object({
-            type: Type$.inboundSchema,
-        });
-
-    export type Outbound = {
-        type: string;
-    };
-
-    export const outboundSchema: z.ZodType<
-        Outbound,
-        z.ZodTypeDef,
-        TestingCreditCardGetRequestBody
-    > = z.object({
-        type: Type$.outboundSchema,
     });
+
+/** @internal */
+export type TestingCreditCardGetSecurity$Outbound = {
+    "api-key": string;
+};
+
+/** @internal */
+export const TestingCreditCardGetSecurity$outboundSchema: z.ZodType<
+    TestingCreditCardGetSecurity$Outbound,
+    z.ZodTypeDef,
+    TestingCreditCardGetSecurity
+> = z
+    .object({
+        apiKey: z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            apiKey: "api-key",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace TestingCreditCardGetSecurity$ {
+    /** @deprecated use `TestingCreditCardGetSecurity$inboundSchema` instead. */
+    export const inboundSchema = TestingCreditCardGetSecurity$inboundSchema;
+    /** @deprecated use `TestingCreditCardGetSecurity$outboundSchema` instead. */
+    export const outboundSchema = TestingCreditCardGetSecurity$outboundSchema;
+    /** @deprecated use `TestingCreditCardGetSecurity$Outbound` instead. */
+    export type Outbound = TestingCreditCardGetSecurity$Outbound;
 }
 
 /** @internal */
+export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(Type);
+
+/** @internal */
+export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> = Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Type$ {
+    /** @deprecated use `Type$inboundSchema` instead. */
+    export const inboundSchema = Type$inboundSchema;
+    /** @deprecated use `Type$outboundSchema` instead. */
+    export const outboundSchema = Type$outboundSchema;
+}
+
+/** @internal */
+export const TestingCreditCardGetRequestBody$inboundSchema: z.ZodType<
+    TestingCreditCardGetRequestBody,
+    z.ZodTypeDef,
+    unknown
+> = z.object({
+    type: Type$inboundSchema,
+});
+
+/** @internal */
+export type TestingCreditCardGetRequestBody$Outbound = {
+    type: string;
+};
+
+/** @internal */
+export const TestingCreditCardGetRequestBody$outboundSchema: z.ZodType<
+    TestingCreditCardGetRequestBody$Outbound,
+    z.ZodTypeDef,
+    TestingCreditCardGetRequestBody
+> = z.object({
+    type: Type$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace TestingCreditCardGetRequestBody$ {
+    /** @deprecated use `TestingCreditCardGetRequestBody$inboundSchema` instead. */
+    export const inboundSchema = TestingCreditCardGetRequestBody$inboundSchema;
+    /** @deprecated use `TestingCreditCardGetRequestBody$outboundSchema` instead. */
+    export const outboundSchema = TestingCreditCardGetRequestBody$outboundSchema;
+    /** @deprecated use `TestingCreditCardGetRequestBody$Outbound` instead. */
+    export type Outbound = TestingCreditCardGetRequestBody$Outbound;
+}
+
+/** @internal */
+export const TestingCreditCardGetResponse$inboundSchema: z.ZodType<
+    TestingCreditCardGetResponse,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        ContentType: z.string(),
+        StatusCode: z.number().int(),
+        RawResponse: z.instanceof(Response),
+        "test-credit-card": components.TestCreditCard$inboundSchema.optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            ContentType: "contentType",
+            StatusCode: "statusCode",
+            RawResponse: "rawResponse",
+            "test-credit-card": "testCreditCard",
+        });
+    });
+
+/** @internal */
+export type TestingCreditCardGetResponse$Outbound = {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    "test-credit-card"?: components.TestCreditCard$Outbound | undefined;
+};
+
+/** @internal */
+export const TestingCreditCardGetResponse$outboundSchema: z.ZodType<
+    TestingCreditCardGetResponse$Outbound,
+    z.ZodTypeDef,
+    TestingCreditCardGetResponse
+> = z
+    .object({
+        contentType: z.string(),
+        statusCode: z.number().int(),
+        rawResponse: z.instanceof(Response).transform(() => {
+            throw new Error("Response cannot be serialized");
+        }),
+        testCreditCard: components.TestCreditCard$outboundSchema.optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            contentType: "ContentType",
+            statusCode: "StatusCode",
+            rawResponse: "RawResponse",
+            testCreditCard: "test-credit-card",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace TestingCreditCardGetResponse$ {
-    export const inboundSchema: z.ZodType<TestingCreditCardGetResponse, z.ZodTypeDef, unknown> = z
-        .object({
-            ContentType: z.string(),
-            StatusCode: z.number().int(),
-            RawResponse: z.instanceof(Response),
-            "test-credit-card": components.TestCreditCard$.inboundSchema.optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                ContentType: "contentType",
-                StatusCode: "statusCode",
-                RawResponse: "rawResponse",
-                "test-credit-card": "testCreditCard",
-            });
-        });
-
-    export type Outbound = {
-        ContentType: string;
-        StatusCode: number;
-        RawResponse: never;
-        "test-credit-card"?: components.TestCreditCard$.Outbound | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, TestingCreditCardGetResponse> = z
-        .object({
-            contentType: z.string(),
-            statusCode: z.number().int(),
-            rawResponse: z.instanceof(Response).transform(() => {
-                throw new Error("Response cannot be serialized");
-            }),
-            testCreditCard: components.TestCreditCard$.outboundSchema.optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                contentType: "ContentType",
-                statusCode: "StatusCode",
-                rawResponse: "RawResponse",
-                testCreditCard: "test-credit-card",
-            });
-        });
+    /** @deprecated use `TestingCreditCardGetResponse$inboundSchema` instead. */
+    export const inboundSchema = TestingCreditCardGetResponse$inboundSchema;
+    /** @deprecated use `TestingCreditCardGetResponse$outboundSchema` instead. */
+    export const outboundSchema = TestingCreditCardGetResponse$outboundSchema;
+    /** @deprecated use `TestingCreditCardGetResponse$Outbound` instead. */
+    export type Outbound = TestingCreditCardGetResponse$Outbound;
 }

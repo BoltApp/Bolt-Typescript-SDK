@@ -53,7 +53,7 @@ export class OAuth extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => components.TokenRequest$.outboundSchema.parse(value$),
+            (value$) => components.TokenRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = Object.entries(payload$ || {})
@@ -89,10 +89,12 @@ export class OAuth extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.OauthGetTokenResponse>()
-            .json(200, operations.OauthGetTokenResponse$, { key: "get-access-token-response" })
-            .json("4XX", errors.OauthGetTokenResponseBody$, { err: true })
+            .json(200, operations.OauthGetTokenResponse$inboundSchema, {
+                key: "get-access-token-response",
+            })
+            .json("4XX", errors.OauthGetTokenResponseBody$inboundSchema, { err: true })
             .fail("5XX")
-            .void("default", operations.OauthGetTokenResponse$)
+            .void("default", operations.OauthGetTokenResponse$inboundSchema)
             .match(response, { extraFields: responseFields$ });
 
         return result$;

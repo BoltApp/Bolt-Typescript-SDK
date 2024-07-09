@@ -3,10 +3,10 @@ id: 79fa0df9-852a-493c-b998-1d82654b5f18
 management:
   docChecksum: 52a4491de6268327ef41bf826024fc20
   docVersion: 3.0.3
-  speakeasyVersion: 1.314.2
-  generationVersion: 2.349.6
-  releaseVersion: 0.15.3
-  configChecksum: f3ab74b99f04430cedd172ce90d3be64
+  speakeasyVersion: 1.330.0
+  generationVersion: 2.361.10
+  releaseVersion: 0.16.0
+  configChecksum: 06c0913f66052b2f0f95ae4af72aa941
   repoURL: https://github.com/BoltApp/Bolt-Typescript-SDK.git
   repoSubDirectory: .
   installationURL: https://github.com/BoltApp/Bolt-Typescript-SDK
@@ -14,7 +14,7 @@ management:
 features:
   typescript:
     additionalDependencies: 0.1.0
-    core: 3.10.2
+    core: 3.11.5
     errorUnions: 0.1.0
     flattening: 2.81.1
     globalSecurity: 2.82.9

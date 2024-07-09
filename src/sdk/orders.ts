@@ -60,7 +60,7 @@ export class Orders extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.OrdersCreateRequest$.outboundSchema.parse(value$),
+            (value$) => operations.OrdersCreateRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = encodeJSON$("body", payload$.order, { explode: true });
@@ -117,10 +117,10 @@ export class Orders extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.OrdersCreateResponse>()
-            .json(200, operations.OrdersCreateResponse$, { key: "order-response" })
-            .json("4XX", errors.OrdersCreateResponseBody$, { err: true })
+            .json(200, operations.OrdersCreateResponse$inboundSchema, { key: "order-response" })
+            .json("4XX", errors.OrdersCreateResponseBody$inboundSchema, { err: true })
             .fail("5XX")
-            .void("default", operations.OrdersCreateResponse$)
+            .void("default", operations.OrdersCreateResponse$inboundSchema)
             .match(response, { extraFields: responseFields$ });
 
         return result$;

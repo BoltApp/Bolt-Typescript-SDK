@@ -25,39 +25,52 @@ export type Profile = {
 };
 
 /** @internal */
+export const Profile$inboundSchema: z.ZodType<Profile, z.ZodTypeDef, unknown> = z
+    .object({
+        first_name: z.string(),
+        last_name: z.string(),
+        email: z.string(),
+        phone: z.string().optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            first_name: "firstName",
+            last_name: "lastName",
+        });
+    });
+
+/** @internal */
+export type Profile$Outbound = {
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone?: string | undefined;
+};
+
+/** @internal */
+export const Profile$outboundSchema: z.ZodType<Profile$Outbound, z.ZodTypeDef, Profile> = z
+    .object({
+        firstName: z.string(),
+        lastName: z.string(),
+        email: z.string(),
+        phone: z.string().optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            firstName: "first_name",
+            lastName: "last_name",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace Profile$ {
-    export const inboundSchema: z.ZodType<Profile, z.ZodTypeDef, unknown> = z
-        .object({
-            first_name: z.string(),
-            last_name: z.string(),
-            email: z.string(),
-            phone: z.string().optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                first_name: "firstName",
-                last_name: "lastName",
-            });
-        });
-
-    export type Outbound = {
-        first_name: string;
-        last_name: string;
-        email: string;
-        phone?: string | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, Profile> = z
-        .object({
-            firstName: z.string(),
-            lastName: z.string(),
-            email: z.string(),
-            phone: z.string().optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                firstName: "first_name",
-                lastName: "last_name",
-            });
-        });
+    /** @deprecated use `Profile$inboundSchema` instead. */
+    export const inboundSchema = Profile$inboundSchema;
+    /** @deprecated use `Profile$outboundSchema` instead. */
+    export const outboundSchema = Profile$outboundSchema;
+    /** @deprecated use `Profile$Outbound` instead. */
+    export type Outbound = Profile$Outbound;
 }

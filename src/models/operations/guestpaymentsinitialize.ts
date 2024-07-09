@@ -38,117 +38,167 @@ export type GuestPaymentsInitializeResponse = {
 };
 
 /** @internal */
+export const GuestPaymentsInitializeSecurity$inboundSchema: z.ZodType<
+    GuestPaymentsInitializeSecurity,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        "api-key": z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            "api-key": "apiKey",
+        });
+    });
+
+/** @internal */
+export type GuestPaymentsInitializeSecurity$Outbound = {
+    "api-key": string;
+};
+
+/** @internal */
+export const GuestPaymentsInitializeSecurity$outboundSchema: z.ZodType<
+    GuestPaymentsInitializeSecurity$Outbound,
+    z.ZodTypeDef,
+    GuestPaymentsInitializeSecurity
+> = z
+    .object({
+        apiKey: z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            apiKey: "api-key",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace GuestPaymentsInitializeSecurity$ {
-    export const inboundSchema: z.ZodType<GuestPaymentsInitializeSecurity, z.ZodTypeDef, unknown> =
-        z
-            .object({
-                "api-key": z.string(),
-            })
-            .transform((v) => {
-                return remap$(v, {
-                    "api-key": "apiKey",
-                });
-            });
-
-    export type Outbound = {
-        "api-key": string;
-    };
-
-    export const outboundSchema: z.ZodType<
-        Outbound,
-        z.ZodTypeDef,
-        GuestPaymentsInitializeSecurity
-    > = z
-        .object({
-            apiKey: z.string(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                apiKey: "api-key",
-            });
-        });
+    /** @deprecated use `GuestPaymentsInitializeSecurity$inboundSchema` instead. */
+    export const inboundSchema = GuestPaymentsInitializeSecurity$inboundSchema;
+    /** @deprecated use `GuestPaymentsInitializeSecurity$outboundSchema` instead. */
+    export const outboundSchema = GuestPaymentsInitializeSecurity$outboundSchema;
+    /** @deprecated use `GuestPaymentsInitializeSecurity$Outbound` instead. */
+    export type Outbound = GuestPaymentsInitializeSecurity$Outbound;
 }
 
 /** @internal */
+export const GuestPaymentsInitializeRequest$inboundSchema: z.ZodType<
+    GuestPaymentsInitializeRequest,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        "X-Publishable-Key": z.string(),
+        "guest-payment-initialize-request": components.GuestPaymentInitializeRequest$inboundSchema,
+    })
+    .transform((v) => {
+        return remap$(v, {
+            "X-Publishable-Key": "xPublishableKey",
+            "guest-payment-initialize-request": "guestPaymentInitializeRequest",
+        });
+    });
+
+/** @internal */
+export type GuestPaymentsInitializeRequest$Outbound = {
+    "X-Publishable-Key": string;
+    "guest-payment-initialize-request": components.GuestPaymentInitializeRequest$Outbound;
+};
+
+/** @internal */
+export const GuestPaymentsInitializeRequest$outboundSchema: z.ZodType<
+    GuestPaymentsInitializeRequest$Outbound,
+    z.ZodTypeDef,
+    GuestPaymentsInitializeRequest
+> = z
+    .object({
+        xPublishableKey: z.string(),
+        guestPaymentInitializeRequest: components.GuestPaymentInitializeRequest$outboundSchema,
+    })
+    .transform((v) => {
+        return remap$(v, {
+            xPublishableKey: "X-Publishable-Key",
+            guestPaymentInitializeRequest: "guest-payment-initialize-request",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace GuestPaymentsInitializeRequest$ {
-    export const inboundSchema: z.ZodType<GuestPaymentsInitializeRequest, z.ZodTypeDef, unknown> = z
-        .object({
-            "X-Publishable-Key": z.string(),
-            "guest-payment-initialize-request":
-                components.GuestPaymentInitializeRequest$.inboundSchema,
-        })
-        .transform((v) => {
-            return remap$(v, {
-                "X-Publishable-Key": "xPublishableKey",
-                "guest-payment-initialize-request": "guestPaymentInitializeRequest",
-            });
-        });
-
-    export type Outbound = {
-        "X-Publishable-Key": string;
-        "guest-payment-initialize-request": components.GuestPaymentInitializeRequest$.Outbound;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, GuestPaymentsInitializeRequest> =
-        z
-            .object({
-                xPublishableKey: z.string(),
-                guestPaymentInitializeRequest:
-                    components.GuestPaymentInitializeRequest$.outboundSchema,
-            })
-            .transform((v) => {
-                return remap$(v, {
-                    xPublishableKey: "X-Publishable-Key",
-                    guestPaymentInitializeRequest: "guest-payment-initialize-request",
-                });
-            });
+    /** @deprecated use `GuestPaymentsInitializeRequest$inboundSchema` instead. */
+    export const inboundSchema = GuestPaymentsInitializeRequest$inboundSchema;
+    /** @deprecated use `GuestPaymentsInitializeRequest$outboundSchema` instead. */
+    export const outboundSchema = GuestPaymentsInitializeRequest$outboundSchema;
+    /** @deprecated use `GuestPaymentsInitializeRequest$Outbound` instead. */
+    export type Outbound = GuestPaymentsInitializeRequest$Outbound;
 }
 
 /** @internal */
-export namespace GuestPaymentsInitializeResponse$ {
-    export const inboundSchema: z.ZodType<GuestPaymentsInitializeResponse, z.ZodTypeDef, unknown> =
-        z
-            .object({
-                ContentType: z.string(),
-                StatusCode: z.number().int(),
-                RawResponse: z.instanceof(Response),
-                "payment-response": components.PaymentResponse$.inboundSchema.optional(),
-            })
-            .transform((v) => {
-                return remap$(v, {
-                    ContentType: "contentType",
-                    StatusCode: "statusCode",
-                    RawResponse: "rawResponse",
-                    "payment-response": "paymentResponse",
-                });
-            });
-
-    export type Outbound = {
-        ContentType: string;
-        StatusCode: number;
-        RawResponse: never;
-        "payment-response"?: components.PaymentResponse$.Outbound | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<
-        Outbound,
-        z.ZodTypeDef,
-        GuestPaymentsInitializeResponse
-    > = z
-        .object({
-            contentType: z.string(),
-            statusCode: z.number().int(),
-            rawResponse: z.instanceof(Response).transform(() => {
-                throw new Error("Response cannot be serialized");
-            }),
-            paymentResponse: components.PaymentResponse$.outboundSchema.optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                contentType: "ContentType",
-                statusCode: "StatusCode",
-                rawResponse: "RawResponse",
-                paymentResponse: "payment-response",
-            });
+export const GuestPaymentsInitializeResponse$inboundSchema: z.ZodType<
+    GuestPaymentsInitializeResponse,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        ContentType: z.string(),
+        StatusCode: z.number().int(),
+        RawResponse: z.instanceof(Response),
+        "payment-response": components.PaymentResponse$inboundSchema.optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            ContentType: "contentType",
+            StatusCode: "statusCode",
+            RawResponse: "rawResponse",
+            "payment-response": "paymentResponse",
         });
+    });
+
+/** @internal */
+export type GuestPaymentsInitializeResponse$Outbound = {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    "payment-response"?: components.PaymentResponse$Outbound | undefined;
+};
+
+/** @internal */
+export const GuestPaymentsInitializeResponse$outboundSchema: z.ZodType<
+    GuestPaymentsInitializeResponse$Outbound,
+    z.ZodTypeDef,
+    GuestPaymentsInitializeResponse
+> = z
+    .object({
+        contentType: z.string(),
+        statusCode: z.number().int(),
+        rawResponse: z.instanceof(Response).transform(() => {
+            throw new Error("Response cannot be serialized");
+        }),
+        paymentResponse: components.PaymentResponse$outboundSchema.optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            contentType: "ContentType",
+            statusCode: "StatusCode",
+            rawResponse: "RawResponse",
+            paymentResponse: "payment-response",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GuestPaymentsInitializeResponse$ {
+    /** @deprecated use `GuestPaymentsInitializeResponse$inboundSchema` instead. */
+    export const inboundSchema = GuestPaymentsInitializeResponse$inboundSchema;
+    /** @deprecated use `GuestPaymentsInitializeResponse$outboundSchema` instead. */
+    export const outboundSchema = GuestPaymentsInitializeResponse$outboundSchema;
+    /** @deprecated use `GuestPaymentsInitializeResponse$Outbound` instead. */
+    export type Outbound = GuestPaymentsInitializeResponse$Outbound;
 }

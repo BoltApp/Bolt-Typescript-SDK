@@ -61,7 +61,7 @@ export class Guest extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.GuestPaymentsInitializeRequest$.outboundSchema.parse(value$),
+            (value$) => operations.GuestPaymentsInitializeRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = encodeJSON$("body", payload$["guest-payment-initialize-request"], {
@@ -120,10 +120,12 @@ export class Guest extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.GuestPaymentsInitializeResponse>()
-            .json(200, operations.GuestPaymentsInitializeResponse$, { key: "payment-response" })
-            .json("4XX", errors.GuestPaymentsInitializeResponseBody$, { err: true })
+            .json(200, operations.GuestPaymentsInitializeResponse$inboundSchema, {
+                key: "payment-response",
+            })
+            .json("4XX", errors.GuestPaymentsInitializeResponseBody$inboundSchema, { err: true })
             .fail("5XX")
-            .void("default", operations.GuestPaymentsInitializeResponse$)
+            .void("default", operations.GuestPaymentsInitializeResponse$inboundSchema)
             .match(response, { extraFields: responseFields$ });
 
         return result$;
@@ -151,7 +153,7 @@ export class Guest extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.GuestPaymentsUpdateRequest$.outboundSchema.parse(value$),
+            (value$) => operations.GuestPaymentsUpdateRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = encodeJSON$("body", payload$["payment-update-request"], { explode: true });
@@ -211,10 +213,12 @@ export class Guest extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.GuestPaymentsUpdateResponse>()
-            .json(200, operations.GuestPaymentsUpdateResponse$, { key: "payment-response" })
-            .json("4XX", errors.GuestPaymentsUpdateResponseBody$, { err: true })
+            .json(200, operations.GuestPaymentsUpdateResponse$inboundSchema, {
+                key: "payment-response",
+            })
+            .json("4XX", errors.GuestPaymentsUpdateResponseBody$inboundSchema, { err: true })
             .fail("5XX")
-            .void("default", operations.GuestPaymentsUpdateResponse$)
+            .void("default", operations.GuestPaymentsUpdateResponse$inboundSchema)
             .match(response, { extraFields: responseFields$ });
 
         return result$;
@@ -242,7 +246,7 @@ export class Guest extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.GuestPaymentsActionRequest$.outboundSchema.parse(value$),
+            (value$) => operations.GuestPaymentsActionRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = encodeJSON$("body", payload$["payment-action-request"], { explode: true });
@@ -302,10 +306,12 @@ export class Guest extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.GuestPaymentsActionResponse>()
-            .json(200, operations.GuestPaymentsActionResponse$, { key: "payment-response" })
-            .json("4XX", errors.GuestPaymentsActionResponseBody$, { err: true })
+            .json(200, operations.GuestPaymentsActionResponse$inboundSchema, {
+                key: "payment-response",
+            })
+            .json("4XX", errors.GuestPaymentsActionResponseBody$inboundSchema, { err: true })
             .fail("5XX")
-            .void("default", operations.GuestPaymentsActionResponse$)
+            .void("default", operations.GuestPaymentsActionResponse$inboundSchema)
             .match(response, { extraFields: responseFields$ });
 
         return result$;

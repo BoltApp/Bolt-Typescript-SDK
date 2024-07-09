@@ -3,9 +3,24 @@
  */
 
 import { remap as remap$ } from "../../lib/primitives.js";
-import { AddressListing, AddressListing$ } from "./addresslisting.js";
-import { PaymentMethod, PaymentMethod$ } from "./paymentmethod.js";
-import { Profile, Profile$ } from "./profile.js";
+import {
+    AddressListing,
+    AddressListing$inboundSchema,
+    AddressListing$Outbound,
+    AddressListing$outboundSchema,
+} from "./addresslisting.js";
+import {
+    PaymentMethod,
+    PaymentMethod$inboundSchema,
+    PaymentMethod$Outbound,
+    PaymentMethod$outboundSchema,
+} from "./paymentmethod.js";
+import {
+    Profile,
+    Profile$inboundSchema,
+    Profile$Outbound,
+    Profile$outboundSchema,
+} from "./profile.js";
 import * as z from "zod";
 
 export type Account = {
@@ -21,34 +36,47 @@ export type Account = {
 };
 
 /** @internal */
+export const Account$inboundSchema: z.ZodType<Account, z.ZodTypeDef, unknown> = z
+    .object({
+        addresses: z.array(AddressListing$inboundSchema),
+        payment_methods: z.array(PaymentMethod$inboundSchema),
+        profile: Profile$inboundSchema.optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            payment_methods: "paymentMethods",
+        });
+    });
+
+/** @internal */
+export type Account$Outbound = {
+    addresses: Array<AddressListing$Outbound>;
+    payment_methods: Array<PaymentMethod$Outbound>;
+    profile?: Profile$Outbound | undefined;
+};
+
+/** @internal */
+export const Account$outboundSchema: z.ZodType<Account$Outbound, z.ZodTypeDef, Account> = z
+    .object({
+        addresses: z.array(AddressListing$outboundSchema),
+        paymentMethods: z.array(PaymentMethod$outboundSchema),
+        profile: Profile$outboundSchema.optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            paymentMethods: "payment_methods",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace Account$ {
-    export const inboundSchema: z.ZodType<Account, z.ZodTypeDef, unknown> = z
-        .object({
-            addresses: z.array(AddressListing$.inboundSchema),
-            payment_methods: z.array(PaymentMethod$.inboundSchema),
-            profile: Profile$.inboundSchema.optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                payment_methods: "paymentMethods",
-            });
-        });
-
-    export type Outbound = {
-        addresses: Array<AddressListing$.Outbound>;
-        payment_methods: Array<PaymentMethod$.Outbound>;
-        profile?: Profile$.Outbound | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, Account> = z
-        .object({
-            addresses: z.array(AddressListing$.outboundSchema),
-            paymentMethods: z.array(PaymentMethod$.outboundSchema),
-            profile: Profile$.outboundSchema.optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                paymentMethods: "payment_methods",
-            });
-        });
+    /** @deprecated use `Account$inboundSchema` instead. */
+    export const inboundSchema = Account$inboundSchema;
+    /** @deprecated use `Account$outboundSchema` instead. */
+    export const outboundSchema = Account$outboundSchema;
+    /** @deprecated use `Account$Outbound` instead. */
+    export type Outbound = Account$Outbound;
 }

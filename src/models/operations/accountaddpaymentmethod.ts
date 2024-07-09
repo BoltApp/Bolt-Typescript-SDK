@@ -34,83 +34,119 @@ export type AccountAddPaymentMethodResponse = {
 };
 
 /** @internal */
-export namespace AccountAddPaymentMethodRequest$ {
-    export const inboundSchema: z.ZodType<AccountAddPaymentMethodRequest, z.ZodTypeDef, unknown> = z
-        .object({
-            "X-Publishable-Key": z.string(),
-            "payment-method": components.PaymentMethodInput$.inboundSchema,
-        })
-        .transform((v) => {
-            return remap$(v, {
-                "X-Publishable-Key": "xPublishableKey",
-                "payment-method": "paymentMethod",
-            });
+export const AccountAddPaymentMethodRequest$inboundSchema: z.ZodType<
+    AccountAddPaymentMethodRequest,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        "X-Publishable-Key": z.string(),
+        "payment-method": components.PaymentMethodInput$inboundSchema,
+    })
+    .transform((v) => {
+        return remap$(v, {
+            "X-Publishable-Key": "xPublishableKey",
+            "payment-method": "paymentMethod",
         });
+    });
 
-    export type Outbound = {
-        "X-Publishable-Key": string;
-        "payment-method": components.PaymentMethodInput$.Outbound;
-    };
+/** @internal */
+export type AccountAddPaymentMethodRequest$Outbound = {
+    "X-Publishable-Key": string;
+    "payment-method": components.PaymentMethodInput$Outbound;
+};
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, AccountAddPaymentMethodRequest> =
-        z
-            .object({
-                xPublishableKey: z.string(),
-                paymentMethod: components.PaymentMethodInput$.outboundSchema,
-            })
-            .transform((v) => {
-                return remap$(v, {
-                    xPublishableKey: "X-Publishable-Key",
-                    paymentMethod: "payment-method",
-                });
-            });
+/** @internal */
+export const AccountAddPaymentMethodRequest$outboundSchema: z.ZodType<
+    AccountAddPaymentMethodRequest$Outbound,
+    z.ZodTypeDef,
+    AccountAddPaymentMethodRequest
+> = z
+    .object({
+        xPublishableKey: z.string(),
+        paymentMethod: components.PaymentMethodInput$outboundSchema,
+    })
+    .transform((v) => {
+        return remap$(v, {
+            xPublishableKey: "X-Publishable-Key",
+            paymentMethod: "payment-method",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace AccountAddPaymentMethodRequest$ {
+    /** @deprecated use `AccountAddPaymentMethodRequest$inboundSchema` instead. */
+    export const inboundSchema = AccountAddPaymentMethodRequest$inboundSchema;
+    /** @deprecated use `AccountAddPaymentMethodRequest$outboundSchema` instead. */
+    export const outboundSchema = AccountAddPaymentMethodRequest$outboundSchema;
+    /** @deprecated use `AccountAddPaymentMethodRequest$Outbound` instead. */
+    export type Outbound = AccountAddPaymentMethodRequest$Outbound;
 }
 
 /** @internal */
-export namespace AccountAddPaymentMethodResponse$ {
-    export const inboundSchema: z.ZodType<AccountAddPaymentMethodResponse, z.ZodTypeDef, unknown> =
-        z
-            .object({
-                ContentType: z.string(),
-                StatusCode: z.number().int(),
-                RawResponse: z.instanceof(Response),
-                "payment-method": components.PaymentMethod$.inboundSchema.optional(),
-            })
-            .transform((v) => {
-                return remap$(v, {
-                    ContentType: "contentType",
-                    StatusCode: "statusCode",
-                    RawResponse: "rawResponse",
-                    "payment-method": "paymentMethod",
-                });
-            });
-
-    export type Outbound = {
-        ContentType: string;
-        StatusCode: number;
-        RawResponse: never;
-        "payment-method"?: components.PaymentMethod$.Outbound | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<
-        Outbound,
-        z.ZodTypeDef,
-        AccountAddPaymentMethodResponse
-    > = z
-        .object({
-            contentType: z.string(),
-            statusCode: z.number().int(),
-            rawResponse: z.instanceof(Response).transform(() => {
-                throw new Error("Response cannot be serialized");
-            }),
-            paymentMethod: components.PaymentMethod$.outboundSchema.optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                contentType: "ContentType",
-                statusCode: "StatusCode",
-                rawResponse: "RawResponse",
-                paymentMethod: "payment-method",
-            });
+export const AccountAddPaymentMethodResponse$inboundSchema: z.ZodType<
+    AccountAddPaymentMethodResponse,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        ContentType: z.string(),
+        StatusCode: z.number().int(),
+        RawResponse: z.instanceof(Response),
+        "payment-method": components.PaymentMethod$inboundSchema.optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            ContentType: "contentType",
+            StatusCode: "statusCode",
+            RawResponse: "rawResponse",
+            "payment-method": "paymentMethod",
         });
+    });
+
+/** @internal */
+export type AccountAddPaymentMethodResponse$Outbound = {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    "payment-method"?: components.PaymentMethod$Outbound | undefined;
+};
+
+/** @internal */
+export const AccountAddPaymentMethodResponse$outboundSchema: z.ZodType<
+    AccountAddPaymentMethodResponse$Outbound,
+    z.ZodTypeDef,
+    AccountAddPaymentMethodResponse
+> = z
+    .object({
+        contentType: z.string(),
+        statusCode: z.number().int(),
+        rawResponse: z.instanceof(Response).transform(() => {
+            throw new Error("Response cannot be serialized");
+        }),
+        paymentMethod: components.PaymentMethod$outboundSchema.optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            contentType: "ContentType",
+            statusCode: "StatusCode",
+            rawResponse: "RawResponse",
+            paymentMethod: "payment-method",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace AccountAddPaymentMethodResponse$ {
+    /** @deprecated use `AccountAddPaymentMethodResponse$inboundSchema` instead. */
+    export const inboundSchema = AccountAddPaymentMethodResponse$inboundSchema;
+    /** @deprecated use `AccountAddPaymentMethodResponse$outboundSchema` instead. */
+    export const outboundSchema = AccountAddPaymentMethodResponse$outboundSchema;
+    /** @deprecated use `AccountAddPaymentMethodResponse$Outbound` instead. */
+    export type Outbound = AccountAddPaymentMethodResponse$Outbound;
 }

@@ -33,8 +33,8 @@ export type AccountGetResponse = {
 };
 
 /** @internal */
-export namespace AccountGetRequest$ {
-    export const inboundSchema: z.ZodType<AccountGetRequest, z.ZodTypeDef, unknown> = z
+export const AccountGetRequest$inboundSchema: z.ZodType<AccountGetRequest, z.ZodTypeDef, unknown> =
+    z
         .object({
             "X-Publishable-Key": z.string(),
         })
@@ -44,59 +44,98 @@ export namespace AccountGetRequest$ {
             });
         });
 
-    export type Outbound = {
-        "X-Publishable-Key": string;
-    };
+/** @internal */
+export type AccountGetRequest$Outbound = {
+    "X-Publishable-Key": string;
+};
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, AccountGetRequest> = z
-        .object({
-            xPublishableKey: z.string(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                xPublishableKey: "X-Publishable-Key",
-            });
+/** @internal */
+export const AccountGetRequest$outboundSchema: z.ZodType<
+    AccountGetRequest$Outbound,
+    z.ZodTypeDef,
+    AccountGetRequest
+> = z
+    .object({
+        xPublishableKey: z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            xPublishableKey: "X-Publishable-Key",
         });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace AccountGetRequest$ {
+    /** @deprecated use `AccountGetRequest$inboundSchema` instead. */
+    export const inboundSchema = AccountGetRequest$inboundSchema;
+    /** @deprecated use `AccountGetRequest$outboundSchema` instead. */
+    export const outboundSchema = AccountGetRequest$outboundSchema;
+    /** @deprecated use `AccountGetRequest$Outbound` instead. */
+    export type Outbound = AccountGetRequest$Outbound;
 }
 
 /** @internal */
+export const AccountGetResponse$inboundSchema: z.ZodType<
+    AccountGetResponse,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        ContentType: z.string(),
+        StatusCode: z.number().int(),
+        RawResponse: z.instanceof(Response),
+        account: components.Account$inboundSchema.optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            ContentType: "contentType",
+            StatusCode: "statusCode",
+            RawResponse: "rawResponse",
+        });
+    });
+
+/** @internal */
+export type AccountGetResponse$Outbound = {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    account?: components.Account$Outbound | undefined;
+};
+
+/** @internal */
+export const AccountGetResponse$outboundSchema: z.ZodType<
+    AccountGetResponse$Outbound,
+    z.ZodTypeDef,
+    AccountGetResponse
+> = z
+    .object({
+        contentType: z.string(),
+        statusCode: z.number().int(),
+        rawResponse: z.instanceof(Response).transform(() => {
+            throw new Error("Response cannot be serialized");
+        }),
+        account: components.Account$outboundSchema.optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            contentType: "ContentType",
+            statusCode: "StatusCode",
+            rawResponse: "RawResponse",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace AccountGetResponse$ {
-    export const inboundSchema: z.ZodType<AccountGetResponse, z.ZodTypeDef, unknown> = z
-        .object({
-            ContentType: z.string(),
-            StatusCode: z.number().int(),
-            RawResponse: z.instanceof(Response),
-            account: components.Account$.inboundSchema.optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                ContentType: "contentType",
-                StatusCode: "statusCode",
-                RawResponse: "rawResponse",
-            });
-        });
-
-    export type Outbound = {
-        ContentType: string;
-        StatusCode: number;
-        RawResponse: never;
-        account?: components.Account$.Outbound | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, AccountGetResponse> = z
-        .object({
-            contentType: z.string(),
-            statusCode: z.number().int(),
-            rawResponse: z.instanceof(Response).transform(() => {
-                throw new Error("Response cannot be serialized");
-            }),
-            account: components.Account$.outboundSchema.optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                contentType: "ContentType",
-                statusCode: "StatusCode",
-                rawResponse: "RawResponse",
-            });
-        });
+    /** @deprecated use `AccountGetResponse$inboundSchema` instead. */
+    export const inboundSchema = AccountGetResponse$inboundSchema;
+    /** @deprecated use `AccountGetResponse$outboundSchema` instead. */
+    export const outboundSchema = AccountGetResponse$outboundSchema;
+    /** @deprecated use `AccountGetResponse$Outbound` instead. */
+    export type Outbound = AccountGetResponse$Outbound;
 }

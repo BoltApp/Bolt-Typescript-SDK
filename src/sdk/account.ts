@@ -55,7 +55,7 @@ export class Account extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.AccountGetRequest$.outboundSchema.parse(value$),
+            (value$) => operations.AccountGetRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = null;
@@ -107,10 +107,10 @@ export class Account extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.AccountGetResponse>()
-            .json(200, operations.AccountGetResponse$, { key: "account" })
-            .json("4XX", errors.AccountGetResponseBody$, { err: true })
+            .json(200, operations.AccountGetResponse$inboundSchema, { key: "account" })
+            .json("4XX", errors.AccountGetResponseBody$inboundSchema, { err: true })
             .fail("5XX")
-            .void("default", operations.AccountGetResponse$)
+            .void("default", operations.AccountGetResponse$inboundSchema)
             .match(response, { extraFields: responseFields$ });
 
         return result$;
@@ -134,7 +134,7 @@ export class Account extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.AccountAddressCreateRequest$.outboundSchema.parse(value$),
+            (value$) => operations.AccountAddressCreateRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = encodeJSON$("body", payload$["address-listing"], { explode: true });
@@ -187,10 +187,12 @@ export class Account extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.AccountAddressCreateResponse>()
-            .json(200, operations.AccountAddressCreateResponse$, { key: "address-listing" })
-            .json("4XX", errors.AccountAddressCreateResponseBody$, { err: true })
+            .json(200, operations.AccountAddressCreateResponse$inboundSchema, {
+                key: "address-listing",
+            })
+            .json("4XX", errors.AccountAddressCreateResponseBody$inboundSchema, { err: true })
             .fail("5XX")
-            .void("default", operations.AccountAddressCreateResponse$)
+            .void("default", operations.AccountAddressCreateResponse$inboundSchema)
             .match(response, { extraFields: responseFields$ });
 
         return result$;
@@ -219,7 +221,7 @@ export class Account extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.AccountAddressEditRequest$.outboundSchema.parse(value$),
+            (value$) => operations.AccountAddressEditRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = encodeJSON$("body", payload$["address-listing"], { explode: true });
@@ -275,10 +277,12 @@ export class Account extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.AccountAddressEditResponse>()
-            .json(200, operations.AccountAddressEditResponse$, { key: "address-listing" })
-            .json("4XX", errors.AccountAddressEditResponseBody$, { err: true })
+            .json(200, operations.AccountAddressEditResponse$inboundSchema, {
+                key: "address-listing",
+            })
+            .json("4XX", errors.AccountAddressEditResponseBody$inboundSchema, { err: true })
             .fail("5XX")
-            .void("default", operations.AccountAddressEditResponse$)
+            .void("default", operations.AccountAddressEditResponse$inboundSchema)
             .match(response, { extraFields: responseFields$ });
 
         return result$;
@@ -304,7 +308,7 @@ export class Account extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.AccountAddressDeleteRequest$.outboundSchema.parse(value$),
+            (value$) => operations.AccountAddressDeleteRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = null;
@@ -359,9 +363,9 @@ export class Account extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.AccountAddressDeleteResponse>()
-            .json("4XX", errors.AccountAddressDeleteResponseBody$, { err: true })
+            .json("4XX", errors.AccountAddressDeleteResponseBody$inboundSchema, { err: true })
             .fail("5XX")
-            .void([200, "default"], operations.AccountAddressDeleteResponse$)
+            .void([200, "default"], operations.AccountAddressDeleteResponse$inboundSchema)
             .match(response, { extraFields: responseFields$ });
 
         return result$;
@@ -389,7 +393,7 @@ export class Account extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.AccountAddPaymentMethodRequest$.outboundSchema.parse(value$),
+            (value$) => operations.AccountAddPaymentMethodRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = encodeJSON$("body", payload$["payment-method"], { explode: true });
@@ -442,10 +446,12 @@ export class Account extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.AccountAddPaymentMethodResponse>()
-            .json(200, operations.AccountAddPaymentMethodResponse$, { key: "payment-method" })
-            .json("4XX", errors.AccountAddPaymentMethodResponseBody$, { err: true })
+            .json(200, operations.AccountAddPaymentMethodResponse$inboundSchema, {
+                key: "payment-method",
+            })
+            .json("4XX", errors.AccountAddPaymentMethodResponseBody$inboundSchema, { err: true })
             .fail("5XX")
-            .void("default", operations.AccountAddPaymentMethodResponse$)
+            .void("default", operations.AccountAddPaymentMethodResponse$inboundSchema)
             .match(response, { extraFields: responseFields$ });
 
         return result$;
@@ -471,7 +477,7 @@ export class Account extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.AccountPaymentMethodDeleteRequest$.outboundSchema.parse(value$),
+            (value$) => operations.AccountPaymentMethodDeleteRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = null;
@@ -526,9 +532,9 @@ export class Account extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.AccountPaymentMethodDeleteResponse>()
-            .json("4XX", errors.AccountPaymentMethodDeleteResponseBody$, { err: true })
+            .json("4XX", errors.AccountPaymentMethodDeleteResponseBody$inboundSchema, { err: true })
             .fail("5XX")
-            .void([200, "default"], operations.AccountPaymentMethodDeleteResponse$)
+            .void([200, "default"], operations.AccountPaymentMethodDeleteResponse$inboundSchema)
             .match(response, { extraFields: responseFields$ });
 
         return result$;

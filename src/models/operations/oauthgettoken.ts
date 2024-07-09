@@ -26,46 +26,66 @@ export type OauthGetTokenResponse = {
 };
 
 /** @internal */
+export const OauthGetTokenResponse$inboundSchema: z.ZodType<
+    OauthGetTokenResponse,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        ContentType: z.string(),
+        StatusCode: z.number().int(),
+        RawResponse: z.instanceof(Response),
+        "get-access-token-response": components.GetAccessTokenResponse$inboundSchema.optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            ContentType: "contentType",
+            StatusCode: "statusCode",
+            RawResponse: "rawResponse",
+            "get-access-token-response": "getAccessTokenResponse",
+        });
+    });
+
+/** @internal */
+export type OauthGetTokenResponse$Outbound = {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    "get-access-token-response"?: components.GetAccessTokenResponse$Outbound | undefined;
+};
+
+/** @internal */
+export const OauthGetTokenResponse$outboundSchema: z.ZodType<
+    OauthGetTokenResponse$Outbound,
+    z.ZodTypeDef,
+    OauthGetTokenResponse
+> = z
+    .object({
+        contentType: z.string(),
+        statusCode: z.number().int(),
+        rawResponse: z.instanceof(Response).transform(() => {
+            throw new Error("Response cannot be serialized");
+        }),
+        getAccessTokenResponse: components.GetAccessTokenResponse$outboundSchema.optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            contentType: "ContentType",
+            statusCode: "StatusCode",
+            rawResponse: "RawResponse",
+            getAccessTokenResponse: "get-access-token-response",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace OauthGetTokenResponse$ {
-    export const inboundSchema: z.ZodType<OauthGetTokenResponse, z.ZodTypeDef, unknown> = z
-        .object({
-            ContentType: z.string(),
-            StatusCode: z.number().int(),
-            RawResponse: z.instanceof(Response),
-            "get-access-token-response":
-                components.GetAccessTokenResponse$.inboundSchema.optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                ContentType: "contentType",
-                StatusCode: "statusCode",
-                RawResponse: "rawResponse",
-                "get-access-token-response": "getAccessTokenResponse",
-            });
-        });
-
-    export type Outbound = {
-        ContentType: string;
-        StatusCode: number;
-        RawResponse: never;
-        "get-access-token-response"?: components.GetAccessTokenResponse$.Outbound | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, OauthGetTokenResponse> = z
-        .object({
-            contentType: z.string(),
-            statusCode: z.number().int(),
-            rawResponse: z.instanceof(Response).transform(() => {
-                throw new Error("Response cannot be serialized");
-            }),
-            getAccessTokenResponse: components.GetAccessTokenResponse$.outboundSchema.optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                contentType: "ContentType",
-                statusCode: "StatusCode",
-                rawResponse: "RawResponse",
-                getAccessTokenResponse: "get-access-token-response",
-            });
-        });
+    /** @deprecated use `OauthGetTokenResponse$inboundSchema` instead. */
+    export const inboundSchema = OauthGetTokenResponse$inboundSchema;
+    /** @deprecated use `OauthGetTokenResponse$outboundSchema` instead. */
+    export const outboundSchema = OauthGetTokenResponse$outboundSchema;
+    /** @deprecated use `OauthGetTokenResponse$Outbound` instead. */
+    export type Outbound = OauthGetTokenResponse$Outbound;
 }

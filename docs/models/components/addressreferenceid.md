@@ -1,0 +1,9 @@
+# AddressReferenceId
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          | Example                                                                              |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `dotTag`                                                                             | [components.AddressReferenceIdTag](../../models/components/addressreferenceidtag.md) | :heavy_check_mark:                                                                   | The type of address reference                                                        | id                                                                                   |
+| `id`                                                                                 | *string*                                                                             | :heavy_check_mark:                                                                   | The address's ID                                                                     | D4g3h5tBuVYK9                                                                        |

@@ -32,86 +32,112 @@ export type AccountPaymentMethodDeleteResponse = {
 };
 
 /** @internal */
+export const AccountPaymentMethodDeleteRequest$inboundSchema: z.ZodType<
+    AccountPaymentMethodDeleteRequest,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        id: z.string(),
+        "X-Publishable-Key": z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            "X-Publishable-Key": "xPublishableKey",
+        });
+    });
+
+/** @internal */
+export type AccountPaymentMethodDeleteRequest$Outbound = {
+    id: string;
+    "X-Publishable-Key": string;
+};
+
+/** @internal */
+export const AccountPaymentMethodDeleteRequest$outboundSchema: z.ZodType<
+    AccountPaymentMethodDeleteRequest$Outbound,
+    z.ZodTypeDef,
+    AccountPaymentMethodDeleteRequest
+> = z
+    .object({
+        id: z.string(),
+        xPublishableKey: z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            xPublishableKey: "X-Publishable-Key",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace AccountPaymentMethodDeleteRequest$ {
-    export const inboundSchema: z.ZodType<
-        AccountPaymentMethodDeleteRequest,
-        z.ZodTypeDef,
-        unknown
-    > = z
-        .object({
-            id: z.string(),
-            "X-Publishable-Key": z.string(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                "X-Publishable-Key": "xPublishableKey",
-            });
-        });
-
-    export type Outbound = {
-        id: string;
-        "X-Publishable-Key": string;
-    };
-
-    export const outboundSchema: z.ZodType<
-        Outbound,
-        z.ZodTypeDef,
-        AccountPaymentMethodDeleteRequest
-    > = z
-        .object({
-            id: z.string(),
-            xPublishableKey: z.string(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                xPublishableKey: "X-Publishable-Key",
-            });
-        });
+    /** @deprecated use `AccountPaymentMethodDeleteRequest$inboundSchema` instead. */
+    export const inboundSchema = AccountPaymentMethodDeleteRequest$inboundSchema;
+    /** @deprecated use `AccountPaymentMethodDeleteRequest$outboundSchema` instead. */
+    export const outboundSchema = AccountPaymentMethodDeleteRequest$outboundSchema;
+    /** @deprecated use `AccountPaymentMethodDeleteRequest$Outbound` instead. */
+    export type Outbound = AccountPaymentMethodDeleteRequest$Outbound;
 }
 
 /** @internal */
+export const AccountPaymentMethodDeleteResponse$inboundSchema: z.ZodType<
+    AccountPaymentMethodDeleteResponse,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        ContentType: z.string(),
+        StatusCode: z.number().int(),
+        RawResponse: z.instanceof(Response),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            ContentType: "contentType",
+            StatusCode: "statusCode",
+            RawResponse: "rawResponse",
+        });
+    });
+
+/** @internal */
+export type AccountPaymentMethodDeleteResponse$Outbound = {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+};
+
+/** @internal */
+export const AccountPaymentMethodDeleteResponse$outboundSchema: z.ZodType<
+    AccountPaymentMethodDeleteResponse$Outbound,
+    z.ZodTypeDef,
+    AccountPaymentMethodDeleteResponse
+> = z
+    .object({
+        contentType: z.string(),
+        statusCode: z.number().int(),
+        rawResponse: z.instanceof(Response).transform(() => {
+            throw new Error("Response cannot be serialized");
+        }),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            contentType: "ContentType",
+            statusCode: "StatusCode",
+            rawResponse: "RawResponse",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace AccountPaymentMethodDeleteResponse$ {
-    export const inboundSchema: z.ZodType<
-        AccountPaymentMethodDeleteResponse,
-        z.ZodTypeDef,
-        unknown
-    > = z
-        .object({
-            ContentType: z.string(),
-            StatusCode: z.number().int(),
-            RawResponse: z.instanceof(Response),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                ContentType: "contentType",
-                StatusCode: "statusCode",
-                RawResponse: "rawResponse",
-            });
-        });
-
-    export type Outbound = {
-        ContentType: string;
-        StatusCode: number;
-        RawResponse: never;
-    };
-
-    export const outboundSchema: z.ZodType<
-        Outbound,
-        z.ZodTypeDef,
-        AccountPaymentMethodDeleteResponse
-    > = z
-        .object({
-            contentType: z.string(),
-            statusCode: z.number().int(),
-            rawResponse: z.instanceof(Response).transform(() => {
-                throw new Error("Response cannot be serialized");
-            }),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                contentType: "ContentType",
-                statusCode: "StatusCode",
-                rawResponse: "RawResponse",
-            });
-        });
+    /** @deprecated use `AccountPaymentMethodDeleteResponse$inboundSchema` instead. */
+    export const inboundSchema = AccountPaymentMethodDeleteResponse$inboundSchema;
+    /** @deprecated use `AccountPaymentMethodDeleteResponse$outboundSchema` instead. */
+    export const outboundSchema = AccountPaymentMethodDeleteResponse$outboundSchema;
+    /** @deprecated use `AccountPaymentMethodDeleteResponse$Outbound` instead. */
+    export type Outbound = AccountPaymentMethodDeleteResponse$Outbound;
 }

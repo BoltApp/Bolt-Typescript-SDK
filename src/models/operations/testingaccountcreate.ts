@@ -38,108 +38,168 @@ export type TestingAccountCreateResponse = {
 };
 
 /** @internal */
+export const TestingAccountCreateSecurity$inboundSchema: z.ZodType<
+    TestingAccountCreateSecurity,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        "api-key": z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            "api-key": "apiKey",
+        });
+    });
+
+/** @internal */
+export type TestingAccountCreateSecurity$Outbound = {
+    "api-key": string;
+};
+
+/** @internal */
+export const TestingAccountCreateSecurity$outboundSchema: z.ZodType<
+    TestingAccountCreateSecurity$Outbound,
+    z.ZodTypeDef,
+    TestingAccountCreateSecurity
+> = z
+    .object({
+        apiKey: z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            apiKey: "api-key",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace TestingAccountCreateSecurity$ {
-    export const inboundSchema: z.ZodType<TestingAccountCreateSecurity, z.ZodTypeDef, unknown> = z
-        .object({
-            "api-key": z.string(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                "api-key": "apiKey",
-            });
-        });
-
-    export type Outbound = {
-        "api-key": string;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, TestingAccountCreateSecurity> = z
-        .object({
-            apiKey: z.string(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                apiKey: "api-key",
-            });
-        });
+    /** @deprecated use `TestingAccountCreateSecurity$inboundSchema` instead. */
+    export const inboundSchema = TestingAccountCreateSecurity$inboundSchema;
+    /** @deprecated use `TestingAccountCreateSecurity$outboundSchema` instead. */
+    export const outboundSchema = TestingAccountCreateSecurity$outboundSchema;
+    /** @deprecated use `TestingAccountCreateSecurity$Outbound` instead. */
+    export type Outbound = TestingAccountCreateSecurity$Outbound;
 }
 
 /** @internal */
+export const TestingAccountCreateRequest$inboundSchema: z.ZodType<
+    TestingAccountCreateRequest,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        "X-Publishable-Key": z.string(),
+        "account-test-creation-data": components.AccountTestCreationData$inboundSchema,
+    })
+    .transform((v) => {
+        return remap$(v, {
+            "X-Publishable-Key": "xPublishableKey",
+            "account-test-creation-data": "accountTestCreationData",
+        });
+    });
+
+/** @internal */
+export type TestingAccountCreateRequest$Outbound = {
+    "X-Publishable-Key": string;
+    "account-test-creation-data": components.AccountTestCreationData$Outbound;
+};
+
+/** @internal */
+export const TestingAccountCreateRequest$outboundSchema: z.ZodType<
+    TestingAccountCreateRequest$Outbound,
+    z.ZodTypeDef,
+    TestingAccountCreateRequest
+> = z
+    .object({
+        xPublishableKey: z.string(),
+        accountTestCreationData: components.AccountTestCreationData$outboundSchema,
+    })
+    .transform((v) => {
+        return remap$(v, {
+            xPublishableKey: "X-Publishable-Key",
+            accountTestCreationData: "account-test-creation-data",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace TestingAccountCreateRequest$ {
-    export const inboundSchema: z.ZodType<TestingAccountCreateRequest, z.ZodTypeDef, unknown> = z
-        .object({
-            "X-Publishable-Key": z.string(),
-            "account-test-creation-data": components.AccountTestCreationData$.inboundSchema,
-        })
-        .transform((v) => {
-            return remap$(v, {
-                "X-Publishable-Key": "xPublishableKey",
-                "account-test-creation-data": "accountTestCreationData",
-            });
-        });
-
-    export type Outbound = {
-        "X-Publishable-Key": string;
-        "account-test-creation-data": components.AccountTestCreationData$.Outbound;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, TestingAccountCreateRequest> = z
-        .object({
-            xPublishableKey: z.string(),
-            accountTestCreationData: components.AccountTestCreationData$.outboundSchema,
-        })
-        .transform((v) => {
-            return remap$(v, {
-                xPublishableKey: "X-Publishable-Key",
-                accountTestCreationData: "account-test-creation-data",
-            });
-        });
+    /** @deprecated use `TestingAccountCreateRequest$inboundSchema` instead. */
+    export const inboundSchema = TestingAccountCreateRequest$inboundSchema;
+    /** @deprecated use `TestingAccountCreateRequest$outboundSchema` instead. */
+    export const outboundSchema = TestingAccountCreateRequest$outboundSchema;
+    /** @deprecated use `TestingAccountCreateRequest$Outbound` instead. */
+    export type Outbound = TestingAccountCreateRequest$Outbound;
 }
 
 /** @internal */
+export const TestingAccountCreateResponse$inboundSchema: z.ZodType<
+    TestingAccountCreateResponse,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        ContentType: z.string(),
+        StatusCode: z.number().int(),
+        RawResponse: z.instanceof(Response),
+        "account-test-creation-data":
+            components.AccountTestCreationDataOutput$inboundSchema.optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            ContentType: "contentType",
+            StatusCode: "statusCode",
+            RawResponse: "rawResponse",
+            "account-test-creation-data": "accountTestCreationData",
+        });
+    });
+
+/** @internal */
+export type TestingAccountCreateResponse$Outbound = {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    "account-test-creation-data"?: components.AccountTestCreationDataOutput$Outbound | undefined;
+};
+
+/** @internal */
+export const TestingAccountCreateResponse$outboundSchema: z.ZodType<
+    TestingAccountCreateResponse$Outbound,
+    z.ZodTypeDef,
+    TestingAccountCreateResponse
+> = z
+    .object({
+        contentType: z.string(),
+        statusCode: z.number().int(),
+        rawResponse: z.instanceof(Response).transform(() => {
+            throw new Error("Response cannot be serialized");
+        }),
+        accountTestCreationData: components.AccountTestCreationDataOutput$outboundSchema.optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            contentType: "ContentType",
+            statusCode: "StatusCode",
+            rawResponse: "RawResponse",
+            accountTestCreationData: "account-test-creation-data",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace TestingAccountCreateResponse$ {
-    export const inboundSchema: z.ZodType<TestingAccountCreateResponse, z.ZodTypeDef, unknown> = z
-        .object({
-            ContentType: z.string(),
-            StatusCode: z.number().int(),
-            RawResponse: z.instanceof(Response),
-            "account-test-creation-data":
-                components.AccountTestCreationDataOutput$.inboundSchema.optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                ContentType: "contentType",
-                StatusCode: "statusCode",
-                RawResponse: "rawResponse",
-                "account-test-creation-data": "accountTestCreationData",
-            });
-        });
-
-    export type Outbound = {
-        ContentType: string;
-        StatusCode: number;
-        RawResponse: never;
-        "account-test-creation-data"?:
-            | components.AccountTestCreationDataOutput$.Outbound
-            | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, TestingAccountCreateResponse> = z
-        .object({
-            contentType: z.string(),
-            statusCode: z.number().int(),
-            rawResponse: z.instanceof(Response).transform(() => {
-                throw new Error("Response cannot be serialized");
-            }),
-            accountTestCreationData:
-                components.AccountTestCreationDataOutput$.outboundSchema.optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                contentType: "ContentType",
-                statusCode: "StatusCode",
-                rawResponse: "RawResponse",
-                accountTestCreationData: "account-test-creation-data",
-            });
-        });
+    /** @deprecated use `TestingAccountCreateResponse$inboundSchema` instead. */
+    export const inboundSchema = TestingAccountCreateResponse$inboundSchema;
+    /** @deprecated use `TestingAccountCreateResponse$outboundSchema` instead. */
+    export const outboundSchema = TestingAccountCreateResponse$outboundSchema;
+    /** @deprecated use `TestingAccountCreateResponse$Outbound` instead. */
+    export type Outbound = TestingAccountCreateResponse$Outbound;
 }

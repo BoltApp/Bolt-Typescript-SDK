@@ -60,7 +60,7 @@ export class Testing extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.TestingAccountCreateRequest$.outboundSchema.parse(value$),
+            (value$) => operations.TestingAccountCreateRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = encodeJSON$("body", payload$["account-test-creation-data"], {
@@ -119,12 +119,12 @@ export class Testing extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.TestingAccountCreateResponse>()
-            .json(200, operations.TestingAccountCreateResponse$, {
+            .json(200, operations.TestingAccountCreateResponse$inboundSchema, {
                 key: "account-test-creation-data",
             })
-            .json("4XX", errors.TestingAccountCreateResponseBody$, { err: true })
+            .json("4XX", errors.TestingAccountCreateResponseBody$inboundSchema, { err: true })
             .fail("5XX")
-            .void("default", operations.TestingAccountCreateResponse$)
+            .void("default", operations.TestingAccountCreateResponse$inboundSchema)
             .match(response, { extraFields: responseFields$ });
 
         return result$;
@@ -148,7 +148,7 @@ export class Testing extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.TestingAccountPhoneGetRequest$.outboundSchema.parse(value$),
+            (value$) => operations.TestingAccountPhoneGetRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = null;
@@ -204,12 +204,12 @@ export class Testing extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.TestingAccountPhoneGetResponse>()
-            .json(200, operations.TestingAccountPhoneGetResponse$, {
+            .json(200, operations.TestingAccountPhoneGetResponse$inboundSchema, {
                 key: "account-test-phone-data",
             })
-            .json("4XX", errors.TestingAccountPhoneGetResponseBody$, { err: true })
+            .json("4XX", errors.TestingAccountPhoneGetResponseBody$inboundSchema, { err: true })
             .fail("5XX")
-            .void("default", operations.TestingAccountPhoneGetResponse$)
+            .void("default", operations.TestingAccountPhoneGetResponse$inboundSchema)
             .match(response, { extraFields: responseFields$ });
 
         return result$;
@@ -231,7 +231,7 @@ export class Testing extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.TestingCreditCardGetRequestBody$.outboundSchema.parse(value$),
+            (value$) => operations.TestingCreditCardGetRequestBody$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = encodeJSON$("body", payload$, { explode: true });
@@ -284,10 +284,12 @@ export class Testing extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.TestingCreditCardGetResponse>()
-            .json(200, operations.TestingCreditCardGetResponse$, { key: "test-credit-card" })
-            .json("4XX", errors.TestingCreditCardGetResponseBody$, { err: true })
+            .json(200, operations.TestingCreditCardGetResponse$inboundSchema, {
+                key: "test-credit-card",
+            })
+            .json("4XX", errors.TestingCreditCardGetResponseBody$inboundSchema, { err: true })
             .fail("5XX")
-            .void("default", operations.TestingCreditCardGetResponse$)
+            .void("default", operations.TestingCreditCardGetResponse$inboundSchema)
             .match(response, { extraFields: responseFields$ });
 
         return result$;

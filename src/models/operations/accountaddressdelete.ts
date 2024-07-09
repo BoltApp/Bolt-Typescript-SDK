@@ -32,70 +32,112 @@ export type AccountAddressDeleteResponse = {
 };
 
 /** @internal */
+export const AccountAddressDeleteRequest$inboundSchema: z.ZodType<
+    AccountAddressDeleteRequest,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        id: z.string(),
+        "X-Publishable-Key": z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            "X-Publishable-Key": "xPublishableKey",
+        });
+    });
+
+/** @internal */
+export type AccountAddressDeleteRequest$Outbound = {
+    id: string;
+    "X-Publishable-Key": string;
+};
+
+/** @internal */
+export const AccountAddressDeleteRequest$outboundSchema: z.ZodType<
+    AccountAddressDeleteRequest$Outbound,
+    z.ZodTypeDef,
+    AccountAddressDeleteRequest
+> = z
+    .object({
+        id: z.string(),
+        xPublishableKey: z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            xPublishableKey: "X-Publishable-Key",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace AccountAddressDeleteRequest$ {
-    export const inboundSchema: z.ZodType<AccountAddressDeleteRequest, z.ZodTypeDef, unknown> = z
-        .object({
-            id: z.string(),
-            "X-Publishable-Key": z.string(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                "X-Publishable-Key": "xPublishableKey",
-            });
-        });
-
-    export type Outbound = {
-        id: string;
-        "X-Publishable-Key": string;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, AccountAddressDeleteRequest> = z
-        .object({
-            id: z.string(),
-            xPublishableKey: z.string(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                xPublishableKey: "X-Publishable-Key",
-            });
-        });
+    /** @deprecated use `AccountAddressDeleteRequest$inboundSchema` instead. */
+    export const inboundSchema = AccountAddressDeleteRequest$inboundSchema;
+    /** @deprecated use `AccountAddressDeleteRequest$outboundSchema` instead. */
+    export const outboundSchema = AccountAddressDeleteRequest$outboundSchema;
+    /** @deprecated use `AccountAddressDeleteRequest$Outbound` instead. */
+    export type Outbound = AccountAddressDeleteRequest$Outbound;
 }
 
 /** @internal */
+export const AccountAddressDeleteResponse$inboundSchema: z.ZodType<
+    AccountAddressDeleteResponse,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        ContentType: z.string(),
+        StatusCode: z.number().int(),
+        RawResponse: z.instanceof(Response),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            ContentType: "contentType",
+            StatusCode: "statusCode",
+            RawResponse: "rawResponse",
+        });
+    });
+
+/** @internal */
+export type AccountAddressDeleteResponse$Outbound = {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+};
+
+/** @internal */
+export const AccountAddressDeleteResponse$outboundSchema: z.ZodType<
+    AccountAddressDeleteResponse$Outbound,
+    z.ZodTypeDef,
+    AccountAddressDeleteResponse
+> = z
+    .object({
+        contentType: z.string(),
+        statusCode: z.number().int(),
+        rawResponse: z.instanceof(Response).transform(() => {
+            throw new Error("Response cannot be serialized");
+        }),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            contentType: "ContentType",
+            statusCode: "StatusCode",
+            rawResponse: "RawResponse",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace AccountAddressDeleteResponse$ {
-    export const inboundSchema: z.ZodType<AccountAddressDeleteResponse, z.ZodTypeDef, unknown> = z
-        .object({
-            ContentType: z.string(),
-            StatusCode: z.number().int(),
-            RawResponse: z.instanceof(Response),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                ContentType: "contentType",
-                StatusCode: "statusCode",
-                RawResponse: "rawResponse",
-            });
-        });
-
-    export type Outbound = {
-        ContentType: string;
-        StatusCode: number;
-        RawResponse: never;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, AccountAddressDeleteResponse> = z
-        .object({
-            contentType: z.string(),
-            statusCode: z.number().int(),
-            rawResponse: z.instanceof(Response).transform(() => {
-                throw new Error("Response cannot be serialized");
-            }),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                contentType: "ContentType",
-                statusCode: "StatusCode",
-                rawResponse: "RawResponse",
-            });
-        });
+    /** @deprecated use `AccountAddressDeleteResponse$inboundSchema` instead. */
+    export const inboundSchema = AccountAddressDeleteResponse$inboundSchema;
+    /** @deprecated use `AccountAddressDeleteResponse$outboundSchema` instead. */
+    export const outboundSchema = AccountAddressDeleteResponse$outboundSchema;
+    /** @deprecated use `AccountAddressDeleteResponse$Outbound` instead. */
+    export type Outbound = AccountAddressDeleteResponse$Outbound;
 }
