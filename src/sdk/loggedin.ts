@@ -49,11 +49,13 @@ export class LoggedIn extends ClientSDK {
      */
     async initialize(
         xPublishableKey: string,
+        xMerchantClientId: string,
         paymentInitializeRequest: components.PaymentInitializeRequest,
         options?: RequestOptions
     ): Promise<operations.PaymentsInitializeResponse> {
         const input$: operations.PaymentsInitializeRequest = {
             xPublishableKey: xPublishableKey,
+            xMerchantClientId: xMerchantClientId,
             paymentInitializeRequest: paymentInitializeRequest,
         };
 
@@ -73,6 +75,11 @@ export class LoggedIn extends ClientSDK {
         const headers$ = new Headers({
             "Content-Type": "application/json",
             Accept: "application/json",
+            "X-Merchant-Client-Id": encodeSimple$(
+                "X-Merchant-Client-Id",
+                payload$["X-Merchant-Client-Id"],
+                { explode: false, charEncoding: "none" }
+            ),
             "X-Publishable-Key": encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",
@@ -135,12 +142,14 @@ export class LoggedIn extends ClientSDK {
     async update(
         id: string,
         xPublishableKey: string,
+        xMerchantClientId: string,
         paymentUpdateRequest: components.PaymentUpdateRequest,
         options?: RequestOptions
     ): Promise<operations.PaymentsUpdateResponse> {
         const input$: operations.PaymentsUpdateRequest = {
             id: id,
             xPublishableKey: xPublishableKey,
+            xMerchantClientId: xMerchantClientId,
             paymentUpdateRequest: paymentUpdateRequest,
         };
 
@@ -161,6 +170,11 @@ export class LoggedIn extends ClientSDK {
         const headers$ = new Headers({
             "Content-Type": "application/json",
             Accept: "application/json",
+            "X-Merchant-Client-Id": encodeSimple$(
+                "X-Merchant-Client-Id",
+                payload$["X-Merchant-Client-Id"],
+                { explode: false, charEncoding: "none" }
+            ),
             "X-Publishable-Key": encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",
@@ -221,12 +235,14 @@ export class LoggedIn extends ClientSDK {
     async performAction(
         id: string,
         xPublishableKey: string,
+        xMerchantClientId: string,
         paymentActionRequest: components.PaymentActionRequest,
         options?: RequestOptions
     ): Promise<operations.PaymentsActionResponse> {
         const input$: operations.PaymentsActionRequest = {
             id: id,
             xPublishableKey: xPublishableKey,
+            xMerchantClientId: xMerchantClientId,
             paymentActionRequest: paymentActionRequest,
         };
 
@@ -247,6 +263,11 @@ export class LoggedIn extends ClientSDK {
         const headers$ = new Headers({
             "Content-Type": "application/json",
             Accept: "application/json",
+            "X-Merchant-Client-Id": encodeSimple$(
+                "X-Merchant-Client-Id",
+                payload$["X-Merchant-Client-Id"],
+                { explode: false, charEncoding: "none" }
+            ),
             "X-Publishable-Key": encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",

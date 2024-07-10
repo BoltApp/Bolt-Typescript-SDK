@@ -47,10 +47,12 @@ export class Account extends ClientSDK {
      */
     async getDetails(
         xPublishableKey: string,
+        xMerchantClientId: string,
         options?: RequestOptions
     ): Promise<operations.AccountGetResponse> {
         const input$: operations.AccountGetRequest = {
             xPublishableKey: xPublishableKey,
+            xMerchantClientId: xMerchantClientId,
         };
 
         const payload$ = schemas$.parse(
@@ -66,6 +68,11 @@ export class Account extends ClientSDK {
 
         const headers$ = new Headers({
             Accept: "application/json",
+            "X-Merchant-Client-Id": encodeSimple$(
+                "X-Merchant-Client-Id",
+                payload$["X-Merchant-Client-Id"],
+                { explode: false, charEncoding: "none" }
+            ),
             "X-Publishable-Key": encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",
@@ -124,11 +131,13 @@ export class Account extends ClientSDK {
      */
     async addAddress(
         xPublishableKey: string,
+        xMerchantClientId: string,
         addressListing: components.AddressListingInput,
         options?: RequestOptions
     ): Promise<operations.AccountAddressCreateResponse> {
         const input$: operations.AccountAddressCreateRequest = {
             xPublishableKey: xPublishableKey,
+            xMerchantClientId: xMerchantClientId,
             addressListing: addressListing,
         };
 
@@ -146,6 +155,11 @@ export class Account extends ClientSDK {
         const headers$ = new Headers({
             "Content-Type": "application/json",
             Accept: "application/json",
+            "X-Merchant-Client-Id": encodeSimple$(
+                "X-Merchant-Client-Id",
+                payload$["X-Merchant-Client-Id"],
+                { explode: false, charEncoding: "none" }
+            ),
             "X-Publishable-Key": encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",
@@ -210,12 +224,14 @@ export class Account extends ClientSDK {
     async updateAddress(
         id: string,
         xPublishableKey: string,
+        xMerchantClientId: string,
         addressListing: components.AddressListingInput,
         options?: RequestOptions
     ): Promise<operations.AccountAddressEditResponse> {
         const input$: operations.AccountAddressEditRequest = {
             id: id,
             xPublishableKey: xPublishableKey,
+            xMerchantClientId: xMerchantClientId,
             addressListing: addressListing,
         };
 
@@ -236,6 +252,11 @@ export class Account extends ClientSDK {
         const headers$ = new Headers({
             "Content-Type": "application/json",
             Accept: "application/json",
+            "X-Merchant-Client-Id": encodeSimple$(
+                "X-Merchant-Client-Id",
+                payload$["X-Merchant-Client-Id"],
+                { explode: false, charEncoding: "none" }
+            ),
             "X-Publishable-Key": encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",
@@ -299,11 +320,13 @@ export class Account extends ClientSDK {
     async deleteAddress(
         id: string,
         xPublishableKey: string,
+        xMerchantClientId: string,
         options?: RequestOptions
     ): Promise<operations.AccountAddressDeleteResponse> {
         const input$: operations.AccountAddressDeleteRequest = {
             id: id,
             xPublishableKey: xPublishableKey,
+            xMerchantClientId: xMerchantClientId,
         };
 
         const payload$ = schemas$.parse(
@@ -322,6 +345,11 @@ export class Account extends ClientSDK {
 
         const headers$ = new Headers({
             Accept: "application/json",
+            "X-Merchant-Client-Id": encodeSimple$(
+                "X-Merchant-Client-Id",
+                payload$["X-Merchant-Client-Id"],
+                { explode: false, charEncoding: "none" }
+            ),
             "X-Publishable-Key": encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",
@@ -383,11 +411,13 @@ export class Account extends ClientSDK {
      */
     async addPaymentMethod(
         xPublishableKey: string,
+        xMerchantClientId: string,
         paymentMethod: components.PaymentMethodInput,
         options?: RequestOptions
     ): Promise<operations.AccountAddPaymentMethodResponse> {
         const input$: operations.AccountAddPaymentMethodRequest = {
             xPublishableKey: xPublishableKey,
+            xMerchantClientId: xMerchantClientId,
             paymentMethod: paymentMethod,
         };
 
@@ -405,6 +435,11 @@ export class Account extends ClientSDK {
         const headers$ = new Headers({
             "Content-Type": "application/json",
             Accept: "application/json",
+            "X-Merchant-Client-Id": encodeSimple$(
+                "X-Merchant-Client-Id",
+                payload$["X-Merchant-Client-Id"],
+                { explode: false, charEncoding: "none" }
+            ),
             "X-Publishable-Key": encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",
@@ -468,11 +503,13 @@ export class Account extends ClientSDK {
     async deletePaymentMethod(
         id: string,
         xPublishableKey: string,
+        xMerchantClientId: string,
         options?: RequestOptions
     ): Promise<operations.AccountPaymentMethodDeleteResponse> {
         const input$: operations.AccountPaymentMethodDeleteRequest = {
             id: id,
             xPublishableKey: xPublishableKey,
+            xMerchantClientId: xMerchantClientId,
         };
 
         const payload$ = schemas$.parse(
@@ -491,6 +528,11 @@ export class Account extends ClientSDK {
 
         const headers$ = new Headers({
             Accept: "application/json",
+            "X-Merchant-Client-Id": encodeSimple$(
+                "X-Merchant-Client-Id",
+                payload$["X-Merchant-Client-Id"],
+                { explode: false, charEncoding: "none" }
+            ),
             "X-Publishable-Key": encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",

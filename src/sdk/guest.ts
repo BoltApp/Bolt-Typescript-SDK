@@ -51,11 +51,13 @@ export class Guest extends ClientSDK {
     async initialize(
         security: operations.GuestPaymentsInitializeSecurity,
         xPublishableKey: string,
+        xMerchantClientId: string,
         guestPaymentInitializeRequest: components.GuestPaymentInitializeRequest,
         options?: RequestOptions
     ): Promise<operations.GuestPaymentsInitializeResponse> {
         const input$: operations.GuestPaymentsInitializeRequest = {
             xPublishableKey: xPublishableKey,
+            xMerchantClientId: xMerchantClientId,
             guestPaymentInitializeRequest: guestPaymentInitializeRequest,
         };
 
@@ -75,6 +77,11 @@ export class Guest extends ClientSDK {
         const headers$ = new Headers({
             "Content-Type": "application/json",
             Accept: "application/json",
+            "X-Merchant-Client-Id": encodeSimple$(
+                "X-Merchant-Client-Id",
+                payload$["X-Merchant-Client-Id"],
+                { explode: false, charEncoding: "none" }
+            ),
             "X-Publishable-Key": encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",
@@ -142,12 +149,14 @@ export class Guest extends ClientSDK {
         security: operations.GuestPaymentsUpdateSecurity,
         id: string,
         xPublishableKey: string,
+        xMerchantClientId: string,
         paymentUpdateRequest: components.PaymentUpdateRequest,
         options?: RequestOptions
     ): Promise<operations.GuestPaymentsUpdateResponse> {
         const input$: operations.GuestPaymentsUpdateRequest = {
             id: id,
             xPublishableKey: xPublishableKey,
+            xMerchantClientId: xMerchantClientId,
             paymentUpdateRequest: paymentUpdateRequest,
         };
 
@@ -168,6 +177,11 @@ export class Guest extends ClientSDK {
         const headers$ = new Headers({
             "Content-Type": "application/json",
             Accept: "application/json",
+            "X-Merchant-Client-Id": encodeSimple$(
+                "X-Merchant-Client-Id",
+                payload$["X-Merchant-Client-Id"],
+                { explode: false, charEncoding: "none" }
+            ),
             "X-Publishable-Key": encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",
@@ -235,12 +249,14 @@ export class Guest extends ClientSDK {
         security: operations.GuestPaymentsActionSecurity,
         id: string,
         xPublishableKey: string,
+        xMerchantClientId: string,
         paymentActionRequest: components.PaymentActionRequest,
         options?: RequestOptions
     ): Promise<operations.GuestPaymentsActionResponse> {
         const input$: operations.GuestPaymentsActionRequest = {
             id: id,
             xPublishableKey: xPublishableKey,
+            xMerchantClientId: xMerchantClientId,
             paymentActionRequest: paymentActionRequest,
         };
 
@@ -261,6 +277,11 @@ export class Guest extends ClientSDK {
         const headers$ = new Headers({
             "Content-Type": "application/json",
             Accept: "application/json",
+            "X-Merchant-Client-Id": encodeSimple$(
+                "X-Merchant-Client-Id",
+                payload$["X-Merchant-Client-Id"],
+                { explode: false, charEncoding: "none" }
+            ),
             "X-Publishable-Key": encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",

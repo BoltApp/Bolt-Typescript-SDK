@@ -50,7 +50,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 });
 
 async function run() {
-    const result = await boltTypescriptSDK.account.getDetails("<value>");
+    const result = await boltTypescriptSDK.account.getDetails("<value>", "<value>");
 
     // Handle the result
     console.log(result);
@@ -127,7 +127,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 async function run() {
     let result;
     try {
-        result = await boltTypescriptSDK.account.getDetails("<value>");
+        result = await boltTypescriptSDK.account.getDetails("<value>", "<value>");
     } catch (err) {
         switch (true) {
             case err instanceof SDKValidationError: {
@@ -178,7 +178,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 });
 
 async function run() {
-    const result = await boltTypescriptSDK.account.getDetails("<value>");
+    const result = await boltTypescriptSDK.account.getDetails("<value>", "<value>");
 
     // Handle the result
     console.log(result);
@@ -208,7 +208,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 });
 
 async function run() {
-    const result = await boltTypescriptSDK.account.getDetails("<value>");
+    const result = await boltTypescriptSDK.account.getDetails("<value>", "<value>");
 
     // Handle the result
     console.log(result);
@@ -291,7 +291,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 });
 
 async function run() {
-    const result = await boltTypescriptSDK.account.getDetails("<value>");
+    const result = await boltTypescriptSDK.account.getDetails("<value>", "<value>");
 
     // Handle the result
     console.log(result);
@@ -318,6 +318,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK();
 async function run() {
     const result = await boltTypescriptSDK.payments.guest.initialize(
         "<YOUR_API_KEY_HERE>",
+        "<value>",
         "<value>",
         {
             profile: {

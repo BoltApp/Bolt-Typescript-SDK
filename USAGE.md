@@ -9,7 +9,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 });
 
 async function run() {
-    const result = await boltTypescriptSDK.account.getDetails("<value>");
+    const result = await boltTypescriptSDK.account.getDetails("<value>", "<value>");
 
     // Handle the result
     console.log(result);

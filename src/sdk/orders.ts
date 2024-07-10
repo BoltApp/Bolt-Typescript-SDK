@@ -50,11 +50,13 @@ export class Orders extends ClientSDK {
     async ordersCreate(
         security: operations.OrdersCreateSecurity,
         xPublishableKey: string,
+        xMerchantClientId: string,
         order: components.Order,
         options?: RequestOptions
     ): Promise<operations.OrdersCreateResponse> {
         const input$: operations.OrdersCreateRequest = {
             xPublishableKey: xPublishableKey,
+            xMerchantClientId: xMerchantClientId,
             order: order,
         };
 
@@ -72,6 +74,11 @@ export class Orders extends ClientSDK {
         const headers$ = new Headers({
             "Content-Type": "application/json",
             Accept: "application/json",
+            "X-Merchant-Client-Id": encodeSimple$(
+                "X-Merchant-Client-Id",
+                payload$["X-Merchant-Client-Id"],
+                { explode: false, charEncoding: "none" }
+            ),
             "X-Publishable-Key": encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
                 explode: false,
                 charEncoding: "none",

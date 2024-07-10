@@ -4,7 +4,10 @@
 
 import { SDKHooks } from "../hooks/hooks.js";
 import { SDKOptions, serverURLFromOptions } from "../lib/config.js";
-import { encodeBodyForm as encodeBodyForm$ } from "../lib/encodings.js";
+import {
+    encodeBodyForm as encodeBodyForm$,
+    encodeSimple as encodeSimple$,
+} from "../lib/encodings.js";
 import { HTTPClient } from "../lib/http.js";
 import * as schemas$ from "../lib/schemas.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -46,17 +49,21 @@ export class OAuth extends ClientSDK {
      * Retrieve a new or refresh an existing OAuth token.
      */
     async getToken(
-        request: components.TokenRequest,
+        xMerchantClientId: string,
+        tokenRequest: components.TokenRequest,
         options?: RequestOptions
     ): Promise<operations.OauthGetTokenResponse> {
-        const input$ = request;
+        const input$: operations.OauthGetTokenRequest = {
+            xMerchantClientId: xMerchantClientId,
+            tokenRequest: tokenRequest,
+        };
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => components.TokenRequest$outboundSchema.parse(value$),
+            (value$) => operations.OauthGetTokenRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
-        const body$ = Object.entries(payload$ || {})
+        const body$ = Object.entries(payload$["token-request"] || {})
             .map(([k, v]) => {
                 return encodeBodyForm$(k, v, { charEncoding: "percent" });
             })
@@ -69,6 +76,11 @@ export class OAuth extends ClientSDK {
         const headers$ = new Headers({
             "Content-Type": "application/x-www-form-urlencoded",
             Accept: "application/json",
+            "X-Merchant-Client-Id": encodeSimple$(
+                "X-Merchant-Client-Id",
+                payload$["X-Merchant-Client-Id"],
+                { explode: false, charEncoding: "none" }
+            ),
         });
 
         const context = { operationID: "oauthGetToken", oAuth2Scopes: [], securitySource: null };

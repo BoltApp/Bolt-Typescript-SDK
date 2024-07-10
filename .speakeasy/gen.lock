@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 79fa0df9-852a-493c-b998-1d82654b5f18
 management:
-  docChecksum: 52a4491de6268327ef41bf826024fc20
-  docVersion: 3.0.3
+  docChecksum: 8134778d948a05652350ab91383aff9c
+  docVersion: 3.1.0
   speakeasyVersion: 1.330.0
   generationVersion: 2.361.10
-  releaseVersion: 0.16.0
-  configChecksum: 06c0913f66052b2f0f95ae4af72aa941
+  releaseVersion: 0.17.0
+  configChecksum: 47c54d980192b3aa56690c4f8dc8b849
   repoURL: https://github.com/BoltApp/Bolt-Typescript-SDK.git
   repoSubDirectory: .
   installationURL: https://github.com/BoltApp/Bolt-Typescript-SDK
@@ -176,6 +176,7 @@ generatedFiles:
   - docs/models/operations/paymentsupdateresponse.md
   - docs/models/operations/paymentsactionrequest.md
   - docs/models/operations/paymentsactionresponse.md
+  - docs/models/operations/oauthgettokenrequest.md
   - docs/models/operations/oauthgettokenresponse.md
   - docs/models/operations/orderscreatesecurity.md
   - docs/models/operations/orderscreaterequest.md
