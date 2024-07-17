@@ -12,6 +12,9 @@ import {
 import * as z from "zod";
 
 export type Order = {
+    /**
+     * An account's identifying information.
+     */
     profile: Profile;
     cart: Cart;
 };

@@ -5,6 +5,9 @@
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as z from "zod";
 
+/**
+ * An account's identifying information.
+ */
 export type ProfileCreationData = {
     /**
      * Whether or not an account should be created.

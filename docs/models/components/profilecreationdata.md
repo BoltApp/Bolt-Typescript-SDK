@@ -1,5 +1,7 @@
 # ProfileCreationData
 
+An account's identifying information.
+
 
 ## Fields
 

@@ -43,8 +43,7 @@ export class LoggedIn extends ClientSDK {
      * Initialize a Bolt payment for logged in shoppers
      *
      * @remarks
-     * Initialize a Bolt payment token that will be used to reference this payment to
-     * Bolt when it is updated or finalized for logged in shoppers.
+     * Initialize a Bolt logged-in shopper's intent to pay for a cart, using the specified payment method. Payments must be finalized before indicating the payment result to the shopper. Some payment methods will finalize automatically after initialization. For these payments, they will transition directly to "finalized" and the response from Initialize Payment will contain a finalized payment.
      *
      */
     async initialize(
@@ -107,11 +106,17 @@ export class LoggedIn extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, { context, errorCodes: ["4XX", "5XX"] });
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
@@ -133,11 +138,10 @@ export class LoggedIn extends ClientSDK {
     }
 
     /**
-     * Update an existing payment
-     *
-     * @remarks
      * Update a pending payment
      *
+     * @remarks
+     * Update a payment that is still in the pending state, with new information about the payment.
      */
     async update(
         id: string,
@@ -202,11 +206,17 @@ export class LoggedIn extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, { context, errorCodes: ["4XX", "5XX"] });
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
@@ -226,11 +236,10 @@ export class LoggedIn extends ClientSDK {
     }
 
     /**
-     * Perform an irreversible action (e.g. finalize) on a pending payment
+     * Finalize a pending payment
      *
      * @remarks
-     * Perform an irreversible action on a pending payment, such as finalizing it.
-     *
+     * Finalize a pending payment being made by a Bolt logged-in shopper. Upon receipt of a finalized payment result, payment success should be communicated to the shopper.
      */
     async performAction(
         id: string,
@@ -295,11 +304,17 @@ export class LoggedIn extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, { context, errorCodes: ["4XX", "5XX"] });
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",

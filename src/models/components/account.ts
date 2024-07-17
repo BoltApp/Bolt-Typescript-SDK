@@ -32,6 +32,9 @@ export type Account = {
      * A list of payment methods associated with this account.
      */
     paymentMethods: Array<PaymentMethod>;
+    /**
+     * An account's identifying information.
+     */
     profile?: Profile | undefined;
 };
 

@@ -45,7 +45,6 @@ export class Testing extends ClientSDK {
      *
      * @remarks
      * Create a Bolt shopper account for testing purposes.
-     *
      */
     async createAccount(
         security: operations.TestingAccountCreateSecurity,
@@ -105,11 +104,17 @@ export class Testing extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, { context, errorCodes: ["4XX", "5XX"] });
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
@@ -134,8 +139,7 @@ export class Testing extends ClientSDK {
      * Get a random phone number
      *
      * @remarks
-     * Get a random, fictitious phone number that is not assigned to any existing account.
-     *
+     * Get a random, fictitious phone number that is not assigned to any existing Bolt account.
      */
     async testingAccountPhoneGet(
         security: operations.TestingAccountPhoneGetSecurity,
@@ -190,11 +194,17 @@ export class Testing extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, { context, errorCodes: ["4XX", "5XX"] });
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
@@ -216,11 +226,10 @@ export class Testing extends ClientSDK {
     }
 
     /**
-     * Retrieve a test credit card, including its token
+     * Retrieve a tokenized test credit card
      *
      * @remarks
-     * Retrieve test credit card information. This includes its token, which can be used to process payments.
-     *
+     * Retrieve a test credit card that can be used to process payments in your Bolt testing environment. The response includes the card's Bolt credit card token.
      */
     async getCreditCard(
         request: operations.TestingCreditCardGetRequestBody,
@@ -270,11 +279,17 @@ export class Testing extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, { context, errorCodes: ["4XX", "5XX"] });
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",

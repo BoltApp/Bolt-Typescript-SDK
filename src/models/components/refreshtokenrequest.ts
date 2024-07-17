@@ -28,34 +28,19 @@ export type RefreshTokenRequest = {
      */
     refreshToken: string;
     /**
-     * The OAuth client ID, which corresponds to the merchant publishable key, which can be retrieved
-     *
-     * @remarks
-     * in the Merchant Dashboard.
-     *
+     * The OAuth client ID, which corresponds to the merchant publishable key, which can be retrieved in your Merchant Dashboard.
      */
     clientId: string;
     /**
-     * The OAuth client secret, which corresponds the merchant API key, which can be retrieved in the
-     *
-     * @remarks
-     * Merchant Dashboard.
-     *
+     * The OAuth client secret, which corresponds the merchant API key, which can be retrieved in your Merchant Dashboard.
      */
     clientSecret: string;
     /**
      * The requested scopes. If the request is successful, the OAuth client will be able to perform operations requiring these scopes.
-     *
-     * @remarks
-     *
      */
     scope: Array<RefreshTokenRequestScope>;
     /**
-     * A randomly generated string sent along with an authorization code. This must be included, if provided,
-     *
-     * @remarks
-     * in order to prevent CSRF attacks. used to prevent CSRF attacks.
-     *
+     * A randomly generated string sent along with an authorization code. This must be included if provided. It is used to prevent cross-site request forgery (CSRF) attacks.
      */
     state?: string | undefined;
 };

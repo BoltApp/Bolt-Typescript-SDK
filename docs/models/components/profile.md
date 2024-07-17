@@ -1,5 +1,7 @@
 # Profile
 
+An account's identifying information.
+
 
 ## Fields
 

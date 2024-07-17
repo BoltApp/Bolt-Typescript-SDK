@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 79fa0df9-852a-493c-b998-1d82654b5f18
 management:
-  docChecksum: 8134778d948a05652350ab91383aff9c
-  docVersion: 3.1.0
-  speakeasyVersion: 1.331.0
-  generationVersion: 2.365.0
-  releaseVersion: 0.17.1
-  configChecksum: 7ca902bf9ecf9be66f9391dea83d3b34
+  docChecksum: 1c6f0a40f6a34b5758d83681c80c8538
+  docVersion: 3.1.1
+  speakeasyVersion: 1.337.1
+  generationVersion: 2.373.2
+  releaseVersion: 0.18.0
+  configChecksum: 53969aeb13fadf716b60f94bca566c60
   repoURL: https://github.com/BoltApp/Bolt-Typescript-SDK.git
   repoSubDirectory: .
   installationURL: https://github.com/BoltApp/Bolt-Typescript-SDK
@@ -14,7 +14,8 @@ management:
 features:
   typescript:
     additionalDependencies: 0.1.0
-    core: 3.11.6
+    core: 3.11.7
+    defaultEnabledRetries: 0.1.0
     errorUnions: 0.1.0
     flattening: 2.81.1
     globalSecurity: 2.82.9
@@ -26,6 +27,7 @@ features:
     methodSecurity: 2.82.4
     nameOverrides: 2.81.2
     responseFormat: 0.2.3
+    retries: 2.83.0
     sdkHooks: 0.1.0
     unions: 2.85.5
 generatedFiles:
@@ -294,6 +296,7 @@ generatedFiles:
   - docs/models/errors/testingaccountphonegetresponsebody.md
   - docs/models/errors/testingcreditcardgetresponsebody.md
   - docs/sdks/bolttypescriptsdk/README.md
+  - docs/lib/utils/retryconfig.md
   - docs/sdks/account/README.md
   - docs/sdks/payments/README.md
   - docs/sdks/guest/README.md
@@ -306,3 +309,4 @@ generatedFiles:
   - src/hooks/hooks.ts
   - src/hooks/types.ts
   - src/hooks/index.ts
+  - CONTRIBUTING.md

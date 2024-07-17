@@ -70,21 +70,21 @@ run();
 * [addAddress](docs/sdks/account/README.md#addaddress) - Add an address
 * [updateAddress](docs/sdks/account/README.md#updateaddress) - Edit an existing address
 * [deleteAddress](docs/sdks/account/README.md#deleteaddress) - Delete an existing address
-* [addPaymentMethod](docs/sdks/account/README.md#addpaymentmethod) - Add a payment method to a shopper's Bolt account Wallet.
+* [addPaymentMethod](docs/sdks/account/README.md#addpaymentmethod) - Add a payment method
 * [deletePaymentMethod](docs/sdks/account/README.md#deletepaymentmethod) - Delete an existing payment method
 
 
 ### [payments.guest](docs/sdks/guest/README.md)
 
 * [initialize](docs/sdks/guest/README.md#initialize) - Initialize a Bolt payment for guest shoppers
-* [update](docs/sdks/guest/README.md#update) - Update an existing guest payment
-* [performAction](docs/sdks/guest/README.md#performaction) - Perform an irreversible action (e.g. finalize) on a pending guest payment
+* [update](docs/sdks/guest/README.md#update) - Update a pending guest payment
+* [performAction](docs/sdks/guest/README.md#performaction) - Finalize a pending guest payment
 
 ### [payments.loggedIn](docs/sdks/loggedin/README.md)
 
 * [initialize](docs/sdks/loggedin/README.md#initialize) - Initialize a Bolt payment for logged in shoppers
-* [update](docs/sdks/loggedin/README.md#update) - Update an existing payment
-* [performAction](docs/sdks/loggedin/README.md#performaction) - Perform an irreversible action (e.g. finalize) on a pending payment
+* [update](docs/sdks/loggedin/README.md#update) - Update a pending payment
+* [performAction](docs/sdks/loggedin/README.md#performaction) - Finalize a pending payment
 
 ### [oAuth](docs/sdks/oauth/README.md)
 
@@ -92,13 +92,13 @@ run();
 
 ### [orders](docs/sdks/orders/README.md)
 
-* [ordersCreate](docs/sdks/orders/README.md#orderscreate) - Create an order that was placed outside the Bolt ecosystem.
+* [ordersCreate](docs/sdks/orders/README.md#orderscreate) - Create an order that was prepared outside the Bolt ecosystem.
 
 ### [testing](docs/sdks/testing/README.md)
 
 * [createAccount](docs/sdks/testing/README.md#createaccount) - Create a test account
 * [testingAccountPhoneGet](docs/sdks/testing/README.md#testingaccountphoneget) - Get a random phone number
-* [getCreditCard](docs/sdks/testing/README.md#getcreditcard) - Retrieve a test credit card, including its token
+* [getCreditCard](docs/sdks/testing/README.md#getcreditcard) - Retrieve a tokenized test credit card
 <!-- End Available Resources and Operations [operations] -->
 
 <!-- Start Error Handling [errors] -->
@@ -407,6 +407,75 @@ run();
 
 For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 <!-- End Requirements [requirements] -->
+
+<!-- Start Retries [retries] -->
+## Retries
+
+Some of the endpoints in this SDK support retries.  If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API.  However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
+
+To change the default retry strategy for a single API call, simply provide a retryConfig object to the call:
+```typescript
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
+
+const boltTypescriptSDK = new BoltTypescriptSDK({
+    security: {
+        oauth: "<YOUR_OAUTH_HERE>",
+    },
+});
+
+async function run() {
+    const result = await boltTypescriptSDK.account.getDetails("<value>", "<value>", {
+        retries: {
+            strategy: "backoff",
+            backoff: {
+                initialInterval: 1,
+                maxInterval: 50,
+                exponent: 1.1,
+                maxElapsedTime: 100,
+            },
+            retryConnectionErrors: false,
+        },
+    });
+
+    // Handle the result
+    console.log(result);
+}
+
+run();
+
+```
+
+If you'd like to override the default retry strategy for all operations that support retries, you can provide a retryConfig at SDK initialization:
+```typescript
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
+
+const boltTypescriptSDK = new BoltTypescriptSDK({
+    retryConfig: {
+        strategy: "backoff",
+        backoff: {
+            initialInterval: 1,
+            maxInterval: 50,
+            exponent: 1.1,
+            maxElapsedTime: 100,
+        },
+        retryConnectionErrors: false,
+    },
+    security: {
+        oauth: "<YOUR_OAUTH_HERE>",
+    },
+});
+
+async function run() {
+    const result = await boltTypescriptSDK.account.getDetails("<value>", "<value>");
+
+    // Handle the result
+    console.log(result);
+}
+
+run();
+
+```
+<!-- End Retries [retries] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

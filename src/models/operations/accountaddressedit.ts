@@ -12,7 +12,7 @@ export type AccountAddressEditRequest = {
      */
     id: string;
     /**
-     * The publicly viewable identifier used to identify a merchant division.
+     * The publicly shareable identifier used to identify your Bolt merchant division.
      */
     xPublishableKey: string;
     /**

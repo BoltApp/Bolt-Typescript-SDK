@@ -5,6 +5,9 @@
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as z from "zod";
 
+/**
+ * An account's identifying information.
+ */
 export type Profile = {
     /**
      * The given name of the person associated with this profile.

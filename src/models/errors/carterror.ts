@@ -19,11 +19,7 @@ export type CartErrorData = {
      */
     dotTag: SchemasCartErrorTag;
     /**
-     * A human-readable error message, which might include information specific to
-     *
-     * @remarks
-     * the request that was made.
-     *
+     * A human-readable error message, which might include information specific to the request that was made.
      */
     message: string;
     /**

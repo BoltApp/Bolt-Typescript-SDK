@@ -7,11 +7,11 @@ import * as z from "zod";
 
 export type GetAccessTokenResponse = {
     /**
-     * A JWT token issued when the request includes the scope open_id.
+     * A JSON Web Token (JWT) issued when the request includes the scope open_id.
      */
     idToken?: string | undefined;
     /**
-     * An access token you can use to make requests on behalf of a Bolt Account.
+     * An access token you can use to make requests on behalf of a Bolt shopper.
      */
     accessToken?: string | undefined;
     /**
@@ -27,11 +27,7 @@ export type GetAccessTokenResponse = {
      */
     refreshTokenScope?: string | undefined;
     /**
-     * The scope granted to access token, depending on the scope granted to the authorization code as well as the scope parameter.
-     *
-     * @remarks
-     * Options include `bolt.account.manage`, `bolt.account.view`, `openid`. Multiple values can be returned as space-separated strings.
-     *
+     * The scope granted to access token, depending on the scope granted to the authorization code as well as the scope parameter. Options include `bolt.account.manage`, `bolt.account.view`, `openid`. Multiple values can be returned as space-separated strings.
      */
     scope?: string | undefined;
     /**

@@ -3,6 +3,7 @@
  */
 
 import * as components from "../models/components/index.js";
+import { ClosedEnum } from "../types/enums.js";
 import { HTTPClient } from "./http.js";
 import { RetryConfig } from "./retries.js";
 import { Params, pathToFunc } from "./url.js";
@@ -12,10 +13,11 @@ import { Params, pathToFunc } from "./url.js";
  */
 export const ServerList = ["https://{environment}.bolt.com/v3"] as const;
 
-export enum ServerEnvironment {
-    Api = "api",
-    ApiSandbox = "api-sandbox",
-}
+export const ServerEnvironment = {
+    Api: "api",
+    ApiSandbox: "api-sandbox",
+} as const;
+export type ServerEnvironment = ClosedEnum<typeof ServerEnvironment>;
 
 export type SDKOptions = {
     /**
@@ -40,6 +42,7 @@ export type SDKOptions = {
      * Allows overriding the default retry config used by the SDK
      */
     retryConfig?: RetryConfig;
+    timeoutMs?: number;
 };
 
 export function serverURLFromOptions(options: SDKOptions): URL | null {
@@ -67,8 +70,8 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
 
 export const SDK_METADATA = {
     language: "typescript",
-    openapiDocVersion: "3.1.0",
-    sdkVersion: "0.17.1",
-    genVersion: "2.365.0",
-    userAgent: "speakeasy-sdk/typescript 0.17.1 2.365.0 3.1.0 @boltpay/bolt-typescript-sdk",
+    openapiDocVersion: "3.1.1",
+    sdkVersion: "0.18.0",
+    genVersion: "2.373.2",
+    userAgent: "speakeasy-sdk/typescript 0.18.0 2.373.2 3.1.1 @boltpay/bolt-typescript-sdk",
 } as const;

@@ -100,11 +100,17 @@ export class Account extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, { context, errorCodes: ["4XX", "5XX"] });
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
@@ -187,11 +193,17 @@ export class Account extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, { context, errorCodes: ["4XX", "5XX"] });
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
@@ -216,10 +228,7 @@ export class Account extends ClientSDK {
      * Edit an existing address
      *
      * @remarks
-     * Edit an existing address on the shopper's account. This does not edit addresses
-     * that are already associated with other resources, such as transactions or
-     * shipments.
-     *
+     * Edit an existing address on the shopper's account. This does not edit addresses that are already associated with other resources, such as transactions or shipments.
      */
     async updateAddress(
         id: string,
@@ -284,11 +293,17 @@ export class Account extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, { context, errorCodes: ["4XX", "5XX"] });
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
@@ -313,9 +328,7 @@ export class Account extends ClientSDK {
      * Delete an existing address
      *
      * @remarks
-     * Delete an existing address. Deleting an address does not invalidate transactions or
-     * shipments that are associated with it.
-     *
+     * Delete an existing address. Deleting an address does not invalidate or remove the address from transactions or shipments that are associated with it.
      */
     async deleteAddress(
         id: string,
@@ -377,11 +390,17 @@ export class Account extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, { context, errorCodes: ["4XX", "5XX"] });
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
@@ -400,14 +419,10 @@ export class Account extends ClientSDK {
     }
 
     /**
-     * Add a payment method to a shopper's Bolt account Wallet.
+     * Add a payment method
      *
      * @remarks
-     * Add a payment method to a shopper's Bolt account Wallet. For security purposes, this request must come from
-     * your backend because authentication requires the use of your private key.<br />
-     * **Note**: Before using this API, the credit card details must be tokenized using Bolt's JavaScript library function,
-     * which is documented in [Install the Bolt Tokenizer](https://help.bolt.com/developers/references/bolt-tokenizer).
-     *
+     * Add a payment method to a shopper's Bolt Account Wallet. For security purposes, this request must come from your backend. <br/> **Note**: Before using this API, the credit card details must be tokenized by Bolt's credit card tokenization service. Please review our [Bolt Payment Field Component](https://help.bolt.com/products/ignite/api-implementation/#enhance-payments) or [Install the Bolt Tokenizer](https://help.bolt.com/developers/references/bolt-tokenizer) documentation.
      */
     async addPaymentMethod(
         xPublishableKey: string,
@@ -467,11 +482,17 @@ export class Account extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, { context, errorCodes: ["4XX", "5XX"] });
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
@@ -496,9 +517,7 @@ export class Account extends ClientSDK {
      * Delete an existing payment method
      *
      * @remarks
-     * Delete an existing payment method. Deleting a payment method does not invalidate transactions or
-     * orders that are associated with it.
-     *
+     * Delete an existing payment method. Deleting a payment method does not invalidate or remove it from transactions or orders that are associated with it.
      */
     async deletePaymentMethod(
         id: string,
@@ -560,11 +579,17 @@ export class Account extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, { context, errorCodes: ["4XX", "5XX"] });
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",

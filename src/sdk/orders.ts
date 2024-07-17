@@ -41,11 +41,10 @@ export class Orders extends ClientSDK {
     }
 
     /**
-     * Create an order that was placed outside the Bolt ecosystem.
+     * Create an order that was prepared outside the Bolt ecosystem.
      *
      * @remarks
-     * Create an order that was placed outside the Bolt ecosystem.
-     *
+     * Create an order that was prepared outside the Bolt ecosystem. Some Bolt-powered flows automatically manage order creation - in those flows the order ID will be provided separately and not through this API.
      */
     async ordersCreate(
         security: operations.OrdersCreateSecurity,
@@ -110,11 +109,17 @@ export class Orders extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, { context, errorCodes: ["4XX", "5XX"] });
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",

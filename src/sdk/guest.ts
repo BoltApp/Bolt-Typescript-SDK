@@ -44,9 +44,7 @@ export class Guest extends ClientSDK {
      * Initialize a Bolt payment for guest shoppers
      *
      * @remarks
-     * Initialize a Bolt payment token that will be used to reference this payment to
-     * Bolt when it is updated or finalized for guest shoppers.
-     *
+     * Initialize a Bolt guest shopper's intent to pay for a cart, using the specified payment method. Payments must be finalized before indicating the payment result to the shopper. Some payment methods will finalize automatically after initialization. For these payments, they will transition directly to "finalized" and the response from Initialize Payment will contain a finalized payment.
      */
     async initialize(
         security: operations.GuestPaymentsInitializeSecurity,
@@ -113,11 +111,17 @@ export class Guest extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, { context, errorCodes: ["4XX", "5XX"] });
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
@@ -139,11 +143,10 @@ export class Guest extends ClientSDK {
     }
 
     /**
-     * Update an existing guest payment
-     *
-     * @remarks
      * Update a pending guest payment
      *
+     * @remarks
+     * Update a guest payment that is still in the pending state, with new information about the payment.
      */
     async update(
         security: operations.GuestPaymentsUpdateSecurity,
@@ -213,11 +216,17 @@ export class Guest extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, { context, errorCodes: ["4XX", "5XX"] });
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
@@ -239,11 +248,10 @@ export class Guest extends ClientSDK {
     }
 
     /**
-     * Perform an irreversible action (e.g. finalize) on a pending guest payment
+     * Finalize a pending guest payment
      *
      * @remarks
-     * Perform an irreversible action on a pending guest payment, such as finalizing it.
-     *
+     * Finalize a pending payment being made by a Bolt guest shopper. Upon receipt of a finalized payment result, payment success should be communicated to the shopper.
      */
     async performAction(
         security: operations.GuestPaymentsActionSecurity,
@@ -313,11 +321,17 @@ export class Guest extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, { context, errorCodes: ["4XX", "5XX"] });
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             ContentType: response.headers.get("content-type") ?? "application/octet-stream",
