@@ -88,14 +88,6 @@ export type FieldErrorData = {
      * Raw HTTP response; suitable for custom response parsing
      */
     rawResponse14?: Response | undefined;
-    /**
-     * Raw HTTP response; suitable for custom response parsing
-     */
-    rawResponse15?: Response | undefined;
-    /**
-     * Raw HTTP response; suitable for custom response parsing
-     */
-    rawResponse16?: Response | undefined;
 };
 
 /**
@@ -170,14 +162,6 @@ export class FieldError extends Error {
      * Raw HTTP response; suitable for custom response parsing
      */
     rawResponse14?: Response | undefined;
-    /**
-     * Raw HTTP response; suitable for custom response parsing
-     */
-    rawResponse15?: Response | undefined;
-    /**
-     * Raw HTTP response; suitable for custom response parsing
-     */
-    rawResponse16?: Response | undefined;
 
     /** The original data that was passed to this error instance. */
     data$: FieldErrorData;
@@ -237,12 +221,6 @@ export class FieldError extends Error {
         if (err.rawResponse14 != null) {
             this.rawResponse14 = err.rawResponse14;
         }
-        if (err.rawResponse15 != null) {
-            this.rawResponse15 = err.rawResponse15;
-        }
-        if (err.rawResponse16 != null) {
-            this.rawResponse16 = err.rawResponse16;
-        }
 
         this.name = "FieldError";
     }
@@ -288,8 +266,6 @@ export const FieldError$inboundSchema: z.ZodType<FieldError, z.ZodTypeDef, unkno
         RawResponse12: z.instanceof(Response).optional(),
         RawResponse13: z.instanceof(Response).optional(),
         RawResponse14: z.instanceof(Response).optional(),
-        RawResponse15: z.instanceof(Response).optional(),
-        RawResponse16: z.instanceof(Response).optional(),
     })
     .transform((v) => {
         const remapped = remap$(v, {
@@ -309,8 +285,6 @@ export const FieldError$inboundSchema: z.ZodType<FieldError, z.ZodTypeDef, unkno
             RawResponse12: "rawResponse12",
             RawResponse13: "rawResponse13",
             RawResponse14: "rawResponse14",
-            RawResponse15: "rawResponse15",
-            RawResponse16: "rawResponse16",
         });
 
         return new FieldError(remapped);
@@ -336,8 +310,6 @@ export type FieldError$Outbound = {
     RawResponse12?: never | undefined;
     RawResponse13?: never | undefined;
     RawResponse14?: never | undefined;
-    RawResponse15?: never | undefined;
-    RawResponse16?: never | undefined;
 };
 
 /** @internal */
@@ -440,18 +412,6 @@ export const FieldError$outboundSchema: z.ZodType<FieldError$Outbound, z.ZodType
                         throw new Error("Response cannot be serialized");
                     })
                     .optional(),
-                rawResponse15: z
-                    .instanceof(Response)
-                    .transform(() => {
-                        throw new Error("Response cannot be serialized");
-                    })
-                    .optional(),
-                rawResponse16: z
-                    .instanceof(Response)
-                    .transform(() => {
-                        throw new Error("Response cannot be serialized");
-                    })
-                    .optional(),
             })
             .transform((v) => {
                 return remap$(v, {
@@ -471,8 +431,6 @@ export const FieldError$outboundSchema: z.ZodType<FieldError$Outbound, z.ZodType
                     rawResponse12: "RawResponse12",
                     rawResponse13: "RawResponse13",
                     rawResponse14: "RawResponse14",
-                    rawResponse15: "RawResponse15",
-                    rawResponse16: "RawResponse16",
                 });
             })
     );

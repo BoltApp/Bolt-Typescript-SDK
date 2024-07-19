@@ -49,14 +49,14 @@ export class BoltTypescriptSDK extends ClientSDK {
         return (this._payments ??= new Payments(this.options$));
     }
 
-    private _oAuth?: OAuth;
-    get oAuth(): OAuth {
-        return (this._oAuth ??= new OAuth(this.options$));
-    }
-
     private _orders?: Orders;
     get orders(): Orders {
         return (this._orders ??= new Orders(this.options$));
+    }
+
+    private _oAuth?: OAuth;
+    get oAuth(): OAuth {
+        return (this._oAuth ??= new OAuth(this.options$));
     }
 
     private _testing?: Testing;

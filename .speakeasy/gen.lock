@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 79fa0df9-852a-493c-b998-1d82654b5f18
 management:
-  docChecksum: 1c6f0a40f6a34b5758d83681c80c8538
-  docVersion: 3.1.1
-  speakeasyVersion: 1.337.1
-  generationVersion: 2.373.2
-  releaseVersion: 0.18.0
-  configChecksum: 53969aeb13fadf716b60f94bca566c60
+  docChecksum: 8c2776c2cbcdc065c8bb4d1442f50ef5
+  docVersion: 3.2.0
+  speakeasyVersion: 1.344.0
+  generationVersion: 2.376.0
+  releaseVersion: 0.19.0
+  configChecksum: 2698678ca33723eee1d35dfef136b3af
   repoURL: https://github.com/BoltApp/Bolt-Typescript-SDK.git
   repoSubDirectory: .
   installationURL: https://github.com/BoltApp/Bolt-Typescript-SDK
@@ -29,14 +29,14 @@ features:
     responseFormat: 0.2.3
     retries: 2.83.0
     sdkHooks: 0.1.0
-    unions: 2.85.5
+    unions: 2.85.6
 generatedFiles:
   - src/sdk/account.ts
-  - src/sdk/guest.ts
   - src/sdk/loggedin.ts
+  - src/sdk/guest.ts
   - src/sdk/payments.ts
-  - src/sdk/oauth.ts
   - src/sdk/orders.ts
+  - src/sdk/oauth.ts
   - src/sdk/testing.ts
   - src/sdk/sdk.ts
   - .eslintrc.cjs
@@ -71,14 +71,12 @@ generatedFiles:
   - src/models/operations/accountaddressdelete.ts
   - src/models/operations/accountaddpaymentmethod.ts
   - src/models/operations/accountpaymentmethoddelete.ts
-  - src/models/operations/guestpaymentsinitialize.ts
-  - src/models/operations/guestpaymentsupdate.ts
-  - src/models/operations/guestpaymentsaction.ts
   - src/models/operations/paymentsinitialize.ts
-  - src/models/operations/paymentsupdate.ts
   - src/models/operations/paymentsaction.ts
-  - src/models/operations/oauthgettoken.ts
+  - src/models/operations/guestpaymentsinitialize.ts
+  - src/models/operations/guestpaymentsaction.ts
   - src/models/operations/orderscreate.ts
+  - src/models/operations/oauthgettoken.ts
   - src/models/operations/testingaccountcreate.ts
   - src/models/operations/testingaccountphoneget.ts
   - src/models/operations/testingcreditcardget.ts
@@ -105,24 +103,23 @@ generatedFiles:
   - src/models/components/paymentresponsefinalized.ts
   - src/models/components/transaction.ts
   - src/models/components/paymentresponsepending.ts
-  - src/models/components/guestpaymentinitializerequest.ts
+  - src/models/components/paymentinitializerequest.ts
+  - src/models/components/paymentmethodextended.ts
+  - src/models/components/paymentmethodreference.ts
   - src/models/components/cart.ts
   - src/models/components/amount.ts
   - src/models/components/cartitem.ts
   - src/models/components/cartdiscount.ts
   - src/models/components/cartshipment.ts
-  - src/models/components/profilecreationdata.ts
-  - src/models/components/paymentupdaterequest.ts
   - src/models/components/paymentactionrequest.ts
-  - src/models/components/paymentinitializerequest.ts
-  - src/models/components/paymentmethodextended.ts
-  - src/models/components/paymentmethodreference.ts
+  - src/models/components/guestpaymentinitializerequest.ts
+  - src/models/components/profilecreationdata.ts
+  - src/models/components/orderresponse.ts
+  - src/models/components/order.ts
   - src/models/components/getaccesstokenresponse.ts
   - src/models/components/tokenrequest.ts
   - src/models/components/authorizationcoderequest.ts
   - src/models/components/refreshtokenrequest.ts
-  - src/models/components/orderresponse.ts
-  - src/models/components/order.ts
   - src/models/components/accounttestcreationdataoutput.ts
   - src/models/components/accounttestphonedata.ts
   - src/models/components/testcreditcard.ts
@@ -136,15 +133,13 @@ generatedFiles:
   - src/models/errors/accountaddpaymentmethod.ts
   - src/models/errors/creditcarderror.ts
   - src/models/errors/accountpaymentmethoddelete.ts
-  - src/models/errors/guestpaymentsinitialize.ts
-  - src/models/errors/carterror.ts
-  - src/models/errors/guestpaymentsupdate.ts
-  - src/models/errors/guestpaymentsaction.ts
   - src/models/errors/paymentsinitialize.ts
-  - src/models/errors/paymentsupdate.ts
+  - src/models/errors/carterror.ts
   - src/models/errors/paymentsaction.ts
-  - src/models/errors/oauthgettoken.ts
+  - src/models/errors/guestpaymentsinitialize.ts
+  - src/models/errors/guestpaymentsaction.ts
   - src/models/errors/orderscreate.ts
+  - src/models/errors/oauthgettoken.ts
   - src/models/errors/testingaccountcreate.ts
   - src/models/errors/testingaccountphoneget.ts
   - src/models/errors/testingcreditcardget.ts
@@ -163,26 +158,21 @@ generatedFiles:
   - docs/models/operations/accountaddpaymentmethodresponse.md
   - docs/models/operations/accountpaymentmethoddeleterequest.md
   - docs/models/operations/accountpaymentmethoddeleteresponse.md
+  - docs/models/operations/paymentsinitializerequest.md
+  - docs/models/operations/paymentsinitializeresponse.md
+  - docs/models/operations/paymentsactionrequest.md
+  - docs/models/operations/paymentsactionresponse.md
   - docs/models/operations/guestpaymentsinitializesecurity.md
   - docs/models/operations/guestpaymentsinitializerequest.md
   - docs/models/operations/guestpaymentsinitializeresponse.md
-  - docs/models/operations/guestpaymentsupdatesecurity.md
-  - docs/models/operations/guestpaymentsupdaterequest.md
-  - docs/models/operations/guestpaymentsupdateresponse.md
   - docs/models/operations/guestpaymentsactionsecurity.md
   - docs/models/operations/guestpaymentsactionrequest.md
   - docs/models/operations/guestpaymentsactionresponse.md
-  - docs/models/operations/paymentsinitializerequest.md
-  - docs/models/operations/paymentsinitializeresponse.md
-  - docs/models/operations/paymentsupdaterequest.md
-  - docs/models/operations/paymentsupdateresponse.md
-  - docs/models/operations/paymentsactionrequest.md
-  - docs/models/operations/paymentsactionresponse.md
-  - docs/models/operations/oauthgettokenrequest.md
-  - docs/models/operations/oauthgettokenresponse.md
   - docs/models/operations/orderscreatesecurity.md
   - docs/models/operations/orderscreaterequest.md
   - docs/models/operations/orderscreateresponse.md
+  - docs/models/operations/oauthgettokenrequest.md
+  - docs/models/operations/oauthgettokenresponse.md
   - docs/models/operations/testingaccountcreatesecurity.md
   - docs/models/operations/testingaccountcreaterequest.md
   - docs/models/operations/testingaccountcreateresponse.md
@@ -238,21 +228,22 @@ generatedFiles:
   - docs/models/components/paymentresponsependingstatus.md
   - docs/models/components/action.md
   - docs/models/components/paymentresponsepending.md
-  - docs/models/components/guestpaymentinitializerequest.md
+  - docs/models/components/paymentinitializerequest.md
+  - docs/models/components/paymentmethodextended.md
+  - docs/models/components/paymentmethodreferencetag.md
+  - docs/models/components/paymentmethodreference.md
   - docs/models/components/cart.md
   - docs/models/components/currency.md
   - docs/models/components/amount.md
   - docs/models/components/cartitem.md
   - docs/models/components/cartdiscount.md
   - docs/models/components/cartshipment.md
-  - docs/models/components/profilecreationdata.md
-  - docs/models/components/paymentupdaterequest.md
   - docs/models/components/paymentactionrequesttag.md
   - docs/models/components/paymentactionrequest.md
-  - docs/models/components/paymentinitializerequest.md
-  - docs/models/components/paymentmethodextended.md
-  - docs/models/components/paymentmethodreferencetag.md
-  - docs/models/components/paymentmethodreference.md
+  - docs/models/components/guestpaymentinitializerequest.md
+  - docs/models/components/profilecreationdata.md
+  - docs/models/components/orderresponse.md
+  - docs/models/components/order.md
   - docs/models/components/getaccesstokenresponse.md
   - docs/models/components/tokenrequest.md
   - docs/models/components/granttype.md
@@ -261,8 +252,6 @@ generatedFiles:
   - docs/models/components/refreshtokenrequestgranttype.md
   - docs/models/components/refreshtokenrequestscope.md
   - docs/models/components/refreshtokenrequest.md
-  - docs/models/components/orderresponse.md
-  - docs/models/components/order.md
   - docs/models/components/emailstate.md
   - docs/models/components/phonestate.md
   - docs/models/components/accounttestcreationdataoutput.md
@@ -282,16 +271,14 @@ generatedFiles:
   - docs/models/errors/schemascreditcarderrortag.md
   - docs/models/errors/creditcarderror.md
   - docs/models/errors/accountpaymentmethoddeleteresponsebody.md
-  - docs/models/errors/guestpaymentsinitializeresponsebody.md
+  - docs/models/errors/paymentsinitializeresponsebody.md
   - docs/models/errors/schemascarterrortag.md
   - docs/models/errors/carterror.md
-  - docs/models/errors/guestpaymentsupdateresponsebody.md
-  - docs/models/errors/guestpaymentsactionresponsebody.md
-  - docs/models/errors/paymentsinitializeresponsebody.md
-  - docs/models/errors/paymentsupdateresponsebody.md
   - docs/models/errors/paymentsactionresponsebody.md
-  - docs/models/errors/oauthgettokenresponsebody.md
+  - docs/models/errors/guestpaymentsinitializeresponsebody.md
+  - docs/models/errors/guestpaymentsactionresponsebody.md
   - docs/models/errors/orderscreateresponsebody.md
+  - docs/models/errors/oauthgettokenresponsebody.md
   - docs/models/errors/testingaccountcreateresponsebody.md
   - docs/models/errors/testingaccountphonegetresponsebody.md
   - docs/models/errors/testingcreditcardgetresponsebody.md
@@ -299,10 +286,10 @@ generatedFiles:
   - docs/lib/utils/retryconfig.md
   - docs/sdks/account/README.md
   - docs/sdks/payments/README.md
-  - docs/sdks/guest/README.md
   - docs/sdks/loggedin/README.md
-  - docs/sdks/oauth/README.md
+  - docs/sdks/guest/README.md
   - docs/sdks/orders/README.md
+  - docs/sdks/oauth/README.md
   - docs/sdks/testing/README.md
   - USAGE.md
   - .gitattributes

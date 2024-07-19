@@ -4,7 +4,6 @@
 ### Available Operations
 
 * [initialize](#initialize) - Initialize a Bolt payment for guest shoppers
-* [update](#update) - Update a pending guest payment
 * [performAction](#performaction) - Finalize a pending guest payment
 
 ## initialize
@@ -121,113 +120,6 @@ run();
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | errors.GuestPaymentsInitializeResponseBody | 4XX                                        | application/json                           |
 | errors.SDKError                            | 4xx-5xx                                    | */*                                        |
-
-## update
-
-Update a guest payment that is still in the pending state, with new information about the payment.
-
-### Example Usage
-
-```typescript
-import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { AddressReferenceExplicitTag, CountryCode, Currency } from "@boltpay/bolt-typescript-sdk/models/components";
-
-const boltTypescriptSDK = new BoltTypescriptSDK();
-
-async function run() {
-  const result = await boltTypescriptSDK.payments.guest.update("<YOUR_API_KEY_HERE>", "iKv7t5bgt1gg", "<value>", "<value>", {
-    cart: {
-      orderReference: "order_100",
-      orderDescription: "Order #1234567890",
-      displayId: "215614191",
-      shipments: [
-        {
-        address:     {
-              dotTag: AddressReferenceExplicitTag.Explicit,
-              firstName: "Alice",
-              lastName: "Baker",
-              company: "ACME Corporation",
-              streetAddress1: "535 Mission St, Ste 1401",
-              streetAddress2: "c/o Shipping Department",
-              locality: "San Francisco",
-              postalCode: "94105",
-              region: "CA",
-              countryCode: CountryCode.Us,
-              email: "alice@example.com",
-              phone: "+14155550199",
-            },
-          cost: {
-            currency: Currency.Usd,
-            units: 900,
-          },
-          carrier: "FedEx",
-        },
-      ],
-      discounts: [
-        {
-          amount: {
-            currency: Currency.Usd,
-            units: 900,
-          },
-          code: "SUMMER10DISCOUNT",
-          detailsUrl: "https://www.example.com/SUMMER-SALE",
-        },
-      ],
-      items: [
-        {
-          name: "Bolt Swag Bag",
-          reference: "item_100",
-          description: "Large tote with Bolt logo.",
-          totalAmount: {
-            currency: Currency.Usd,
-            units: 900,
-          },
-          unitPrice: 1000,
-          quantity: 1,
-          imageUrl: "https://www.example.com/products/123456/images/1.png",
-        },
-      ],
-      total: {
-        currency: Currency.Usd,
-        units: 900,
-      },
-      tax: {
-        currency: Currency.Usd,
-        units: 900,
-      },
-    },
-  });
-
-  // Handle the result
-  console.log(result)
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                                           | Type                                                                                                                                                                                                                | Required                                                                                                                                                                                                            | Description                                                                                                                                                                                                         | Example                                                                                                                                                                                                             |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                                                                                          | [operations.GuestPaymentsUpdateSecurity](../../models/operations/guestpaymentsupdatesecurity.md)                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                  | The security requirements to use for the request.                                                                                                                                                                   |                                                                                                                                                                                                                     |
-| `id`                                                                                                                                                                                                                | *string*                                                                                                                                                                                                            | :heavy_check_mark:                                                                                                                                                                                                  | The ID of the guest payment to update                                                                                                                                                                               | [object Object]                                                                                                                                                                                                     |
-| `xPublishableKey`                                                                                                                                                                                                   | *string*                                                                                                                                                                                                            | :heavy_check_mark:                                                                                                                                                                                                  | The publicly shareable identifier used to identify your Bolt merchant division.                                                                                                                                     |                                                                                                                                                                                                                     |
-| `xMerchantClientId`                                                                                                                                                                                                 | *string*                                                                                                                                                                                                            | :heavy_check_mark:                                                                                                                                                                                                  | A unique identifier for a shopper's device, generated by Bolt. This header is required for proper attribution of this operation to your analytics reports. Omitting this header may result in incorrect statistics. |                                                                                                                                                                                                                     |
-| `paymentUpdateRequest`                                                                                                                                                                                              | [components.PaymentUpdateRequest](../../models/components/paymentupdaterequest.md)                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                  | N/A                                                                                                                                                                                                                 |                                                                                                                                                                                                                     |
-| `options`                                                                                                                                                                                                           | RequestOptions                                                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                                  | Used to set various options for making HTTP requests.                                                                                                                                                               |                                                                                                                                                                                                                     |
-| `options.fetchOptions`                                                                                                                                                                                              | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                  | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.                                      |                                                                                                                                                                                                                     |
-| `options.retries`                                                                                                                                                                                                   | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                  | Enables retrying HTTP requests under certain failure conditions.                                                                                                                                                    |                                                                                                                                                                                                                     |
-
-
-### Response
-
-**Promise\<[operations.GuestPaymentsUpdateResponse](../../models/operations/guestpaymentsupdateresponse.md)\>**
-### Errors
-
-| Error Object                           | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| errors.GuestPaymentsUpdateResponseBody | 4XX                                    | application/json                       |
-| errors.SDKError                        | 4xx-5xx                                | */*                                    |
 
 ## performAction
 

@@ -74,25 +74,23 @@ run();
 * [deletePaymentMethod](docs/sdks/account/README.md#deletepaymentmethod) - Delete an existing payment method
 
 
-### [payments.guest](docs/sdks/guest/README.md)
-
-* [initialize](docs/sdks/guest/README.md#initialize) - Initialize a Bolt payment for guest shoppers
-* [update](docs/sdks/guest/README.md#update) - Update a pending guest payment
-* [performAction](docs/sdks/guest/README.md#performaction) - Finalize a pending guest payment
-
 ### [payments.loggedIn](docs/sdks/loggedin/README.md)
 
 * [initialize](docs/sdks/loggedin/README.md#initialize) - Initialize a Bolt payment for logged in shoppers
-* [update](docs/sdks/loggedin/README.md#update) - Update a pending payment
 * [performAction](docs/sdks/loggedin/README.md#performaction) - Finalize a pending payment
 
-### [oAuth](docs/sdks/oauth/README.md)
+### [payments.guest](docs/sdks/guest/README.md)
 
-* [getToken](docs/sdks/oauth/README.md#gettoken) - Get OAuth token
+* [initialize](docs/sdks/guest/README.md#initialize) - Initialize a Bolt payment for guest shoppers
+* [performAction](docs/sdks/guest/README.md#performaction) - Finalize a pending guest payment
 
 ### [orders](docs/sdks/orders/README.md)
 
 * [ordersCreate](docs/sdks/orders/README.md#orderscreate) - Create an order that was prepared outside the Bolt ecosystem.
+
+### [oAuth](docs/sdks/oauth/README.md)
+
+* [getToken](docs/sdks/oauth/README.md#gettoken) - Get OAuth token
 
 ### [testing](docs/sdks/testing/README.md)
 
