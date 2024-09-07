@@ -1,5 +1,29 @@
 # OrdersCreateResponse
 
+## Example Usage
+
+```typescript
+import { OrdersCreateResponse } from "@boltpay/bolt-typescript-sdk/models/operations";
+
+let value: OrdersCreateResponse = {
+    contentType: "<value>",
+    statusCode: 528895,
+    rawResponse: new Response('{"message": "hello world"}', {
+        headers: { "Content-Type": "application/json" },
+    }),
+    orderResponse: {
+        id: "iKv7t5bgt1gg",
+        transaction: {
+            reference: "OBYG-X1PX-FN55",
+            authorizations: [
+                {
+                    processorReference: "123456789XYZ",
+                },
+            ],
+        },
+    },
+};
+```
 
 ## Fields
 

@@ -1,5 +1,12 @@
 # ErrorT
 
+## Example Usage
+
+```typescript
+import { ErrorT } from "@boltpay/bolt-typescript-sdk/models/errors";
+
+// No examples available for this model
+```
 
 ## Fields
 

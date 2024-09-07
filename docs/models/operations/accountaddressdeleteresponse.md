@@ -1,5 +1,18 @@
 # AccountAddressDeleteResponse
 
+## Example Usage
+
+```typescript
+import { AccountAddressDeleteResponse } from "@boltpay/bolt-typescript-sdk/models/operations";
+
+let value: AccountAddressDeleteResponse = {
+    contentType: "<value>",
+    statusCode: 602763,
+    rawResponse: new Response('{"message": "hello world"}', {
+        headers: { "Content-Type": "application/json" },
+    }),
+};
+```
 
 ## Fields
 

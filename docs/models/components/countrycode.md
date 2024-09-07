@@ -2,6 +2,13 @@
 
 The country (in its ISO 3166 alpha-2 format) associated with this address.
 
+## Example Usage
+
+```typescript
+import { CountryCode } from "@boltpay/bolt-typescript-sdk/models/components";
+
+let value: CountryCode = CountryCode.Us;
+```
 
 ## Values
 

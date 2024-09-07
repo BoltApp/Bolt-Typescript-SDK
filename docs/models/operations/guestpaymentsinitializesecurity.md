@@ -1,5 +1,14 @@
 # GuestPaymentsInitializeSecurity
 
+## Example Usage
+
+```typescript
+import { GuestPaymentsInitializeSecurity } from "@boltpay/bolt-typescript-sdk/models/operations";
+
+let value: GuestPaymentsInitializeSecurity = {
+    apiKey: "<value>",
+};
+```
 
 ## Fields
 

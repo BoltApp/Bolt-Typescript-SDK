@@ -2,6 +2,18 @@
 
 An account's identifying information.
 
+## Example Usage
+
+```typescript
+import { Profile } from "@boltpay/bolt-typescript-sdk/models/components";
+
+let value: Profile = {
+    firstName: "Alice",
+    lastName: "Baker",
+    email: "alice@example.com",
+    phone: "+14155550199",
+};
+```
 
 ## Fields
 

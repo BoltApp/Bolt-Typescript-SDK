@@ -1,5 +1,14 @@
 # PaymentMethodAfterpayOutput
 
+## Example Usage
+
+```typescript
+import { PaymentMethodAfterpayOutput, PaymentMethodAfterpayTag } from "@boltpay/bolt-typescript-sdk/models/components";
+
+let value: PaymentMethodAfterpayOutput = {
+    dotTag: PaymentMethodAfterpayTag.Afterpay,
+};
+```
 
 ## Fields
 

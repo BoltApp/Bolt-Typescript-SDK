@@ -1,6 +1,8 @@
 # LoggedIn
 (*payments.loggedIn*)
 
+## Overview
+
 ### Available Operations
 
 * [initialize](#initialize) - Initialize a Bolt payment for logged in shoppers
@@ -20,6 +22,7 @@ import { AddressReferenceIdTag, Currency, PaymentMethodReferenceTag } from "@bol
 const boltTypescriptSDK = new BoltTypescriptSDK({
   security: {
     oauth: "<YOUR_OAUTH_HERE>",
+    apiKey: "<YOUR_API_KEY_HERE>",
   },
 });
 
@@ -31,10 +34,10 @@ async function run() {
       displayId: "215614191",
       shipments: [
         {
-        address:     {
-              dotTag: AddressReferenceIdTag.Id,
-              id: "D4g3h5tBuVYK9",
-            },
+          address: {
+            dotTag: AddressReferenceIdTag.Id,
+            id: "D4g3h5tBuVYK9",
+          },
           cost: {
             currency: Currency.Usd,
             units: 10000,
@@ -75,11 +78,100 @@ async function run() {
         units: 100,
       },
     },
-  paymentMethod:     {
-        dotTag: PaymentMethodReferenceTag.Id,
-        id: "X5h6j8uLpVGK",
-      },
+    paymentMethod: {
+      dotTag: PaymentMethodReferenceTag.Id,
+      id: "X5h6j8uLpVGK",
+    },
   });
+  
+  // Handle the result
+  console.log(result)
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { BoltTypescriptSDKCore } from "@boltpay/bolt-typescript-sdk/core.js";
+import { paymentsLoggedInInitialize } from "@boltpay/bolt-typescript-sdk/funcs/paymentsLoggedInInitialize.js";
+import { AddressReferenceIdTag, Currency, PaymentMethodReferenceTag } from "@boltpay/bolt-typescript-sdk/models/components";
+
+// Use `BoltTypescriptSDKCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const boltTypescriptSDK = new BoltTypescriptSDKCore({
+  security: {
+    oauth: "<YOUR_OAUTH_HERE>",
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
+
+async function run() {
+  const res = await paymentsLoggedInInitialize(boltTypescriptSDK, "<value>", "<value>", {
+    cart: {
+      orderReference: "order_100",
+      orderDescription: "Order #1234567890",
+      displayId: "215614191",
+      shipments: [
+        {
+          address: {
+            dotTag: AddressReferenceIdTag.Id,
+            id: "D4g3h5tBuVYK9",
+          },
+          cost: {
+            currency: Currency.Usd,
+            units: 10000,
+          },
+          carrier: "FedEx",
+        },
+      ],
+      discounts: [
+        {
+          amount: {
+            currency: Currency.Usd,
+            units: 10000,
+          },
+          code: "SUMMER10DISCOUNT",
+          detailsUrl: "https://www.example.com/SUMMER-SALE",
+        },
+      ],
+      items: [
+        {
+          name: "Bolt Swag Bag",
+          reference: "item_100",
+          description: "Large tote with Bolt logo.",
+          totalAmount: {
+            currency: Currency.Usd,
+            units: 9000,
+          },
+          unitPrice: 1000,
+          quantity: 9,
+          imageUrl: "https://www.example.com/products/123456/images/1.png",
+        },
+      ],
+      total: {
+        currency: Currency.Usd,
+        units: 9000,
+      },
+      tax: {
+        currency: Currency.Usd,
+        units: 100,
+      },
+    },
+    paymentMethod: {
+      dotTag: PaymentMethodReferenceTag.Id,
+      id: "X5h6j8uLpVGK",
+    },
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
 
   // Handle the result
   console.log(result)
@@ -99,16 +191,20 @@ run();
 | `options.fetchOptions`                                                                                                                                                                                              | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                  | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.                                      |
 | `options.retries`                                                                                                                                                                                                   | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                  | Enables retrying HTTP requests under certain failure conditions.                                                                                                                                                    |
 
-
 ### Response
 
 **Promise\<[operations.PaymentsInitializeResponse](../../models/operations/paymentsinitializeresponse.md)\>**
+
 ### Errors
 
-| Error Object                          | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.PaymentsInitializeResponseBody | 4XX                                   | application/json                      |
-| errors.SDKError                       | 4xx-5xx                               | */*                                   |
+| Error Object           | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| errors.ErrorT          | 4XX                    | application/json       |
+| errors.FieldError      | 4XX                    | application/json       |
+| errors.CartError       | 4XX                    | application/json       |
+| errors.CreditCardError | 4XX                    | application/json       |
+| errors.SDKError        | 4xx-5xx                | */*                    |
+
 
 ## performAction
 
@@ -123,6 +219,7 @@ import { PaymentActionRequestTag } from "@boltpay/bolt-typescript-sdk/models/com
 const boltTypescriptSDK = new BoltTypescriptSDK({
   security: {
     oauth: "<YOUR_OAUTH_HERE>",
+    apiKey: "<YOUR_API_KEY_HERE>",
   },
 });
 
@@ -131,6 +228,43 @@ async function run() {
     dotTag: PaymentActionRequestTag.Finalize,
     redirectResult: "eyJ0cmFuc",
   });
+  
+  // Handle the result
+  console.log(result)
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { BoltTypescriptSDKCore } from "@boltpay/bolt-typescript-sdk/core.js";
+import { paymentsLoggedInPerformAction } from "@boltpay/bolt-typescript-sdk/funcs/paymentsLoggedInPerformAction.js";
+import { PaymentActionRequestTag } from "@boltpay/bolt-typescript-sdk/models/components";
+
+// Use `BoltTypescriptSDKCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const boltTypescriptSDK = new BoltTypescriptSDKCore({
+  security: {
+    oauth: "<YOUR_OAUTH_HERE>",
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
+
+async function run() {
+  const res = await paymentsLoggedInPerformAction(boltTypescriptSDK, "iKv7t5bgt1gg", "<value>", "<value>", {
+    dotTag: PaymentActionRequestTag.Finalize,
+    redirectResult: "eyJ0cmFuc",
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
 
   // Handle the result
   console.log(result)
@@ -151,13 +285,14 @@ run();
 | `options.fetchOptions`                                                                                                                                                                                              | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                  | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.                                      |                                                                                                                                                                                                                     |
 | `options.retries`                                                                                                                                                                                                   | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                  | Enables retrying HTTP requests under certain failure conditions.                                                                                                                                                    |                                                                                                                                                                                                                     |
 
-
 ### Response
 
 **Promise\<[operations.PaymentsActionResponse](../../models/operations/paymentsactionresponse.md)\>**
+
 ### Errors
 
-| Error Object                      | Status Code                       | Content Type                      |
-| --------------------------------- | --------------------------------- | --------------------------------- |
-| errors.PaymentsActionResponseBody | 4XX                               | application/json                  |
-| errors.SDKError                   | 4xx-5xx                           | */*                               |
+| Error Object      | Status Code       | Content Type      |
+| ----------------- | ----------------- | ----------------- |
+| errors.ErrorT     | 4XX               | application/json  |
+| errors.FieldError | 4XX               | application/json  |
+| errors.SDKError   | 4xx-5xx           | */*               |

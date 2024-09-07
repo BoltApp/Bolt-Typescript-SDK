@@ -1,5 +1,14 @@
 # TestingAccountPhoneGetSecurity
 
+## Example Usage
+
+```typescript
+import { TestingAccountPhoneGetSecurity } from "@boltpay/bolt-typescript-sdk/models/operations";
+
+let value: TestingAccountPhoneGetSecurity = {
+    apiKey: "<value>",
+};
+```
 
 ## Fields
 

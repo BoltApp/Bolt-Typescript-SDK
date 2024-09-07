@@ -1,5 +1,14 @@
 # AccountTestPhoneData
 
+## Example Usage
+
+```typescript
+import { AccountTestPhoneData } from "@boltpay/bolt-typescript-sdk/models/components";
+
+let value: AccountTestPhoneData = {
+    phone: "+14155550199",
+};
+```
 
 ## Fields
 

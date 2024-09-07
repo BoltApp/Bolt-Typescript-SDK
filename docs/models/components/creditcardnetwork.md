@@ -2,6 +2,13 @@
 
 The credit card's network.
 
+## Example Usage
+
+```typescript
+import { CreditCardNetwork } from "@boltpay/bolt-typescript-sdk/models/components";
+
+let value: CreditCardNetwork = CreditCardNetwork.Visa;
+```
 
 ## Values
 

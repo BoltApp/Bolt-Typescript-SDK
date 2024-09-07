@@ -1,5 +1,26 @@
 # GuestPaymentsActionResponse
 
+## Example Usage
+
+```typescript
+import { Action, PaymentResponsePendingStatus, PaymentResponsePendingTag } from "@boltpay/bolt-typescript-sdk/models/components";
+import { GuestPaymentsActionResponse } from "@boltpay/bolt-typescript-sdk/models/operations";
+
+let value: GuestPaymentsActionResponse = {
+    contentType: "<value>",
+    statusCode: 477665,
+    rawResponse: new Response('{"message": "hello world"}', {
+        headers: { "Content-Type": "application/json" },
+    }),
+    paymentResponse: {
+        dotTag: PaymentResponsePendingTag.Pending,
+        id: "iKv7t5bgt1gg",
+        status: PaymentResponsePendingStatus.AwaitingUserConfirmation,
+        action: Action.Redirect,
+        url: "www.example.com/payments/finalize",
+    },
+};
+```
 
 ## Fields
 

@@ -1,5 +1,21 @@
 # TestingAccountPhoneGetResponse
 
+## Example Usage
+
+```typescript
+import { TestingAccountPhoneGetResponse } from "@boltpay/bolt-typescript-sdk/models/operations";
+
+let value: TestingAccountPhoneGetResponse = {
+    contentType: "<value>",
+    statusCode: 836079,
+    rawResponse: new Response('{"message": "hello world"}', {
+        headers: { "Content-Type": "application/json" },
+    }),
+    accountTestPhoneData: {
+        phone: "+14155550199",
+    },
+};
+```
 
 ## Fields
 

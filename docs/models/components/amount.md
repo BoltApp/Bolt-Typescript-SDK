@@ -2,6 +2,16 @@
 
 A monetary amount, i.e. a base unit amount and a supported currency.
 
+## Example Usage
+
+```typescript
+import { Amount, Currency } from "@boltpay/bolt-typescript-sdk/models/components";
+
+let value: Amount = {
+    currency: Currency.Usd,
+    units: 900,
+};
+```
 
 ## Fields
 

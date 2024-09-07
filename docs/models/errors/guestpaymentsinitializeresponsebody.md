@@ -2,6 +2,13 @@
 
 The payment operation cannot complete
 
+## Example Usage
+
+```typescript
+import { GuestPaymentsInitializeResponseBody } from "@boltpay/bolt-typescript-sdk/models/errors";
+
+// No examples available for this model
+```
 
 ## Supported Types
 

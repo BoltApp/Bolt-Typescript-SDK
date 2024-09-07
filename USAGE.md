@@ -5,6 +5,7 @@ import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 const boltTypescriptSDK = new BoltTypescriptSDK({
     security: {
         oauth: "<YOUR_OAUTH_HERE>",
+        apiKey: "<YOUR_API_KEY_HERE>",
     },
 });
 

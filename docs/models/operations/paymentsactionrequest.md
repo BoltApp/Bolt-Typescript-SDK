@@ -1,5 +1,21 @@
 # PaymentsActionRequest
 
+## Example Usage
+
+```typescript
+import { PaymentActionRequestTag } from "@boltpay/bolt-typescript-sdk/models/components";
+import { PaymentsActionRequest } from "@boltpay/bolt-typescript-sdk/models/operations";
+
+let value: PaymentsActionRequest = {
+    id: "iKv7t5bgt1gg",
+    xPublishableKey: "<value>",
+    xMerchantClientId: "<value>",
+    paymentActionRequest: {
+        dotTag: PaymentActionRequestTag.Finalize,
+        redirectResult: "eyJ0cmFuc",
+    },
+};
+```
 
 ## Fields
 

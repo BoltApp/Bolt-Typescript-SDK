@@ -1,5 +1,14 @@
 # PaymentMethodPaypalOutput
 
+## Example Usage
+
+```typescript
+import { PaymentMethodPaypalOutput, PaymentMethodPaypalTag } from "@boltpay/bolt-typescript-sdk/models/components";
+
+let value: PaymentMethodPaypalOutput = {
+    dotTag: PaymentMethodPaypalTag.Paypal,
+};
+```
 
 ## Fields
 

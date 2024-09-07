@@ -1,5 +1,23 @@
 # CartItem
 
+## Example Usage
+
+```typescript
+import { CartItem, Currency } from "@boltpay/bolt-typescript-sdk/models/components";
+
+let value: CartItem = {
+    name: "Bolt Swag Bag",
+    reference: "item_100",
+    description: "Large tote with Bolt logo.",
+    totalAmount: {
+        currency: Currency.Usd,
+        units: 900,
+    },
+    unitPrice: 1000,
+    quantity: 1,
+    imageUrl: "https://www.example.com/products/123456/images/1.png",
+};
+```
 
 ## Fields
 

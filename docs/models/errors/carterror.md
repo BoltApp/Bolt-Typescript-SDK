@@ -1,5 +1,12 @@
 # CartError
 
+## Example Usage
+
+```typescript
+import { CartError } from "@boltpay/bolt-typescript-sdk/models/errors";
+
+// No examples available for this model
+```
 
 ## Fields
 

@@ -2,6 +2,13 @@
 
 The type of error returned
 
+## Example Usage
+
+```typescript
+import { SchemasCreditCardErrorTag } from "@boltpay/bolt-typescript-sdk/models/errors";
+
+let value: SchemasCreditCardErrorTag = SchemasCreditCardErrorTag.DeclinedInvalidCvv;
+```
 
 ## Values
 

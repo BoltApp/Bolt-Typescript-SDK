@@ -1,5 +1,15 @@
 # PaymentActionRequest
 
+## Example Usage
+
+```typescript
+import { PaymentActionRequest, PaymentActionRequestTag } from "@boltpay/bolt-typescript-sdk/models/components";
+
+let value: PaymentActionRequest = {
+    dotTag: PaymentActionRequestTag.Finalize,
+    redirectResult: "eyJ0cmFuc",
+};
+```
 
 ## Fields
 

@@ -2,6 +2,13 @@
 
 An error has occurred, and further details are contained in the response
 
+## Example Usage
+
+```typescript
+import { GuestPaymentsActionResponseBody } from "@boltpay/bolt-typescript-sdk/models/errors";
+
+// No examples available for this model
+```
 
 ## Supported Types
 

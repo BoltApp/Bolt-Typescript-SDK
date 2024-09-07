@@ -1,5 +1,12 @@
 # Security
 
+## Example Usage
+
+```typescript
+import { Security } from "@boltpay/bolt-typescript-sdk/models/components";
+
+let value: Security = {};
+```
 
 ## Fields
 

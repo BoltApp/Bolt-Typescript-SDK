@@ -1,5 +1,19 @@
 # CartDiscount
 
+## Example Usage
+
+```typescript
+import { CartDiscount, Currency } from "@boltpay/bolt-typescript-sdk/models/components";
+
+let value: CartDiscount = {
+    amount: {
+        currency: Currency.Usd,
+        units: 900,
+    },
+    code: "SUMMER10DISCOUNT",
+    detailsUrl: "https://www.example.com/SUMMER-SALE",
+};
+```
 
 ## Fields
 

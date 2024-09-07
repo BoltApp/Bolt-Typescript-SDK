@@ -4,8 +4,32 @@
     <a href="https://github.com/BoltApp/Bolt-Typescript-SDK.git/actions"><img src="https://img.shields.io/github/actions/workflow/status/BoltApp/Bolt-Typescript-SDK/speakeasy_sdk_generation.yml?style=for-the-badge" /></a>
 </div>
 
+<!-- Start Summary [summary] -->
+## Summary
+
+Bolt API Reference: A comprehensive Bolt API reference for interacting with Accounts, Payments, Orders and more.
+<!-- End Summary [summary] -->
+
+<!-- Start Table of Contents [toc] -->
+## Table of Contents
+
+* [SDK Installation](#sdk-installation)
+* [Requirements](#requirements)
+* [SDK Example Usage](#sdk-example-usage)
+* [Available Resources and Operations](#available-resources-and-operations)
+* [Standalone functions](#standalone-functions)
+* [Retries](#retries)
+* [Error Handling](#error-handling)
+* [Server Selection](#server-selection)
+* [Custom HTTP Client](#custom-http-client)
+* [Authentication](#authentication)
+* [Debugging](#debugging)
+<!-- End Table of Contents [toc] -->
+
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
+
+The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/), [bun](https://bun.sh/) or [yarn](https://classic.yarnpkg.com/en/) package managers.
 
 ### NPM
 
@@ -46,6 +70,7 @@ import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 const boltTypescriptSDK = new BoltTypescriptSDK({
     security: {
         oauth: "<YOUR_OAUTH_HERE>",
+        apiKey: "<YOUR_API_KEY_HERE>",
     },
 });
 
@@ -104,21 +129,23 @@ run();
 
 All SDK methods return a response object or throw an error. If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Error type.
 
-| Error Object                  | Status Code                   | Content Type                  |
-| ----------------------------- | ----------------------------- | ----------------------------- |
-| errors.AccountGetResponseBody | 4XX                           | application/json              |
-| errors.SDKError               | 4xx-5xx                       | */*                           |
+| Error Object      | Status Code       | Content Type      |
+| ----------------- | ----------------- | ----------------- |
+| errors.ErrorT     | 4XX               | application/json  |
+| errors.FieldError | 4XX               | application/json  |
+| errors.SDKError   | 4xx-5xx           | */*               |
 
 Validation errors can also occur when either method arguments or data returned from the server do not match the expected format. The `SDKValidationError` that is thrown as a result will capture the raw value that failed validation in an attribute called `rawValue`. Additionally, a `pretty()` method is available on this error that can be used to log a nicely formatted string since validation errors can list many issues and the plain error string may be difficult read when debugging. 
 
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-import { SDKValidationError } from "@boltpay/bolt-typescript-sdk/models/errors";
+import { ErrorT, FieldError, SDKValidationError } from "@boltpay/bolt-typescript-sdk/models/errors";
 
 const boltTypescriptSDK = new BoltTypescriptSDK({
     security: {
         oauth: "<YOUR_OAUTH_HERE>",
+        apiKey: "<YOUR_API_KEY_HERE>",
     },
 });
 
@@ -126,6 +153,9 @@ async function run() {
     let result;
     try {
         result = await boltTypescriptSDK.account.getDetails("<value>", "<value>");
+
+        // Handle the result
+        console.log(result);
     } catch (err) {
         switch (true) {
             case err instanceof SDKValidationError: {
@@ -135,8 +165,12 @@ async function run() {
                 console.error(err.rawValue);
                 return;
             }
-            case err instanceof errors.AccountGetResponseBody: {
-                console.error(err); // handle exception
+            case err instanceof ErrorT: {
+                // Handle err.data$: ErrorTData
+                return;
+            }
+            case err instanceof FieldError: {
+                // Handle err.data$: FieldErrorData
                 return;
             }
             default: {
@@ -144,9 +178,6 @@ async function run() {
             }
         }
     }
-
-    // Handle the result
-    console.log(result);
 }
 
 run();
@@ -172,6 +203,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
     serverIdx: 0,
     security: {
         oauth: "<YOUR_OAUTH_HERE>",
+        apiKey: "<YOUR_API_KEY_HERE>",
     },
 });
 
@@ -202,6 +234,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
     serverURL: "https://{environment}.bolt.com/v3",
     security: {
         oauth: "<YOUR_OAUTH_HERE>",
+        apiKey: "<YOUR_API_KEY_HERE>",
     },
 });
 
@@ -285,6 +318,7 @@ import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 const boltTypescriptSDK = new BoltTypescriptSDK({
     security: {
         oauth: "<YOUR_OAUTH_HERE>",
+        apiKey: "<YOUR_API_KEY_HERE>",
     },
 });
 
@@ -305,7 +339,8 @@ Some operations in this SDK require the security scheme to be specified at the r
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 import {
-    AddressReferenceIdTag,
+    AddressReferenceExplicitTag,
+    CountryCode,
     CreditCardNetwork,
     Currency,
     DotTag,
@@ -315,7 +350,9 @@ const boltTypescriptSDK = new BoltTypescriptSDK();
 
 async function run() {
     const result = await boltTypescriptSDK.payments.guest.initialize(
-        "<YOUR_API_KEY_HERE>",
+        {
+            apiKey: "<YOUR_API_KEY_HERE>",
+        },
         "<value>",
         "<value>",
         {
@@ -333,8 +370,18 @@ async function run() {
                 shipments: [
                     {
                         address: {
-                            dotTag: AddressReferenceIdTag.Id,
-                            id: "D4g3h5tBuVYK9",
+                            dotTag: AddressReferenceExplicitTag.Explicit,
+                            firstName: "Alice",
+                            lastName: "Baker",
+                            company: "ACME Corporation",
+                            streetAddress1: "535 Mission St, Ste 1401",
+                            streetAddress2: "c/o Shipping Department",
+                            locality: "San Francisco",
+                            postalCode: "94105",
+                            region: "CA",
+                            countryCode: CountryCode.Us,
+                            email: "alice@example.com",
+                            phone: "+14155550199",
                         },
                         cost: {
                             currency: Currency.Usd,
@@ -379,8 +426,18 @@ async function run() {
             paymentMethod: {
                 dotTag: DotTag.CreditCard,
                 billingAddress: {
-                    dotTag: AddressReferenceIdTag.Id,
-                    id: "D4g3h5tBuVYK9",
+                    dotTag: AddressReferenceExplicitTag.Explicit,
+                    firstName: "Alice",
+                    lastName: "Baker",
+                    company: "ACME Corporation",
+                    streetAddress1: "535 Mission St, Ste 1401",
+                    streetAddress2: "c/o Shipping Department",
+                    locality: "San Francisco",
+                    postalCode: "94105",
+                    region: "CA",
+                    countryCode: CountryCode.Us,
+                    email: "alice@example.com",
+                    phone: "+14155550199",
                 },
                 network: CreditCardNetwork.Visa,
                 bin: "411111",
@@ -406,6 +463,41 @@ run();
 For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 <!-- End Requirements [requirements] -->
 
+<!-- Start Standalone functions [standalone-funcs] -->
+## Standalone functions
+
+All the methods listed above are available as standalone functions. These
+functions are ideal for use in applications running in the browser, serverless
+runtimes or other environments where application bundle size is a primary
+concern. When using a bundler to build your application, all unused
+functionality will be either excluded from the final bundle or tree-shaken away.
+
+To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
+
+<details>
+
+<summary>Available standalone functions</summary>
+
+- [accountAddAddress](docs/sdks/account/README.md#addaddress)
+- [accountAddPaymentMethod](docs/sdks/account/README.md#addpaymentmethod)
+- [accountDeleteAddress](docs/sdks/account/README.md#deleteaddress)
+- [accountDeletePaymentMethod](docs/sdks/account/README.md#deletepaymentmethod)
+- [accountGetDetails](docs/sdks/account/README.md#getdetails)
+- [accountUpdateAddress](docs/sdks/account/README.md#updateaddress)
+- [oAuthGetToken](docs/sdks/oauth/README.md#gettoken)
+- [ordersOrdersCreate](docs/sdks/orders/README.md#orderscreate)
+- [paymentsGuestInitialize](docs/sdks/guest/README.md#initialize)
+- [paymentsGuestPerformAction](docs/sdks/guest/README.md#performaction)
+- [paymentsLoggedInInitialize](docs/sdks/loggedin/README.md#initialize)
+- [paymentsLoggedInPerformAction](docs/sdks/loggedin/README.md#performaction)
+- [testingCreateAccount](docs/sdks/testing/README.md#createaccount)
+- [testingGetCreditCard](docs/sdks/testing/README.md#getcreditcard)
+- [testingTestingAccountPhoneGet](docs/sdks/testing/README.md#testingaccountphoneget)
+
+
+</details>
+<!-- End Standalone functions [standalone-funcs] -->
+
 <!-- Start Retries [retries] -->
 ## Retries
 
@@ -418,6 +510,7 @@ import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 const boltTypescriptSDK = new BoltTypescriptSDK({
     security: {
         oauth: "<YOUR_OAUTH_HERE>",
+        apiKey: "<YOUR_API_KEY_HERE>",
     },
 });
 
@@ -460,6 +553,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
     },
     security: {
         oauth: "<YOUR_OAUTH_HERE>",
+        apiKey: "<YOUR_API_KEY_HERE>",
     },
 });
 
@@ -474,6 +568,23 @@ run();
 
 ```
 <!-- End Retries [retries] -->
+
+<!-- Start Debugging [debug] -->
+## Debugging
+
+You can setup your SDK to emit debug logs for SDK requests and responses.
+
+You can pass a logger that matches `console`'s interface as an SDK option.
+
+> [!WARNING]
+> Beware that debug logging will reveal secrets, like API tokens in headers, in log messages printed to a console or files. It's recommended to use this feature only during local development and not in production.
+
+```typescript
+import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
+
+const sdk = new BoltTypescriptSDK({ debugLogger: console });
+```
+<!-- End Debugging [debug] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

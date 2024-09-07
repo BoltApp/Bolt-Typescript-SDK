@@ -1,5 +1,14 @@
 # TestingCreditCardGetRequestBody
 
+## Example Usage
+
+```typescript
+import { TestingCreditCardGetRequestBody, Type } from "@boltpay/bolt-typescript-sdk/models/operations";
+
+let value: TestingCreditCardGetRequestBody = {
+    type: Type.Approve,
+};
+```
 
 ## Fields
 

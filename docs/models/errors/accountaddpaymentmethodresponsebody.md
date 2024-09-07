@@ -2,6 +2,13 @@
 
 The payment method is invalid and cannot be added, or some other error has occurred
 
+## Example Usage
+
+```typescript
+import { AccountAddPaymentMethodResponseBody } from "@boltpay/bolt-typescript-sdk/models/errors";
+
+// No examples available for this model
+```
 
 ## Supported Types
 

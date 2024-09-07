@@ -1,5 +1,34 @@
 # AccountAddressCreateResponse
 
+## Example Usage
+
+```typescript
+import { CountryCode } from "@boltpay/bolt-typescript-sdk/models/components";
+import { AccountAddressCreateResponse } from "@boltpay/bolt-typescript-sdk/models/operations";
+
+let value: AccountAddressCreateResponse = {
+    contentType: "<value>",
+    statusCode: 715190,
+    rawResponse: new Response('{"message": "hello world"}', {
+        headers: { "Content-Type": "application/json" },
+    }),
+    addressListing: {
+        id: "D4g3h5tBuVYK9",
+        firstName: "Alice",
+        lastName: "Baker",
+        company: "ACME Corporation",
+        streetAddress1: "535 Mission St, Ste 1401",
+        streetAddress2: "c/o Shipping Department",
+        locality: "San Francisco",
+        postalCode: "94105",
+        region: "CA",
+        countryCode: CountryCode.Us,
+        email: "alice@example.com",
+        phone: "+14155550199",
+        isDefault: true,
+    },
+};
+```
 
 ## Fields
 

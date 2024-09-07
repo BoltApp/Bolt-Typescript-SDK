@@ -1,5 +1,14 @@
 # PaymentMethodKlarnaOutput
 
+## Example Usage
+
+```typescript
+import { PaymentMethodKlarnaOutput, PaymentMethodKlarnaTag } from "@boltpay/bolt-typescript-sdk/models/components";
+
+let value: PaymentMethodKlarnaOutput = {
+    dotTag: PaymentMethodKlarnaTag.Klarna,
+};
+```
 
 ## Fields
 

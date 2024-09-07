@@ -1,5 +1,20 @@
 # AccountAddPaymentMethodRequest
 
+## Example Usage
+
+```typescript
+import { PaymentMethodKlarnaPaynowTag } from "@boltpay/bolt-typescript-sdk/models/components";
+import { AccountAddPaymentMethodRequest } from "@boltpay/bolt-typescript-sdk/models/operations";
+
+let value: AccountAddPaymentMethodRequest = {
+    xPublishableKey: "<value>",
+    xMerchantClientId: "<value>",
+    paymentMethod: {
+        dotTag: PaymentMethodKlarnaPaynowTag.KlarnaPaynow,
+        returnUrl: "www.example.com/handle_klarna_paynow_success",
+    },
+};
+```
 
 ## Fields
 

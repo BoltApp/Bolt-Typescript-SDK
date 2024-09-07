@@ -1,5 +1,27 @@
 # TestingAccountCreateResponse
 
+## Example Usage
+
+```typescript
+import { EmailState, PhoneState } from "@boltpay/bolt-typescript-sdk/models/components";
+import { TestingAccountCreateResponse } from "@boltpay/bolt-typescript-sdk/models/operations";
+
+let value: TestingAccountCreateResponse = {
+    contentType: "<value>",
+    statusCode: 925597,
+    rawResponse: new Response('{"message": "hello world"}', {
+        headers: { "Content-Type": "application/json" },
+    }),
+    accountTestCreationData: {
+        email: "alice@example.com",
+        emailState: EmailState.Unverified,
+        phone: "+14155550199",
+        phoneState: PhoneState.Verified,
+        otpCode: "123456",
+        oauthCode: "7GSjMRSHs6Ak7C_zvVW6P2IhZOHxMK7HZKW1fMX85ms",
+    },
+};
+```
 
 ## Fields
 

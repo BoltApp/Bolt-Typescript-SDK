@@ -2,6 +2,13 @@
 
 A supported currency.
 
+## Example Usage
+
+```typescript
+import { Currency } from "@boltpay/bolt-typescript-sdk/models/components";
+
+let value: Currency = Currency.Usd;
+```
 
 ## Values
 

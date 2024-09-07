@@ -2,6 +2,13 @@
 
 The type of error returned
 
+## Example Usage
+
+```typescript
+import { SchemasCartErrorTag } from "@boltpay/bolt-typescript-sdk/models/errors";
+
+let value: SchemasCartErrorTag = SchemasCartErrorTag.PaymentAlreadyExists;
+```
 
 ## Values
 

@@ -1,5 +1,14 @@
 # TestingAccountPhoneGetRequest
 
+## Example Usage
+
+```typescript
+import { TestingAccountPhoneGetRequest } from "@boltpay/bolt-typescript-sdk/models/operations";
+
+let value: TestingAccountPhoneGetRequest = {
+    xPublishableKey: "<value>",
+};
+```
 
 ## Fields
 

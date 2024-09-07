@@ -1,5 +1,15 @@
 # AccountGetRequest
 
+## Example Usage
+
+```typescript
+import { AccountGetRequest } from "@boltpay/bolt-typescript-sdk/models/operations";
+
+let value: AccountGetRequest = {
+    xPublishableKey: "<value>",
+    xMerchantClientId: "<value>",
+};
+```
 
 ## Fields
 

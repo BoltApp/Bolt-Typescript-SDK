@@ -2,6 +2,13 @@
 
 An error that pertains to validation of a specific field in the request.
 
+## Example Usage
+
+```typescript
+import { FieldError } from "@boltpay/bolt-typescript-sdk/models/errors";
+
+// No examples available for this model
+```
 
 ## Fields
 

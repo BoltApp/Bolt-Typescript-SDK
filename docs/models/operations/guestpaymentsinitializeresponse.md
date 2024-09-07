@@ -1,5 +1,32 @@
 # GuestPaymentsInitializeResponse
 
+## Example Usage
+
+```typescript
+import { PaymentResponseFinalizedTag, Status } from "@boltpay/bolt-typescript-sdk/models/components";
+import { GuestPaymentsInitializeResponse } from "@boltpay/bolt-typescript-sdk/models/operations";
+
+let value: GuestPaymentsInitializeResponse = {
+    contentType: "<value>",
+    statusCode: 272656,
+    rawResponse: new Response('{"message": "hello world"}', {
+        headers: { "Content-Type": "application/json" },
+    }),
+    paymentResponse: {
+        dotTag: PaymentResponseFinalizedTag.Finalized,
+        id: "iKv7t5bgt1gg",
+        status: Status.Success,
+        transaction: {
+            reference: "OBYG-X1PX-FN55",
+            authorizations: [
+                {
+                    processorReference: "123456789XYZ",
+                },
+            ],
+        },
+    },
+};
+```
 
 ## Fields
 

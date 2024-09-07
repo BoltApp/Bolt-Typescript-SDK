@@ -1,5 +1,12 @@
 # RefreshTokenRequestScope
 
+## Example Usage
+
+```typescript
+import { RefreshTokenRequestScope } from "@boltpay/bolt-typescript-sdk/models/components";
+
+let value: RefreshTokenRequestScope = RefreshTokenRequestScope.BoltAccountManage;
+```
 
 ## Values
 

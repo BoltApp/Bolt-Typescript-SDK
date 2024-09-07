@@ -1,5 +1,23 @@
 # PaymentResponsePending
 
+## Example Usage
+
+```typescript
+import {
+  Action,
+  PaymentResponsePending,
+  PaymentResponsePendingStatus,
+  PaymentResponsePendingTag,
+} from "@boltpay/bolt-typescript-sdk/models/components";
+
+let value: PaymentResponsePending = {
+    dotTag: PaymentResponsePendingTag.Pending,
+    id: "iKv7t5bgt1gg",
+    status: PaymentResponsePendingStatus.AwaitingUserConfirmation,
+    action: Action.Redirect,
+    url: "www.example.com/payments/finalize",
+};
+```
 
 ## Fields
 
