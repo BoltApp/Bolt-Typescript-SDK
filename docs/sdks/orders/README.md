@@ -24,7 +24,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK();
 async function run() {
   const result = await boltTypescriptSDK.orders.ordersCreate({
     apiKey: "<YOUR_API_KEY_HERE>",
-  }, "<value>", "<value>", {
+  }, {
     profile: {
       firstName: "Charlie",
       lastName: "Dunn",
@@ -91,10 +91,10 @@ async function run() {
         units: 100,
       },
     },
-  });
-  
+  }, "<value>", "<value>");
+
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -116,7 +116,7 @@ const boltTypescriptSDK = new BoltTypescriptSDKCore();
 async function run() {
   const res = await ordersOrdersCreate(boltTypescriptSDK, {
     apiKey: "<YOUR_API_KEY_HERE>",
-  }, "<value>", "<value>", {
+  }, {
     profile: {
       firstName: "Charlie",
       lastName: "Dunn",
@@ -183,7 +183,7 @@ async function run() {
         units: 100,
       },
     },
-  });
+  }, "<value>", "<value>");
 
   if (!res.ok) {
     throw res.error;
@@ -192,7 +192,7 @@ async function run() {
   const { value: result } = res;
 
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -216,8 +216,8 @@ run();
 
 ### Errors
 
-| Error Object      | Status Code       | Content Type      |
+| Error Type        | Status Code       | Content Type      |
 | ----------------- | ----------------- | ----------------- |
 | errors.ErrorT     | 4XX               | application/json  |
 | errors.FieldError | 4XX               | application/json  |
-| errors.SDKError   | 4xx-5xx           | */*               |
+| errors.SDKError   | 5XX               | \*/\*             |

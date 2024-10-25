@@ -6,7 +6,7 @@
 import { TestingAccountCreateSecurity } from "@boltpay/bolt-typescript-sdk/models/operations";
 
 let value: TestingAccountCreateSecurity = {
-    apiKey: "<value>",
+  apiKey: "<value>",
 };
 ```
 

@@ -3,19 +3,19 @@
  */
 
 import { BoltTypescriptSDKCore } from "../core.js";
-import { encodeJSON as encodeJSON$, encodeSimple as encodeSimple$ } from "../lib/encodings.js";
-import * as m$ from "../lib/matchers.js";
-import * as schemas$ from "../lib/schemas.js";
+import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import * as M from "../lib/matchers.js";
+import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { resolveSecurity, SecurityInput } from "../lib/security.js";
+import { resolveSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
 import * as components from "../models/components/index.js";
 import {
-    ConnectionError,
-    InvalidRequestError,
-    RequestAbortedError,
-    RequestTimeoutError,
-    UnexpectedClientError,
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import * as errors from "../models/errors/index.js";
 import { SDKError } from "../models/errors/sdkerror.js";
@@ -30,123 +30,124 @@ import { Result } from "../types/fp.js";
  * Create a Bolt shopper account for testing purposes.
  */
 export async function testingCreateAccount(
-    client$: BoltTypescriptSDKCore,
-    security: operations.TestingAccountCreateSecurity,
-    xPublishableKey: string,
-    accountTestCreationData: components.AccountTestCreationData,
-    options?: RequestOptions
+  client: BoltTypescriptSDKCore,
+  security: operations.TestingAccountCreateSecurity,
+  accountTestCreationData: components.AccountTestCreationData,
+  xPublishableKey: string,
+  options?: RequestOptions,
 ): Promise<
-    Result<
-        operations.TestingAccountCreateResponse,
-        | errors.TestingAccountCreateResponseBody
-        | SDKError
-        | SDKValidationError
-        | UnexpectedClientError
-        | InvalidRequestError
-        | RequestAbortedError
-        | RequestTimeoutError
-        | ConnectionError
-    >
+  Result<
+    operations.TestingAccountCreateResponse,
+    | errors.TestingAccountCreateResponseBody
+    | SDKError
+    | SDKValidationError
+    | UnexpectedClientError
+    | InvalidRequestError
+    | RequestAbortedError
+    | RequestTimeoutError
+    | ConnectionError
+  >
 > {
-    const input$: operations.TestingAccountCreateRequest = {
-        xPublishableKey: xPublishableKey,
-        accountTestCreationData: accountTestCreationData,
-    };
+  const input: operations.TestingAccountCreateRequest = {
+    accountTestCreationData: accountTestCreationData,
+    xPublishableKey: xPublishableKey,
+  };
 
-    const parsed$ = schemas$.safeParse(
-        input$,
-        (value$) => operations.TestingAccountCreateRequest$outboundSchema.parse(value$),
-        "Input validation failed"
-    );
-    if (!parsed$.ok) {
-        return parsed$;
-    }
-    const payload$ = parsed$.value;
-    const body$ = encodeJSON$("body", payload$["account-test-creation-data"], { explode: true });
+  const parsed = safeParse(
+    input,
+    (value) =>
+      operations.TestingAccountCreateRequest$outboundSchema.parse(value),
+    "Input validation failed",
+  );
+  if (!parsed.ok) {
+    return parsed;
+  }
+  const payload = parsed.value;
+  const body = encodeJSON("body", payload["account-test-creation-data"], {
+    explode: true,
+  });
 
-    const path$ = pathToFunc("/testing/accounts")();
+  const path = pathToFunc("/testing/accounts")();
 
-    const headers$ = new Headers({
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "X-Publishable-Key": encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
-            explode: false,
-            charEncoding: "none",
-        }),
-    });
+  const headers = new Headers({
+    "Content-Type": "application/json",
+    Accept: "application/json",
+    "X-Publishable-Key": encodeSimple(
+      "X-Publishable-Key",
+      payload["X-Publishable-Key"],
+      { explode: false, charEncoding: "none" },
+    ),
+  });
 
-    const security$: SecurityInput[][] = [
-        [
-            {
-                fieldName: "X-API-Key",
-                type: "apiKey:header",
-                value: security?.apiKey,
-            },
-        ],
-    ];
-    const securitySettings$ = resolveSecurity(...security$);
-    const context = {
-        operationID: "testingAccountCreate",
-        oAuth2Scopes: [],
-        securitySource: security,
-    };
+  const requestSecurity = resolveSecurity(
+    [
+      {
+        fieldName: "X-API-Key",
+        type: "apiKey:header",
+        value: security?.apiKey,
+      },
+    ],
+  );
+  const context = {
+    operationID: "testingAccountCreate",
+    oAuth2Scopes: [],
+    securitySource: security,
+  };
 
-    const requestRes = client$.createRequest$(
-        context,
-        {
-            security: securitySettings$,
-            method: "POST",
-            path: path$,
-            headers: headers$,
-            body: body$,
-            timeoutMs: options?.timeoutMs || client$.options$.timeoutMs || -1,
-        },
-        options
-    );
-    if (!requestRes.ok) {
-        return requestRes;
-    }
-    const request$ = requestRes.value;
+  const requestRes = client._createRequest(context, {
+    security: requestSecurity,
+    method: "POST",
+    path: path,
+    headers: headers,
+    body: body,
+    timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
+  }, options);
+  if (!requestRes.ok) {
+    return requestRes;
+  }
+  const req = requestRes.value;
 
-    const doResult = await client$.do$(request$, {
-        context,
-        errorCodes: ["4XX", "5XX"],
-        retryConfig: options?.retries || client$.options$.retryConfig,
-        retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
-    });
-    if (!doResult.ok) {
-        return doResult;
-    }
-    const response = doResult.value;
+  const doResult = await client._do(req, {
+    context,
+    errorCodes: ["4XX", "5XX"],
+    retryConfig: options?.retries
+      || client._options.retryConfig,
+    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+  });
+  if (!doResult.ok) {
+    return doResult;
+  }
+  const response = doResult.value;
 
-    const responseFields$ = {
-        ContentType: response.headers.get("content-type") ?? "application/octet-stream",
-        StatusCode: response.status,
-        RawResponse: response,
-        Headers: {},
-    };
+  const responseFields = {
+    ContentType: response.headers.get("content-type")
+      ?? "application/octet-stream",
+    StatusCode: response.status,
+    RawResponse: response,
+    Headers: {},
+  };
 
-    const [result$] = await m$.match<
-        operations.TestingAccountCreateResponse,
-        | errors.TestingAccountCreateResponseBody
-        | SDKError
-        | SDKValidationError
-        | UnexpectedClientError
-        | InvalidRequestError
-        | RequestAbortedError
-        | RequestTimeoutError
-        | ConnectionError
-    >(
-        m$.json(200, operations.TestingAccountCreateResponse$inboundSchema, {
-            key: "account-test-creation-data",
-        }),
-        m$.jsonErr("4XX", errors.TestingAccountCreateResponseBody$inboundSchema),
-        m$.fail("5XX"),
-        m$.nil("default", operations.TestingAccountCreateResponse$inboundSchema)
-    )(response, { extraFields: responseFields$ });
-    if (!result$.ok) {
-        return result$;
-    }
+  const [result] = await M.match<
+    operations.TestingAccountCreateResponse,
+    | errors.TestingAccountCreateResponseBody
+    | SDKError
+    | SDKValidationError
+    | UnexpectedClientError
+    | InvalidRequestError
+    | RequestAbortedError
+    | RequestTimeoutError
+    | ConnectionError
+  >(
+    M.json(200, operations.TestingAccountCreateResponse$inboundSchema, {
+      key: "account-test-creation-data",
+    }),
+    M.jsonErr("4XX", errors.TestingAccountCreateResponseBody$inboundSchema),
+    M.fail("5XX"),
+    M.nil("default", operations.TestingAccountCreateResponse$inboundSchema),
+  )(response, { extraFields: responseFields });
+  if (!result.ok) {
+    return result;
+  }
 
-    return result$;
+  return result;
 }

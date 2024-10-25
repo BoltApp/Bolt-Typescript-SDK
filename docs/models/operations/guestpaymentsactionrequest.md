@@ -7,13 +7,13 @@ import { PaymentActionRequestTag } from "@boltpay/bolt-typescript-sdk/models/com
 import { GuestPaymentsActionRequest } from "@boltpay/bolt-typescript-sdk/models/operations";
 
 let value: GuestPaymentsActionRequest = {
-    id: "iKv7t5bgt1gg",
-    xPublishableKey: "<value>",
-    xMerchantClientId: "<value>",
-    paymentActionRequest: {
-        dotTag: PaymentActionRequestTag.Finalize,
-        redirectResult: "eyJ0cmFuc",
-    },
+  id: "iKv7t5bgt1gg",
+  xPublishableKey: "<value>",
+  xMerchantClientId: "<id>",
+  paymentActionRequest: {
+    dotTag: PaymentActionRequestTag.Finalize,
+    redirectResult: "eyJ0cmFuc",
+  },
 };
 ```
 

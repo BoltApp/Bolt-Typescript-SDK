@@ -16,7 +16,7 @@ Use the Accounts API to access shoppers' accounts to empower your checkout and f
 
 ## getDetails
 
-Retrieve a shopper's account details, such as addresses and payment information
+Retrieve a shopper's account details, such as addresses and payment information. The account's details are filtered to be relevant to your merchant account, and some fields may be missing for some accounts. See the schema for details.
 
 ### Example Usage
 
@@ -32,9 +32,9 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 
 async function run() {
   const result = await boltTypescriptSDK.account.getDetails("<value>", "<value>");
-  
+
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -67,7 +67,7 @@ async function run() {
   const { value: result } = res;
 
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -89,12 +89,11 @@ run();
 
 ### Errors
 
-| Error Object      | Status Code       | Content Type      |
+| Error Type        | Status Code       | Content Type      |
 | ----------------- | ----------------- | ----------------- |
 | errors.ErrorT     | 4XX               | application/json  |
 | errors.FieldError | 4XX               | application/json  |
-| errors.SDKError   | 4xx-5xx           | */*               |
-
+| errors.SDKError   | 5XX               | \*/\*             |
 
 ## addAddress
 
@@ -114,7 +113,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 });
 
 async function run() {
-  const result = await boltTypescriptSDK.account.addAddress("<value>", "<value>", {
+  const result = await boltTypescriptSDK.account.addAddress({
     firstName: "Alice",
     lastName: "Baker",
     company: "ACME Corporation",
@@ -126,10 +125,10 @@ async function run() {
     countryCode: CountryCode.Us,
     email: "alice@example.com",
     phone: "+14155550199",
-  });
-  
+  }, "<value>", "<value>");
+
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -154,7 +153,7 @@ const boltTypescriptSDK = new BoltTypescriptSDKCore({
 });
 
 async function run() {
-  const res = await accountAddAddress(boltTypescriptSDK, "<value>", "<value>", {
+  const res = await accountAddAddress(boltTypescriptSDK, {
     firstName: "Alice",
     lastName: "Baker",
     company: "ACME Corporation",
@@ -166,7 +165,7 @@ async function run() {
     countryCode: CountryCode.Us,
     email: "alice@example.com",
     phone: "+14155550199",
-  });
+  }, "<value>", "<value>");
 
   if (!res.ok) {
     throw res.error;
@@ -175,7 +174,7 @@ async function run() {
   const { value: result } = res;
 
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -198,12 +197,11 @@ run();
 
 ### Errors
 
-| Error Object      | Status Code       | Content Type      |
+| Error Type        | Status Code       | Content Type      |
 | ----------------- | ----------------- | ----------------- |
 | errors.ErrorT     | 4XX               | application/json  |
 | errors.FieldError | 4XX               | application/json  |
-| errors.SDKError   | 4xx-5xx           | */*               |
-
+| errors.SDKError   | 5XX               | \*/\*             |
 
 ## updateAddress
 
@@ -223,7 +221,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 });
 
 async function run() {
-  const result = await boltTypescriptSDK.account.updateAddress("D4g3h5tBuVYK9", "<value>", "<value>", {
+  const result = await boltTypescriptSDK.account.updateAddress({
     firstName: "Alice",
     lastName: "Baker",
     company: "ACME Corporation",
@@ -235,10 +233,10 @@ async function run() {
     countryCode: CountryCode.Us,
     email: "alice@example.com",
     phone: "+14155550199",
-  });
-  
+  }, "D4g3h5tBuVYK9", "<value>", "<value>");
+
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -263,7 +261,7 @@ const boltTypescriptSDK = new BoltTypescriptSDKCore({
 });
 
 async function run() {
-  const res = await accountUpdateAddress(boltTypescriptSDK, "D4g3h5tBuVYK9", "<value>", "<value>", {
+  const res = await accountUpdateAddress(boltTypescriptSDK, {
     firstName: "Alice",
     lastName: "Baker",
     company: "ACME Corporation",
@@ -275,7 +273,7 @@ async function run() {
     countryCode: CountryCode.Us,
     email: "alice@example.com",
     phone: "+14155550199",
-  });
+  }, "D4g3h5tBuVYK9", "<value>", "<value>");
 
   if (!res.ok) {
     throw res.error;
@@ -284,7 +282,7 @@ async function run() {
   const { value: result } = res;
 
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -308,12 +306,11 @@ run();
 
 ### Errors
 
-| Error Object      | Status Code       | Content Type      |
+| Error Type        | Status Code       | Content Type      |
 | ----------------- | ----------------- | ----------------- |
 | errors.ErrorT     | 4XX               | application/json  |
 | errors.FieldError | 4XX               | application/json  |
-| errors.SDKError   | 4xx-5xx           | */*               |
-
+| errors.SDKError   | 5XX               | \*/\*             |
 
 ## deleteAddress
 
@@ -333,9 +330,9 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 
 async function run() {
   const result = await boltTypescriptSDK.account.deleteAddress("D4g3h5tBuVYK9", "<value>", "<value>");
-  
+
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -368,7 +365,7 @@ async function run() {
   const { value: result } = res;
 
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -391,12 +388,11 @@ run();
 
 ### Errors
 
-| Error Object      | Status Code       | Content Type      |
+| Error Type        | Status Code       | Content Type      |
 | ----------------- | ----------------- | ----------------- |
 | errors.ErrorT     | 4XX               | application/json  |
 | errors.FieldError | 4XX               | application/json  |
-| errors.SDKError   | 4xx-5xx           | */*               |
-
+| errors.SDKError   | 5XX               | \*/\*             |
 
 ## addPaymentMethod
 
@@ -416,7 +412,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 });
 
 async function run() {
-  const result = await boltTypescriptSDK.account.addPaymentMethod("<value>", "<value>", {
+  const result = await boltTypescriptSDK.account.addPaymentMethod({
     dotTag: DotTag.CreditCard,
     billingAddress: {
       dotTag: AddressReferenceIdTag.Id,
@@ -427,10 +423,10 @@ async function run() {
     last4: "1004",
     expiration: "2025-03",
     token: "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0",
-  });
-  
+  }, "<value>", "<value>");
+
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -455,7 +451,7 @@ const boltTypescriptSDK = new BoltTypescriptSDKCore({
 });
 
 async function run() {
-  const res = await accountAddPaymentMethod(boltTypescriptSDK, "<value>", "<value>", {
+  const res = await accountAddPaymentMethod(boltTypescriptSDK, {
     dotTag: DotTag.CreditCard,
     billingAddress: {
       dotTag: AddressReferenceIdTag.Id,
@@ -466,7 +462,7 @@ async function run() {
     last4: "1004",
     expiration: "2025-03",
     token: "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0",
-  });
+  }, "<value>", "<value>");
 
   if (!res.ok) {
     throw res.error;
@@ -475,7 +471,7 @@ async function run() {
   const { value: result } = res;
 
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -498,13 +494,12 @@ run();
 
 ### Errors
 
-| Error Object           | Status Code            | Content Type           |
+| Error Type             | Status Code            | Content Type           |
 | ---------------------- | ---------------------- | ---------------------- |
 | errors.ErrorT          | 4XX                    | application/json       |
 | errors.FieldError      | 4XX                    | application/json       |
 | errors.CreditCardError | 4XX                    | application/json       |
-| errors.SDKError        | 4xx-5xx                | */*                    |
-
+| errors.SDKError        | 5XX                    | \*/\*                  |
 
 ## deletePaymentMethod
 
@@ -524,9 +519,9 @@ const boltTypescriptSDK = new BoltTypescriptSDK({
 
 async function run() {
   const result = await boltTypescriptSDK.account.deletePaymentMethod("D4g3h5tBuVYK9", "<value>", "<value>");
-  
+
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -559,7 +554,7 @@ async function run() {
   const { value: result } = res;
 
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -582,8 +577,8 @@ run();
 
 ### Errors
 
-| Error Object      | Status Code       | Content Type      |
+| Error Type        | Status Code       | Content Type      |
 | ----------------- | ----------------- | ----------------- |
 | errors.ErrorT     | 4XX               | application/json  |
 | errors.FieldError | 4XX               | application/json  |
-| errors.SDKError   | 4xx-5xx           | */*               |
+| errors.SDKError   | 5XX               | \*/\*             |

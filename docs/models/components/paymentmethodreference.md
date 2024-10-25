@@ -6,8 +6,8 @@
 import { PaymentMethodReference, PaymentMethodReferenceTag } from "@boltpay/bolt-typescript-sdk/models/components";
 
 let value: PaymentMethodReference = {
-    dotTag: PaymentMethodReferenceTag.Id,
-    id: "X5h6j8uLpVGK",
+  dotTag: PaymentMethodReferenceTag.Id,
+  id: "X5h6j8uLpVGK",
 };
 ```
 

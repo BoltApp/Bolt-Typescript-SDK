@@ -6,7 +6,7 @@
 import { TestingCreditCardGetRequestBody, Type } from "@boltpay/bolt-typescript-sdk/models/operations";
 
 let value: TestingCreditCardGetRequestBody = {
-    type: Type.Approve,
+  type: Type.Approve,
 };
 ```
 

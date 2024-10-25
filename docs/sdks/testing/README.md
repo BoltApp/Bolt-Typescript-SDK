@@ -26,16 +26,16 @@ const boltTypescriptSDK = new BoltTypescriptSDK();
 async function run() {
   const result = await boltTypescriptSDK.testing.createAccount({
     apiKey: "<YOUR_API_KEY_HERE>",
-  }, "<value>", {
+  }, {
     emailState: EmailState.Unverified,
     phoneState: PhoneState.Verified,
     isMigrated: true,
     hasAddress: true,
     hasCreditCard: true,
-  });
-  
+  }, "<value>");
+
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -57,13 +57,13 @@ const boltTypescriptSDK = new BoltTypescriptSDKCore();
 async function run() {
   const res = await testingCreateAccount(boltTypescriptSDK, {
     apiKey: "<YOUR_API_KEY_HERE>",
-  }, "<value>", {
+  }, {
     emailState: EmailState.Unverified,
     phoneState: PhoneState.Verified,
     isMigrated: true,
     hasAddress: true,
     hasCreditCard: true,
-  });
+  }, "<value>");
 
   if (!res.ok) {
     throw res.error;
@@ -72,7 +72,7 @@ async function run() {
   const { value: result } = res;
 
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -95,12 +95,11 @@ run();
 
 ### Errors
 
-| Error Object      | Status Code       | Content Type      |
+| Error Type        | Status Code       | Content Type      |
 | ----------------- | ----------------- | ----------------- |
 | errors.ErrorT     | 4XX               | application/json  |
 | errors.FieldError | 4XX               | application/json  |
-| errors.SDKError   | 4xx-5xx           | */*               |
-
+| errors.SDKError   | 5XX               | \*/\*             |
 
 ## testingAccountPhoneGet
 
@@ -117,9 +116,9 @@ async function run() {
   const result = await boltTypescriptSDK.testing.testingAccountPhoneGet({
     apiKey: "<YOUR_API_KEY_HERE>",
   }, "<value>");
-  
+
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -149,7 +148,7 @@ async function run() {
   const { value: result } = res;
 
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -171,12 +170,11 @@ run();
 
 ### Errors
 
-| Error Object      | Status Code       | Content Type      |
+| Error Type        | Status Code       | Content Type      |
 | ----------------- | ----------------- | ----------------- |
 | errors.ErrorT     | 4XX               | application/json  |
 | errors.FieldError | 4XX               | application/json  |
-| errors.SDKError   | 4xx-5xx           | */*               |
-
+| errors.SDKError   | 5XX               | \*/\*             |
 
 ## getCreditCard
 
@@ -192,13 +190,13 @@ const boltTypescriptSDK = new BoltTypescriptSDK();
 
 async function run() {
   const result = await boltTypescriptSDK.testing.getCreditCard({
-    type: Type.Approve,
-  }, {
     apiKey: "<YOUR_API_KEY_HERE>",
+  }, {
+    type: Type.Approve,
   });
-  
+
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -219,9 +217,9 @@ const boltTypescriptSDK = new BoltTypescriptSDKCore();
 
 async function run() {
   const res = await testingGetCreditCard(boltTypescriptSDK, {
-    type: Type.Approve,
-  }, {
     apiKey: "<YOUR_API_KEY_HERE>",
+  }, {
+    type: Type.Approve,
   });
 
   if (!res.ok) {
@@ -231,7 +229,7 @@ async function run() {
   const { value: result } = res;
 
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -253,8 +251,8 @@ run();
 
 ### Errors
 
-| Error Object      | Status Code       | Content Type      |
+| Error Type        | Status Code       | Content Type      |
 | ----------------- | ----------------- | ----------------- |
 | errors.ErrorT     | 4XX               | application/json  |
 | errors.FieldError | 4XX               | application/json  |
-| errors.SDKError   | 4xx-5xx           | */*               |
+| errors.SDKError   | 5XX               | \*/\*             |

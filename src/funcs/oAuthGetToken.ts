@@ -3,21 +3,18 @@
  */
 
 import { BoltTypescriptSDKCore } from "../core.js";
-import {
-    encodeBodyForm as encodeBodyForm$,
-    encodeSimple as encodeSimple$,
-} from "../lib/encodings.js";
-import * as m$ from "../lib/matchers.js";
-import * as schemas$ from "../lib/schemas.js";
+import { encodeBodyForm, encodeSimple } from "../lib/encodings.js";
+import * as M from "../lib/matchers.js";
+import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { pathToFunc } from "../lib/url.js";
 import * as components from "../models/components/index.js";
 import {
-    ConnectionError,
-    InvalidRequestError,
-    RequestAbortedError,
-    RequestTimeoutError,
-    UnexpectedClientError,
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import * as errors from "../models/errors/index.js";
 import { SDKError } from "../models/errors/sdkerror.js";
@@ -32,112 +29,113 @@ import { Result } from "../types/fp.js";
  * Retrieve a new or refresh an existing OAuth token.
  */
 export async function oAuthGetToken(
-    client$: BoltTypescriptSDKCore,
-    xMerchantClientId: string,
-    tokenRequest: components.TokenRequest,
-    options?: RequestOptions
+  client: BoltTypescriptSDKCore,
+  tokenRequest: components.TokenRequest,
+  xMerchantClientId: string,
+  options?: RequestOptions,
 ): Promise<
-    Result<
-        operations.OauthGetTokenResponse,
-        | errors.OauthGetTokenResponseBody
-        | SDKError
-        | SDKValidationError
-        | UnexpectedClientError
-        | InvalidRequestError
-        | RequestAbortedError
-        | RequestTimeoutError
-        | ConnectionError
-    >
+  Result<
+    operations.OauthGetTokenResponse,
+    | errors.OauthGetTokenResponseBody
+    | SDKError
+    | SDKValidationError
+    | UnexpectedClientError
+    | InvalidRequestError
+    | RequestAbortedError
+    | RequestTimeoutError
+    | ConnectionError
+  >
 > {
-    const input$: operations.OauthGetTokenRequest = {
-        xMerchantClientId: xMerchantClientId,
-        tokenRequest: tokenRequest,
-    };
+  const input: operations.OauthGetTokenRequest = {
+    tokenRequest: tokenRequest,
+    xMerchantClientId: xMerchantClientId,
+  };
 
-    const parsed$ = schemas$.safeParse(
-        input$,
-        (value$) => operations.OauthGetTokenRequest$outboundSchema.parse(value$),
-        "Input validation failed"
-    );
-    if (!parsed$.ok) {
-        return parsed$;
-    }
-    const payload$ = parsed$.value;
-    const body$ = Object.entries(payload$["token-request"] || {})
-        .map(([k, v]) => {
-            return encodeBodyForm$(k, v, { charEncoding: "percent" });
-        })
-        .join("&");
+  const parsed = safeParse(
+    input,
+    (value) => operations.OauthGetTokenRequest$outboundSchema.parse(value),
+    "Input validation failed",
+  );
+  if (!parsed.ok) {
+    return parsed;
+  }
+  const payload = parsed.value;
 
-    const path$ = pathToFunc("/oauth/token")();
+  const body = Object.entries(payload["token-request"] || {}).map(([k, v]) => {
+    return encodeBodyForm(k, v, { charEncoding: "percent" });
+  }).join("&");
 
-    const headers$ = new Headers({
-        "Content-Type": "application/x-www-form-urlencoded",
-        Accept: "application/json",
-        "X-Merchant-Client-Id": encodeSimple$(
-            "X-Merchant-Client-Id",
-            payload$["X-Merchant-Client-Id"],
-            { explode: false, charEncoding: "none" }
-        ),
-    });
+  const path = pathToFunc("/oauth/token")();
 
-    const context = { operationID: "oauthGetToken", oAuth2Scopes: [], securitySource: null };
+  const headers = new Headers({
+    "Content-Type": "application/x-www-form-urlencoded",
+    Accept: "application/json",
+    "X-Merchant-Client-Id": encodeSimple(
+      "X-Merchant-Client-Id",
+      payload["X-Merchant-Client-Id"],
+      { explode: false, charEncoding: "none" },
+    ),
+  });
 
-    const requestRes = client$.createRequest$(
-        context,
-        {
-            method: "POST",
-            path: path$,
-            headers: headers$,
-            body: body$,
-            timeoutMs: options?.timeoutMs || client$.options$.timeoutMs || -1,
-        },
-        options
-    );
-    if (!requestRes.ok) {
-        return requestRes;
-    }
-    const request$ = requestRes.value;
+  const context = {
+    operationID: "oauthGetToken",
+    oAuth2Scopes: [],
+    securitySource: null,
+  };
 
-    const doResult = await client$.do$(request$, {
-        context,
-        errorCodes: ["4XX", "5XX"],
-        retryConfig: options?.retries || client$.options$.retryConfig,
-        retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
-    });
-    if (!doResult.ok) {
-        return doResult;
-    }
-    const response = doResult.value;
+  const requestRes = client._createRequest(context, {
+    method: "POST",
+    path: path,
+    headers: headers,
+    body: body,
+    timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
+  }, options);
+  if (!requestRes.ok) {
+    return requestRes;
+  }
+  const req = requestRes.value;
 
-    const responseFields$ = {
-        ContentType: response.headers.get("content-type") ?? "application/octet-stream",
-        StatusCode: response.status,
-        RawResponse: response,
-        Headers: {},
-    };
+  const doResult = await client._do(req, {
+    context,
+    errorCodes: ["4XX", "5XX"],
+    retryConfig: options?.retries
+      || client._options.retryConfig,
+    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+  });
+  if (!doResult.ok) {
+    return doResult;
+  }
+  const response = doResult.value;
 
-    const [result$] = await m$.match<
-        operations.OauthGetTokenResponse,
-        | errors.OauthGetTokenResponseBody
-        | SDKError
-        | SDKValidationError
-        | UnexpectedClientError
-        | InvalidRequestError
-        | RequestAbortedError
-        | RequestTimeoutError
-        | ConnectionError
-    >(
-        m$.json(200, operations.OauthGetTokenResponse$inboundSchema, {
-            key: "get-access-token-response",
-        }),
-        m$.jsonErr("4XX", errors.OauthGetTokenResponseBody$inboundSchema),
-        m$.fail("5XX"),
-        m$.nil("default", operations.OauthGetTokenResponse$inboundSchema)
-    )(response, { extraFields: responseFields$ });
-    if (!result$.ok) {
-        return result$;
-    }
+  const responseFields = {
+    ContentType: response.headers.get("content-type")
+      ?? "application/octet-stream",
+    StatusCode: response.status,
+    RawResponse: response,
+    Headers: {},
+  };
 
-    return result$;
+  const [result] = await M.match<
+    operations.OauthGetTokenResponse,
+    | errors.OauthGetTokenResponseBody
+    | SDKError
+    | SDKValidationError
+    | UnexpectedClientError
+    | InvalidRequestError
+    | RequestAbortedError
+    | RequestTimeoutError
+    | ConnectionError
+  >(
+    M.json(200, operations.OauthGetTokenResponse$inboundSchema, {
+      key: "get-access-token-response",
+    }),
+    M.jsonErr("4XX", errors.OauthGetTokenResponseBody$inboundSchema),
+    M.fail("5XX"),
+    M.nil("default", operations.OauthGetTokenResponse$inboundSchema),
+  )(response, { extraFields: responseFields });
+  if (!result.ok) {
+    return result;
+  }
+
+  return result;
 }

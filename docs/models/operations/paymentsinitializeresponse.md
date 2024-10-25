@@ -3,28 +3,22 @@
 ## Example Usage
 
 ```typescript
-import { PaymentResponseFinalizedTag, Status } from "@boltpay/bolt-typescript-sdk/models/components";
+import { Action, PaymentResponsePendingStatus, PaymentResponsePendingTag } from "@boltpay/bolt-typescript-sdk/models/components";
 import { PaymentsInitializeResponse } from "@boltpay/bolt-typescript-sdk/models/operations";
 
 let value: PaymentsInitializeResponse = {
-    contentType: "<value>",
-    statusCode: 384382,
-    rawResponse: new Response('{"message": "hello world"}', {
-        headers: { "Content-Type": "application/json" },
-    }),
-    paymentResponse: {
-        dotTag: PaymentResponseFinalizedTag.Finalized,
-        id: "iKv7t5bgt1gg",
-        status: Status.Success,
-        transaction: {
-            reference: "OBYG-X1PX-FN55",
-            authorizations: [
-                {
-                    processorReference: "123456789XYZ",
-                },
-            ],
-        },
-    },
+  contentType: "<value>",
+  statusCode: 508,
+  rawResponse: new Response("{\"message\": \"hello world\"}", {
+    headers: { "Content-Type": "application/json" },
+  }),
+  paymentResponse: {
+    dotTag: PaymentResponsePendingTag.Pending,
+    id: "iKv7t5bgt1gg",
+    status: PaymentResponsePendingStatus.AwaitingUserConfirmation,
+    action: Action.Redirect,
+    url: "www.example.com/payments/finalize",
+  },
 };
 ```
 

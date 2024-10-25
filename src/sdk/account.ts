@@ -14,116 +14,129 @@ import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Account extends ClientSDK {
-    /**
-     * Retrieve account details
-     *
-     * @remarks
-     * Retrieve a shopper's account details, such as addresses and payment information
-     */
-    async getDetails(
-        xPublishableKey: string,
-        xMerchantClientId: string,
-        options?: RequestOptions
-    ): Promise<operations.AccountGetResponse> {
-        return unwrapAsync(accountGetDetails(this, xPublishableKey, xMerchantClientId, options));
-    }
+  /**
+   * Retrieve account details
+   *
+   * @remarks
+   * Retrieve a shopper's account details, such as addresses and payment information. The account's details are filtered to be relevant to your merchant account, and some fields may be missing for some accounts. See the schema for details.
+   */
+  async getDetails(
+    xPublishableKey: string,
+    xMerchantClientId: string,
+    options?: RequestOptions,
+  ): Promise<operations.AccountGetResponse> {
+    return unwrapAsync(accountGetDetails(
+      this,
+      xPublishableKey,
+      xMerchantClientId,
+      options,
+    ));
+  }
 
-    /**
-     * Add an address
-     *
-     * @remarks
-     * Add an address to the shopper's account
-     */
-    async addAddress(
-        xPublishableKey: string,
-        xMerchantClientId: string,
-        addressListing: components.AddressListingInput,
-        options?: RequestOptions
-    ): Promise<operations.AccountAddressCreateResponse> {
-        return unwrapAsync(
-            accountAddAddress(this, xPublishableKey, xMerchantClientId, addressListing, options)
-        );
-    }
+  /**
+   * Add an address
+   *
+   * @remarks
+   * Add an address to the shopper's account
+   */
+  async addAddress(
+    addressListing: components.AddressListingInput,
+    xPublishableKey: string,
+    xMerchantClientId: string,
+    options?: RequestOptions,
+  ): Promise<operations.AccountAddressCreateResponse> {
+    return unwrapAsync(accountAddAddress(
+      this,
+      addressListing,
+      xPublishableKey,
+      xMerchantClientId,
+      options,
+    ));
+  }
 
-    /**
-     * Edit an existing address
-     *
-     * @remarks
-     * Edit an existing address on the shopper's account. This does not edit addresses that are already associated with other resources, such as transactions or shipments.
-     */
-    async updateAddress(
-        id: string,
-        xPublishableKey: string,
-        xMerchantClientId: string,
-        addressListing: components.AddressListingInput,
-        options?: RequestOptions
-    ): Promise<operations.AccountAddressEditResponse> {
-        return unwrapAsync(
-            accountUpdateAddress(
-                this,
-                id,
-                xPublishableKey,
-                xMerchantClientId,
-                addressListing,
-                options
-            )
-        );
-    }
+  /**
+   * Edit an existing address
+   *
+   * @remarks
+   * Edit an existing address on the shopper's account. This does not edit addresses that are already associated with other resources, such as transactions or shipments.
+   */
+  async updateAddress(
+    addressListing: components.AddressListingInput,
+    id: string,
+    xPublishableKey: string,
+    xMerchantClientId: string,
+    options?: RequestOptions,
+  ): Promise<operations.AccountAddressEditResponse> {
+    return unwrapAsync(accountUpdateAddress(
+      this,
+      addressListing,
+      id,
+      xPublishableKey,
+      xMerchantClientId,
+      options,
+    ));
+  }
 
-    /**
-     * Delete an existing address
-     *
-     * @remarks
-     * Delete an existing address. Deleting an address does not invalidate or remove the address from transactions or shipments that are associated with it.
-     */
-    async deleteAddress(
-        id: string,
-        xPublishableKey: string,
-        xMerchantClientId: string,
-        options?: RequestOptions
-    ): Promise<operations.AccountAddressDeleteResponse> {
-        return unwrapAsync(
-            accountDeleteAddress(this, id, xPublishableKey, xMerchantClientId, options)
-        );
-    }
+  /**
+   * Delete an existing address
+   *
+   * @remarks
+   * Delete an existing address. Deleting an address does not invalidate or remove the address from transactions or shipments that are associated with it.
+   */
+  async deleteAddress(
+    id: string,
+    xPublishableKey: string,
+    xMerchantClientId: string,
+    options?: RequestOptions,
+  ): Promise<operations.AccountAddressDeleteResponse> {
+    return unwrapAsync(accountDeleteAddress(
+      this,
+      id,
+      xPublishableKey,
+      xMerchantClientId,
+      options,
+    ));
+  }
 
-    /**
-     * Add a payment method
-     *
-     * @remarks
-     * Add a payment method to a shopper's Bolt Account Wallet. For security purposes, this request must come from your backend. <br/> **Note**: Before using this API, the credit card details must be tokenized by Bolt's credit card tokenization service. Please review our [Bolt Payment Field Component](https://help.bolt.com/products/ignite/api-implementation/#enhance-payments) or [Install the Bolt Tokenizer](https://help.bolt.com/developers/references/bolt-tokenizer) documentation.
-     */
-    async addPaymentMethod(
-        xPublishableKey: string,
-        xMerchantClientId: string,
-        paymentMethod: components.PaymentMethodInput,
-        options?: RequestOptions
-    ): Promise<operations.AccountAddPaymentMethodResponse> {
-        return unwrapAsync(
-            accountAddPaymentMethod(
-                this,
-                xPublishableKey,
-                xMerchantClientId,
-                paymentMethod,
-                options
-            )
-        );
-    }
+  /**
+   * Add a payment method
+   *
+   * @remarks
+   * Add a payment method to a shopper's Bolt Account Wallet. For security purposes, this request must come from your backend. <br/> **Note**: Before using this API, the credit card details must be tokenized by Bolt's credit card tokenization service. Please review our [Bolt Payment Field Component](https://help.bolt.com/products/ignite/api-implementation/#enhance-payments) or [Install the Bolt Tokenizer](https://help.bolt.com/developers/references/bolt-tokenizer) documentation.
+   */
+  async addPaymentMethod(
+    paymentMethod: components.PaymentMethodInput,
+    xPublishableKey: string,
+    xMerchantClientId: string,
+    options?: RequestOptions,
+  ): Promise<operations.AccountAddPaymentMethodResponse> {
+    return unwrapAsync(accountAddPaymentMethod(
+      this,
+      paymentMethod,
+      xPublishableKey,
+      xMerchantClientId,
+      options,
+    ));
+  }
 
-    /**
-     * Delete an existing payment method
-     *
-     * @remarks
-     * Delete an existing payment method. Deleting a payment method does not invalidate or remove it from transactions or orders that are associated with it.
-     */
-    async deletePaymentMethod(
-        id: string,
-        xPublishableKey: string,
-        xMerchantClientId: string,
-        options?: RequestOptions
-    ): Promise<operations.AccountPaymentMethodDeleteResponse> {
-        return unwrapAsync(
-            accountDeletePaymentMethod(this, id, xPublishableKey, xMerchantClientId, options)
-        );
-    }
+  /**
+   * Delete an existing payment method
+   *
+   * @remarks
+   * Delete an existing payment method. Deleting a payment method does not invalidate or remove it from transactions or orders that are associated with it.
+   */
+  async deletePaymentMethod(
+    id: string,
+    xPublishableKey: string,
+    xMerchantClientId: string,
+    options?: RequestOptions,
+  ): Promise<operations.AccountPaymentMethodDeleteResponse> {
+    return unwrapAsync(accountDeletePaymentMethod(
+      this,
+      id,
+      xPublishableKey,
+      xMerchantClientId,
+      options,
+    ));
+  }
 }

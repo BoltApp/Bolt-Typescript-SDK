@@ -6,7 +6,7 @@
 import { PaymentMethodAffirmOutput, PaymentMethodAffirmTag } from "@boltpay/bolt-typescript-sdk/models/components";
 
 let value: PaymentMethodAffirmOutput = {
-    dotTag: PaymentMethodAffirmTag.Affirm,
+  dotTag: PaymentMethodAffirmTag.Affirm,
 };
 ```
 

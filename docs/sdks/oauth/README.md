@@ -23,7 +23,7 @@ import { GrantType, Scope } from "@boltpay/bolt-typescript-sdk/models/components
 const boltTypescriptSDK = new BoltTypescriptSDK();
 
 async function run() {
-  const result = await boltTypescriptSDK.oAuth.getToken("<value>", {
+  const result = await boltTypescriptSDK.oAuth.getToken({
     grantType: GrantType.AuthorizationCode,
     code: "7GSjMRSHs6Ak7C_zvVW6P2IhZOHxMK7HZKW1fMX85ms",
     clientId: "8fd9diIy59sj.IraJdeIgmdsO.fd233434fg2c616cgo932aa6e1e4fc627a9385045gr395222a127gi93c595rg4",
@@ -34,10 +34,10 @@ async function run() {
       Scope.Openid,
     ],
     state: "xyzABC123",
-  });
-  
+  }, "<value>");
+
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -57,7 +57,7 @@ import { GrantType, Scope } from "@boltpay/bolt-typescript-sdk/models/components
 const boltTypescriptSDK = new BoltTypescriptSDKCore();
 
 async function run() {
-  const res = await oAuthGetToken(boltTypescriptSDK, "<value>", {
+  const res = await oAuthGetToken(boltTypescriptSDK, {
     grantType: GrantType.AuthorizationCode,
     code: "7GSjMRSHs6Ak7C_zvVW6P2IhZOHxMK7HZKW1fMX85ms",
     clientId: "8fd9diIy59sj.IraJdeIgmdsO.fd233434fg2c616cgo932aa6e1e4fc627a9385045gr395222a127gi93c595rg4",
@@ -68,7 +68,7 @@ async function run() {
       Scope.Openid,
     ],
     state: "xyzABC123",
-  });
+  }, "<value>");
 
   if (!res.ok) {
     throw res.error;
@@ -77,7 +77,7 @@ async function run() {
   const { value: result } = res;
 
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -99,8 +99,8 @@ run();
 
 ### Errors
 
-| Error Object      | Status Code       | Content Type      |
+| Error Type        | Status Code       | Content Type      |
 | ----------------- | ----------------- | ----------------- |
 | errors.ErrorT     | 4XX               | application/json  |
 | errors.FieldError | 4XX               | application/json  |
-| errors.SDKError   | 4xx-5xx           | */*               |
+| errors.SDKError   | 5XX               | \*/\*             |

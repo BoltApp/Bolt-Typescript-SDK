@@ -6,9 +6,9 @@
 import { AccountAddressDeleteRequest } from "@boltpay/bolt-typescript-sdk/models/operations";
 
 let value: AccountAddressDeleteRequest = {
-    id: "D4g3h5tBuVYK9",
-    xPublishableKey: "<value>",
-    xMerchantClientId: "<value>",
+  id: "D4g3h5tBuVYK9",
+  xPublishableKey: "<value>",
+  xMerchantClientId: "<id>",
 };
 ```
 

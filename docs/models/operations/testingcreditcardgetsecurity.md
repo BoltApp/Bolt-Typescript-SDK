@@ -6,7 +6,7 @@
 import { TestingCreditCardGetSecurity } from "@boltpay/bolt-typescript-sdk/models/operations";
 
 let value: TestingCreditCardGetSecurity = {
-    apiKey: "<value>",
+  apiKey: "<value>",
 };
 ```
 

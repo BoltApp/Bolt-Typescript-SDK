@@ -23,7 +23,7 @@ const boltTypescriptSDK = new BoltTypescriptSDK();
 async function run() {
   const result = await boltTypescriptSDK.payments.guest.initialize({
     apiKey: "<YOUR_API_KEY_HERE>",
-  }, "<value>", "<value>", {
+  }, {
     profile: {
       createAccount: true,
       firstName: "Alice",
@@ -113,10 +113,10 @@ async function run() {
       expiration: "2025-03",
       token: "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0",
     },
-  });
-  
+  }, "<value>", "<value>");
+
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -138,7 +138,7 @@ const boltTypescriptSDK = new BoltTypescriptSDKCore();
 async function run() {
   const res = await paymentsGuestInitialize(boltTypescriptSDK, {
     apiKey: "<YOUR_API_KEY_HERE>",
-  }, "<value>", "<value>", {
+  }, {
     profile: {
       createAccount: true,
       firstName: "Alice",
@@ -228,7 +228,7 @@ async function run() {
       expiration: "2025-03",
       token: "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0",
     },
-  });
+  }, "<value>", "<value>");
 
   if (!res.ok) {
     throw res.error;
@@ -237,7 +237,7 @@ async function run() {
   const { value: result } = res;
 
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -261,14 +261,13 @@ run();
 
 ### Errors
 
-| Error Object           | Status Code            | Content Type           |
+| Error Type             | Status Code            | Content Type           |
 | ---------------------- | ---------------------- | ---------------------- |
 | errors.ErrorT          | 4XX                    | application/json       |
 | errors.FieldError      | 4XX                    | application/json       |
 | errors.CartError       | 4XX                    | application/json       |
 | errors.CreditCardError | 4XX                    | application/json       |
-| errors.SDKError        | 4xx-5xx                | */*                    |
-
+| errors.SDKError        | 5XX                    | \*/\*                  |
 
 ## performAction
 
@@ -285,13 +284,13 @@ const boltTypescriptSDK = new BoltTypescriptSDK();
 async function run() {
   const result = await boltTypescriptSDK.payments.guest.performAction({
     apiKey: "<YOUR_API_KEY_HERE>",
-  }, "iKv7t5bgt1gg", "<value>", "<value>", {
+  }, {
     dotTag: PaymentActionRequestTag.Finalize,
     redirectResult: "eyJ0cmFuc",
-  });
-  
+  }, "iKv7t5bgt1gg", "<value>", "<value>");
+
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -313,10 +312,10 @@ const boltTypescriptSDK = new BoltTypescriptSDKCore();
 async function run() {
   const res = await paymentsGuestPerformAction(boltTypescriptSDK, {
     apiKey: "<YOUR_API_KEY_HERE>",
-  }, "iKv7t5bgt1gg", "<value>", "<value>", {
+  }, {
     dotTag: PaymentActionRequestTag.Finalize,
     redirectResult: "eyJ0cmFuc",
-  });
+  }, "iKv7t5bgt1gg", "<value>", "<value>");
 
   if (!res.ok) {
     throw res.error;
@@ -325,7 +324,7 @@ async function run() {
   const { value: result } = res;
 
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -350,8 +349,8 @@ run();
 
 ### Errors
 
-| Error Object      | Status Code       | Content Type      |
+| Error Type        | Status Code       | Content Type      |
 | ----------------- | ----------------- | ----------------- |
 | errors.ErrorT     | 4XX               | application/json  |
 | errors.FieldError | 4XX               | application/json  |
-| errors.SDKError   | 4xx-5xx           | */*               |
+| errors.SDKError   | 5XX               | \*/\*             |

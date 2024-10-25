@@ -2,25 +2,25 @@
 
 An error has occurred, and further details are contained in the response
 
-## Example Usage
-
-```typescript
-import { AccountAddressDeleteResponseBody } from "@boltpay/bolt-typescript-sdk/models/errors";
-
-// No examples available for this model
-```
 
 ## Supported Types
 
 ### `errors.ErrorT`
 
 ```typescript
-const value: errors.ErrorT = /* values here */
+const value: errors.ErrorT = {
+  dotTag: DotTag.UnprocessableRequest,
+  message: "We were unable to process your request.",
+};
 ```
 
 ### `errors.FieldError`
 
 ```typescript
-const value: errors.FieldError = /* values here */
+const value: errors.FieldError = {
+  dotTag: SchemasTag.InvalidInputParameter,
+  message: "We were unable to process your request.",
+  field: "address.phone",
+};
 ```
 

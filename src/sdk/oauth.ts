@@ -9,17 +9,22 @@ import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class OAuth extends ClientSDK {
-    /**
-     * Get OAuth token
-     *
-     * @remarks
-     * Retrieve a new or refresh an existing OAuth token.
-     */
-    async getToken(
-        xMerchantClientId: string,
-        tokenRequest: components.TokenRequest,
-        options?: RequestOptions
-    ): Promise<operations.OauthGetTokenResponse> {
-        return unwrapAsync(oAuthGetToken(this, xMerchantClientId, tokenRequest, options));
-    }
+  /**
+   * Get OAuth token
+   *
+   * @remarks
+   * Retrieve a new or refresh an existing OAuth token.
+   */
+  async getToken(
+    tokenRequest: components.TokenRequest,
+    xMerchantClientId: string,
+    options?: RequestOptions,
+  ): Promise<operations.OauthGetTokenResponse> {
+    return unwrapAsync(oAuthGetToken(
+      this,
+      tokenRequest,
+      xMerchantClientId,
+      options,
+    ));
+  }
 }

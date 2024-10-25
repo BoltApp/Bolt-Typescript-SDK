@@ -8,31 +8,33 @@ import * as z from "zod";
  * The credit card's network.
  */
 export enum CreditCardNetwork {
-    Visa = "visa",
-    Mastercard = "mastercard",
-    Amex = "amex",
-    Discover = "discover",
-    Jcb = "jcb",
-    Unionpay = "unionpay",
-    Alliancedata = "alliancedata",
-    Citiplcc = "citiplcc",
+  Visa = "visa",
+  Mastercard = "mastercard",
+  Amex = "amex",
+  Discover = "discover",
+  Jcb = "jcb",
+  Unionpay = "unionpay",
+  Alliancedata = "alliancedata",
+  Citiplcc = "citiplcc",
 }
 
 /** @internal */
-export const CreditCardNetwork$inboundSchema: z.ZodNativeEnum<typeof CreditCardNetwork> =
-    z.nativeEnum(CreditCardNetwork);
+export const CreditCardNetwork$inboundSchema: z.ZodNativeEnum<
+  typeof CreditCardNetwork
+> = z.nativeEnum(CreditCardNetwork);
 
 /** @internal */
-export const CreditCardNetwork$outboundSchema: z.ZodNativeEnum<typeof CreditCardNetwork> =
-    CreditCardNetwork$inboundSchema;
+export const CreditCardNetwork$outboundSchema: z.ZodNativeEnum<
+  typeof CreditCardNetwork
+> = CreditCardNetwork$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
 export namespace CreditCardNetwork$ {
-    /** @deprecated use `CreditCardNetwork$inboundSchema` instead. */
-    export const inboundSchema = CreditCardNetwork$inboundSchema;
-    /** @deprecated use `CreditCardNetwork$outboundSchema` instead. */
-    export const outboundSchema = CreditCardNetwork$outboundSchema;
+  /** @deprecated use `CreditCardNetwork$inboundSchema` instead. */
+  export const inboundSchema = CreditCardNetwork$inboundSchema;
+  /** @deprecated use `CreditCardNetwork$outboundSchema` instead. */
+  export const outboundSchema = CreditCardNetwork$outboundSchema;
 }

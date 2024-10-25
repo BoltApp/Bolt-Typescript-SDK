@@ -3,17 +3,20 @@
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 
 const boltTypescriptSDK = new BoltTypescriptSDK({
-    security: {
-        oauth: "<YOUR_OAUTH_HERE>",
-        apiKey: "<YOUR_API_KEY_HERE>",
-    },
+  security: {
+    oauth: "<YOUR_OAUTH_HERE>",
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
 });
 
 async function run() {
-    const result = await boltTypescriptSDK.account.getDetails("<value>", "<value>");
+  const result = await boltTypescriptSDK.account.getDetails(
+    "<value>",
+    "<value>",
+  );
 
-    // Handle the result
-    console.log(result);
+  // Handle the result
+  console.log(result);
 }
 
 run();

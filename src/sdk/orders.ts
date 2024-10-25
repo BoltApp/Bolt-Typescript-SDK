@@ -9,21 +9,26 @@ import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Orders extends ClientSDK {
-    /**
-     * Create an order that was prepared outside the Bolt ecosystem.
-     *
-     * @remarks
-     * Create an order that was prepared outside the Bolt ecosystem. Some Bolt-powered flows automatically manage order creation - in those flows the order ID will be provided separately and not through this API.
-     */
-    async ordersCreate(
-        security: operations.OrdersCreateSecurity,
-        xPublishableKey: string,
-        xMerchantClientId: string,
-        order: components.Order,
-        options?: RequestOptions
-    ): Promise<operations.OrdersCreateResponse> {
-        return unwrapAsync(
-            ordersOrdersCreate(this, security, xPublishableKey, xMerchantClientId, order, options)
-        );
-    }
+  /**
+   * Create an order that was prepared outside the Bolt ecosystem.
+   *
+   * @remarks
+   * Create an order that was prepared outside the Bolt ecosystem. Some Bolt-powered flows automatically manage order creation - in those flows the order ID will be provided separately and not through this API.
+   */
+  async ordersCreate(
+    security: operations.OrdersCreateSecurity,
+    order: components.Order,
+    xPublishableKey: string,
+    xMerchantClientId: string,
+    options?: RequestOptions,
+  ): Promise<operations.OrdersCreateResponse> {
+    return unwrapAsync(ordersOrdersCreate(
+      this,
+      security,
+      order,
+      xPublishableKey,
+      xMerchantClientId,
+      options,
+    ));
+  }
 }

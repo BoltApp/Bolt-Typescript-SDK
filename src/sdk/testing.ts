@@ -11,48 +11,62 @@ import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Testing extends ClientSDK {
-    /**
-     * Create a test account
-     *
-     * @remarks
-     * Create a Bolt shopper account for testing purposes.
-     */
-    async createAccount(
-        security: operations.TestingAccountCreateSecurity,
-        xPublishableKey: string,
-        accountTestCreationData: components.AccountTestCreationData,
-        options?: RequestOptions
-    ): Promise<operations.TestingAccountCreateResponse> {
-        return unwrapAsync(
-            testingCreateAccount(this, security, xPublishableKey, accountTestCreationData, options)
-        );
-    }
+  /**
+   * Create a test account
+   *
+   * @remarks
+   * Create a Bolt shopper account for testing purposes.
+   */
+  async createAccount(
+    security: operations.TestingAccountCreateSecurity,
+    accountTestCreationData: components.AccountTestCreationData,
+    xPublishableKey: string,
+    options?: RequestOptions,
+  ): Promise<operations.TestingAccountCreateResponse> {
+    return unwrapAsync(testingCreateAccount(
+      this,
+      security,
+      accountTestCreationData,
+      xPublishableKey,
+      options,
+    ));
+  }
 
-    /**
-     * Get a random phone number
-     *
-     * @remarks
-     * Get a random, fictitious phone number that is not assigned to any existing Bolt account.
-     */
-    async testingAccountPhoneGet(
-        security: operations.TestingAccountPhoneGetSecurity,
-        xPublishableKey: string,
-        options?: RequestOptions
-    ): Promise<operations.TestingAccountPhoneGetResponse> {
-        return unwrapAsync(testingTestingAccountPhoneGet(this, security, xPublishableKey, options));
-    }
+  /**
+   * Get a random phone number
+   *
+   * @remarks
+   * Get a random, fictitious phone number that is not assigned to any existing Bolt account.
+   */
+  async testingAccountPhoneGet(
+    security: operations.TestingAccountPhoneGetSecurity,
+    xPublishableKey: string,
+    options?: RequestOptions,
+  ): Promise<operations.TestingAccountPhoneGetResponse> {
+    return unwrapAsync(testingTestingAccountPhoneGet(
+      this,
+      security,
+      xPublishableKey,
+      options,
+    ));
+  }
 
-    /**
-     * Retrieve a tokenized test credit card
-     *
-     * @remarks
-     * Retrieve a test credit card that can be used to process payments in your Bolt testing environment. The response includes the card's Bolt credit card token.
-     */
-    async getCreditCard(
-        request: operations.TestingCreditCardGetRequestBody,
-        security: operations.TestingCreditCardGetSecurity,
-        options?: RequestOptions
-    ): Promise<operations.TestingCreditCardGetResponse> {
-        return unwrapAsync(testingGetCreditCard(this, request, security, options));
-    }
+  /**
+   * Retrieve a tokenized test credit card
+   *
+   * @remarks
+   * Retrieve a test credit card that can be used to process payments in your Bolt testing environment. The response includes the card's Bolt credit card token.
+   */
+  async getCreditCard(
+    security: operations.TestingCreditCardGetSecurity,
+    request: operations.TestingCreditCardGetRequestBody,
+    options?: RequestOptions,
+  ): Promise<operations.TestingCreditCardGetResponse> {
+    return unwrapAsync(testingGetCreditCard(
+      this,
+      security,
+      request,
+      options,
+    ));
+  }
 }

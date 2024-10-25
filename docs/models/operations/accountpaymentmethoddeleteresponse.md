@@ -6,11 +6,11 @@
 import { AccountPaymentMethodDeleteResponse } from "@boltpay/bolt-typescript-sdk/models/operations";
 
 let value: AccountPaymentMethodDeleteResponse = {
-    contentType: "<value>",
-    statusCode: 423655,
-    rawResponse: new Response('{"message": "hello world"}', {
-        headers: { "Content-Type": "application/json" },
-    }),
+  contentType: "<value>",
+  statusCode: 500,
+  rawResponse: new Response("{\"message\": \"hello world\"}", {
+    headers: { "Content-Type": "application/json" },
+  }),
 };
 ```
 

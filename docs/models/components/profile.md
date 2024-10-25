@@ -8,10 +8,10 @@ An account's identifying information.
 import { Profile } from "@boltpay/bolt-typescript-sdk/models/components";
 
 let value: Profile = {
-    firstName: "Alice",
-    lastName: "Baker",
-    email: "alice@example.com",
-    phone: "+14155550199",
+  firstName: "Alice",
+  lastName: "Baker",
+  email: "alice@example.com",
+  phone: "+14155550199",
 };
 ```
 

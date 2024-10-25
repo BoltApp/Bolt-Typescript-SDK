@@ -6,7 +6,7 @@
 import { PaymentMethodAfterpayOutput, PaymentMethodAfterpayTag } from "@boltpay/bolt-typescript-sdk/models/components";
 
 let value: PaymentMethodAfterpayOutput = {
-    dotTag: PaymentMethodAfterpayTag.Afterpay,
+  dotTag: PaymentMethodAfterpayTag.Afterpay,
 };
 ```
 

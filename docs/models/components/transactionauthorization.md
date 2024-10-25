@@ -6,7 +6,7 @@
 import { TransactionAuthorization } from "@boltpay/bolt-typescript-sdk/models/components";
 
 let value: TransactionAuthorization = {
-    processorReference: "123456789XYZ",
+  processorReference: "123456789XYZ",
 };
 ```
 

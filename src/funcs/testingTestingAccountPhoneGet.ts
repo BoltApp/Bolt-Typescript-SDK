@@ -3,18 +3,18 @@
  */
 
 import { BoltTypescriptSDKCore } from "../core.js";
-import { encodeSimple as encodeSimple$ } from "../lib/encodings.js";
-import * as m$ from "../lib/matchers.js";
-import * as schemas$ from "../lib/schemas.js";
+import { encodeSimple } from "../lib/encodings.js";
+import * as M from "../lib/matchers.js";
+import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { resolveSecurity, SecurityInput } from "../lib/security.js";
+import { resolveSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
 import {
-    ConnectionError,
-    InvalidRequestError,
-    RequestAbortedError,
-    RequestTimeoutError,
-    UnexpectedClientError,
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import * as errors from "../models/errors/index.js";
 import { SDKError } from "../models/errors/sdkerror.js";
@@ -29,120 +29,119 @@ import { Result } from "../types/fp.js";
  * Get a random, fictitious phone number that is not assigned to any existing Bolt account.
  */
 export async function testingTestingAccountPhoneGet(
-    client$: BoltTypescriptSDKCore,
-    security: operations.TestingAccountPhoneGetSecurity,
-    xPublishableKey: string,
-    options?: RequestOptions
+  client: BoltTypescriptSDKCore,
+  security: operations.TestingAccountPhoneGetSecurity,
+  xPublishableKey: string,
+  options?: RequestOptions,
 ): Promise<
-    Result<
-        operations.TestingAccountPhoneGetResponse,
-        | errors.TestingAccountPhoneGetResponseBody
-        | SDKError
-        | SDKValidationError
-        | UnexpectedClientError
-        | InvalidRequestError
-        | RequestAbortedError
-        | RequestTimeoutError
-        | ConnectionError
-    >
+  Result<
+    operations.TestingAccountPhoneGetResponse,
+    | errors.TestingAccountPhoneGetResponseBody
+    | SDKError
+    | SDKValidationError
+    | UnexpectedClientError
+    | InvalidRequestError
+    | RequestAbortedError
+    | RequestTimeoutError
+    | ConnectionError
+  >
 > {
-    const input$: operations.TestingAccountPhoneGetRequest = {
-        xPublishableKey: xPublishableKey,
-    };
+  const input: operations.TestingAccountPhoneGetRequest = {
+    xPublishableKey: xPublishableKey,
+  };
 
-    const parsed$ = schemas$.safeParse(
-        input$,
-        (value$) => operations.TestingAccountPhoneGetRequest$outboundSchema.parse(value$),
-        "Input validation failed"
-    );
-    if (!parsed$.ok) {
-        return parsed$;
-    }
-    const payload$ = parsed$.value;
-    const body$ = null;
+  const parsed = safeParse(
+    input,
+    (value) =>
+      operations.TestingAccountPhoneGetRequest$outboundSchema.parse(value),
+    "Input validation failed",
+  );
+  if (!parsed.ok) {
+    return parsed;
+  }
+  const payload = parsed.value;
+  const body = null;
 
-    const path$ = pathToFunc("/testing/accounts/phones")();
+  const path = pathToFunc("/testing/accounts/phones")();
 
-    const headers$ = new Headers({
-        Accept: "application/json",
-        "X-Publishable-Key": encodeSimple$("X-Publishable-Key", payload$["X-Publishable-Key"], {
-            explode: false,
-            charEncoding: "none",
-        }),
-    });
+  const headers = new Headers({
+    Accept: "application/json",
+    "X-Publishable-Key": encodeSimple(
+      "X-Publishable-Key",
+      payload["X-Publishable-Key"],
+      { explode: false, charEncoding: "none" },
+    ),
+  });
 
-    const security$: SecurityInput[][] = [
-        [
-            {
-                fieldName: "X-API-Key",
-                type: "apiKey:header",
-                value: security?.apiKey,
-            },
-        ],
-    ];
-    const securitySettings$ = resolveSecurity(...security$);
-    const context = {
-        operationID: "testingAccountPhoneGet",
-        oAuth2Scopes: [],
-        securitySource: security,
-    };
+  const requestSecurity = resolveSecurity(
+    [
+      {
+        fieldName: "X-API-Key",
+        type: "apiKey:header",
+        value: security?.apiKey,
+      },
+    ],
+  );
+  const context = {
+    operationID: "testingAccountPhoneGet",
+    oAuth2Scopes: [],
+    securitySource: security,
+  };
 
-    const requestRes = client$.createRequest$(
-        context,
-        {
-            security: securitySettings$,
-            method: "GET",
-            path: path$,
-            headers: headers$,
-            body: body$,
-            timeoutMs: options?.timeoutMs || client$.options$.timeoutMs || -1,
-        },
-        options
-    );
-    if (!requestRes.ok) {
-        return requestRes;
-    }
-    const request$ = requestRes.value;
+  const requestRes = client._createRequest(context, {
+    security: requestSecurity,
+    method: "GET",
+    path: path,
+    headers: headers,
+    body: body,
+    timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
+  }, options);
+  if (!requestRes.ok) {
+    return requestRes;
+  }
+  const req = requestRes.value;
 
-    const doResult = await client$.do$(request$, {
-        context,
-        errorCodes: ["4XX", "5XX"],
-        retryConfig: options?.retries || client$.options$.retryConfig,
-        retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
-    });
-    if (!doResult.ok) {
-        return doResult;
-    }
-    const response = doResult.value;
+  const doResult = await client._do(req, {
+    context,
+    errorCodes: ["4XX", "5XX"],
+    retryConfig: options?.retries
+      || client._options.retryConfig,
+    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+  });
+  if (!doResult.ok) {
+    return doResult;
+  }
+  const response = doResult.value;
 
-    const responseFields$ = {
-        ContentType: response.headers.get("content-type") ?? "application/octet-stream",
-        StatusCode: response.status,
-        RawResponse: response,
-        Headers: {},
-    };
+  const responseFields = {
+    ContentType: response.headers.get("content-type")
+      ?? "application/octet-stream",
+    StatusCode: response.status,
+    RawResponse: response,
+    Headers: {},
+  };
 
-    const [result$] = await m$.match<
-        operations.TestingAccountPhoneGetResponse,
-        | errors.TestingAccountPhoneGetResponseBody
-        | SDKError
-        | SDKValidationError
-        | UnexpectedClientError
-        | InvalidRequestError
-        | RequestAbortedError
-        | RequestTimeoutError
-        | ConnectionError
-    >(
-        m$.json(200, operations.TestingAccountPhoneGetResponse$inboundSchema, {
-            key: "account-test-phone-data",
-        }),
-        m$.jsonErr("4XX", errors.TestingAccountPhoneGetResponseBody$inboundSchema),
-        m$.fail("5XX"),
-        m$.nil("default", operations.TestingAccountPhoneGetResponse$inboundSchema)
-    )(response, { extraFields: responseFields$ });
-    if (!result$.ok) {
-        return result$;
-    }
+  const [result] = await M.match<
+    operations.TestingAccountPhoneGetResponse,
+    | errors.TestingAccountPhoneGetResponseBody
+    | SDKError
+    | SDKValidationError
+    | UnexpectedClientError
+    | InvalidRequestError
+    | RequestAbortedError
+    | RequestTimeoutError
+    | ConnectionError
+  >(
+    M.json(200, operations.TestingAccountPhoneGetResponse$inboundSchema, {
+      key: "account-test-phone-data",
+    }),
+    M.jsonErr("4XX", errors.TestingAccountPhoneGetResponseBody$inboundSchema),
+    M.fail("5XX"),
+    M.nil("default", operations.TestingAccountPhoneGetResponse$inboundSchema),
+  )(response, { extraFields: responseFields });
+  if (!result.ok) {
+    return result;
+  }
 
-    return result$;
+  return result;
 }

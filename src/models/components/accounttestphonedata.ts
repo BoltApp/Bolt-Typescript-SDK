@@ -5,33 +5,33 @@
 import * as z from "zod";
 
 export type AccountTestPhoneData = {
-    /**
-     * A random, fictitious, unassigned phone number.
-     */
-    phone: string;
+  /**
+   * A random, fictitious, unassigned phone number.
+   */
+  phone: string;
 };
 
 /** @internal */
 export const AccountTestPhoneData$inboundSchema: z.ZodType<
-    AccountTestPhoneData,
-    z.ZodTypeDef,
-    unknown
+  AccountTestPhoneData,
+  z.ZodTypeDef,
+  unknown
 > = z.object({
-    phone: z.string(),
+  phone: z.string(),
 });
 
 /** @internal */
 export type AccountTestPhoneData$Outbound = {
-    phone: string;
+  phone: string;
 };
 
 /** @internal */
 export const AccountTestPhoneData$outboundSchema: z.ZodType<
-    AccountTestPhoneData$Outbound,
-    z.ZodTypeDef,
-    AccountTestPhoneData
+  AccountTestPhoneData$Outbound,
+  z.ZodTypeDef,
+  AccountTestPhoneData
 > = z.object({
-    phone: z.string(),
+  phone: z.string(),
 });
 
 /**
@@ -39,10 +39,10 @@ export const AccountTestPhoneData$outboundSchema: z.ZodType<
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
 export namespace AccountTestPhoneData$ {
-    /** @deprecated use `AccountTestPhoneData$inboundSchema` instead. */
-    export const inboundSchema = AccountTestPhoneData$inboundSchema;
-    /** @deprecated use `AccountTestPhoneData$outboundSchema` instead. */
-    export const outboundSchema = AccountTestPhoneData$outboundSchema;
-    /** @deprecated use `AccountTestPhoneData$Outbound` instead. */
-    export type Outbound = AccountTestPhoneData$Outbound;
+  /** @deprecated use `AccountTestPhoneData$inboundSchema` instead. */
+  export const inboundSchema = AccountTestPhoneData$inboundSchema;
+  /** @deprecated use `AccountTestPhoneData$outboundSchema` instead. */
+  export const outboundSchema = AccountTestPhoneData$outboundSchema;
+  /** @deprecated use `AccountTestPhoneData$Outbound` instead. */
+  export type Outbound = AccountTestPhoneData$Outbound;
 }

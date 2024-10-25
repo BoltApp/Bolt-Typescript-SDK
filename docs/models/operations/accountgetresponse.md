@@ -7,41 +7,41 @@ import { CountryCode, PaymentMethodKlarnaTag } from "@boltpay/bolt-typescript-sd
 import { AccountGetResponse } from "@boltpay/bolt-typescript-sdk/models/operations";
 
 let value: AccountGetResponse = {
-    contentType: "<value>",
-    statusCode: 548814,
-    rawResponse: new Response('{"message": "hello world"}', {
-        headers: { "Content-Type": "application/json" },
-    }),
-    account: {
-        addresses: [
-            {
-                id: "D4g3h5tBuVYK9",
-                firstName: "Alice",
-                lastName: "Baker",
-                company: "ACME Corporation",
-                streetAddress1: "535 Mission St, Ste 1401",
-                streetAddress2: "c/o Shipping Department",
-                locality: "San Francisco",
-                postalCode: "94105",
-                region: "CA",
-                countryCode: CountryCode.Us,
-                email: "alice@example.com",
-                phone: "+14155550199",
-                isDefault: true,
-            },
-        ],
-        paymentMethods: [
-            {
-                dotTag: PaymentMethodKlarnaTag.Klarna,
-            },
-        ],
-        profile: {
-            firstName: "Alice",
-            lastName: "Baker",
-            email: "alice@example.com",
-            phone: "+14155550199",
-        },
+  contentType: "<value>",
+  statusCode: 306,
+  rawResponse: new Response("{\"message\": \"hello world\"}", {
+    headers: { "Content-Type": "application/json" },
+  }),
+  account: {
+    addresses: [
+      {
+        id: "D4g3h5tBuVYK9",
+        firstName: "Alice",
+        lastName: "Baker",
+        company: "ACME Corporation",
+        streetAddress1: "535 Mission St, Ste 1401",
+        streetAddress2: "c/o Shipping Department",
+        locality: "San Francisco",
+        postalCode: "94105",
+        region: "CA",
+        countryCode: CountryCode.Us,
+        email: "alice@example.com",
+        phone: "+14155550199",
+        isDefault: true,
+      },
+    ],
+    paymentMethods: [
+      {
+        dotTag: PaymentMethodKlarnaTag.Klarna,
+      },
+    ],
+    profile: {
+      firstName: "Alice",
+      lastName: "Baker",
+      email: "alice@example.com",
+      phone: "+14155550199",
     },
+  },
 };
 ```
 

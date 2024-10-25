@@ -10,28 +10,28 @@ import { Payments } from "./payments.js";
 import { Testing } from "./testing.js";
 
 export class BoltTypescriptSDK extends ClientSDK {
-    private _account?: Account;
-    get account(): Account {
-        return (this._account ??= new Account(this.options$));
-    }
+  private _account?: Account;
+  get account(): Account {
+    return (this._account ??= new Account(this._options));
+  }
 
-    private _payments?: Payments;
-    get payments(): Payments {
-        return (this._payments ??= new Payments(this.options$));
-    }
+  private _payments?: Payments;
+  get payments(): Payments {
+    return (this._payments ??= new Payments(this._options));
+  }
 
-    private _orders?: Orders;
-    get orders(): Orders {
-        return (this._orders ??= new Orders(this.options$));
-    }
+  private _orders?: Orders;
+  get orders(): Orders {
+    return (this._orders ??= new Orders(this._options));
+  }
 
-    private _oAuth?: OAuth;
-    get oAuth(): OAuth {
-        return (this._oAuth ??= new OAuth(this.options$));
-    }
+  private _oAuth?: OAuth;
+  get oAuth(): OAuth {
+    return (this._oAuth ??= new OAuth(this._options));
+  }
 
-    private _testing?: Testing;
-    get testing(): Testing {
-        return (this._testing ??= new Testing(this.options$));
-    }
+  private _testing?: Testing;
+  get testing(): Testing {
+    return (this._testing ??= new Testing(this._options));
+  }
 }

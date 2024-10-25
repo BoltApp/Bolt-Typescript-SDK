@@ -3,18 +3,18 @@
 ## Example Usage
 
 ```typescript
-import { PaymentMethodKlarnaAccountTag } from "@boltpay/bolt-typescript-sdk/models/components";
+import { PaymentMethodAfterpayTag } from "@boltpay/bolt-typescript-sdk/models/components";
 import { AccountAddPaymentMethodResponse } from "@boltpay/bolt-typescript-sdk/models/operations";
 
 let value: AccountAddPaymentMethodResponse = {
-    contentType: "<value>",
-    statusCode: 544883,
-    rawResponse: new Response('{"message": "hello world"}', {
-        headers: { "Content-Type": "application/json" },
-    }),
-    paymentMethod: {
-        dotTag: PaymentMethodKlarnaAccountTag.KlarnaAccount,
-    },
+  contentType: "<value>",
+  statusCode: 415,
+  rawResponse: new Response("{\"message\": \"hello world\"}", {
+    headers: { "Content-Type": "application/json" },
+  }),
+  paymentMethod: {
+    dotTag: PaymentMethodAfterpayTag.Afterpay,
+  },
 };
 ```
 

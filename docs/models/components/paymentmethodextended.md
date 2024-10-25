@@ -1,87 +1,96 @@
 # PaymentMethodExtended
 
-## Example Usage
-
-```typescript
-import {
-  AddressReferenceExplicitTag,
-  CountryCode,
-  CreditCardNetwork,
-  DotTag,
-  PaymentMethodExtended,
-} from "@boltpay/bolt-typescript-sdk/models/components";
-
-let value: PaymentMethodExtended = {
-    dotTag: DotTag.CreditCard,
-    billingAddress: {
-        dotTag: AddressReferenceExplicitTag.Explicit,
-        firstName: "Alice",
-        lastName: "Baker",
-        company: "ACME Corporation",
-        streetAddress1: "535 Mission St, Ste 1401",
-        streetAddress2: "c/o Shipping Department",
-        locality: "San Francisco",
-        postalCode: "94105",
-        region: "CA",
-        countryCode: CountryCode.Us,
-        email: "alice@example.com",
-        phone: "+14155550199",
-    },
-    network: CreditCardNetwork.Visa,
-    bin: "411111",
-    last4: "1004",
-    expiration: "2029-03",
-    token: "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0",
-};
-```
 
 ## Supported Types
 
 ### `components.PaymentMethodReference`
 
 ```typescript
-const value: components.PaymentMethodReference = /* values here */
+const value: components.PaymentMethodReference = {
+  dotTag: PaymentMethodReferenceTag.Id,
+  id: "X5h6j8uLpVGK",
+};
 ```
 
 ### `components.PaymentMethodCreditCardInput`
 
 ```typescript
-const value: components.PaymentMethodCreditCardInput = /* values here */
+const value: components.PaymentMethodCreditCardInput = {
+  dotTag: DotTag.CreditCard,
+  billingAddress: {
+    dotTag: AddressReferenceExplicitTag.Explicit,
+    firstName: "Alice",
+    lastName: "Baker",
+    company: "ACME Corporation",
+    streetAddress1: "535 Mission St, Ste 1401",
+    streetAddress2: "c/o Shipping Department",
+    locality: "San Francisco",
+    postalCode: "94105",
+    region: "CA",
+    countryCode: CountryCode.Us,
+    email: "alice@example.com",
+    phone: "+14155550199",
+  },
+  network: CreditCardNetwork.Visa,
+  bin: "411111",
+  last4: "1004",
+  expiration: "2029-03",
+  token: "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0",
+};
 ```
 
 ### `components.PaymentMethodPaypal`
 
 ```typescript
-const value: components.PaymentMethodPaypal = /* values here */
+const value: components.PaymentMethodPaypal = {
+  dotTag: PaymentMethodPaypalTag.Paypal,
+  successUrl: "https://www.example.com/paypal-callback/success",
+  cancelUrl: "https://www.example.com/paypal-callback/cancel",
+};
 ```
 
 ### `components.PaymentMethodAffirm`
 
 ```typescript
-const value: components.PaymentMethodAffirm = /* values here */
+const value: components.PaymentMethodAffirm = {
+  dotTag: PaymentMethodAffirmTag.Affirm,
+  returnUrl: "www.example.com/handle_affirm_success",
+};
 ```
 
 ### `components.PaymentMethodAfterpay`
 
 ```typescript
-const value: components.PaymentMethodAfterpay = /* values here */
+const value: components.PaymentMethodAfterpay = {
+  dotTag: PaymentMethodAfterpayTag.Afterpay,
+  returnUrl: "www.example.com/handle_afterpay_success",
+};
 ```
 
 ### `components.PaymentMethodKlarna`
 
 ```typescript
-const value: components.PaymentMethodKlarna = /* values here */
+const value: components.PaymentMethodKlarna = {
+  dotTag: PaymentMethodKlarnaTag.Klarna,
+  returnUrl: "www.example.com/handle_klarna_success",
+};
 ```
 
 ### `components.PaymentMethodKlarnaAccount`
 
 ```typescript
-const value: components.PaymentMethodKlarnaAccount = /* values here */
+const value: components.PaymentMethodKlarnaAccount = {
+  dotTag: PaymentMethodKlarnaAccountTag.KlarnaAccount,
+  returnUrl: "www.example.com/handle_klarna_account_success",
+};
 ```
 
 ### `components.PaymentMethodKlarnaPaynow`
 
 ```typescript
-const value: components.PaymentMethodKlarnaPaynow = /* values here */
+const value: components.PaymentMethodKlarnaPaynow = {
+  dotTag: PaymentMethodKlarnaPaynowTag.KlarnaPaynow,
+  returnUrl: "www.example.com/handle_klarna_paynow_success",
+};
 ```
 

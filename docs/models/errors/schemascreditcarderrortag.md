@@ -7,7 +7,8 @@ The type of error returned
 ```typescript
 import { SchemasCreditCardErrorTag } from "@boltpay/bolt-typescript-sdk/models/errors";
 
-let value: SchemasCreditCardErrorTag = SchemasCreditCardErrorTag.DeclinedInvalidCvv;
+let value: SchemasCreditCardErrorTag =
+  SchemasCreditCardErrorTag.DeclinedInvalidCvv;
 ```
 
 ## Values

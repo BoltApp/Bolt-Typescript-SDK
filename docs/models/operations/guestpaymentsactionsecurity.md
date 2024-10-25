@@ -6,7 +6,7 @@
 import { GuestPaymentsActionSecurity } from "@boltpay/bolt-typescript-sdk/models/operations";
 
 let value: GuestPaymentsActionSecurity = {
-    apiKey: "<value>",
+  apiKey: "<value>",
 };
 ```
 

@@ -6,7 +6,7 @@
 import { PaymentMethodKlarnaPaynowOutput, PaymentMethodKlarnaPaynowTag } from "@boltpay/bolt-typescript-sdk/models/components";
 
 let value: PaymentMethodKlarnaPaynowOutput = {
-    dotTag: PaymentMethodKlarnaPaynowTag.KlarnaPaynow,
+  dotTag: PaymentMethodKlarnaPaynowTag.KlarnaPaynow,
 };
 ```
 

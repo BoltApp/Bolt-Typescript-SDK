@@ -6,15 +6,15 @@
 import { AddressReferenceIdTag, CreditCardNetwork, DotTag, PaymentMethodCreditCard } from "@boltpay/bolt-typescript-sdk/models/components";
 
 let value: PaymentMethodCreditCard = {
-    dotTag: DotTag.CreditCard,
-    id: "X5h6j8uLpVGK",
-    billingAddress: {
-        dotTag: AddressReferenceIdTag.Id,
-        id: "D4g3h5tBuVYK9",
-    },
-    network: CreditCardNetwork.Visa,
-    last4: "1004",
-    expiration: "2029-03",
+  dotTag: DotTag.CreditCard,
+  id: "X5h6j8uLpVGK",
+  billingAddress: {
+    dotTag: AddressReferenceIdTag.Id,
+    id: "D4g3h5tBuVYK9",
+  },
+  network: CreditCardNetwork.Visa,
+  last4: "1004",
+  expiration: "2029-03",
 };
 ```
 

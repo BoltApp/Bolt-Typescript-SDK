@@ -6,12 +6,12 @@
 import { Transaction } from "@boltpay/bolt-typescript-sdk/models/components";
 
 let value: Transaction = {
-    reference: "OBYG-X1PX-FN55",
-    authorizations: [
-        {
-            processorReference: "123456789XYZ",
-        },
-    ],
+  reference: "OBYG-X1PX-FN55",
+  authorizations: [
+    {
+      processorReference: "123456789XYZ",
+    },
+  ],
 };
 ```
 

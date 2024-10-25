@@ -6,7 +6,7 @@
 import { TestingAccountPhoneGetRequest } from "@boltpay/bolt-typescript-sdk/models/operations";
 
 let value: TestingAccountPhoneGetRequest = {
-    xPublishableKey: "<value>",
+  xPublishableKey: "<value>",
 };
 ```
 

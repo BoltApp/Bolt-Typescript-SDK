@@ -6,8 +6,8 @@
 import { PaymentActionRequest, PaymentActionRequestTag } from "@boltpay/bolt-typescript-sdk/models/components";
 
 let value: PaymentActionRequest = {
-    dotTag: PaymentActionRequestTag.Finalize,
-    redirectResult: "eyJ0cmFuc",
+  dotTag: PaymentActionRequestTag.Finalize,
+  redirectResult: "eyJ0cmFuc",
 };
 ```
 
