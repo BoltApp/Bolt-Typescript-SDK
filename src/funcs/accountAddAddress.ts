@@ -86,12 +86,20 @@ export async function accountAddAddress(
   });
 
   const securityInput = await extractSecurity(client._options.security);
+  const requestSecurity = resolveGlobalSecurity(securityInput);
+
   const context = {
     operationID: "accountAddressCreate",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.security,
+    retryConfig: options?.retries
+      || client._options.retryConfig
+      || { strategy: "none" },
+    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
   };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
@@ -109,9 +117,8 @@ export async function accountAddAddress(
   const doResult = await client._do(req, {
     context,
     errorCodes: ["4XX", "5XX"],
-    retryConfig: options?.retries
-      || client._options.retryConfig,
-    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+    retryConfig: context.retryConfig,
+    retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
     return doResult;

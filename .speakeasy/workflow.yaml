@@ -13,3 +13,7 @@ targets:
         publish:
             npm:
                 token: $NPM_TOKEN
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/bolt/boltpublicapi/my-source-code-samples
+            blocking: false

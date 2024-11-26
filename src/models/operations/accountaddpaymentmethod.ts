@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AccountAddPaymentMethodRequest = {
   /**
@@ -91,6 +94,26 @@ export namespace AccountAddPaymentMethodRequest$ {
   export type Outbound = AccountAddPaymentMethodRequest$Outbound;
 }
 
+export function accountAddPaymentMethodRequestToJSON(
+  accountAddPaymentMethodRequest: AccountAddPaymentMethodRequest,
+): string {
+  return JSON.stringify(
+    AccountAddPaymentMethodRequest$outboundSchema.parse(
+      accountAddPaymentMethodRequest,
+    ),
+  );
+}
+
+export function accountAddPaymentMethodRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<AccountAddPaymentMethodRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AccountAddPaymentMethodRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AccountAddPaymentMethodRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const AccountAddPaymentMethodResponse$inboundSchema: z.ZodType<
   AccountAddPaymentMethodResponse,
@@ -150,4 +173,24 @@ export namespace AccountAddPaymentMethodResponse$ {
   export const outboundSchema = AccountAddPaymentMethodResponse$outboundSchema;
   /** @deprecated use `AccountAddPaymentMethodResponse$Outbound` instead. */
   export type Outbound = AccountAddPaymentMethodResponse$Outbound;
+}
+
+export function accountAddPaymentMethodResponseToJSON(
+  accountAddPaymentMethodResponse: AccountAddPaymentMethodResponse,
+): string {
+  return JSON.stringify(
+    AccountAddPaymentMethodResponse$outboundSchema.parse(
+      accountAddPaymentMethodResponse,
+    ),
+  );
+}
+
+export function accountAddPaymentMethodResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<AccountAddPaymentMethodResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AccountAddPaymentMethodResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AccountAddPaymentMethodResponse' from JSON`,
+  );
 }

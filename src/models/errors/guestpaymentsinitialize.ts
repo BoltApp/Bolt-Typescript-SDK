@@ -3,6 +3,8 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   CartError,
   CartError$inboundSchema,
@@ -27,6 +29,7 @@ import {
   FieldError$Outbound,
   FieldError$outboundSchema,
 } from "./fielderror.js";
+import { SDKValidationError } from "./sdkvalidationerror.js";
 
 /**
  * The payment operation cannot complete
@@ -81,4 +84,25 @@ export namespace GuestPaymentsInitializeResponseBody$ {
     GuestPaymentsInitializeResponseBody$outboundSchema;
   /** @deprecated use `GuestPaymentsInitializeResponseBody$Outbound` instead. */
   export type Outbound = GuestPaymentsInitializeResponseBody$Outbound;
+}
+
+export function guestPaymentsInitializeResponseBodyToJSON(
+  guestPaymentsInitializeResponseBody: GuestPaymentsInitializeResponseBody,
+): string {
+  return JSON.stringify(
+    GuestPaymentsInitializeResponseBody$outboundSchema.parse(
+      guestPaymentsInitializeResponseBody,
+    ),
+  );
+}
+
+export function guestPaymentsInitializeResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GuestPaymentsInitializeResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GuestPaymentsInitializeResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GuestPaymentsInitializeResponseBody' from JSON`,
+  );
 }

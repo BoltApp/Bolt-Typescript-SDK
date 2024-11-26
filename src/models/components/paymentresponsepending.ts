@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export enum PaymentResponsePendingTag {
   Pending = "pending",
@@ -140,4 +143,22 @@ export namespace PaymentResponsePending$ {
   export const outboundSchema = PaymentResponsePending$outboundSchema;
   /** @deprecated use `PaymentResponsePending$Outbound` instead. */
   export type Outbound = PaymentResponsePending$Outbound;
+}
+
+export function paymentResponsePendingToJSON(
+  paymentResponsePending: PaymentResponsePending,
+): string {
+  return JSON.stringify(
+    PaymentResponsePending$outboundSchema.parse(paymentResponsePending),
+  );
+}
+
+export function paymentResponsePendingFromJSON(
+  jsonString: string,
+): SafeParseResult<PaymentResponsePending, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PaymentResponsePending$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PaymentResponsePending' from JSON`,
+  );
 }

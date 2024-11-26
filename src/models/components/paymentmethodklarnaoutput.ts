@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export enum PaymentMethodKlarnaTag {
   Klarna = "klarna",
@@ -86,6 +89,24 @@ export namespace PaymentMethodKlarnaOutput$ {
   export type Outbound = PaymentMethodKlarnaOutput$Outbound;
 }
 
+export function paymentMethodKlarnaOutputToJSON(
+  paymentMethodKlarnaOutput: PaymentMethodKlarnaOutput,
+): string {
+  return JSON.stringify(
+    PaymentMethodKlarnaOutput$outboundSchema.parse(paymentMethodKlarnaOutput),
+  );
+}
+
+export function paymentMethodKlarnaOutputFromJSON(
+  jsonString: string,
+): SafeParseResult<PaymentMethodKlarnaOutput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PaymentMethodKlarnaOutput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PaymentMethodKlarnaOutput' from JSON`,
+  );
+}
+
 /** @internal */
 export const PaymentMethodKlarna$inboundSchema: z.ZodType<
   PaymentMethodKlarna,
@@ -133,4 +154,22 @@ export namespace PaymentMethodKlarna$ {
   export const outboundSchema = PaymentMethodKlarna$outboundSchema;
   /** @deprecated use `PaymentMethodKlarna$Outbound` instead. */
   export type Outbound = PaymentMethodKlarna$Outbound;
+}
+
+export function paymentMethodKlarnaToJSON(
+  paymentMethodKlarna: PaymentMethodKlarna,
+): string {
+  return JSON.stringify(
+    PaymentMethodKlarna$outboundSchema.parse(paymentMethodKlarna),
+  );
+}
+
+export function paymentMethodKlarnaFromJSON(
+  jsonString: string,
+): SafeParseResult<PaymentMethodKlarna, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PaymentMethodKlarna$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PaymentMethodKlarna' from JSON`,
+  );
 }

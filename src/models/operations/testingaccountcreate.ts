@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type TestingAccountCreateSecurity = {
   apiKey: string;
@@ -83,6 +86,26 @@ export namespace TestingAccountCreateSecurity$ {
   export type Outbound = TestingAccountCreateSecurity$Outbound;
 }
 
+export function testingAccountCreateSecurityToJSON(
+  testingAccountCreateSecurity: TestingAccountCreateSecurity,
+): string {
+  return JSON.stringify(
+    TestingAccountCreateSecurity$outboundSchema.parse(
+      testingAccountCreateSecurity,
+    ),
+  );
+}
+
+export function testingAccountCreateSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<TestingAccountCreateSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TestingAccountCreateSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TestingAccountCreateSecurity' from JSON`,
+  );
+}
+
 /** @internal */
 export const TestingAccountCreateRequest$inboundSchema: z.ZodType<
   TestingAccountCreateRequest,
@@ -131,6 +154,26 @@ export namespace TestingAccountCreateRequest$ {
   export const outboundSchema = TestingAccountCreateRequest$outboundSchema;
   /** @deprecated use `TestingAccountCreateRequest$Outbound` instead. */
   export type Outbound = TestingAccountCreateRequest$Outbound;
+}
+
+export function testingAccountCreateRequestToJSON(
+  testingAccountCreateRequest: TestingAccountCreateRequest,
+): string {
+  return JSON.stringify(
+    TestingAccountCreateRequest$outboundSchema.parse(
+      testingAccountCreateRequest,
+    ),
+  );
+}
+
+export function testingAccountCreateRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<TestingAccountCreateRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TestingAccountCreateRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TestingAccountCreateRequest' from JSON`,
+  );
 }
 
 /** @internal */
@@ -196,4 +239,24 @@ export namespace TestingAccountCreateResponse$ {
   export const outboundSchema = TestingAccountCreateResponse$outboundSchema;
   /** @deprecated use `TestingAccountCreateResponse$Outbound` instead. */
   export type Outbound = TestingAccountCreateResponse$Outbound;
+}
+
+export function testingAccountCreateResponseToJSON(
+  testingAccountCreateResponse: TestingAccountCreateResponse,
+): string {
+  return JSON.stringify(
+    TestingAccountCreateResponse$outboundSchema.parse(
+      testingAccountCreateResponse,
+    ),
+  );
+}
+
+export function testingAccountCreateResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<TestingAccountCreateResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TestingAccountCreateResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TestingAccountCreateResponse' from JSON`,
+  );
 }

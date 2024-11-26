@@ -3,6 +3,8 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   ErrorT,
   ErrorT$inboundSchema,
@@ -15,6 +17,7 @@ import {
   FieldError$Outbound,
   FieldError$outboundSchema,
 } from "./fielderror.js";
+import { SDKValidationError } from "./sdkvalidationerror.js";
 
 /**
  * An error has occurred, and further details are contained in the response
@@ -51,4 +54,24 @@ export namespace TestingCreditCardGetResponseBody$ {
   export const outboundSchema = TestingCreditCardGetResponseBody$outboundSchema;
   /** @deprecated use `TestingCreditCardGetResponseBody$Outbound` instead. */
   export type Outbound = TestingCreditCardGetResponseBody$Outbound;
+}
+
+export function testingCreditCardGetResponseBodyToJSON(
+  testingCreditCardGetResponseBody: TestingCreditCardGetResponseBody,
+): string {
+  return JSON.stringify(
+    TestingCreditCardGetResponseBody$outboundSchema.parse(
+      testingCreditCardGetResponseBody,
+    ),
+  );
+}
+
+export function testingCreditCardGetResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<TestingCreditCardGetResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TestingCreditCardGetResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TestingCreditCardGetResponseBody' from JSON`,
+  );
 }

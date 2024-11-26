@@ -39,6 +39,7 @@ export * from "./paymentmethodreference.js";
 export * from "./paymentresponse.js";
 export * from "./paymentresponsefinalized.js";
 export * from "./paymentresponsepending.js";
+export * from "./processorresponse.js";
 export * from "./profile.js";
 export * from "./profilecreationdata.js";
 export * from "./refreshtokenrequest.js";

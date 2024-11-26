@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The type of OAuth 2.0 grant being utilized.
@@ -150,4 +153,22 @@ export namespace RefreshTokenRequest$ {
   export const outboundSchema = RefreshTokenRequest$outboundSchema;
   /** @deprecated use `RefreshTokenRequest$Outbound` instead. */
   export type Outbound = RefreshTokenRequest$Outbound;
+}
+
+export function refreshTokenRequestToJSON(
+  refreshTokenRequest: RefreshTokenRequest,
+): string {
+  return JSON.stringify(
+    RefreshTokenRequest$outboundSchema.parse(refreshTokenRequest),
+  );
+}
+
+export function refreshTokenRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<RefreshTokenRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RefreshTokenRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RefreshTokenRequest' from JSON`,
+  );
 }

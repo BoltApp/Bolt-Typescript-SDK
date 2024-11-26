@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   CountryCode,
   CountryCode$inboundSchema,
@@ -158,4 +161,18 @@ export namespace AddressListing$ {
   export const outboundSchema = AddressListing$outboundSchema;
   /** @deprecated use `AddressListing$Outbound` instead. */
   export type Outbound = AddressListing$Outbound;
+}
+
+export function addressListingToJSON(addressListing: AddressListing): string {
+  return JSON.stringify(AddressListing$outboundSchema.parse(addressListing));
+}
+
+export function addressListingFromJSON(
+  jsonString: string,
+): SafeParseResult<AddressListing, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AddressListing$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AddressListing' from JSON`,
+  );
 }

@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type TestingCreditCardGetSecurity = {
   apiKey: string;
@@ -88,6 +91,26 @@ export namespace TestingCreditCardGetSecurity$ {
   export type Outbound = TestingCreditCardGetSecurity$Outbound;
 }
 
+export function testingCreditCardGetSecurityToJSON(
+  testingCreditCardGetSecurity: TestingCreditCardGetSecurity,
+): string {
+  return JSON.stringify(
+    TestingCreditCardGetSecurity$outboundSchema.parse(
+      testingCreditCardGetSecurity,
+    ),
+  );
+}
+
+export function testingCreditCardGetSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<TestingCreditCardGetSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TestingCreditCardGetSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TestingCreditCardGetSecurity' from JSON`,
+  );
+}
+
 /** @internal */
 export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
   Type,
@@ -142,6 +165,26 @@ export namespace TestingCreditCardGetRequestBody$ {
   export const outboundSchema = TestingCreditCardGetRequestBody$outboundSchema;
   /** @deprecated use `TestingCreditCardGetRequestBody$Outbound` instead. */
   export type Outbound = TestingCreditCardGetRequestBody$Outbound;
+}
+
+export function testingCreditCardGetRequestBodyToJSON(
+  testingCreditCardGetRequestBody: TestingCreditCardGetRequestBody,
+): string {
+  return JSON.stringify(
+    TestingCreditCardGetRequestBody$outboundSchema.parse(
+      testingCreditCardGetRequestBody,
+    ),
+  );
+}
+
+export function testingCreditCardGetRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<TestingCreditCardGetRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TestingCreditCardGetRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TestingCreditCardGetRequestBody' from JSON`,
+  );
 }
 
 /** @internal */
@@ -203,4 +246,24 @@ export namespace TestingCreditCardGetResponse$ {
   export const outboundSchema = TestingCreditCardGetResponse$outboundSchema;
   /** @deprecated use `TestingCreditCardGetResponse$Outbound` instead. */
   export type Outbound = TestingCreditCardGetResponse$Outbound;
+}
+
+export function testingCreditCardGetResponseToJSON(
+  testingCreditCardGetResponse: TestingCreditCardGetResponse,
+): string {
+  return JSON.stringify(
+    TestingCreditCardGetResponse$outboundSchema.parse(
+      testingCreditCardGetResponse,
+    ),
+  );
+}
+
+export function testingCreditCardGetResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<TestingCreditCardGetResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TestingCreditCardGetResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TestingCreditCardGetResponse' from JSON`,
+  );
 }

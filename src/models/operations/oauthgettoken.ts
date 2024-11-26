@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type OauthGetTokenRequest = {
   /**
@@ -82,6 +85,24 @@ export namespace OauthGetTokenRequest$ {
   export type Outbound = OauthGetTokenRequest$Outbound;
 }
 
+export function oauthGetTokenRequestToJSON(
+  oauthGetTokenRequest: OauthGetTokenRequest,
+): string {
+  return JSON.stringify(
+    OauthGetTokenRequest$outboundSchema.parse(oauthGetTokenRequest),
+  );
+}
+
+export function oauthGetTokenRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<OauthGetTokenRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => OauthGetTokenRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OauthGetTokenRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const OauthGetTokenResponse$inboundSchema: z.ZodType<
   OauthGetTokenResponse,
@@ -145,4 +166,22 @@ export namespace OauthGetTokenResponse$ {
   export const outboundSchema = OauthGetTokenResponse$outboundSchema;
   /** @deprecated use `OauthGetTokenResponse$Outbound` instead. */
   export type Outbound = OauthGetTokenResponse$Outbound;
+}
+
+export function oauthGetTokenResponseToJSON(
+  oauthGetTokenResponse: OauthGetTokenResponse,
+): string {
+  return JSON.stringify(
+    OauthGetTokenResponse$outboundSchema.parse(oauthGetTokenResponse),
+  );
+}
+
+export function oauthGetTokenResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<OauthGetTokenResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => OauthGetTokenResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OauthGetTokenResponse' from JSON`,
+  );
 }

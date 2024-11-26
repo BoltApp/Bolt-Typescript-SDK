@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GuestPaymentsInitializeSecurity = {
   apiKey: string;
@@ -85,6 +88,26 @@ export namespace GuestPaymentsInitializeSecurity$ {
   export type Outbound = GuestPaymentsInitializeSecurity$Outbound;
 }
 
+export function guestPaymentsInitializeSecurityToJSON(
+  guestPaymentsInitializeSecurity: GuestPaymentsInitializeSecurity,
+): string {
+  return JSON.stringify(
+    GuestPaymentsInitializeSecurity$outboundSchema.parse(
+      guestPaymentsInitializeSecurity,
+    ),
+  );
+}
+
+export function guestPaymentsInitializeSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<GuestPaymentsInitializeSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GuestPaymentsInitializeSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GuestPaymentsInitializeSecurity' from JSON`,
+  );
+}
+
 /** @internal */
 export const GuestPaymentsInitializeRequest$inboundSchema: z.ZodType<
   GuestPaymentsInitializeRequest,
@@ -140,6 +163,26 @@ export namespace GuestPaymentsInitializeRequest$ {
   export const outboundSchema = GuestPaymentsInitializeRequest$outboundSchema;
   /** @deprecated use `GuestPaymentsInitializeRequest$Outbound` instead. */
   export type Outbound = GuestPaymentsInitializeRequest$Outbound;
+}
+
+export function guestPaymentsInitializeRequestToJSON(
+  guestPaymentsInitializeRequest: GuestPaymentsInitializeRequest,
+): string {
+  return JSON.stringify(
+    GuestPaymentsInitializeRequest$outboundSchema.parse(
+      guestPaymentsInitializeRequest,
+    ),
+  );
+}
+
+export function guestPaymentsInitializeRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GuestPaymentsInitializeRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GuestPaymentsInitializeRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GuestPaymentsInitializeRequest' from JSON`,
+  );
 }
 
 /** @internal */
@@ -201,4 +244,24 @@ export namespace GuestPaymentsInitializeResponse$ {
   export const outboundSchema = GuestPaymentsInitializeResponse$outboundSchema;
   /** @deprecated use `GuestPaymentsInitializeResponse$Outbound` instead. */
   export type Outbound = GuestPaymentsInitializeResponse$Outbound;
+}
+
+export function guestPaymentsInitializeResponseToJSON(
+  guestPaymentsInitializeResponse: GuestPaymentsInitializeResponse,
+): string {
+  return JSON.stringify(
+    GuestPaymentsInitializeResponse$outboundSchema.parse(
+      guestPaymentsInitializeResponse,
+    ),
+  );
+}
+
+export function guestPaymentsInitializeResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GuestPaymentsInitializeResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GuestPaymentsInitializeResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GuestPaymentsInitializeResponse' from JSON`,
+  );
 }

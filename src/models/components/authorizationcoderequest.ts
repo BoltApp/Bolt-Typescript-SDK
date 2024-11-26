@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The type of OAuth 2.0 grant being utilized.
@@ -145,4 +148,22 @@ export namespace AuthorizationCodeRequest$ {
   export const outboundSchema = AuthorizationCodeRequest$outboundSchema;
   /** @deprecated use `AuthorizationCodeRequest$Outbound` instead. */
   export type Outbound = AuthorizationCodeRequest$Outbound;
+}
+
+export function authorizationCodeRequestToJSON(
+  authorizationCodeRequest: AuthorizationCodeRequest,
+): string {
+  return JSON.stringify(
+    AuthorizationCodeRequest$outboundSchema.parse(authorizationCodeRequest),
+  );
+}
+
+export function authorizationCodeRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<AuthorizationCodeRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AuthorizationCodeRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AuthorizationCodeRequest' from JSON`,
+  );
 }

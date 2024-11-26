@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AccountPaymentMethodDeleteRequest = {
   /**
@@ -88,6 +91,26 @@ export namespace AccountPaymentMethodDeleteRequest$ {
   export type Outbound = AccountPaymentMethodDeleteRequest$Outbound;
 }
 
+export function accountPaymentMethodDeleteRequestToJSON(
+  accountPaymentMethodDeleteRequest: AccountPaymentMethodDeleteRequest,
+): string {
+  return JSON.stringify(
+    AccountPaymentMethodDeleteRequest$outboundSchema.parse(
+      accountPaymentMethodDeleteRequest,
+    ),
+  );
+}
+
+export function accountPaymentMethodDeleteRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<AccountPaymentMethodDeleteRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AccountPaymentMethodDeleteRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AccountPaymentMethodDeleteRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const AccountPaymentMethodDeleteResponse$inboundSchema: z.ZodType<
   AccountPaymentMethodDeleteResponse,
@@ -143,4 +166,25 @@ export namespace AccountPaymentMethodDeleteResponse$ {
     AccountPaymentMethodDeleteResponse$outboundSchema;
   /** @deprecated use `AccountPaymentMethodDeleteResponse$Outbound` instead. */
   export type Outbound = AccountPaymentMethodDeleteResponse$Outbound;
+}
+
+export function accountPaymentMethodDeleteResponseToJSON(
+  accountPaymentMethodDeleteResponse: AccountPaymentMethodDeleteResponse,
+): string {
+  return JSON.stringify(
+    AccountPaymentMethodDeleteResponse$outboundSchema.parse(
+      accountPaymentMethodDeleteResponse,
+    ),
+  );
+}
+
+export function accountPaymentMethodDeleteResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<AccountPaymentMethodDeleteResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      AccountPaymentMethodDeleteResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AccountPaymentMethodDeleteResponse' from JSON`,
+  );
 }

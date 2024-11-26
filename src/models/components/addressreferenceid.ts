@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The type of address reference
@@ -89,4 +92,22 @@ export namespace AddressReferenceId$ {
   export const outboundSchema = AddressReferenceId$outboundSchema;
   /** @deprecated use `AddressReferenceId$Outbound` instead. */
   export type Outbound = AddressReferenceId$Outbound;
+}
+
+export function addressReferenceIdToJSON(
+  addressReferenceId: AddressReferenceId,
+): string {
+  return JSON.stringify(
+    AddressReferenceId$outboundSchema.parse(addressReferenceId),
+  );
+}
+
+export function addressReferenceIdFromJSON(
+  jsonString: string,
+): SafeParseResult<AddressReferenceId, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AddressReferenceId$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AddressReferenceId' from JSON`,
+  );
 }

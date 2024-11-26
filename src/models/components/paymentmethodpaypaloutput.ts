@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export enum PaymentMethodPaypalTag {
   Paypal = "paypal",
@@ -90,6 +93,24 @@ export namespace PaymentMethodPaypalOutput$ {
   export type Outbound = PaymentMethodPaypalOutput$Outbound;
 }
 
+export function paymentMethodPaypalOutputToJSON(
+  paymentMethodPaypalOutput: PaymentMethodPaypalOutput,
+): string {
+  return JSON.stringify(
+    PaymentMethodPaypalOutput$outboundSchema.parse(paymentMethodPaypalOutput),
+  );
+}
+
+export function paymentMethodPaypalOutputFromJSON(
+  jsonString: string,
+): SafeParseResult<PaymentMethodPaypalOutput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PaymentMethodPaypalOutput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PaymentMethodPaypalOutput' from JSON`,
+  );
+}
+
 /** @internal */
 export const PaymentMethodPaypal$inboundSchema: z.ZodType<
   PaymentMethodPaypal,
@@ -142,4 +163,22 @@ export namespace PaymentMethodPaypal$ {
   export const outboundSchema = PaymentMethodPaypal$outboundSchema;
   /** @deprecated use `PaymentMethodPaypal$Outbound` instead. */
   export type Outbound = PaymentMethodPaypal$Outbound;
+}
+
+export function paymentMethodPaypalToJSON(
+  paymentMethodPaypal: PaymentMethodPaypal,
+): string {
+  return JSON.stringify(
+    PaymentMethodPaypal$outboundSchema.parse(paymentMethodPaypal),
+  );
+}
+
+export function paymentMethodPaypalFromJSON(
+  jsonString: string,
+): SafeParseResult<PaymentMethodPaypal, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PaymentMethodPaypal$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PaymentMethodPaypal' from JSON`,
+  );
 }

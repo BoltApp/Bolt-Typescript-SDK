@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   CountryCode,
   CountryCode$inboundSchema,
@@ -142,4 +145,22 @@ export namespace AddressListingInput$ {
   export const outboundSchema = AddressListingInput$outboundSchema;
   /** @deprecated use `AddressListingInput$Outbound` instead. */
   export type Outbound = AddressListingInput$Outbound;
+}
+
+export function addressListingInputToJSON(
+  addressListingInput: AddressListingInput,
+): string {
+  return JSON.stringify(
+    AddressListingInput$outboundSchema.parse(addressListingInput),
+  );
+}
+
+export function addressListingInputFromJSON(
+  jsonString: string,
+): SafeParseResult<AddressListingInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AddressListingInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AddressListingInput' from JSON`,
+  );
 }

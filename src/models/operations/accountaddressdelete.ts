@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AccountAddressDeleteRequest = {
   /**
@@ -87,6 +90,26 @@ export namespace AccountAddressDeleteRequest$ {
   export type Outbound = AccountAddressDeleteRequest$Outbound;
 }
 
+export function accountAddressDeleteRequestToJSON(
+  accountAddressDeleteRequest: AccountAddressDeleteRequest,
+): string {
+  return JSON.stringify(
+    AccountAddressDeleteRequest$outboundSchema.parse(
+      accountAddressDeleteRequest,
+    ),
+  );
+}
+
+export function accountAddressDeleteRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<AccountAddressDeleteRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AccountAddressDeleteRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AccountAddressDeleteRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const AccountAddressDeleteResponse$inboundSchema: z.ZodType<
   AccountAddressDeleteResponse,
@@ -141,4 +164,24 @@ export namespace AccountAddressDeleteResponse$ {
   export const outboundSchema = AccountAddressDeleteResponse$outboundSchema;
   /** @deprecated use `AccountAddressDeleteResponse$Outbound` instead. */
   export type Outbound = AccountAddressDeleteResponse$Outbound;
+}
+
+export function accountAddressDeleteResponseToJSON(
+  accountAddressDeleteResponse: AccountAddressDeleteResponse,
+): string {
+  return JSON.stringify(
+    AccountAddressDeleteResponse$outboundSchema.parse(
+      accountAddressDeleteResponse,
+    ),
+  );
+}
+
+export function accountAddressDeleteResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<AccountAddressDeleteResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AccountAddressDeleteResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AccountAddressDeleteResponse' from JSON`,
+  );
 }

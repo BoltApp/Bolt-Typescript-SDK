@@ -3,6 +3,8 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   ErrorT,
   ErrorT$inboundSchema,
@@ -15,6 +17,7 @@ import {
   FieldError$Outbound,
   FieldError$outboundSchema,
 } from "./fielderror.js";
+import { SDKValidationError } from "./sdkvalidationerror.js";
 
 /**
  * An error has occurred, and further details are contained in the response
@@ -51,4 +54,24 @@ export namespace AccountAddressDeleteResponseBody$ {
   export const outboundSchema = AccountAddressDeleteResponseBody$outboundSchema;
   /** @deprecated use `AccountAddressDeleteResponseBody$Outbound` instead. */
   export type Outbound = AccountAddressDeleteResponseBody$Outbound;
+}
+
+export function accountAddressDeleteResponseBodyToJSON(
+  accountAddressDeleteResponseBody: AccountAddressDeleteResponseBody,
+): string {
+  return JSON.stringify(
+    AccountAddressDeleteResponseBody$outboundSchema.parse(
+      accountAddressDeleteResponseBody,
+    ),
+  );
+}
+
+export function accountAddressDeleteResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<AccountAddressDeleteResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AccountAddressDeleteResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AccountAddressDeleteResponseBody' from JSON`,
+  );
 }

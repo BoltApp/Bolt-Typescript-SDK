@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 79fa0df9-852a-493c-b998-1d82654b5f18
 management:
-  docChecksum: a056defa80f4b9d4555e25f10f77aef3
-  docVersion: 3.2.3
-  speakeasyVersion: 1.421.2
-  generationVersion: 2.438.15
-  releaseVersion: 0.21.0
-  configChecksum: 69591dec1bc2a8dae026e130f5b83eb6
+  docChecksum: 50f02d66997bd07ff1539ec5c7048116
+  docVersion: 3.2.4
+  speakeasyVersion: 1.446.0
+  generationVersion: 2.462.0
+  releaseVersion: 0.22.0
+  configChecksum: 0253435a65cff29494494847a03237f9
   repoURL: https://github.com/BoltApp/Bolt-Typescript-SDK.git
   repoSubDirectory: .
   installationURL: https://github.com/BoltApp/Bolt-Typescript-SDK
@@ -14,10 +14,10 @@ management:
 features:
   typescript:
     additionalDependencies: 0.1.0
-    core: 3.18.2
+    core: 3.18.7
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
-    envVarSecurityUsage: 0.1.1
+    envVarSecurityUsage: 0.1.2
     errorUnions: 0.1.1
     flattening: 2.82.0
     globalSecurity: 2.82.11
@@ -30,8 +30,8 @@ features:
     nameOverrides: 2.81.2
     responseFormat: 0.2.3
     retries: 2.83.0
-    sdkHooks: 0.1.0
-    unions: 2.85.7
+    sdkHooks: 0.2.0
+    unions: 2.85.8
 generatedFiles:
   - .eslintrc.cjs
   - .gitattributes
@@ -106,6 +106,7 @@ generatedFiles:
   - docs/models/components/paymentresponsependingstatus.md
   - docs/models/components/paymentresponsependingtag.md
   - docs/models/components/phonestate.md
+  - docs/models/components/processorresponse.md
   - docs/models/components/profile.md
   - docs/models/components/profilecreationdata.md
   - docs/models/components/refreshtokenrequest.md
@@ -261,6 +262,7 @@ generatedFiles:
   - src/models/components/paymentresponse.ts
   - src/models/components/paymentresponsefinalized.ts
   - src/models/components/paymentresponsepending.ts
+  - src/models/components/processorresponse.ts
   - src/models/components/profile.ts
   - src/models/components/profilecreationdata.ts
   - src/models/components/refreshtokenrequest.ts
@@ -598,7 +600,7 @@ examples:
           X-Publishable-Key: "<value>"
           X-Merchant-Client-Id: "<value>"
       requestBody:
-        application/json: {"cart": {"order_reference": "order_100", "order_description": "Order #1234567890", "display_id": "215614191", "shipments": [{"address": {".tag": "explicit", "first_name": "Alice", "last_name": "Baker", "company": "ACME Corporation", "street_address1": "535 Mission St, Ste 1401", "street_address2": "c/o Shipping Department", "locality": "San Francisco", "postal_code": "94105", "region": "CA", "country_code": "US", "email": "alice@example.com", "phone": "+14155550199"}, "cost": {"currency": "USD", "units": 10000}, "carrier": "FedEx"}], "discounts": [{"amount": {"currency": "USD", "units": 10000}, "code": "SUMMER10DISCOUNT", "details_url": "https://www.example.com/SUMMER-SALE"}], "items": [{"name": "Bolt Swag Bag", "reference": "item_100", "description": "Large tote with Bolt logo.", "total_amount": {"currency": "USD", "units": 9000}, "unit_price": 1000, "quantity": 9, "image_url": "https://www.example.com/products/123456/images/1.png"}], "total": {"currency": "USD", "units": 9000}, "tax": {"currency": "USD", "units": 100}}, "payment_method": {".tag": "credit_card", "billing_address": {".tag": "explicit", "first_name": "Alice", "last_name": "Baker", "company": "ACME Corporation", "street_address1": "535 Mission St, Ste 1401", "street_address2": "c/o Shipping Department", "locality": "San Francisco", "postal_code": "94105", "region": "CA", "country_code": "US", "email": "alice@example.com", "phone": "+14155550199"}, "network": "visa", "bin": "411111", "last4": "1004", "expiration": "2025-03", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0"}}
+        application/json: {"cart": {"order_reference": "order_100", "order_description": "Order #1234567890", "display_id": "215614191", "shipments": [{"address": {".tag": "explicit", "first_name": "Alice", "last_name": "Baker", "street_address1": "535 Mission St, Ste 1401", "locality": "San Francisco", "postal_code": "94105", "region": "CA", "country_code": "US"}, "cost": {"currency": "USD", "units": 10000}, "carrier": "FedEx"}], "discounts": [{"amount": {"currency": "USD", "units": 10000}, "code": "SUMMER10DISCOUNT", "details_url": "https://www.example.com/SUMMER-SALE"}], "items": [{"name": "Bolt Swag Bag", "reference": "item_100", "description": "Large tote with Bolt logo.", "total_amount": {"currency": "USD", "units": 9000}, "unit_price": 1000, "quantity": 9, "image_url": "https://www.example.com/products/123456/images/1.png"}], "total": {"currency": "USD", "units": 9000}, "tax": {"currency": "USD", "units": 100}}, "payment_method": {".tag": "credit_card", "billing_address": {".tag": "explicit", "first_name": "Alice", "last_name": "Baker", "company": "ACME Corporation", "street_address1": "535 Mission St, Ste 1401", "street_address2": "c/o Shipping Department", "locality": "San Francisco", "postal_code": "94105", "region": "CA", "country_code": "US", "email": "alice@example.com", "phone": "+14155550199"}, "network": "visa", "bin": "411111", "last4": "1004", "expiration": "2025-03", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0"}}
       responses:
         "200":
           application/json: {".tag": "pending", "id": "iKv7t5bgt1gg", "status": "awaiting_user_confirmation", "action": "redirect", "url": "www.example.com/payments/finalize"}
@@ -610,7 +612,7 @@ examples:
           X-Publishable-Key: "<value>"
           X-Merchant-Client-Id: "<value>"
       requestBody:
-        application/json: {"cart": {"order_reference": "order_100", "order_description": "Order #1234567890", "display_id": "215614191", "shipments": [{"address": {".tag": "explicit", "first_name": "Alice", "last_name": "Baker", "company": "ACME Corporation", "street_address1": "535 Mission St, Ste 1401", "street_address2": "c/o Shipping Department", "locality": "San Francisco", "postal_code": "94105", "region": "CA", "country_code": "US", "email": "alice@example.com", "phone": "+14155550199"}, "cost": {"currency": "USD", "units": 10000}, "carrier": "FedEx"}], "discounts": [{"amount": {"currency": "USD", "units": 10000}, "code": "SUMMER10DISCOUNT", "details_url": "https://www.example.com/SUMMER-SALE"}], "items": [{"name": "Bolt Swag Bag", "reference": "item_100", "description": "Large tote with Bolt logo.", "total_amount": {"currency": "USD", "units": 9000}, "unit_price": 1000, "quantity": 9, "image_url": "https://www.example.com/products/123456/images/1.png"}], "total": {"currency": "USD", "units": 9000}, "tax": {"currency": "USD", "units": 100}}, "payment_method": {".tag": "paypal", "success_url": "https://www.example.com/paypal-callback/success", "cancel_url": "https://www.example.com/paypal-callback/cancel"}}
+        application/json: {"cart": {"order_reference": "order_100", "order_description": "Order #1234567890", "display_id": "215614191", "shipments": [{"address": {".tag": "explicit", "first_name": "Alice", "last_name": "Baker", "street_address1": "535 Mission St, Ste 1401", "locality": "San Francisco", "postal_code": "94105", "region": "CA", "country_code": "US"}, "cost": {"currency": "USD", "units": 10000}, "carrier": "FedEx"}], "discounts": [{"amount": {"currency": "USD", "units": 10000}, "code": "SUMMER10DISCOUNT", "details_url": "https://www.example.com/SUMMER-SALE"}], "items": [{"name": "Bolt Swag Bag", "reference": "item_100", "description": "Large tote with Bolt logo.", "total_amount": {"currency": "USD", "units": 9000}, "unit_price": 1000, "quantity": 9, "image_url": "https://www.example.com/products/123456/images/1.png"}], "total": {"currency": "USD", "units": 9000}, "tax": {"currency": "USD", "units": 100}}, "payment_method": {".tag": "paypal", "success_url": "https://www.example.com/paypal-callback/success", "cancel_url": "https://www.example.com/paypal-callback/cancel"}}
       responses:
         "200":
           application/json: {".tag": "finalized", "id": "iKv7t5bgt1gg", "status": "success", "transaction": {"reference": "OBYG-X1PX-FN55", "authorizations": []}}
@@ -698,7 +700,7 @@ examples:
           X-Publishable-Key: "<value>"
           X-Merchant-Client-Id: "<value>"
       requestBody:
-        application/json: {"profile": {"create_account": true, "first_name": "Alice", "last_name": "Baker", "email": "alice@example.com", "phone": "+14155550199"}, "cart": {"order_reference": "order_100", "order_description": "Order #1234567890", "display_id": "215614191", "shipments": [{"address": {".tag": "explicit", "first_name": "Alice", "last_name": "Baker", "company": "ACME Corporation", "street_address1": "535 Mission St, Ste 1401", "street_address2": "c/o Shipping Department", "locality": "San Francisco", "postal_code": "94105", "region": "CA", "country_code": "US", "email": "alice@example.com", "phone": "+14155550199"}, "cost": {"currency": "USD", "units": 10000}, "carrier": "FedEx"}], "discounts": [{"amount": {"currency": "USD", "units": 10000}, "code": "SUMMER10DISCOUNT", "details_url": "https://www.example.com/SUMMER-SALE"}], "items": [{"name": "Bolt Swag Bag", "reference": "item_100", "description": "Large tote with Bolt logo.", "total_amount": {"currency": "USD", "units": 9000}, "unit_price": 1000, "quantity": 9, "image_url": "https://www.example.com/products/123456/images/1.png"}], "total": {"currency": "USD", "units": 9000}, "tax": {"currency": "USD", "units": 100}}, "payment_method": {".tag": "credit_card", "billing_address": {".tag": "explicit", "first_name": "Alice", "last_name": "Baker", "company": "ACME Corporation", "street_address1": "535 Mission St, Ste 1401", "street_address2": "c/o Shipping Department", "locality": "San Francisco", "postal_code": "94105", "region": "CA", "country_code": "US", "email": "alice@example.com", "phone": "+14155550199"}, "network": "visa", "bin": "411111", "last4": "1004", "expiration": "2025-03", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0"}}
+        application/json: {"profile": {"create_account": true, "first_name": "Alice", "last_name": "Baker", "email": "alice@example.com", "phone": "+14155550199"}, "cart": {"order_reference": "order_100", "order_description": "Order #1234567890", "display_id": "215614191", "shipments": [{"address": {".tag": "explicit", "first_name": "Alice", "last_name": "Baker", "street_address1": "535 Mission St, Ste 1401", "locality": "San Francisco", "postal_code": "94105", "region": "CA", "country_code": "US"}, "cost": {"currency": "USD", "units": 10000}, "carrier": "FedEx"}], "discounts": [{"amount": {"currency": "USD", "units": 10000}, "code": "SUMMER10DISCOUNT", "details_url": "https://www.example.com/SUMMER-SALE"}], "items": [{"name": "Bolt Swag Bag", "reference": "item_100", "description": "Large tote with Bolt logo.", "total_amount": {"currency": "USD", "units": 9000}, "unit_price": 1000, "quantity": 9, "image_url": "https://www.example.com/products/123456/images/1.png"}], "total": {"currency": "USD", "units": 9000}, "tax": {"currency": "USD", "units": 100}}, "payment_method": {".tag": "credit_card", "billing_address": {".tag": "explicit", "first_name": "Alice", "last_name": "Baker", "company": "ACME Corporation", "street_address1": "535 Mission St, Ste 1401", "street_address2": "c/o Shipping Department", "locality": "San Francisco", "postal_code": "94105", "region": "CA", "country_code": "US", "email": "alice@example.com", "phone": "+14155550199"}, "network": "visa", "bin": "411111", "last4": "1004", "expiration": "2025-03", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0"}}
       responses:
         "200":
           application/json: {".tag": "pending", "id": "iKv7t5bgt1gg", "status": "awaiting_user_confirmation", "action": "redirect", "url": "www.example.com/payments/finalize"}
@@ -710,7 +712,7 @@ examples:
           X-Publishable-Key: "<value>"
           X-Merchant-Client-Id: "<value>"
       requestBody:
-        application/json: {"profile": {"create_account": true, "first_name": "Alice", "last_name": "Baker", "email": "alice@example.com", "phone": "+14155550199"}, "cart": {"order_reference": "order_100", "order_description": "Order #1234567890", "display_id": "215614191", "shipments": [{"address": {".tag": "explicit", "first_name": "Alice", "last_name": "Baker", "company": "ACME Corporation", "street_address1": "535 Mission St, Ste 1401", "street_address2": "c/o Shipping Department", "locality": "San Francisco", "postal_code": "94105", "region": "CA", "country_code": "US", "email": "alice@example.com", "phone": "+14155550199"}, "cost": {"currency": "USD", "units": 10000}, "carrier": "FedEx"}], "discounts": [{"amount": {"currency": "USD", "units": 10000}, "code": "SUMMER10DISCOUNT", "details_url": "https://www.example.com/SUMMER-SALE"}], "items": [{"name": "Bolt Swag Bag", "reference": "item_100", "description": "Large tote with Bolt logo.", "total_amount": {"currency": "USD", "units": 9000}, "unit_price": 1000, "quantity": 9, "image_url": "https://www.example.com/products/123456/images/1.png"}], "total": {"currency": "USD", "units": 9000}, "tax": {"currency": "USD", "units": 100}}, "payment_method": {".tag": "paypal", "success_url": "https://www.example.com/paypal-callback/success", "cancel_url": "https://www.example.com/paypal-callback/cancel"}}
+        application/json: {"profile": {"create_account": true, "first_name": "Alice", "last_name": "Baker", "email": "alice@example.com", "phone": "+14155550199"}, "cart": {"order_reference": "order_100", "order_description": "Order #1234567890", "display_id": "215614191", "shipments": [{"address": {".tag": "explicit", "first_name": "Alice", "last_name": "Baker", "street_address1": "535 Mission St, Ste 1401", "locality": "San Francisco", "postal_code": "94105", "region": "CA", "country_code": "US"}, "cost": {"currency": "USD", "units": 10000}, "carrier": "FedEx"}], "discounts": [{"amount": {"currency": "USD", "units": 10000}, "code": "SUMMER10DISCOUNT", "details_url": "https://www.example.com/SUMMER-SALE"}], "items": [{"name": "Bolt Swag Bag", "reference": "item_100", "description": "Large tote with Bolt logo.", "total_amount": {"currency": "USD", "units": 9000}, "unit_price": 1000, "quantity": 9, "image_url": "https://www.example.com/products/123456/images/1.png"}], "total": {"currency": "USD", "units": 9000}, "tax": {"currency": "USD", "units": 100}}, "payment_method": {".tag": "paypal", "success_url": "https://www.example.com/paypal-callback/success", "cancel_url": "https://www.example.com/paypal-callback/cancel"}}
       responses:
         "200":
           application/json: {".tag": "finalized", "id": "iKv7t5bgt1gg", "status": "success", "transaction": {"reference": "OBYG-X1PX-FN55", "authorizations": []}}
@@ -798,7 +800,7 @@ examples:
           X-Publishable-Key: "<value>"
           X-Merchant-Client-Id: "<value>"
       requestBody:
-        application/json: {"profile": {"first_name": "Charlie", "last_name": "Dunn", "email": "charlie@example.com", "phone": "+14085551111"}, "cart": {"order_reference": "instore_20240116-878", "order_description": "Order #878", "display_id": "20240116-878", "shipments": [{"address": {".tag": "explicit", "first_name": "Charlie", "last_name": "Dunn", "company": "ACME Corporation", "street_address1": "535 Mission St", "street_address2": "c/o Shipping Department", "locality": "San Francisco", "postal_code": "94105", "region": "CA", "country_code": "US", "email": "alice@example.com", "phone": "+14155550199"}, "cost": {"currency": "USD", "units": 10000}, "carrier": "FedEx"}], "discounts": [], "items": [{"name": "Red Fidget Spinner", "reference": "sku-984", "description": "Single-packed fidget spinner, red", "total_amount": {"currency": "USD", "units": 1000}, "unit_price": 1000, "quantity": 1, "image_url": "https://www.example.com/products/984/image.png"}], "total": {"currency": "USD", "units": 1000}, "tax": {"currency": "USD", "units": 100}}}
+        application/json: {"profile": {"first_name": "Charlie", "last_name": "Dunn", "email": "charlie@example.com", "phone": "+14085551111"}, "cart": {"order_reference": "instore_20240116-878", "order_description": "Order #878", "display_id": "20240116-878", "shipments": [{"address": {".tag": "explicit", "first_name": "Charlie", "last_name": "Dunn", "street_address1": "535 Mission St", "locality": "San Francisco", "postal_code": "94105", "region": "CA", "country_code": "US"}, "cost": {"currency": "USD", "units": 10000}, "carrier": "FedEx"}], "discounts": [], "items": [{"name": "Red Fidget Spinner", "reference": "sku-984", "description": "Single-packed fidget spinner, red", "total_amount": {"currency": "USD", "units": 1000}, "unit_price": 1000, "quantity": 1, "image_url": "https://www.example.com/products/984/image.png"}], "total": {"currency": "USD", "units": 1000}, "tax": {"currency": "USD", "units": 100}}}
       responses:
         "200":
           application/json: {"id": "iKv7t5bgt1gg", "transaction": {"reference": "OBYG-X1PX-FN55", "authorizations": []}}
@@ -870,3 +872,4 @@ examples:
           application/json: {"network": "visa", "bin": "411111", "last4": "1004", "expiration": "2023-10-31:T06:00:00Z", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0"}
         4XX:
           application/json: {".tag": "unprocessable_request", "message": "We were unable to process your request."}
+generatedTests: {}

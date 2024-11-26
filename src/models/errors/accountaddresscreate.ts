@@ -3,6 +3,8 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   ErrorT,
   ErrorT$inboundSchema,
@@ -15,6 +17,7 @@ import {
   FieldError$Outbound,
   FieldError$outboundSchema,
 } from "./fielderror.js";
+import { SDKValidationError } from "./sdkvalidationerror.js";
 
 /**
  * The address is invalid and cannot be added, or some other error has occurred
@@ -51,4 +54,24 @@ export namespace AccountAddressCreateResponseBody$ {
   export const outboundSchema = AccountAddressCreateResponseBody$outboundSchema;
   /** @deprecated use `AccountAddressCreateResponseBody$Outbound` instead. */
   export type Outbound = AccountAddressCreateResponseBody$Outbound;
+}
+
+export function accountAddressCreateResponseBodyToJSON(
+  accountAddressCreateResponseBody: AccountAddressCreateResponseBody,
+): string {
+  return JSON.stringify(
+    AccountAddressCreateResponseBody$outboundSchema.parse(
+      accountAddressCreateResponseBody,
+    ),
+  );
+}
+
+export function accountAddressCreateResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<AccountAddressCreateResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AccountAddressCreateResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AccountAddressCreateResponseBody' from JSON`,
+  );
 }

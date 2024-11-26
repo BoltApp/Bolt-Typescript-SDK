@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export enum PaymentMethodKlarnaAccountTag {
   KlarnaAccount = "klarna_account",
@@ -86,6 +89,26 @@ export namespace PaymentMethodKlarnaAccountOutput$ {
   export type Outbound = PaymentMethodKlarnaAccountOutput$Outbound;
 }
 
+export function paymentMethodKlarnaAccountOutputToJSON(
+  paymentMethodKlarnaAccountOutput: PaymentMethodKlarnaAccountOutput,
+): string {
+  return JSON.stringify(
+    PaymentMethodKlarnaAccountOutput$outboundSchema.parse(
+      paymentMethodKlarnaAccountOutput,
+    ),
+  );
+}
+
+export function paymentMethodKlarnaAccountOutputFromJSON(
+  jsonString: string,
+): SafeParseResult<PaymentMethodKlarnaAccountOutput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PaymentMethodKlarnaAccountOutput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PaymentMethodKlarnaAccountOutput' from JSON`,
+  );
+}
+
 /** @internal */
 export const PaymentMethodKlarnaAccount$inboundSchema: z.ZodType<
   PaymentMethodKlarnaAccount,
@@ -133,4 +156,22 @@ export namespace PaymentMethodKlarnaAccount$ {
   export const outboundSchema = PaymentMethodKlarnaAccount$outboundSchema;
   /** @deprecated use `PaymentMethodKlarnaAccount$Outbound` instead. */
   export type Outbound = PaymentMethodKlarnaAccount$Outbound;
+}
+
+export function paymentMethodKlarnaAccountToJSON(
+  paymentMethodKlarnaAccount: PaymentMethodKlarnaAccount,
+): string {
+  return JSON.stringify(
+    PaymentMethodKlarnaAccount$outboundSchema.parse(paymentMethodKlarnaAccount),
+  );
+}
+
+export function paymentMethodKlarnaAccountFromJSON(
+  jsonString: string,
+): SafeParseResult<PaymentMethodKlarnaAccount, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PaymentMethodKlarnaAccount$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PaymentMethodKlarnaAccount' from JSON`,
+  );
 }

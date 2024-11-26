@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export enum PaymentMethodAffirmTag {
   Affirm = "affirm",
@@ -86,6 +89,24 @@ export namespace PaymentMethodAffirmOutput$ {
   export type Outbound = PaymentMethodAffirmOutput$Outbound;
 }
 
+export function paymentMethodAffirmOutputToJSON(
+  paymentMethodAffirmOutput: PaymentMethodAffirmOutput,
+): string {
+  return JSON.stringify(
+    PaymentMethodAffirmOutput$outboundSchema.parse(paymentMethodAffirmOutput),
+  );
+}
+
+export function paymentMethodAffirmOutputFromJSON(
+  jsonString: string,
+): SafeParseResult<PaymentMethodAffirmOutput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PaymentMethodAffirmOutput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PaymentMethodAffirmOutput' from JSON`,
+  );
+}
+
 /** @internal */
 export const PaymentMethodAffirm$inboundSchema: z.ZodType<
   PaymentMethodAffirm,
@@ -133,4 +154,22 @@ export namespace PaymentMethodAffirm$ {
   export const outboundSchema = PaymentMethodAffirm$outboundSchema;
   /** @deprecated use `PaymentMethodAffirm$Outbound` instead. */
   export type Outbound = PaymentMethodAffirm$Outbound;
+}
+
+export function paymentMethodAffirmToJSON(
+  paymentMethodAffirm: PaymentMethodAffirm,
+): string {
+  return JSON.stringify(
+    PaymentMethodAffirm$outboundSchema.parse(paymentMethodAffirm),
+  );
+}
+
+export function paymentMethodAffirmFromJSON(
+  jsonString: string,
+): SafeParseResult<PaymentMethodAffirm, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PaymentMethodAffirm$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PaymentMethodAffirm' from JSON`,
+  );
 }

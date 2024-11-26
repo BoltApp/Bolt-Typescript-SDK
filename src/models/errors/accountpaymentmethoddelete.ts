@@ -3,6 +3,8 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   ErrorT,
   ErrorT$inboundSchema,
@@ -15,6 +17,7 @@ import {
   FieldError$Outbound,
   FieldError$outboundSchema,
 } from "./fielderror.js";
+import { SDKValidationError } from "./sdkvalidationerror.js";
 
 /**
  * An error has occurred, and further details are contained in the response
@@ -53,4 +56,26 @@ export namespace AccountPaymentMethodDeleteResponseBody$ {
     AccountPaymentMethodDeleteResponseBody$outboundSchema;
   /** @deprecated use `AccountPaymentMethodDeleteResponseBody$Outbound` instead. */
   export type Outbound = AccountPaymentMethodDeleteResponseBody$Outbound;
+}
+
+export function accountPaymentMethodDeleteResponseBodyToJSON(
+  accountPaymentMethodDeleteResponseBody:
+    AccountPaymentMethodDeleteResponseBody,
+): string {
+  return JSON.stringify(
+    AccountPaymentMethodDeleteResponseBody$outboundSchema.parse(
+      accountPaymentMethodDeleteResponseBody,
+    ),
+  );
+}
+
+export function accountPaymentMethodDeleteResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<AccountPaymentMethodDeleteResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      AccountPaymentMethodDeleteResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AccountPaymentMethodDeleteResponseBody' from JSON`,
+  );
 }

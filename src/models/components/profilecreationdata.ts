@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * An account's identifying information.
@@ -89,4 +92,22 @@ export namespace ProfileCreationData$ {
   export const outboundSchema = ProfileCreationData$outboundSchema;
   /** @deprecated use `ProfileCreationData$Outbound` instead. */
   export type Outbound = ProfileCreationData$Outbound;
+}
+
+export function profileCreationDataToJSON(
+  profileCreationData: ProfileCreationData,
+): string {
+  return JSON.stringify(
+    ProfileCreationData$outboundSchema.parse(profileCreationData),
+  );
+}
+
+export function profileCreationDataFromJSON(
+  jsonString: string,
+): SafeParseResult<ProfileCreationData, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ProfileCreationData$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ProfileCreationData' from JSON`,
+  );
 }

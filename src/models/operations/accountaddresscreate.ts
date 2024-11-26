@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AccountAddressCreateRequest = {
   /**
@@ -91,6 +94,26 @@ export namespace AccountAddressCreateRequest$ {
   export type Outbound = AccountAddressCreateRequest$Outbound;
 }
 
+export function accountAddressCreateRequestToJSON(
+  accountAddressCreateRequest: AccountAddressCreateRequest,
+): string {
+  return JSON.stringify(
+    AccountAddressCreateRequest$outboundSchema.parse(
+      accountAddressCreateRequest,
+    ),
+  );
+}
+
+export function accountAddressCreateRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<AccountAddressCreateRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AccountAddressCreateRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AccountAddressCreateRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const AccountAddressCreateResponse$inboundSchema: z.ZodType<
   AccountAddressCreateResponse,
@@ -150,4 +173,24 @@ export namespace AccountAddressCreateResponse$ {
   export const outboundSchema = AccountAddressCreateResponse$outboundSchema;
   /** @deprecated use `AccountAddressCreateResponse$Outbound` instead. */
   export type Outbound = AccountAddressCreateResponse$Outbound;
+}
+
+export function accountAddressCreateResponseToJSON(
+  accountAddressCreateResponse: AccountAddressCreateResponse,
+): string {
+  return JSON.stringify(
+    AccountAddressCreateResponse$outboundSchema.parse(
+      accountAddressCreateResponse,
+    ),
+  );
+}
+
+export function accountAddressCreateResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<AccountAddressCreateResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AccountAddressCreateResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AccountAddressCreateResponse' from JSON`,
+  );
 }

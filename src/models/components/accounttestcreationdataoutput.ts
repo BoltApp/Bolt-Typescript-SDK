@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export enum EmailState {
   Missing = "missing",
@@ -137,6 +140,26 @@ export namespace AccountTestCreationDataOutput$ {
   export type Outbound = AccountTestCreationDataOutput$Outbound;
 }
 
+export function accountTestCreationDataOutputToJSON(
+  accountTestCreationDataOutput: AccountTestCreationDataOutput,
+): string {
+  return JSON.stringify(
+    AccountTestCreationDataOutput$outboundSchema.parse(
+      accountTestCreationDataOutput,
+    ),
+  );
+}
+
+export function accountTestCreationDataOutputFromJSON(
+  jsonString: string,
+): SafeParseResult<AccountTestCreationDataOutput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AccountTestCreationDataOutput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AccountTestCreationDataOutput' from JSON`,
+  );
+}
+
 /** @internal */
 export const AccountTestCreationData$inboundSchema: z.ZodType<
   AccountTestCreationData,
@@ -199,4 +222,22 @@ export namespace AccountTestCreationData$ {
   export const outboundSchema = AccountTestCreationData$outboundSchema;
   /** @deprecated use `AccountTestCreationData$Outbound` instead. */
   export type Outbound = AccountTestCreationData$Outbound;
+}
+
+export function accountTestCreationDataToJSON(
+  accountTestCreationData: AccountTestCreationData,
+): string {
+  return JSON.stringify(
+    AccountTestCreationData$outboundSchema.parse(accountTestCreationData),
+  );
+}
+
+export function accountTestCreationDataFromJSON(
+  jsonString: string,
+): SafeParseResult<AccountTestCreationData, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AccountTestCreationData$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AccountTestCreationData' from JSON`,
+  );
 }

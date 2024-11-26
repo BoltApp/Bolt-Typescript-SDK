@@ -152,11 +152,11 @@ If a HTTP request fails, an operation my also throw an error from the `models/er
 
 In addition, when custom error responses are specified for an operation, the SDK may throw their associated Error type. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation. For example, the `getDetails` method may throw the following errors:
 
-| Error Type        | Status Code       | Content Type      |
-| ----------------- | ----------------- | ----------------- |
-| errors.ErrorT     | 4XX               | application/json  |
-| errors.FieldError | 4XX               | application/json  |
-| errors.SDKError   | 5XX               | \*/\*             |
+| Error Type        | Status Code | Content Type     |
+| ----------------- | ----------- | ---------------- |
+| errors.ErrorT     | 4XX         | application/json |
+| errors.FieldError | 4XX         | application/json |
+| errors.SDKError   | 5XX         | \*/\*            |
 
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
@@ -214,53 +214,19 @@ Validation errors can also occur when either method arguments or data returned f
 <!-- Start Server Selection [server] -->
 ## Server Selection
 
-### Select Server by Index
+### Server Variables
 
-You can override the default server globally by passing a server index to the `serverIdx` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
-
-| # | Server | Variables |
-| - | ------ | --------- |
-| 0 | `https://{environment}.bolt.com/v3` | `environment` (default is `api-sandbox`) |
-
-```typescript
-import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
-
-const boltTypescriptSDK = new BoltTypescriptSDK({
-  serverIdx: 0,
-  security: {
-    oauth: "<YOUR_OAUTH_HERE>",
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
-
-async function run() {
-  const result = await boltTypescriptSDK.account.getDetails(
-    "<value>",
-    "<value>",
-  );
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-
-```
-
-#### Variables
-
-Some of the server options above contain variables. If you want to set the values of those variables, the following optional parameters are available when initializing the SDK client instance:
+The default server `https://{environment}.bolt.com/v3` contains variables and is set to `https://api-sandbox.bolt.com/v3` by default. To override default values, the following parameters are available when initializing the SDK client instance:
  * `environment: models.ServerEnvironment`
 
 ### Override Server URL Per-Client
 
-The default server can also be overridden globally by passing a URL to the `serverURL` optional parameter when initializing the SDK client instance. For example:
-
+The default server can also be overridden globally by passing a URL to the `serverURL: string` optional parameter when initializing the SDK client instance. For example:
 ```typescript
 import { BoltTypescriptSDK } from "@boltpay/bolt-typescript-sdk";
 
 const boltTypescriptSDK = new BoltTypescriptSDK({
-  serverURL: "https://{environment}.bolt.com/v3",
+  serverURL: "https://api-sandbox.bolt.com/v3",
   security: {
     oauth: "<YOUR_OAUTH_HERE>",
     apiKey: "<YOUR_API_KEY_HERE>",
@@ -338,10 +304,10 @@ const sdk = new BoltTypescriptSDK({ httpClient });
 
 This SDK supports the following security schemes globally:
 
-| Name         | Type         | Scheme       |
-| ------------ | ------------ | ------------ |
-| `oauth`      | oauth2       | OAuth2 token |
-| `apiKey`     | apiKey       | API key      |
+| Name     | Type   | Scheme       |
+| -------- | ------ | ------------ |
+| `oauth`  | oauth2 | OAuth2 token |
+| `apiKey` | apiKey | API key      |
 
 You can set the security parameters through the `security` optional parameter when initializing the SDK client instance. The selected scheme will be used by default to authenticate with the API for all operations that support it. For example:
 ```typescript
@@ -406,15 +372,11 @@ async function run() {
               dotTag: AddressReferenceExplicitTag.Explicit,
               firstName: "Alice",
               lastName: "Baker",
-              company: "ACME Corporation",
               streetAddress1: "535 Mission St, Ste 1401",
-              streetAddress2: "c/o Shipping Department",
               locality: "San Francisco",
               postalCode: "94105",
               region: "CA",
               countryCode: CountryCode.Us,
-              email: "alice@example.com",
-              phone: "+14155550199",
             },
             cost: {
               currency: Currency.Usd,

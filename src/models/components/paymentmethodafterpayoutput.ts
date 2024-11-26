@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export enum PaymentMethodAfterpayTag {
   Afterpay = "afterpay",
@@ -86,6 +89,26 @@ export namespace PaymentMethodAfterpayOutput$ {
   export type Outbound = PaymentMethodAfterpayOutput$Outbound;
 }
 
+export function paymentMethodAfterpayOutputToJSON(
+  paymentMethodAfterpayOutput: PaymentMethodAfterpayOutput,
+): string {
+  return JSON.stringify(
+    PaymentMethodAfterpayOutput$outboundSchema.parse(
+      paymentMethodAfterpayOutput,
+    ),
+  );
+}
+
+export function paymentMethodAfterpayOutputFromJSON(
+  jsonString: string,
+): SafeParseResult<PaymentMethodAfterpayOutput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PaymentMethodAfterpayOutput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PaymentMethodAfterpayOutput' from JSON`,
+  );
+}
+
 /** @internal */
 export const PaymentMethodAfterpay$inboundSchema: z.ZodType<
   PaymentMethodAfterpay,
@@ -133,4 +156,22 @@ export namespace PaymentMethodAfterpay$ {
   export const outboundSchema = PaymentMethodAfterpay$outboundSchema;
   /** @deprecated use `PaymentMethodAfterpay$Outbound` instead. */
   export type Outbound = PaymentMethodAfterpay$Outbound;
+}
+
+export function paymentMethodAfterpayToJSON(
+  paymentMethodAfterpay: PaymentMethodAfterpay,
+): string {
+  return JSON.stringify(
+    PaymentMethodAfterpay$outboundSchema.parse(paymentMethodAfterpay),
+  );
+}
+
+export function paymentMethodAfterpayFromJSON(
+  jsonString: string,
+): SafeParseResult<PaymentMethodAfterpay, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PaymentMethodAfterpay$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PaymentMethodAfterpay' from JSON`,
+  );
 }

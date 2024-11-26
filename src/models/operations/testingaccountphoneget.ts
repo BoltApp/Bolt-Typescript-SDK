@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type TestingAccountPhoneGetSecurity = {
   apiKey: string;
@@ -80,6 +83,26 @@ export namespace TestingAccountPhoneGetSecurity$ {
   export type Outbound = TestingAccountPhoneGetSecurity$Outbound;
 }
 
+export function testingAccountPhoneGetSecurityToJSON(
+  testingAccountPhoneGetSecurity: TestingAccountPhoneGetSecurity,
+): string {
+  return JSON.stringify(
+    TestingAccountPhoneGetSecurity$outboundSchema.parse(
+      testingAccountPhoneGetSecurity,
+    ),
+  );
+}
+
+export function testingAccountPhoneGetSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<TestingAccountPhoneGetSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TestingAccountPhoneGetSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TestingAccountPhoneGetSecurity' from JSON`,
+  );
+}
+
 /** @internal */
 export const TestingAccountPhoneGetRequest$inboundSchema: z.ZodType<
   TestingAccountPhoneGetRequest,
@@ -122,6 +145,26 @@ export namespace TestingAccountPhoneGetRequest$ {
   export const outboundSchema = TestingAccountPhoneGetRequest$outboundSchema;
   /** @deprecated use `TestingAccountPhoneGetRequest$Outbound` instead. */
   export type Outbound = TestingAccountPhoneGetRequest$Outbound;
+}
+
+export function testingAccountPhoneGetRequestToJSON(
+  testingAccountPhoneGetRequest: TestingAccountPhoneGetRequest,
+): string {
+  return JSON.stringify(
+    TestingAccountPhoneGetRequest$outboundSchema.parse(
+      testingAccountPhoneGetRequest,
+    ),
+  );
+}
+
+export function testingAccountPhoneGetRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<TestingAccountPhoneGetRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TestingAccountPhoneGetRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TestingAccountPhoneGetRequest' from JSON`,
+  );
 }
 
 /** @internal */
@@ -187,4 +230,24 @@ export namespace TestingAccountPhoneGetResponse$ {
   export const outboundSchema = TestingAccountPhoneGetResponse$outboundSchema;
   /** @deprecated use `TestingAccountPhoneGetResponse$Outbound` instead. */
   export type Outbound = TestingAccountPhoneGetResponse$Outbound;
+}
+
+export function testingAccountPhoneGetResponseToJSON(
+  testingAccountPhoneGetResponse: TestingAccountPhoneGetResponse,
+): string {
+  return JSON.stringify(
+    TestingAccountPhoneGetResponse$outboundSchema.parse(
+      testingAccountPhoneGetResponse,
+    ),
+  );
+}
+
+export function testingAccountPhoneGetResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<TestingAccountPhoneGetResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TestingAccountPhoneGetResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TestingAccountPhoneGetResponse' from JSON`,
+  );
 }

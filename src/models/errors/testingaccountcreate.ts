@@ -3,6 +3,8 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   ErrorT,
   ErrorT$inboundSchema,
@@ -15,6 +17,7 @@ import {
   FieldError$Outbound,
   FieldError$outboundSchema,
 } from "./fielderror.js";
+import { SDKValidationError } from "./sdkvalidationerror.js";
 
 /**
  * An error has occurred, and further details are contained in the response
@@ -51,4 +54,24 @@ export namespace TestingAccountCreateResponseBody$ {
   export const outboundSchema = TestingAccountCreateResponseBody$outboundSchema;
   /** @deprecated use `TestingAccountCreateResponseBody$Outbound` instead. */
   export type Outbound = TestingAccountCreateResponseBody$Outbound;
+}
+
+export function testingAccountCreateResponseBodyToJSON(
+  testingAccountCreateResponseBody: TestingAccountCreateResponseBody,
+): string {
+  return JSON.stringify(
+    TestingAccountCreateResponseBody$outboundSchema.parse(
+      testingAccountCreateResponseBody,
+    ),
+  );
+}
+
+export function testingAccountCreateResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<TestingAccountCreateResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TestingAccountCreateResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TestingAccountCreateResponseBody' from JSON`,
+  );
 }

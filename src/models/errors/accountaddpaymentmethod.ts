@@ -3,6 +3,8 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   CreditCardError,
   CreditCardError$inboundSchema,
@@ -21,6 +23,7 @@ import {
   FieldError$Outbound,
   FieldError$outboundSchema,
 } from "./fielderror.js";
+import { SDKValidationError } from "./sdkvalidationerror.js";
 
 /**
  * The payment method is invalid and cannot be added, or some other error has occurred
@@ -71,4 +74,25 @@ export namespace AccountAddPaymentMethodResponseBody$ {
     AccountAddPaymentMethodResponseBody$outboundSchema;
   /** @deprecated use `AccountAddPaymentMethodResponseBody$Outbound` instead. */
   export type Outbound = AccountAddPaymentMethodResponseBody$Outbound;
+}
+
+export function accountAddPaymentMethodResponseBodyToJSON(
+  accountAddPaymentMethodResponseBody: AccountAddPaymentMethodResponseBody,
+): string {
+  return JSON.stringify(
+    AccountAddPaymentMethodResponseBody$outboundSchema.parse(
+      accountAddPaymentMethodResponseBody,
+    ),
+  );
+}
+
+export function accountAddPaymentMethodResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<AccountAddPaymentMethodResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      AccountAddPaymentMethodResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AccountAddPaymentMethodResponseBody' from JSON`,
+  );
 }

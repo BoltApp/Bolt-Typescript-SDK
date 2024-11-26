@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PaymentsActionRequest = {
   /**
@@ -98,6 +101,24 @@ export namespace PaymentsActionRequest$ {
   export type Outbound = PaymentsActionRequest$Outbound;
 }
 
+export function paymentsActionRequestToJSON(
+  paymentsActionRequest: PaymentsActionRequest,
+): string {
+  return JSON.stringify(
+    PaymentsActionRequest$outboundSchema.parse(paymentsActionRequest),
+  );
+}
+
+export function paymentsActionRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<PaymentsActionRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PaymentsActionRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PaymentsActionRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const PaymentsActionResponse$inboundSchema: z.ZodType<
   PaymentsActionResponse,
@@ -157,4 +178,22 @@ export namespace PaymentsActionResponse$ {
   export const outboundSchema = PaymentsActionResponse$outboundSchema;
   /** @deprecated use `PaymentsActionResponse$Outbound` instead. */
   export type Outbound = PaymentsActionResponse$Outbound;
+}
+
+export function paymentsActionResponseToJSON(
+  paymentsActionResponse: PaymentsActionResponse,
+): string {
+  return JSON.stringify(
+    PaymentsActionResponse$outboundSchema.parse(paymentsActionResponse),
+  );
+}
+
+export function paymentsActionResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PaymentsActionResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PaymentsActionResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PaymentsActionResponse' from JSON`,
+  );
 }

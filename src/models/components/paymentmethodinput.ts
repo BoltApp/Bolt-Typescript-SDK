@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PaymentMethodAffirm,
   PaymentMethodAffirm$inboundSchema,
@@ -173,4 +176,22 @@ export namespace PaymentMethodInput$ {
   export const outboundSchema = PaymentMethodInput$outboundSchema;
   /** @deprecated use `PaymentMethodInput$Outbound` instead. */
   export type Outbound = PaymentMethodInput$Outbound;
+}
+
+export function paymentMethodInputToJSON(
+  paymentMethodInput: PaymentMethodInput,
+): string {
+  return JSON.stringify(
+    PaymentMethodInput$outboundSchema.parse(paymentMethodInput),
+  );
+}
+
+export function paymentMethodInputFromJSON(
+  jsonString: string,
+): SafeParseResult<PaymentMethodInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PaymentMethodInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PaymentMethodInput' from JSON`,
+  );
 }

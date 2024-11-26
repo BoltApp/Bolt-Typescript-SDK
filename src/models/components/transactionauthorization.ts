@@ -4,9 +4,22 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  ProcessorResponse,
+  ProcessorResponse$inboundSchema,
+  ProcessorResponse$Outbound,
+  ProcessorResponse$outboundSchema,
+} from "./processorresponse.js";
 
 export type TransactionAuthorization = {
   processorReference?: string | undefined;
+  /**
+   * Raw authorization response from the payment processor
+   */
+  processorResponse?: ProcessorResponse | undefined;
 };
 
 /** @internal */
@@ -16,15 +29,18 @@ export const TransactionAuthorization$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   processor_reference: z.string().optional(),
+  processor_response: ProcessorResponse$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "processor_reference": "processorReference",
+    "processor_response": "processorResponse",
   });
 });
 
 /** @internal */
 export type TransactionAuthorization$Outbound = {
   processor_reference?: string | undefined;
+  processor_response?: ProcessorResponse$Outbound | undefined;
 };
 
 /** @internal */
@@ -34,9 +50,11 @@ export const TransactionAuthorization$outboundSchema: z.ZodType<
   TransactionAuthorization
 > = z.object({
   processorReference: z.string().optional(),
+  processorResponse: ProcessorResponse$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     processorReference: "processor_reference",
+    processorResponse: "processor_response",
   });
 });
 
@@ -51,4 +69,22 @@ export namespace TransactionAuthorization$ {
   export const outboundSchema = TransactionAuthorization$outboundSchema;
   /** @deprecated use `TransactionAuthorization$Outbound` instead. */
   export type Outbound = TransactionAuthorization$Outbound;
+}
+
+export function transactionAuthorizationToJSON(
+  transactionAuthorization: TransactionAuthorization,
+): string {
+  return JSON.stringify(
+    TransactionAuthorization$outboundSchema.parse(transactionAuthorization),
+  );
+}
+
+export function transactionAuthorizationFromJSON(
+  jsonString: string,
+): SafeParseResult<TransactionAuthorization, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TransactionAuthorization$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TransactionAuthorization' from JSON`,
+  );
 }

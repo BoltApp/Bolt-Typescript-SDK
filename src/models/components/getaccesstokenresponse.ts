@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetAccessTokenResponse = {
   /**
@@ -106,4 +109,22 @@ export namespace GetAccessTokenResponse$ {
   export const outboundSchema = GetAccessTokenResponse$outboundSchema;
   /** @deprecated use `GetAccessTokenResponse$Outbound` instead. */
   export type Outbound = GetAccessTokenResponse$Outbound;
+}
+
+export function getAccessTokenResponseToJSON(
+  getAccessTokenResponse: GetAccessTokenResponse,
+): string {
+  return JSON.stringify(
+    GetAccessTokenResponse$outboundSchema.parse(getAccessTokenResponse),
+  );
+}
+
+export function getAccessTokenResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAccessTokenResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAccessTokenResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAccessTokenResponse' from JSON`,
+  );
 }

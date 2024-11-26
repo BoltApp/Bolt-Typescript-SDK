@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export enum PaymentMethodKlarnaPaynowTag {
   KlarnaPaynow = "klarna_paynow",
@@ -86,6 +89,26 @@ export namespace PaymentMethodKlarnaPaynowOutput$ {
   export type Outbound = PaymentMethodKlarnaPaynowOutput$Outbound;
 }
 
+export function paymentMethodKlarnaPaynowOutputToJSON(
+  paymentMethodKlarnaPaynowOutput: PaymentMethodKlarnaPaynowOutput,
+): string {
+  return JSON.stringify(
+    PaymentMethodKlarnaPaynowOutput$outboundSchema.parse(
+      paymentMethodKlarnaPaynowOutput,
+    ),
+  );
+}
+
+export function paymentMethodKlarnaPaynowOutputFromJSON(
+  jsonString: string,
+): SafeParseResult<PaymentMethodKlarnaPaynowOutput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PaymentMethodKlarnaPaynowOutput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PaymentMethodKlarnaPaynowOutput' from JSON`,
+  );
+}
+
 /** @internal */
 export const PaymentMethodKlarnaPaynow$inboundSchema: z.ZodType<
   PaymentMethodKlarnaPaynow,
@@ -133,4 +156,22 @@ export namespace PaymentMethodKlarnaPaynow$ {
   export const outboundSchema = PaymentMethodKlarnaPaynow$outboundSchema;
   /** @deprecated use `PaymentMethodKlarnaPaynow$Outbound` instead. */
   export type Outbound = PaymentMethodKlarnaPaynow$Outbound;
+}
+
+export function paymentMethodKlarnaPaynowToJSON(
+  paymentMethodKlarnaPaynow: PaymentMethodKlarnaPaynow,
+): string {
+  return JSON.stringify(
+    PaymentMethodKlarnaPaynow$outboundSchema.parse(paymentMethodKlarnaPaynow),
+  );
+}
+
+export function paymentMethodKlarnaPaynowFromJSON(
+  jsonString: string,
+): SafeParseResult<PaymentMethodKlarnaPaynow, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PaymentMethodKlarnaPaynow$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PaymentMethodKlarnaPaynow' from JSON`,
+  );
 }

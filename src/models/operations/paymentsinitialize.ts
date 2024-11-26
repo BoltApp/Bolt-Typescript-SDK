@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PaymentsInitializeRequest = {
   /**
@@ -92,6 +95,24 @@ export namespace PaymentsInitializeRequest$ {
   export type Outbound = PaymentsInitializeRequest$Outbound;
 }
 
+export function paymentsInitializeRequestToJSON(
+  paymentsInitializeRequest: PaymentsInitializeRequest,
+): string {
+  return JSON.stringify(
+    PaymentsInitializeRequest$outboundSchema.parse(paymentsInitializeRequest),
+  );
+}
+
+export function paymentsInitializeRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<PaymentsInitializeRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PaymentsInitializeRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PaymentsInitializeRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const PaymentsInitializeResponse$inboundSchema: z.ZodType<
   PaymentsInitializeResponse,
@@ -151,4 +172,22 @@ export namespace PaymentsInitializeResponse$ {
   export const outboundSchema = PaymentsInitializeResponse$outboundSchema;
   /** @deprecated use `PaymentsInitializeResponse$Outbound` instead. */
   export type Outbound = PaymentsInitializeResponse$Outbound;
+}
+
+export function paymentsInitializeResponseToJSON(
+  paymentsInitializeResponse: PaymentsInitializeResponse,
+): string {
+  return JSON.stringify(
+    PaymentsInitializeResponse$outboundSchema.parse(paymentsInitializeResponse),
+  );
+}
+
+export function paymentsInitializeResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PaymentsInitializeResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PaymentsInitializeResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PaymentsInitializeResponse' from JSON`,
+  );
 }

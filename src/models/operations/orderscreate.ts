@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type OrdersCreateSecurity = {
   apiKey: string;
@@ -85,6 +88,24 @@ export namespace OrdersCreateSecurity$ {
   export type Outbound = OrdersCreateSecurity$Outbound;
 }
 
+export function ordersCreateSecurityToJSON(
+  ordersCreateSecurity: OrdersCreateSecurity,
+): string {
+  return JSON.stringify(
+    OrdersCreateSecurity$outboundSchema.parse(ordersCreateSecurity),
+  );
+}
+
+export function ordersCreateSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<OrdersCreateSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => OrdersCreateSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OrdersCreateSecurity' from JSON`,
+  );
+}
+
 /** @internal */
 export const OrdersCreateRequest$inboundSchema: z.ZodType<
   OrdersCreateRequest,
@@ -135,6 +156,24 @@ export namespace OrdersCreateRequest$ {
   export const outboundSchema = OrdersCreateRequest$outboundSchema;
   /** @deprecated use `OrdersCreateRequest$Outbound` instead. */
   export type Outbound = OrdersCreateRequest$Outbound;
+}
+
+export function ordersCreateRequestToJSON(
+  ordersCreateRequest: OrdersCreateRequest,
+): string {
+  return JSON.stringify(
+    OrdersCreateRequest$outboundSchema.parse(ordersCreateRequest),
+  );
+}
+
+export function ordersCreateRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<OrdersCreateRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => OrdersCreateRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OrdersCreateRequest' from JSON`,
+  );
 }
 
 /** @internal */
@@ -196,4 +235,22 @@ export namespace OrdersCreateResponse$ {
   export const outboundSchema = OrdersCreateResponse$outboundSchema;
   /** @deprecated use `OrdersCreateResponse$Outbound` instead. */
   export type Outbound = OrdersCreateResponse$Outbound;
+}
+
+export function ordersCreateResponseToJSON(
+  ordersCreateResponse: OrdersCreateResponse,
+): string {
+  return JSON.stringify(
+    OrdersCreateResponse$outboundSchema.parse(ordersCreateResponse),
+  );
+}
+
+export function ordersCreateResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<OrdersCreateResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => OrdersCreateResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OrdersCreateResponse' from JSON`,
+  );
 }

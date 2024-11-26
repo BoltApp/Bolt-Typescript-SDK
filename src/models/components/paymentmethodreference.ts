@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export enum PaymentMethodReferenceTag {
   Id = "id",
@@ -83,4 +86,22 @@ export namespace PaymentMethodReference$ {
   export const outboundSchema = PaymentMethodReference$outboundSchema;
   /** @deprecated use `PaymentMethodReference$Outbound` instead. */
   export type Outbound = PaymentMethodReference$Outbound;
+}
+
+export function paymentMethodReferenceToJSON(
+  paymentMethodReference: PaymentMethodReference,
+): string {
+  return JSON.stringify(
+    PaymentMethodReference$outboundSchema.parse(paymentMethodReference),
+  );
+}
+
+export function paymentMethodReferenceFromJSON(
+  jsonString: string,
+): SafeParseResult<PaymentMethodReference, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PaymentMethodReference$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PaymentMethodReference' from JSON`,
+  );
 }

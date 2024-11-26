@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AddressReferenceExplicit,
   AddressReferenceExplicit$inboundSchema,
@@ -76,4 +79,22 @@ export namespace AddressReference$ {
   export const outboundSchema = AddressReference$outboundSchema;
   /** @deprecated use `AddressReference$Outbound` instead. */
   export type Outbound = AddressReference$Outbound;
+}
+
+export function addressReferenceToJSON(
+  addressReference: AddressReference,
+): string {
+  return JSON.stringify(
+    AddressReference$outboundSchema.parse(addressReference),
+  );
+}
+
+export function addressReferenceFromJSON(
+  jsonString: string,
+): SafeParseResult<AddressReference, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AddressReference$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AddressReference' from JSON`,
+  );
 }

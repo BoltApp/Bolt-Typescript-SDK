@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AddressReference,
   AddressReference$inboundSchema,
@@ -149,6 +152,24 @@ export namespace PaymentMethodCreditCard$ {
   export type Outbound = PaymentMethodCreditCard$Outbound;
 }
 
+export function paymentMethodCreditCardToJSON(
+  paymentMethodCreditCard: PaymentMethodCreditCard,
+): string {
+  return JSON.stringify(
+    PaymentMethodCreditCard$outboundSchema.parse(paymentMethodCreditCard),
+  );
+}
+
+export function paymentMethodCreditCardFromJSON(
+  jsonString: string,
+): SafeParseResult<PaymentMethodCreditCard, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PaymentMethodCreditCard$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PaymentMethodCreditCard' from JSON`,
+  );
+}
+
 /** @internal */
 export const PaymentMethodCreditCardInput$inboundSchema: z.ZodType<
   PaymentMethodCreditCardInput,
@@ -211,4 +232,24 @@ export namespace PaymentMethodCreditCardInput$ {
   export const outboundSchema = PaymentMethodCreditCardInput$outboundSchema;
   /** @deprecated use `PaymentMethodCreditCardInput$Outbound` instead. */
   export type Outbound = PaymentMethodCreditCardInput$Outbound;
+}
+
+export function paymentMethodCreditCardInputToJSON(
+  paymentMethodCreditCardInput: PaymentMethodCreditCardInput,
+): string {
+  return JSON.stringify(
+    PaymentMethodCreditCardInput$outboundSchema.parse(
+      paymentMethodCreditCardInput,
+    ),
+  );
+}
+
+export function paymentMethodCreditCardInputFromJSON(
+  jsonString: string,
+): SafeParseResult<PaymentMethodCreditCardInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PaymentMethodCreditCardInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PaymentMethodCreditCardInput' from JSON`,
+  );
 }

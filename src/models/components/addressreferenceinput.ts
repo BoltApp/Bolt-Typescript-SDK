@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AddressReferenceExplicitInput,
   AddressReferenceExplicitInput$inboundSchema,
@@ -76,4 +79,22 @@ export namespace AddressReferenceInput$ {
   export const outboundSchema = AddressReferenceInput$outboundSchema;
   /** @deprecated use `AddressReferenceInput$Outbound` instead. */
   export type Outbound = AddressReferenceInput$Outbound;
+}
+
+export function addressReferenceInputToJSON(
+  addressReferenceInput: AddressReferenceInput,
+): string {
+  return JSON.stringify(
+    AddressReferenceInput$outboundSchema.parse(addressReferenceInput),
+  );
+}
+
+export function addressReferenceInputFromJSON(
+  jsonString: string,
+): SafeParseResult<AddressReferenceInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AddressReferenceInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AddressReferenceInput' from JSON`,
+  );
 }

@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AccountAddressEditRequest = {
   /**
@@ -98,6 +101,24 @@ export namespace AccountAddressEditRequest$ {
   export type Outbound = AccountAddressEditRequest$Outbound;
 }
 
+export function accountAddressEditRequestToJSON(
+  accountAddressEditRequest: AccountAddressEditRequest,
+): string {
+  return JSON.stringify(
+    AccountAddressEditRequest$outboundSchema.parse(accountAddressEditRequest),
+  );
+}
+
+export function accountAddressEditRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<AccountAddressEditRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AccountAddressEditRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AccountAddressEditRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const AccountAddressEditResponse$inboundSchema: z.ZodType<
   AccountAddressEditResponse,
@@ -157,4 +178,22 @@ export namespace AccountAddressEditResponse$ {
   export const outboundSchema = AccountAddressEditResponse$outboundSchema;
   /** @deprecated use `AccountAddressEditResponse$Outbound` instead. */
   export type Outbound = AccountAddressEditResponse$Outbound;
+}
+
+export function accountAddressEditResponseToJSON(
+  accountAddressEditResponse: AccountAddressEditResponse,
+): string {
+  return JSON.stringify(
+    AccountAddressEditResponse$outboundSchema.parse(accountAddressEditResponse),
+  );
+}
+
+export function accountAddressEditResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<AccountAddressEditResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AccountAddressEditResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AccountAddressEditResponse' from JSON`,
+  );
 }

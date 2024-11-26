@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AccountTestPhoneData = {
   /**
@@ -45,4 +48,22 @@ export namespace AccountTestPhoneData$ {
   export const outboundSchema = AccountTestPhoneData$outboundSchema;
   /** @deprecated use `AccountTestPhoneData$Outbound` instead. */
   export type Outbound = AccountTestPhoneData$Outbound;
+}
+
+export function accountTestPhoneDataToJSON(
+  accountTestPhoneData: AccountTestPhoneData,
+): string {
+  return JSON.stringify(
+    AccountTestPhoneData$outboundSchema.parse(accountTestPhoneData),
+  );
+}
+
+export function accountTestPhoneDataFromJSON(
+  jsonString: string,
+): SafeParseResult<AccountTestPhoneData, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AccountTestPhoneData$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AccountTestPhoneData' from JSON`,
+  );
 }

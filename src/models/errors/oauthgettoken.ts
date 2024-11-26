@@ -3,6 +3,8 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   ErrorT,
   ErrorT$inboundSchema,
@@ -15,6 +17,7 @@ import {
   FieldError$Outbound,
   FieldError$outboundSchema,
 } from "./fielderror.js";
+import { SDKValidationError } from "./sdkvalidationerror.js";
 
 /**
  * An error has occurred, and further details are contained in the response
@@ -51,4 +54,22 @@ export namespace OauthGetTokenResponseBody$ {
   export const outboundSchema = OauthGetTokenResponseBody$outboundSchema;
   /** @deprecated use `OauthGetTokenResponseBody$Outbound` instead. */
   export type Outbound = OauthGetTokenResponseBody$Outbound;
+}
+
+export function oauthGetTokenResponseBodyToJSON(
+  oauthGetTokenResponseBody: OauthGetTokenResponseBody,
+): string {
+  return JSON.stringify(
+    OauthGetTokenResponseBody$outboundSchema.parse(oauthGetTokenResponseBody),
+  );
+}
+
+export function oauthGetTokenResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<OauthGetTokenResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => OauthGetTokenResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OauthGetTokenResponseBody' from JSON`,
+  );
 }

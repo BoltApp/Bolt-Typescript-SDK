@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export enum PaymentActionRequestTag {
   Finalize = "finalize",
@@ -85,4 +88,22 @@ export namespace PaymentActionRequest$ {
   export const outboundSchema = PaymentActionRequest$outboundSchema;
   /** @deprecated use `PaymentActionRequest$Outbound` instead. */
   export type Outbound = PaymentActionRequest$Outbound;
+}
+
+export function paymentActionRequestToJSON(
+  paymentActionRequest: PaymentActionRequest,
+): string {
+  return JSON.stringify(
+    PaymentActionRequest$outboundSchema.parse(paymentActionRequest),
+  );
+}
+
+export function paymentActionRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<PaymentActionRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PaymentActionRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PaymentActionRequest' from JSON`,
+  );
 }

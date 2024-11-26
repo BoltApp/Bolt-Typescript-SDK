@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AuthorizationCodeRequest,
   AuthorizationCodeRequest$inboundSchema,
@@ -54,4 +57,18 @@ export namespace TokenRequest$ {
   export const outboundSchema = TokenRequest$outboundSchema;
   /** @deprecated use `TokenRequest$Outbound` instead. */
   export type Outbound = TokenRequest$Outbound;
+}
+
+export function tokenRequestToJSON(tokenRequest: TokenRequest): string {
+  return JSON.stringify(TokenRequest$outboundSchema.parse(tokenRequest));
+}
+
+export function tokenRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<TokenRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TokenRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TokenRequest' from JSON`,
+  );
 }

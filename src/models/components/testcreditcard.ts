@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   CreditCardNetwork,
   CreditCardNetwork$inboundSchema,
@@ -78,4 +81,18 @@ export namespace TestCreditCard$ {
   export const outboundSchema = TestCreditCard$outboundSchema;
   /** @deprecated use `TestCreditCard$Outbound` instead. */
   export type Outbound = TestCreditCard$Outbound;
+}
+
+export function testCreditCardToJSON(testCreditCard: TestCreditCard): string {
+  return JSON.stringify(TestCreditCard$outboundSchema.parse(testCreditCard));
+}
+
+export function testCreditCardFromJSON(
+  jsonString: string,
+): SafeParseResult<TestCreditCard, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TestCreditCard$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TestCreditCard' from JSON`,
+  );
 }

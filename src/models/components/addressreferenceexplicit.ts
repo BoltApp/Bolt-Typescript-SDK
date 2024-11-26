@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   CountryCode,
   CountryCode$inboundSchema,
@@ -242,6 +245,24 @@ export namespace AddressReferenceExplicit$ {
   export type Outbound = AddressReferenceExplicit$Outbound;
 }
 
+export function addressReferenceExplicitToJSON(
+  addressReferenceExplicit: AddressReferenceExplicit,
+): string {
+  return JSON.stringify(
+    AddressReferenceExplicit$outboundSchema.parse(addressReferenceExplicit),
+  );
+}
+
+export function addressReferenceExplicitFromJSON(
+  jsonString: string,
+): SafeParseResult<AddressReferenceExplicit, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AddressReferenceExplicit$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AddressReferenceExplicit' from JSON`,
+  );
+}
+
 /** @internal */
 export const AddressReferenceExplicitInput$inboundSchema: z.ZodType<
   AddressReferenceExplicitInput,
@@ -329,4 +350,24 @@ export namespace AddressReferenceExplicitInput$ {
   export const outboundSchema = AddressReferenceExplicitInput$outboundSchema;
   /** @deprecated use `AddressReferenceExplicitInput$Outbound` instead. */
   export type Outbound = AddressReferenceExplicitInput$Outbound;
+}
+
+export function addressReferenceExplicitInputToJSON(
+  addressReferenceExplicitInput: AddressReferenceExplicitInput,
+): string {
+  return JSON.stringify(
+    AddressReferenceExplicitInput$outboundSchema.parse(
+      addressReferenceExplicitInput,
+    ),
+  );
+}
+
+export function addressReferenceExplicitInputFromJSON(
+  jsonString: string,
+): SafeParseResult<AddressReferenceExplicitInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AddressReferenceExplicitInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AddressReferenceExplicitInput' from JSON`,
+  );
 }

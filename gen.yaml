@@ -11,8 +11,9 @@ generation:
     requestResponseComponentNamesFeb2024: false
   auth:
     oAuth2ClientCredentialsEnabled: false
+    oAuth2PasswordEnabled: false
 typescript:
-  version: 0.21.0
+  version: 0.22.0
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -20,6 +21,7 @@ typescript:
   additionalPackageJSON: {}
   author: BoltPublicAPI
   clientServerStatusCodesAsErrors: true
+  defaultErrorName: SDKError
   enumFormat: enum
   flattenGlobalSecurity: true
   flatteningOrder: body-first

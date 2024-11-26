@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   Amount,
   Amount$inboundSchema,
@@ -116,4 +119,18 @@ export namespace Cart$ {
   export const outboundSchema = Cart$outboundSchema;
   /** @deprecated use `Cart$Outbound` instead. */
   export type Outbound = Cart$Outbound;
+}
+
+export function cartToJSON(cart: Cart): string {
+  return JSON.stringify(Cart$outboundSchema.parse(cart));
+}
+
+export function cartFromJSON(
+  jsonString: string,
+): SafeParseResult<Cart, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Cart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Cart' from JSON`,
+  );
 }

@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * A supported currency.
@@ -82,4 +85,18 @@ export namespace Amount$ {
   export const outboundSchema = Amount$outboundSchema;
   /** @deprecated use `Amount$Outbound` instead. */
   export type Outbound = Amount$Outbound;
+}
+
+export function amountToJSON(amount: Amount): string {
+  return JSON.stringify(Amount$outboundSchema.parse(amount));
+}
+
+export function amountFromJSON(
+  jsonString: string,
+): SafeParseResult<Amount, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Amount$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Amount' from JSON`,
+  );
 }

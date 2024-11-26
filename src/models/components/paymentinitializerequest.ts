@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   Cart,
   Cart$inboundSchema,
@@ -67,4 +70,22 @@ export namespace PaymentInitializeRequest$ {
   export const outboundSchema = PaymentInitializeRequest$outboundSchema;
   /** @deprecated use `PaymentInitializeRequest$Outbound` instead. */
   export type Outbound = PaymentInitializeRequest$Outbound;
+}
+
+export function paymentInitializeRequestToJSON(
+  paymentInitializeRequest: PaymentInitializeRequest,
+): string {
+  return JSON.stringify(
+    PaymentInitializeRequest$outboundSchema.parse(paymentInitializeRequest),
+  );
+}
+
+export function paymentInitializeRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<PaymentInitializeRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PaymentInitializeRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PaymentInitializeRequest' from JSON`,
+  );
 }
