@@ -13,7 +13,7 @@ generation:
     oAuth2ClientCredentialsEnabled: false
     oAuth2PasswordEnabled: false
 typescript:
-  version: 0.22.0
+  version: 0.22.1
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -22,6 +22,7 @@ typescript:
   author: BoltPublicAPI
   clientServerStatusCodesAsErrors: true
   defaultErrorName: SDKError
+  enableReactQuery: false
   enumFormat: enum
   flattenGlobalSecurity: true
   flatteningOrder: body-first

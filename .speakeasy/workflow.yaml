@@ -15,5 +15,5 @@ targets:
                 token: $NPM_TOKEN
         codeSamples:
             registry:
-                location: registry.speakeasyapi.dev/bolt/boltpublicapi/my-source-code-samples
+                location: registry.speakeasyapi.dev/bolt/boltpublicapi/my-source-typescript-code-samples
             blocking: false

@@ -1,21 +1,21 @@
-speakeasyVersion: 1.446.0
+speakeasyVersion: 1.448.0
 sources:
     my-source:
         sourceNamespace: my-source
-        sourceRevisionDigest: sha256:e3714ef88e9bc920bdf74eb94d398f6611ca419b712095309efff4ab10d36670
-        sourceBlobDigest: sha256:0ba32db401957a274c014d3f824ed12e26ced169b6d211c494e2ab5761046c6f
+        sourceRevisionDigest: sha256:b21f53ae577279e8400fd78b8fd5f8c45f85abbdb5d5f680a82a6079086746cc
+        sourceBlobDigest: sha256:6a2aeb90866b3a655e132aaf94933f5edeb2b5d182423e38c1fde6af06d74aed
         tags:
             - latest
-            - speakeasy-sdk-regen-1732580562
-            - 3.2.4
+            - speakeasy-sdk-regen-1732666952
+            - 3.2.5
 targets:
     bolt-typescript:
         source: my-source
         sourceNamespace: my-source
-        sourceRevisionDigest: sha256:e3714ef88e9bc920bdf74eb94d398f6611ca419b712095309efff4ab10d36670
-        sourceBlobDigest: sha256:0ba32db401957a274c014d3f824ed12e26ced169b6d211c494e2ab5761046c6f
-        codeSamplesNamespace: my-source-code-samples
-        codeSamplesRevisionDigest: sha256:19fed045310f7d6eca795f3ec6c84ea864cc6e0a1d78d65ae76b03526d605f6f
+        sourceRevisionDigest: sha256:b21f53ae577279e8400fd78b8fd5f8c45f85abbdb5d5f680a82a6079086746cc
+        sourceBlobDigest: sha256:6a2aeb90866b3a655e132aaf94933f5edeb2b5d182423e38c1fde6af06d74aed
+        codeSamplesNamespace: my-source-typescript-code-samples
+        codeSamplesRevisionDigest: sha256:dcbcd7938fd106f106d66ff3f4de5ea6ebcc384279c97d29c6111ae676c8ce0b
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -34,5 +34,5 @@ workflow:
                     token: $NPM_TOKEN
             codeSamples:
                 registry:
-                    location: registry.speakeasyapi.dev/bolt/boltpublicapi/my-source-code-samples
+                    location: registry.speakeasyapi.dev/bolt/boltpublicapi/my-source-typescript-code-samples
                 blocking: false
