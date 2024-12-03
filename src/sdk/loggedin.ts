@@ -19,7 +19,7 @@ export class LoggedIn extends ClientSDK {
   async initialize(
     paymentInitializeRequest: components.PaymentInitializeRequest,
     xPublishableKey: string,
-    xMerchantClientId: string,
+    xMerchantClientId?: string | undefined,
     options?: RequestOptions,
   ): Promise<operations.PaymentsInitializeResponse> {
     return unwrapAsync(paymentsLoggedInInitialize(
@@ -41,7 +41,7 @@ export class LoggedIn extends ClientSDK {
     paymentActionRequest: components.PaymentActionRequest,
     id: string,
     xPublishableKey: string,
-    xMerchantClientId: string,
+    xMerchantClientId?: string | undefined,
     options?: RequestOptions,
   ): Promise<operations.PaymentsActionResponse> {
     return unwrapAsync(paymentsLoggedInPerformAction(

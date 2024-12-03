@@ -34,7 +34,7 @@ export async function paymentsGuestInitialize(
   security: operations.GuestPaymentsInitializeSecurity,
   guestPaymentInitializeRequest: components.GuestPaymentInitializeRequest,
   xPublishableKey: string,
-  xMerchantClientId: string,
+  xMerchantClientId?: string | undefined,
   options?: RequestOptions,
 ): Promise<
   Result<

@@ -31,7 +31,7 @@ import { Result } from "../types/fp.js";
 export async function oAuthGetToken(
   client: BoltTypescriptSDKCore,
   tokenRequest: components.TokenRequest,
-  xMerchantClientId: string,
+  xMerchantClientId?: string | undefined,
   options?: RequestOptions,
 ): Promise<
   Result<

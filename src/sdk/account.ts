@@ -22,7 +22,7 @@ export class Account extends ClientSDK {
    */
   async getDetails(
     xPublishableKey: string,
-    xMerchantClientId: string,
+    xMerchantClientId?: string | undefined,
     options?: RequestOptions,
   ): Promise<operations.AccountGetResponse> {
     return unwrapAsync(accountGetDetails(
@@ -42,7 +42,7 @@ export class Account extends ClientSDK {
   async addAddress(
     addressListing: components.AddressListingInput,
     xPublishableKey: string,
-    xMerchantClientId: string,
+    xMerchantClientId?: string | undefined,
     options?: RequestOptions,
   ): Promise<operations.AccountAddressCreateResponse> {
     return unwrapAsync(accountAddAddress(
@@ -64,7 +64,7 @@ export class Account extends ClientSDK {
     addressListing: components.AddressListingInput,
     id: string,
     xPublishableKey: string,
-    xMerchantClientId: string,
+    xMerchantClientId?: string | undefined,
     options?: RequestOptions,
   ): Promise<operations.AccountAddressEditResponse> {
     return unwrapAsync(accountUpdateAddress(
@@ -86,7 +86,7 @@ export class Account extends ClientSDK {
   async deleteAddress(
     id: string,
     xPublishableKey: string,
-    xMerchantClientId: string,
+    xMerchantClientId?: string | undefined,
     options?: RequestOptions,
   ): Promise<operations.AccountAddressDeleteResponse> {
     return unwrapAsync(accountDeleteAddress(
@@ -107,7 +107,7 @@ export class Account extends ClientSDK {
   async addPaymentMethod(
     paymentMethod: components.PaymentMethodInput,
     xPublishableKey: string,
-    xMerchantClientId: string,
+    xMerchantClientId?: string | undefined,
     options?: RequestOptions,
   ): Promise<operations.AccountAddPaymentMethodResponse> {
     return unwrapAsync(accountAddPaymentMethod(
@@ -128,7 +128,7 @@ export class Account extends ClientSDK {
   async deletePaymentMethod(
     id: string,
     xPublishableKey: string,
-    xMerchantClientId: string,
+    xMerchantClientId?: string | undefined,
     options?: RequestOptions,
   ): Promise<operations.AccountPaymentMethodDeleteResponse> {
     return unwrapAsync(accountDeletePaymentMethod(

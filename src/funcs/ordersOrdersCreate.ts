@@ -34,7 +34,7 @@ export async function ordersOrdersCreate(
   security: operations.OrdersCreateSecurity,
   order: components.Order,
   xPublishableKey: string,
-  xMerchantClientId: string,
+  xMerchantClientId?: string | undefined,
   options?: RequestOptions,
 ): Promise<
   Result<

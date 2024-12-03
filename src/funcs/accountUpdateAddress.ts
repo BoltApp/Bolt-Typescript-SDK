@@ -34,7 +34,7 @@ export async function accountUpdateAddress(
   addressListing: components.AddressListingInput,
   id: string,
   xPublishableKey: string,
-  xMerchantClientId: string,
+  xMerchantClientId?: string | undefined,
   options?: RequestOptions,
 ): Promise<
   Result<

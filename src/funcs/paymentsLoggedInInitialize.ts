@@ -33,7 +33,7 @@ export async function paymentsLoggedInInitialize(
   client: BoltTypescriptSDKCore,
   paymentInitializeRequest: components.PaymentInitializeRequest,
   xPublishableKey: string,
-  xMerchantClientId: string,
+  xMerchantClientId?: string | undefined,
   options?: RequestOptions,
 ): Promise<
   Result<

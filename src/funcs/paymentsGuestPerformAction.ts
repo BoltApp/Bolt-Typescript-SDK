@@ -35,7 +35,7 @@ export async function paymentsGuestPerformAction(
   paymentActionRequest: components.PaymentActionRequest,
   id: string,
   xPublishableKey: string,
-  xMerchantClientId: string,
+  xMerchantClientId?: string | undefined,
   options?: RequestOptions,
 ): Promise<
   Result<

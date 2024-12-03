@@ -33,7 +33,7 @@ export async function accountAddAddress(
   client: BoltTypescriptSDKCore,
   addressListing: components.AddressListingInput,
   xPublishableKey: string,
-  xMerchantClientId: string,
+  xMerchantClientId?: string | undefined,
   options?: RequestOptions,
 ): Promise<
   Result<

@@ -34,7 +34,7 @@ export async function paymentsLoggedInPerformAction(
   paymentActionRequest: components.PaymentActionRequest,
   id: string,
   xPublishableKey: string,
-  xMerchantClientId: string,
+  xMerchantClientId?: string | undefined,
   options?: RequestOptions,
 ): Promise<
   Result<

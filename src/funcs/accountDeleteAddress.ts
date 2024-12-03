@@ -32,7 +32,7 @@ export async function accountDeleteAddress(
   client: BoltTypescriptSDKCore,
   id: string,
   xPublishableKey: string,
-  xMerchantClientId: string,
+  xMerchantClientId?: string | undefined,
   options?: RequestOptions,
 ): Promise<
   Result<

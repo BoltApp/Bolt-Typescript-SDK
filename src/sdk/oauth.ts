@@ -17,7 +17,7 @@ export class OAuth extends ClientSDK {
    */
   async getToken(
     tokenRequest: components.TokenRequest,
-    xMerchantClientId: string,
+    xMerchantClientId?: string | undefined,
     options?: RequestOptions,
   ): Promise<operations.OauthGetTokenResponse> {
     return unwrapAsync(oAuthGetToken(

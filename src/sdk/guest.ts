@@ -20,7 +20,7 @@ export class Guest extends ClientSDK {
     security: operations.GuestPaymentsInitializeSecurity,
     guestPaymentInitializeRequest: components.GuestPaymentInitializeRequest,
     xPublishableKey: string,
-    xMerchantClientId: string,
+    xMerchantClientId?: string | undefined,
     options?: RequestOptions,
   ): Promise<operations.GuestPaymentsInitializeResponse> {
     return unwrapAsync(paymentsGuestInitialize(
@@ -44,7 +44,7 @@ export class Guest extends ClientSDK {
     paymentActionRequest: components.PaymentActionRequest,
     id: string,
     xPublishableKey: string,
-    xMerchantClientId: string,
+    xMerchantClientId?: string | undefined,
     options?: RequestOptions,
   ): Promise<operations.GuestPaymentsActionResponse> {
     return unwrapAsync(paymentsGuestPerformAction(

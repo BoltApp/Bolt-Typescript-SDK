@@ -33,7 +33,7 @@ export async function accountAddPaymentMethod(
   client: BoltTypescriptSDKCore,
   paymentMethod: components.PaymentMethodInput,
   xPublishableKey: string,
-  xMerchantClientId: string,
+  xMerchantClientId?: string | undefined,
   options?: RequestOptions,
 ): Promise<
   Result<

@@ -19,7 +19,7 @@ export class Orders extends ClientSDK {
     security: operations.OrdersCreateSecurity,
     order: components.Order,
     xPublishableKey: string,
-    xMerchantClientId: string,
+    xMerchantClientId?: string | undefined,
     options?: RequestOptions,
   ): Promise<operations.OrdersCreateResponse> {
     return unwrapAsync(ordersOrdersCreate(
